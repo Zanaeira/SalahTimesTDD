@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1BE005AC26B8069D003F5F54 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; };
 		1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005BC26B80701003F5F54 /* SalahTimes.swift */; };
+		1BE005C126BB5280003F5F54 /* SalahTimesLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,7 @@
 		1BE005AB26B8069D003F5F54 /* SalahTimesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalahTimesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE005B226B8069D003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE005BC26B80701003F5F54 /* SalahTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimes.swift; sourceTree = "<group>"; };
+		1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesLoaderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE005B226B8069D003F5F54 /* Info.plist */,
+				1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */,
 			);
 			path = SalahTimesTests;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 					};
 					1BE005AA26B8069D003F5F54 = {
 						CreatedOnToolsVersion = 12.5.1;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -199,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE005C126BB5280003F5F54 /* SalahTimesLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +394,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = HHWJTGZ862;
@@ -400,6 +406,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Zanaeira.SalahTimesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -408,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = HHWJTGZ862;
