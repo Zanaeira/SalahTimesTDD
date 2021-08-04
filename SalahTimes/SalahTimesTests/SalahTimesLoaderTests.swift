@@ -12,9 +12,7 @@ import SalahTimes
 class SalahTimesLoaderTests: XCTestCase {
     
     func test_loadTimes_deliversConnectivityErrorOnHTTPClientError() {
-        let httpClient = HTTPClientSpy()
-        let endpointSpy = EndpointSpy.make()
-        let sut = SalahTimesLoader(endpoint: endpointSpy, httpClient: httpClient)
+        let (sut, httpClient) = makeSUT()
         
         var capturedErrors = [SalahTimesLoader.Error]()
         sut.loadTimes(for: Location(city: "London", country: "UK"), on: Date()) {
@@ -28,6 +26,14 @@ class SalahTimesLoaderTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT() -> (salahTimesLoader: SalahTimesLoader, httpClient: HTTPClientSpy) {
+        let httpClient = HTTPClientSpy()
+        let endpointSpy = EndpointSpy.make()
+        let loader = SalahTimesLoader(endpoint: endpointSpy, httpClient: httpClient)
+        
+        return (loader, httpClient)
+    }
     
     private final class HTTPClientSpy: HTTPClient {
         
