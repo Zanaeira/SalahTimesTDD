@@ -11,6 +11,7 @@ public final class SalahTimesLoader {
     
     public enum Error: Swift.Error {
         case connectivity
+        case invalidData
     }
     
     private let client: HTTPClient
@@ -22,8 +23,13 @@ public final class SalahTimesLoader {
     }
     
     public func loadTimes(for location: Location, on date: Date, completion: @escaping (Error) -> Void) {
-        client.get(from: endpoint.url) { error in
-            completion(.connectivity)
+        
+        client.get(from: endpoint.url) { response, error in
+            guard let _ = response else {
+                return completion(.connectivity)
+            }
+            
+            completion(.invalidData)
         }
     }
     

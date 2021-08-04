@@ -25,6 +25,19 @@ class SalahTimesLoaderTests: XCTestCase {
         XCTAssertEqual(capturedErrors, [.connectivity])
     }
     
+    func test_loadTimes_deliversInvalidDataErrorOnNon200HTTPResponse() {
+        let (sut, httpClient) = makeSUT()
+        
+        var capturedErrors = [SalahTimesLoader.Error]()
+        sut.loadTimes(for: Location(city: "London", country: "UK"), on: Date()) {
+            capturedErrors.append($0)
+        }
+        
+        httpClient.complete(withStatusCode: 400)
+        
+        XCTAssertEqual(capturedErrors, [.invalidData])
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT() -> (salahTimesLoader: SalahTimesLoader, httpClient: HTTPClientSpy) {
@@ -37,17 +50,23 @@ class SalahTimesLoaderTests: XCTestCase {
     
     private final class HTTPClientSpy: HTTPClient {
         
-        typealias Completion = (Error) -> Void
+        typealias Completion = (HTTPURLResponse?, Error?) -> Void
         
         private var urlCompletions = [(url: URL, completion: Completion)]()
         
-        func get(from url: URL, completion: @escaping (Error) -> Void) {
+        func get(from url: URL, completion: @escaping Completion) {
             urlCompletions.append((url, completion))
         }
         
         func complete(with error: Error, at index: Int = 0) {
-            urlCompletions[index].completion(error)
+            urlCompletions[index].completion(nil, error)
         }
+        
+        func complete(withStatusCode code: Int, at index: Int = 0) {
+            let response = HTTPURLResponse(url: urlCompletions[index].url, statusCode: code, httpVersion: nil, headerFields: nil)
+            urlCompletions[index].completion(response, nil)
+        }
+        
         
     }
     
