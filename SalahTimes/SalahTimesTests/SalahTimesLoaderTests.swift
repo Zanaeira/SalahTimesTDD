@@ -15,7 +15,7 @@ class SalahTimesLoaderTests: XCTestCase {
         let (sut, httpClient) = makeSUT()
         
         var capturedErrors = [SalahTimesLoader.Error]()
-        sut.loadTimes(for: Location(city: "London", country: "UK"), on: Date()) {
+        sut.loadTimes(for: anyLocation(), on: anyDate()) {
             capturedErrors.append($0)
         }
         
@@ -29,7 +29,7 @@ class SalahTimesLoaderTests: XCTestCase {
         let (sut, httpClient) = makeSUT()
         
         var capturedErrors = [SalahTimesLoader.Error]()
-        sut.loadTimes(for: Location(city: "London", country: "UK"), on: Date()) {
+        sut.loadTimes(for: anyLocation(), on: anyDate()) {
             capturedErrors.append($0)
         }
         
@@ -46,6 +46,14 @@ class SalahTimesLoaderTests: XCTestCase {
         let loader = SalahTimesLoader(endpoint: endpointSpy, client: httpClient)
         
         return (loader, httpClient)
+    }
+    
+    private func anyLocation() -> Location {
+        return Location(city: "London", country: "UK")
+    }
+    
+    private func anyDate() -> Date {
+        return Date()
     }
     
     private final class HTTPClientSpy: HTTPClient {
