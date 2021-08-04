@@ -7,43 +7,7 @@
 
 import Foundation
 import XCTest
-
-protocol HTTPClient {
-    func get(from url: URL, completion: @escaping (Error) -> Void)
-}
-
-protocol Endpoint {
-    var path: String { get }
-    var queryItems: [URLQueryItem] { get }
-    var url: URL { get }
-}
-
-class SalahTimesLoader {
-    
-    enum Error: Swift.Error {
-        case connectivity
-    }
-    
-    private let httpClient: HTTPClient
-    private let endpoint: Endpoint
-    
-    init(endpoint: Endpoint, httpClient: HTTPClient) {
-        self.endpoint = endpoint
-        self.httpClient = httpClient
-    }
-    
-    func loadTimes(for location: Location, on date: Date, completion: @escaping (Error) -> Void) {
-        httpClient.get(from: endpoint.url) { error in
-            completion(.connectivity)
-        }
-    }
-    
-}
-
-struct Location {
-    let city: String
-    let country: String
-}
+import SalahTimes
 
 class SalahTimesLoaderTests: XCTestCase {
     
