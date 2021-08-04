@@ -30,7 +30,7 @@ class SalahTimesLoaderTests: XCTestCase {
     private func makeSUT() -> (salahTimesLoader: SalahTimesLoader, httpClient: HTTPClientSpy) {
         let httpClient = HTTPClientSpy()
         let endpointSpy = EndpointSpy.make()
-        let loader = SalahTimesLoader(endpoint: endpointSpy, httpClient: httpClient)
+        let loader = SalahTimesLoader(endpoint: endpointSpy, client: httpClient)
         
         return (loader, httpClient)
     }

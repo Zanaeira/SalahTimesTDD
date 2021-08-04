@@ -13,16 +13,16 @@ public final class SalahTimesLoader {
         case connectivity
     }
     
-    private let httpClient: HTTPClient
+    private let client: HTTPClient
     private let endpoint: Endpoint
     
-    public init(endpoint: Endpoint, httpClient: HTTPClient) {
+    public init(endpoint: Endpoint, client: HTTPClient) {
         self.endpoint = endpoint
-        self.httpClient = httpClient
+        self.client = client
     }
     
     public func loadTimes(for location: Location, on date: Date, completion: @escaping (Error) -> Void) {
-        httpClient.get(from: endpoint.url) { error in
+        client.get(from: endpoint.url) { error in
             completion(.connectivity)
         }
     }
