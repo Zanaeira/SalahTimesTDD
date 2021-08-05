@@ -18,10 +18,19 @@
 		1BE005D126BBF723003F5F54 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */; };
 		1BE005D426BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D326BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift */; };
 		1BE005D626BC6527003F5F54 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */; };
+		1BE005DE26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005DD26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift */; };
+		1BE005E026BCA172003F5F54 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		1BE005AD26B8069D003F5F54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE0059926B8069D003F5F54 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE005A126B8069D003F5F54;
+			remoteInfo = SalahTimes;
+		};
+		1BE005E126BCA172003F5F54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BE0059926B8069D003F5F54 /* Project object */;
 			proxyType = 1;
@@ -45,6 +54,9 @@
 		1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		1BE005D326BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		1BE005DB26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalahTimesAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BE005DD26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesAPIEndToEndTests.swift; sourceTree = "<group>"; };
+		1BE005DF26BCA172003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +75,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BE005D826BCA172003F5F54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE005E026BCA172003F5F54 /* SalahTimes.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -71,6 +91,7 @@
 			children = (
 				1BE005A426B8069D003F5F54 /* SalahTimes */,
 				1BE005AF26B8069D003F5F54 /* SalahTimesTests */,
+				1BE005DC26BCA172003F5F54 /* SalahTimesAPIEndToEndTests */,
 				1BE005A326B8069D003F5F54 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -80,6 +101,7 @@
 			children = (
 				1BE005A226B8069D003F5F54 /* SalahTimes.framework */,
 				1BE005AB26B8069D003F5F54 /* SalahTimesTests.xctest */,
+				1BE005DB26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,6 +156,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1BE005DC26BCA172003F5F54 /* SalahTimesAPIEndToEndTests */ = {
+			isa = PBXGroup;
+			children = (
+				1BE005DD26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift */,
+				1BE005DF26BCA172003F5F54 /* Info.plist */,
+			);
+			path = SalahTimesAPIEndToEndTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -183,6 +214,24 @@
 			productReference = 1BE005AB26B8069D003F5F54 /* SalahTimesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		1BE005DA26BCA172003F5F54 /* SalahTimesAPIEndToEndTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1BE005E326BCA172003F5F54 /* Build configuration list for PBXNativeTarget "SalahTimesAPIEndToEndTests" */;
+			buildPhases = (
+				1BE005D726BCA172003F5F54 /* Sources */,
+				1BE005D826BCA172003F5F54 /* Frameworks */,
+				1BE005D926BCA172003F5F54 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BE005E226BCA172003F5F54 /* PBXTargetDependency */,
+			);
+			name = SalahTimesAPIEndToEndTests;
+			productName = SalahTimesAPIEndToEndTests;
+			productReference = 1BE005DB26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -199,6 +248,9 @@
 					1BE005AA26B8069D003F5F54 = {
 						CreatedOnToolsVersion = 12.5.1;
 						LastSwiftMigration = 1250;
+					};
+					1BE005DA26BCA172003F5F54 = {
+						CreatedOnToolsVersion = 12.5.1;
 					};
 				};
 			};
@@ -217,6 +269,7 @@
 			targets = (
 				1BE005A126B8069D003F5F54 /* SalahTimes */,
 				1BE005AA26B8069D003F5F54 /* SalahTimesTests */,
+				1BE005DA26BCA172003F5F54 /* SalahTimesAPIEndToEndTests */,
 			);
 		};
 /* End PBXProject section */
@@ -230,6 +283,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		1BE005A926B8069D003F5F54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1BE005D926BCA172003F5F54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -263,6 +323,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1BE005D726BCA172003F5F54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BE005DE26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -270,6 +338,11 @@
 			isa = PBXTargetDependency;
 			target = 1BE005A126B8069D003F5F54 /* SalahTimes */;
 			targetProxy = 1BE005AD26B8069D003F5F54 /* PBXContainerItemProxy */;
+		};
+		1BE005E226BCA172003F5F54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BE005A126B8069D003F5F54 /* SalahTimes */;
+			targetProxy = 1BE005E126BCA172003F5F54 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -487,6 +560,42 @@
 			};
 			name = Release;
 		};
+		1BE005E426BCA172003F5F54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HHWJTGZ862;
+				INFOPLIST_FILE = SalahTimesAPIEndToEndTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zanaeira.SalahTimesAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1BE005E526BCA172003F5F54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HHWJTGZ862;
+				INFOPLIST_FILE = SalahTimesAPIEndToEndTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zanaeira.SalahTimesAPIEndToEndTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -513,6 +622,15 @@
 			buildConfigurations = (
 				1BE005BA26B8069D003F5F54 /* Debug */,
 				1BE005BB26B8069D003F5F54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BE005E326BCA172003F5F54 /* Build configuration list for PBXNativeTarget "SalahTimesAPIEndToEndTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BE005E426BCA172003F5F54 /* Debug */,
+				1BE005E526BCA172003F5F54 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
