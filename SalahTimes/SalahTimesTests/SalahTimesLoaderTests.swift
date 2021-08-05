@@ -42,7 +42,7 @@ class SalahTimesLoaderTests: XCTestCase {
         }
     }
     
-    func test_loadTimes_deliversTimesOn200HTTPResponseWithJSONItems() {
+    func test_loadTimes_deliversTimesOn200HTTPResponseWithJSONTimes() {
         let (sut, httpClient) = makeSUT()
         let (salahTimes, data) = sampleSalahTimesJSON()
         
