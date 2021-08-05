@@ -20,6 +20,8 @@
 		1BE005D626BC6527003F5F54 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */; };
 		1BE005DE26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005DD26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift */; };
 		1BE005E026BCA172003F5F54 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; };
+		1BE005E726BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */; };
+		1BE005E826BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,7 @@
 		1BE005DB26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalahTimesAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE005DD26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		1BE005DF26BCA172003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+SampleSalahTimes.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE005D326BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift */,
+				1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -318,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE005C126BB5280003F5F54 /* SalahTimesLoaderTests.swift in Sources */,
+				1BE005E726BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */,
 				1BE005D126BBF723003F5F54 /* URLSessionHTTPClientTests.swift in Sources */,
 				1BE005D426BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
@@ -328,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE005DE26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift in Sources */,
+				1BE005E826BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

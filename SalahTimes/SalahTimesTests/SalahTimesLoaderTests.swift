@@ -27,7 +27,7 @@ class SalahTimesLoaderTests: XCTestCase {
         
         sampleStatusCodes.enumerated().forEach { index, code in
             expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
-                let (_, data) = sampleSalahTimesJSON()
+                let (_, data) = salahTimesModelAndDataFor5thAug2021LondonUK()
                 httpClient.complete(withStatusCode: code, data: data, at: index)
             }
         }
@@ -44,7 +44,7 @@ class SalahTimesLoaderTests: XCTestCase {
     
     func test_loadTimes_deliversTimesOn200HTTPResponseWithJSONTimes() {
         let (sut, httpClient, endpointSpy) = makeSUT()
-        let (salahTimes, data) = sampleSalahTimesJSON()
+        let (salahTimes, data) = salahTimesModelAndDataFor5thAug2021LondonUK()
         
         expect(sut, toCompleteWith: .success(salahTimes), using: endpointSpy) {
             httpClient.complete(withStatusCode: 200, data: data)
@@ -55,7 +55,7 @@ class SalahTimesLoaderTests: XCTestCase {
         let httpClient = HTTPClientSpy()
         let endpointSpy = EndpointSpy.make()
         var sut: SalahTimesLoader? = SalahTimesLoader(client: httpClient)
-        let (_, data) = sampleSalahTimesJSON()
+        let (_, data) = salahTimesModelAndDataFor5thAug2021LondonUK()
         
         var capturedResults = [SalahTimesLoader.Result]()
         sut?.loadTimes(from: endpointSpy) {
@@ -89,51 +89,6 @@ class SalahTimesLoaderTests: XCTestCase {
         action()
         
         XCTAssertEqual(capturedResults, [result], file: file, line: line)
-    }
-    
-    private func sampleSalahTimesJSON() -> (model: SalahTimes, data: Data) {
-        let timestamp: Double = 1628118000
-        
-        let (salahTimes, salahTimesJSON) = makeSalahTimes(
-            fajr: "03:27", sunrise: "05:31", zuhr: "13:07", asr: "17:14",
-            sunset: "20:42", maghrib: "20:42", isha: "22:44", imsak: "03:17",
-            midnight: "01:06", readableDate: "05 Aug 2021", timestamp: timestamp)
-        
-        let data = makeSalahTimesJSON(salahTimesJSON)
-        
-        return (salahTimes, data)
-    }
-    
-    private func makeSalahTimes(fajr: String, sunrise: String, zuhr: String, asr: String, sunset: String, maghrib: String, isha: String, imsak: String, midnight: String, readableDate: String, timestamp: Double) -> (model: SalahTimes, json: [String: [String: String]]) {
-        
-        let date = Date(timeIntervalSince1970: timestamp)
-        
-        let salahTimesModel = SalahTimes(date: date, fajr: fajr, sunrise: sunrise, zuhr: zuhr, asr: asr, maghrib: maghrib, isha: isha)
-        
-        let salahTimesJSON = [
-            "timings": [
-                "Fajr": fajr,
-                "Sunrise": sunrise,
-                "Dhuhr": zuhr,
-                "Asr": asr,
-                "Sunset": sunset,
-                "Maghrib": maghrib,
-                "Isha": isha,
-                "Imsak": imsak,
-                "Midnight": midnight,
-            ],
-            "date": [
-                "readable": readableDate,
-                "timestamp": "\(timestamp)",
-            ]
-        ]
-        
-        return (salahTimesModel, salahTimesJSON)
-    }
-    
-    private func makeSalahTimesJSON(_ timings: [String: [String: String]]) -> Data {
-        let json = ["data": timings]
-        return try! JSONSerialization.data(withJSONObject: json)
     }
     
     private func anyLocation() -> Location {
