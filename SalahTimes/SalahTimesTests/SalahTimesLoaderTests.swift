@@ -12,21 +12,21 @@ import XCTest
 class SalahTimesLoaderTests: XCTestCase {
     
     func test_loadTimes_deliversConnectivityErrorOnHTTPClientError() {
-        let (sut, httpClient) = makeSUT()
+        let (sut, httpClient, endpointSpy) = makeSUT()
         
-        expect(sut, toCompleteWith: .failure(.connectivity)) {
+        expect(sut, toCompleteWith: .failure(.connectivity), using: endpointSpy) {
             let httpClientError = NSError(domain: "Error", code: 0)
             httpClient.complete(with: httpClientError)
         }
     }
     
     func test_loadTimes_deliversInvalidDataErrorOnNon200HTTPResponse() {
-        let (sut, httpClient) = makeSUT()
+        let (sut, httpClient, endpointSpy) = makeSUT()
         
         let sampleStatusCodes = [199, 201, 300, 400, 500]
         
         sampleStatusCodes.enumerated().forEach { index, code in
-            expect(sut, toCompleteWith: .failure(.invalidData)) {
+            expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
                 let (_, data) = sampleSalahTimesJSON()
                 httpClient.complete(withStatusCode: code, data: data, at: index)
             }
@@ -34,19 +34,19 @@ class SalahTimesLoaderTests: XCTestCase {
     }
     
     func test_loadTimes_deliversErrorOn200HTTPResponseWithInvalidJSON() {
-        let (sut, httpClient) = makeSUT()
+        let (sut, httpClient, endpointSpy) = makeSUT()
         
-        expect(sut, toCompleteWith: .failure(.invalidData)) {
+        expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
             let invalidJSON =  Data("invalid json".utf8)
             httpClient.complete(withStatusCode: 200, data: invalidJSON)
         }
     }
     
     func test_loadTimes_deliversTimesOn200HTTPResponseWithJSONTimes() {
-        let (sut, httpClient) = makeSUT()
+        let (sut, httpClient, endpointSpy) = makeSUT()
         let (salahTimes, data) = sampleSalahTimesJSON()
         
-        expect(sut, toCompleteWith: .success(salahTimes)) {
+        expect(sut, toCompleteWith: .success(salahTimes), using: endpointSpy) {
             httpClient.complete(withStatusCode: 200, data: data)
         }
     }
@@ -54,11 +54,11 @@ class SalahTimesLoaderTests: XCTestCase {
     func test_loadTimes_doesNotDeliverResultsAfterSUTInstanceHasBeenDeallocated() {
         let httpClient = HTTPClientSpy()
         let endpointSpy = EndpointSpy.make()
-        var sut: SalahTimesLoader? = SalahTimesLoader(endpoint: endpointSpy, client: httpClient)
+        var sut: SalahTimesLoader? = SalahTimesLoader(client: httpClient)
         let (_, data) = sampleSalahTimesJSON()
         
         var capturedResults = [SalahTimesLoader.Result]()
-        sut?.loadTimes(for: anyLocation(), on: anyDate()) {
+        sut?.loadTimes(from: endpointSpy) {
             capturedResults.append($0)
         }
         
@@ -70,19 +70,19 @@ class SalahTimesLoaderTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (salahTimesLoader: SalahTimesLoader, httpClient: HTTPClientSpy) {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (salahTimesLoader: SalahTimesLoader, httpClient: HTTPClientSpy, endpoint: Endpoint) {
         let httpClient = HTTPClientSpy()
         let endpointSpy = EndpointSpy.make()
-        let sut = SalahTimesLoader(endpoint: endpointSpy, client: httpClient)
+        let sut = SalahTimesLoader(client: httpClient)
         trackForMemoryLeaks(sut, file: file, line: line)
         trackForMemoryLeaks(httpClient, file: file, line: line)
         
-        return (sut, httpClient)
+        return (sut, httpClient, endpointSpy)
     }
         
-    private func expect(_ sut: SalahTimesLoader, toCompleteWith result: SalahTimesLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+    private func expect(_ sut: SalahTimesLoader, toCompleteWith result: SalahTimesLoader.Result, using endpoint: Endpoint, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         var capturedResults = [SalahTimesLoader.Result]()
-        sut.loadTimes(for: anyLocation(), on: anyDate()) {
+        sut.loadTimes(from: endpoint) {
             capturedResults.append($0)
         }
         

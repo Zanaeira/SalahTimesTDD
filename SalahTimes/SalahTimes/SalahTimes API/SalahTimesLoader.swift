@@ -17,14 +17,12 @@ public final class SalahTimesLoader {
     }
     
     private let client: HTTPClient
-    private let endpoint: Endpoint
     
-    public init(endpoint: Endpoint, client: HTTPClient) {
-        self.endpoint = endpoint
+    public init(client: HTTPClient) {
         self.client = client
     }
     
-    public func loadTimes(for location: Location, on date: Date, completion: @escaping (Result) -> Void) {
+    public func loadTimes(from endpoint: Endpoint, completion: @escaping (Result) -> Void) {
         client.get(from: endpoint.url) { [weak self] result in
             guard self != nil else { return }
             
