@@ -27,7 +27,6 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      enableThreadSanitizer = "YES"
       codeCoverageEnabled = "YES"
       onlyGenerateCoverageForSpecifiedTargets = "YES">
       <CodeCoverageTargets>
@@ -48,6 +47,17 @@
                BlueprintIdentifier = "1BE005AA26B8069D003F5F54"
                BuildableName = "SalahTimesTests.xctest"
                BlueprintName = "SalahTimesTests"
+               ReferencedContainer = "container:SalahTimes.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1BE005DA26BCA172003F5F54"
+               BuildableName = "SalahTimesAPIEndToEndTests.xctest"
+               BlueprintName = "SalahTimesAPIEndToEndTests"
                ReferencedContainer = "container:SalahTimes.xcodeproj">
             </BuildableReference>
          </TestableReference>
