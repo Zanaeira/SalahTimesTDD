@@ -6,8 +6,9 @@
 //
 
 import XCTest
+import SalahTimes
 
-final class URLSessionHTTPClient {
+final class URLSessionHTTPClient: HTTPClient {
     
     private let session: URLSession
     
@@ -104,7 +105,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> URLSessionHTTPClient {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
         let client = URLSessionHTTPClient()
         trackForMemoryLeaks(client, file: file, line: line)
         
