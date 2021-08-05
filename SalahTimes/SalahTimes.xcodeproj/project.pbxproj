@@ -14,6 +14,7 @@
 		1BE005C726BB5A69003F5F54 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C626BB5A69003F5F54 /* Endpoint.swift */; };
 		1BE005C926BB5A8C003F5F54 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C826BB5A8C003F5F54 /* Location.swift */; };
 		1BE005CB26BB5AA1003F5F54 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */; };
+		1BE005CF26BB894D003F5F54 /* SalahTimesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		1BE005C626BB5A69003F5F54 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		1BE005C826BB5A8C003F5F54 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,11 +82,8 @@
 			isa = PBXGroup;
 			children = (
 				1BE005A626B8069D003F5F54 /* Info.plist */,
-				1BE005C426BB5A49003F5F54 /* SalahTimesLoader.swift */,
-				1BE005C626BB5A69003F5F54 /* Endpoint.swift */,
-				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
-				1BE005C826BB5A8C003F5F54 /* Location.swift */,
-				1BE005BC26B80701003F5F54 /* SalahTimes.swift */,
+				1BE005CD26BB892D003F5F54 /* SalahTimes Feature */,
+				1BE005CC26BB891E003F5F54 /* SalahTimes API */,
 			);
 			path = SalahTimes;
 			sourceTree = "<group>";
@@ -96,6 +95,26 @@
 				1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */,
 			);
 			path = SalahTimesTests;
+			sourceTree = "<group>";
+		};
+		1BE005CC26BB891E003F5F54 /* SalahTimes API */ = {
+			isa = PBXGroup;
+			children = (
+				1BE005C426BB5A49003F5F54 /* SalahTimesLoader.swift */,
+				1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */,
+				1BE005C626BB5A69003F5F54 /* Endpoint.swift */,
+				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
+				1BE005C826BB5A8C003F5F54 /* Location.swift */,
+			);
+			path = "SalahTimes API";
+			sourceTree = "<group>";
+		};
+		1BE005CD26BB892D003F5F54 /* SalahTimes Feature */ = {
+			isa = PBXGroup;
+			children = (
+				1BE005BC26B80701003F5F54 /* SalahTimes.swift */,
+			);
+			path = "SalahTimes Feature";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */,
+				1BE005CF26BB894D003F5F54 /* SalahTimesMapper.swift in Sources */,
 				1BE005CB26BB5AA1003F5F54 /* HTTPClient.swift in Sources */,
 				1BE005C726BB5A69003F5F54 /* Endpoint.swift in Sources */,
 				1BE005C926BB5A8C003F5F54 /* Location.swift in Sources */,
