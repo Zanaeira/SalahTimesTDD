@@ -28,12 +28,13 @@ public final class SalahTimesLoader {
         
         client.get(from: endpoint.url) { result in
             switch result {
-            case let .success((data, _)):
-                if let root = try? JSONDecoder().decode(Root.self, from: data) {
-                    completion(.success(self.map(from: root.data)))
-                } else {
-                    completion(.failure(.invalidData))
+            case let .success((data, response)):
+                guard response.statusCode == 200,
+                      let root = try? JSONDecoder().decode(Root.self, from: data) else {
+                    return completion(.failure(.invalidData))
                 }
+                
+                completion(.success(self.map(from: root.data)))
             case .failure:
                 completion(.failure(.connectivity))
             }

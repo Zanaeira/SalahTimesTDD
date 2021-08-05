@@ -27,7 +27,8 @@ class SalahTimesLoaderTests: XCTestCase {
         
         sampleStatusCodes.enumerated().forEach { index, code in
             expect(sut, toCompleteWith: .failure(.invalidData)) {
-                httpClient.complete(withStatusCode: code, at: index)
+                let (_, data) = sampleSalahTimesJSON()
+                httpClient.complete(withStatusCode: code, data: data, at: index)
             }
         }
     }
@@ -43,17 +44,10 @@ class SalahTimesLoaderTests: XCTestCase {
     
     func test_loadTimes_deliversTimesOn200HTTPResponseWithJSONItems() {
         let (sut, httpClient) = makeSUT()
-        
-        let timestamp: Double = 1628118000
-        
-        let (salahTimes, salahTimesJSON) = makeSalahTimes(
-            fajr: "03:27", sunrise: "05:31", zuhr: "13:07", asr: "17:14",
-            sunset: "20:42", maghrib: "20:42", isha: "22:44", imsak: "03:17",
-            midnight: "01:06", readableDate: "05 Aug 2021", timestamp: timestamp)
+        let (salahTimes, data) = sampleSalahTimesJSON()
         
         expect(sut, toCompleteWith: .success(salahTimes)) {
-            let json = makeSalahTimesJSON(salahTimesJSON)
-            httpClient.complete(withStatusCode: 200, data: json)
+            httpClient.complete(withStatusCode: 200, data: data)
         }
     }
     
@@ -76,6 +70,19 @@ class SalahTimesLoaderTests: XCTestCase {
         action()
         
         XCTAssertEqual(capturedResults, [result], file: file, line: line)
+    }
+    
+    private func sampleSalahTimesJSON() -> (model: SalahTimes, data: Data) {
+        let timestamp: Double = 1628118000
+        
+        let (salahTimes, salahTimesJSON) = makeSalahTimes(
+            fajr: "03:27", sunrise: "05:31", zuhr: "13:07", asr: "17:14",
+            sunset: "20:42", maghrib: "20:42", isha: "22:44", imsak: "03:17",
+            midnight: "01:06", readableDate: "05 Aug 2021", timestamp: timestamp)
+        
+        let data = makeSalahTimesJSON(salahTimesJSON)
+        
+        return (salahTimes, data)
     }
     
     private func makeSalahTimes(fajr: String, sunrise: String, zuhr: String, asr: String, sunset: String, maghrib: String, isha: String, imsak: String, midnight: String, readableDate: String, timestamp: Double) -> (model: SalahTimes, json: [String: [String: String]]) {
@@ -132,7 +139,7 @@ class SalahTimesLoaderTests: XCTestCase {
             urlCompletions[index].completion(.failure(error))
         }
         
-        func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
+        func complete(withStatusCode code: Int, data: Data, at index: Int = 0) {
             let response = HTTPURLResponse(url: urlCompletions[index].url, statusCode: code, httpVersion: nil, headerFields: nil)!
             urlCompletions[index].completion(.success((data, response)))
         }
