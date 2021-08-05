@@ -9,6 +9,8 @@ import Foundation
 
 public final class SalahTimesLoader {
     
+    public typealias Result = Swift.Result<SalahTimes, Error>
+    
     public enum Error: Swift.Error {
         case connectivity
         case invalidData
@@ -22,7 +24,7 @@ public final class SalahTimesLoader {
         self.client = client
     }
     
-    public func loadTimes(for location: Location, on date: Date, completion: @escaping (Result<SalahTimes, Error>) -> Void) {
+    public func loadTimes(for location: Location, on date: Date, completion: @escaping (Result) -> Void) {
         
         client.get(from: endpoint.url) { result in
             switch result {

@@ -14,7 +14,7 @@ class SalahTimesLoaderTests: XCTestCase {
     func test_loadTimes_deliversConnectivityErrorOnHTTPClientError() {
         let (sut, httpClient) = makeSUT()
         
-        expect(sut, toCompleteWithError: .connectivity) {
+        expect(sut, toCompleteWith: .failure(.connectivity)) {
             let httpClientError = NSError(domain: "Error", code: 0)
             httpClient.complete(with: httpClientError)
         }
@@ -26,7 +26,7 @@ class SalahTimesLoaderTests: XCTestCase {
         let sampleStatusCodes = [199, 201, 300, 400, 500]
         
         sampleStatusCodes.enumerated().forEach { index, code in
-            expect(sut, toCompleteWithError: .invalidData) {
+            expect(sut, toCompleteWith: .failure(.invalidData)) {
                 httpClient.complete(withStatusCode: code, at: index)
             }
         }
@@ -35,7 +35,7 @@ class SalahTimesLoaderTests: XCTestCase {
     func test_loadTimes_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, httpClient) = makeSUT()
         
-        expect(sut, toCompleteWithError: .invalidData) {
+        expect(sut, toCompleteWith: .failure(.invalidData)) {
             let invalidJSON =  Data("invalid json".utf8)
             httpClient.complete(withStatusCode: 200, data: invalidJSON)
         }
@@ -51,15 +51,15 @@ class SalahTimesLoaderTests: XCTestCase {
         return (loader, httpClient)
     }
     
-    private func expect(_ sut: SalahTimesLoader, toCompleteWithError error: SalahTimesLoader.Error, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        var capturedResults = [Result<SalahTimes, SalahTimesLoader.Error>]()
+    private func expect(_ sut: SalahTimesLoader, toCompleteWith result: SalahTimesLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        var capturedResults = [SalahTimesLoader.Result]()
         sut.loadTimes(for: anyLocation(), on: anyDate()) {
             capturedResults.append($0)
         }
         
         action()
         
-        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
+        XCTAssertEqual(capturedResults, [result], file: file, line: line)
     }
     
     private func anyLocation() -> Location {
