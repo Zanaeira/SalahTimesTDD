@@ -28,14 +28,33 @@ class SalahTimesLoaderTests: XCTestCase {
     func test_loadTimes_deliversInvalidDataErrorOnNon200HTTPResponse() {
         let (sut, httpClient) = makeSUT()
         
+        let sampleStatusCodes = [199, 201, 300, 400, 500]
+        
+        sampleStatusCodes.enumerated().forEach { index, code in
+            var capturedErrors = [SalahTimesLoader.Error]()
+            sut.loadTimes(for: anyLocation(), on: anyDate()) {
+                capturedErrors.append($0)
+            }
+            
+            httpClient.complete(withStatusCode: code, at: index)
+            
+            XCTAssertEqual(capturedErrors, [.invalidData])
+        }
+    }
+    
+    func test_loadTimes_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+        let (sut, httpClient) = makeSUT()
+        
         var capturedErrors = [SalahTimesLoader.Error]()
         sut.loadTimes(for: anyLocation(), on: anyDate()) {
             capturedErrors.append($0)
         }
         
-        httpClient.complete(withStatusCode: 400)
+        let invalidJSON =  Data("invalid json".utf8)
+        httpClient.complete(withStatusCode: 200, data: invalidJSON)
         
         XCTAssertEqual(capturedErrors, [.invalidData])
+        
     }
     
     // MARK: - Helpers
@@ -58,7 +77,7 @@ class SalahTimesLoaderTests: XCTestCase {
     
     private final class HTTPClientSpy: HTTPClient {
         
-        typealias Completion = (HTTPURLResponse?, Error?) -> Void
+        typealias Completion = (Result<(Data, HTTPURLResponse), Error>) -> Void
         
         private var urlCompletions = [(url: URL, completion: Completion)]()
         
@@ -67,12 +86,12 @@ class SalahTimesLoaderTests: XCTestCase {
         }
         
         func complete(with error: Error, at index: Int = 0) {
-            urlCompletions[index].completion(nil, error)
+            urlCompletions[index].completion(.failure(error))
         }
         
-        func complete(withStatusCode code: Int, at index: Int = 0) {
-            let response = HTTPURLResponse(url: urlCompletions[index].url, statusCode: code, httpVersion: nil, headerFields: nil)
-            urlCompletions[index].completion(response, nil)
+        func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
+            let response = HTTPURLResponse(url: urlCompletions[index].url, statusCode: code, httpVersion: nil, headerFields: nil)!
+            urlCompletions[index].completion(.success((data, response)))
         }
         
         

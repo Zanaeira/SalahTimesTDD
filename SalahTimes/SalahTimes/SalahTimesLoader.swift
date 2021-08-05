@@ -24,12 +24,13 @@ public final class SalahTimesLoader {
     
     public func loadTimes(for location: Location, on date: Date, completion: @escaping (Error) -> Void) {
         
-        client.get(from: endpoint.url) { response, error in
-            guard let _ = response else {
-                return completion(.connectivity)
+        client.get(from: endpoint.url) { result in
+            switch result {
+            case .success:
+                completion(.invalidData)
+            case .failure:
+                completion(.connectivity)
             }
-            
-            completion(.invalidData)
         }
     }
     
