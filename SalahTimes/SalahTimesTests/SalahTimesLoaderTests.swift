@@ -51,6 +51,23 @@ class SalahTimesLoaderTests: XCTestCase {
         }
     }
     
+    func test_loadTimes_doesNotDeliverResultsAfterSUTInstanceHasBeenDeallocated() {
+        let httpClient = HTTPClientSpy()
+        let endpointSpy = EndpointSpy.make()
+        var sut: SalahTimesLoader? = SalahTimesLoader(endpoint: endpointSpy, client: httpClient)
+        let (_, data) = sampleSalahTimesJSON()
+        
+        var capturedResults = [SalahTimesLoader.Result]()
+        sut?.loadTimes(for: anyLocation(), on: anyDate()) {
+            capturedResults.append($0)
+        }
+        
+        sut = nil
+        httpClient.complete(withStatusCode: 200, data: data)
+        
+        XCTAssertTrue(capturedResults.isEmpty)
+    }
+    
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (salahTimesLoader: SalahTimesLoader, httpClient: HTTPClientSpy) {
