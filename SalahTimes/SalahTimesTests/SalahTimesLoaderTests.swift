@@ -14,15 +14,10 @@ class SalahTimesLoaderTests: XCTestCase {
     func test_loadTimes_deliversConnectivityErrorOnHTTPClientError() {
         let (sut, httpClient) = makeSUT()
         
-        var capturedErrors = [SalahTimesLoader.Error]()
-        sut.loadTimes(for: anyLocation(), on: anyDate()) {
-            capturedErrors.append($0)
+        expect(sut, toCompleteWithError: .connectivity) {
+            let httpClientError = NSError(domain: "Error", code: 0)
+            httpClient.complete(with: httpClientError)
         }
-        
-        let httpClientError = NSError(domain: "Error", code: 0)
-        httpClient.complete(with: httpClientError)
-        
-        XCTAssertEqual(capturedErrors, [.connectivity])
     }
     
     func test_loadTimes_deliversInvalidDataErrorOnNon200HTTPResponse() {
@@ -31,30 +26,19 @@ class SalahTimesLoaderTests: XCTestCase {
         let sampleStatusCodes = [199, 201, 300, 400, 500]
         
         sampleStatusCodes.enumerated().forEach { index, code in
-            var capturedErrors = [SalahTimesLoader.Error]()
-            sut.loadTimes(for: anyLocation(), on: anyDate()) {
-                capturedErrors.append($0)
+            expect(sut, toCompleteWithError: .invalidData) {
+                httpClient.complete(withStatusCode: code, at: index)
             }
-            
-            httpClient.complete(withStatusCode: code, at: index)
-            
-            XCTAssertEqual(capturedErrors, [.invalidData])
         }
     }
     
     func test_loadTimes_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, httpClient) = makeSUT()
         
-        var capturedErrors = [SalahTimesLoader.Error]()
-        sut.loadTimes(for: anyLocation(), on: anyDate()) {
-            capturedErrors.append($0)
+        expect(sut, toCompleteWithError: .invalidData) {
+            let invalidJSON =  Data("invalid json".utf8)
+            httpClient.complete(withStatusCode: 200, data: invalidJSON)
         }
-        
-        let invalidJSON =  Data("invalid json".utf8)
-        httpClient.complete(withStatusCode: 200, data: invalidJSON)
-        
-        XCTAssertEqual(capturedErrors, [.invalidData])
-        
     }
     
     // MARK: - Helpers
@@ -65,6 +49,17 @@ class SalahTimesLoaderTests: XCTestCase {
         let loader = SalahTimesLoader(endpoint: endpointSpy, client: httpClient)
         
         return (loader, httpClient)
+    }
+    
+    private func expect(_ sut: SalahTimesLoader, toCompleteWithError error: SalahTimesLoader.Error, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        var capturedErrors = [SalahTimesLoader.Error]()
+        sut.loadTimes(for: anyLocation(), on: anyDate()) {
+            capturedErrors.append($0)
+        }
+        
+        action()
+        
+        XCTAssertEqual(capturedErrors, [error])
     }
     
     private func anyLocation() -> Location {
