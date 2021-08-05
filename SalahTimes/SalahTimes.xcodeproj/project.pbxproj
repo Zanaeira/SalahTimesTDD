@@ -17,6 +17,7 @@
 		1BE005CF26BB894D003F5F54 /* SalahTimesMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */; };
 		1BE005D126BBF723003F5F54 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */; };
 		1BE005D426BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D326BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift */; };
+		1BE005D626BC6527003F5F54 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesMapper.swift; sourceTree = "<group>"; };
 		1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		1BE005D326BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			children = (
 				1BE005C426BB5A49003F5F54 /* SalahTimesLoader.swift */,
 				1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */,
+				1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */,
 				1BE005C626BB5A69003F5F54 /* Endpoint.swift */,
 				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
 				1BE005C826BB5A8C003F5F54 /* Location.swift */,
@@ -240,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE005D626BC6527003F5F54 /* URLSessionHTTPClient.swift in Sources */,
 				1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */,
 				1BE005CF26BB894D003F5F54 /* SalahTimesMapper.swift in Sources */,
 				1BE005CB26BB5AA1003F5F54 /* HTTPClient.swift in Sources */,
