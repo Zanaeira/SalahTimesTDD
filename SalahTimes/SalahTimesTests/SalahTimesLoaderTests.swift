@@ -53,12 +53,20 @@ class SalahTimesLoaderTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT() -> (salahTimesLoader: SalahTimesLoader, httpClient: HTTPClientSpy) {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (salahTimesLoader: SalahTimesLoader, httpClient: HTTPClientSpy) {
         let httpClient = HTTPClientSpy()
         let endpointSpy = EndpointSpy.make()
-        let loader = SalahTimesLoader(endpoint: endpointSpy, client: httpClient)
+        let sut = SalahTimesLoader(endpoint: endpointSpy, client: httpClient)
+        trackForMemoryLeaks(sut, file: file, line: line)
+        trackForMemoryLeaks(httpClient, file: file, line: line)
         
-        return (loader, httpClient)
+        return (sut, httpClient)
+    }
+    
+    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, "Instance should have been deallocated. Potential memory leak.", file: file, line: line)
+        }
     }
     
     private func expect(_ sut: SalahTimesLoader, toCompleteWith result: SalahTimesLoader.Result, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {

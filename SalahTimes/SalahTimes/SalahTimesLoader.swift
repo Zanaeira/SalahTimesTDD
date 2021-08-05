@@ -34,18 +34,18 @@ public final class SalahTimesLoader {
                     return completion(.failure(.invalidData))
                 }
                 
-                completion(.success(self.map(from: root.data)))
+                completion(.success(SalahTimesLoader.map(from: root.data)))
             case .failure:
                 completion(.failure(.connectivity))
             }
         }
     }
     
-    private func map(from data: TimingsData) -> SalahTimes {
+    private static func map(from data: TimingsData) -> SalahTimes {
         return SalahTimes(date: date(from: data.date.readable), fajr: data.timings.Fajr, sunrise: data.timings.Sunrise, zuhr: data.timings.Dhuhr, asr: data.timings.Asr, maghrib: data.timings.Maghrib, isha: data.timings.Isha)
     }
     
-    private func date(from readable: String) -> Date {
+    private static func date(from readable: String) -> Date {
         DateFormatter.readableDateFormatterForAladhanAPI.date(from: readable)!
     }
     
