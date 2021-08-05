@@ -25,7 +25,6 @@ public final class SalahTimesLoader {
     }
     
     public func loadTimes(for location: Location, on date: Date, completion: @escaping (Result) -> Void) {
-        
         client.get(from: endpoint.url) { [weak self] result in
             guard self != nil else { return }
             
