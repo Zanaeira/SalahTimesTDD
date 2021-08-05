@@ -11,9 +11,7 @@ import SalahTimes
 class SalahTimesAPIEndToEndTests: XCTestCase {
     
     func test_endToEndAladhanAPIGETSalahTimes_matchesTestSalahTimes() {
-        let endpoint = EndpointSpy(urlString: "http://api.aladhan.com/v1/timingsByCity/05-08-2021?city=London&country=UK")
-        let client = URLSessionHTTPClient()
-        let salahTimesLoader = SalahTimesLoader(client: client)
+        let (salahTimesLoader, endpoint) = makeSUT()
         let (expectedSalahTimes, _) = salahTimesModelAndDataFor5thAug2021LondonUK()
         
         let exp = expectation(description: "Wait for load completion")
@@ -36,6 +34,14 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT() -> (salahTimesLoader: SalahTimesLoader, endpoint: Endpoint) {
+        let endpoint = EndpointSpy(urlString: "http://api.aladhan.com/v1/timingsByCity/05-08-2021?city=London&country=UK")
+        let client = URLSessionHTTPClient()
+        let salahTimesLoader = SalahTimesLoader(client: client)
+        
+        return (salahTimesLoader, endpoint)
+    }
     
     private struct EndpointSpy: Endpoint {
         let path: String = ""
