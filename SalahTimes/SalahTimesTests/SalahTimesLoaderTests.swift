@@ -52,14 +52,14 @@ class SalahTimesLoaderTests: XCTestCase {
     }
     
     private func expect(_ sut: SalahTimesLoader, toCompleteWithError error: SalahTimesLoader.Error, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        var capturedErrors = [SalahTimesLoader.Error]()
+        var capturedResults = [Result<SalahTimes, SalahTimesLoader.Error>]()
         sut.loadTimes(for: anyLocation(), on: anyDate()) {
-            capturedErrors.append($0)
+            capturedResults.append($0)
         }
         
         action()
         
-        XCTAssertEqual(capturedErrors, [error])
+        XCTAssertEqual(capturedResults, [.failure(error)], file: file, line: line)
     }
     
     private func anyLocation() -> Location {

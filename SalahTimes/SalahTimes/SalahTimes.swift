@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SalahTimes {
+public struct SalahTimes: Equatable {
     public let date: Date
     public let location: String
     public let fajr: Date
