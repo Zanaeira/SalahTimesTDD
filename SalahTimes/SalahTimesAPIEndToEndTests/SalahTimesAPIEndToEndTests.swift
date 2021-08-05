@@ -26,12 +26,12 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT() -> (salahTimesLoader: SalahTimesLoader, endpoint: Endpoint) {
+    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (salahTimesLoader: SalahTimesLoader, endpoint: Endpoint) {
         let endpoint = EndpointSpy(urlString: "http://api.aladhan.com/v1/timingsByCity/05-08-2021?city=London&country=UK")
         let client = URLSessionHTTPClient()
         let salahTimesLoader = SalahTimesLoader(client: client)
-        trackForMemoryLeaks(salahTimesLoader)
-        trackForMemoryLeaks(client)
+        trackForMemoryLeaks(salahTimesLoader, file: file, line: line)
+        trackForMemoryLeaks(client, file: file, line: line)
         
         return (salahTimesLoader, endpoint)
     }
