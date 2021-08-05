@@ -11,17 +11,8 @@ import SalahTimes
 class SalahTimesAPIEndToEndTests: XCTestCase {
     
     func test_endToEndAladhanAPIGETSalahTimes_matchesTestSalahTimes() {
-        let (salahTimesLoader, endpoint) = makeSUT()
+        let receivedResult = getSalahTimesLoadingResult()
         let (expectedSalahTimes, _) = salahTimesModelAndDataFor5thAug2021LondonUK()
-        
-        let exp = expectation(description: "Wait for load completion")
-        
-        var receivedResult: SalahTimesLoader.Result?
-        salahTimesLoader.loadTimes(from: endpoint) { result in
-            receivedResult = result
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 5.0)
         
         switch receivedResult {
         case let .success(salahTimes):
@@ -41,6 +32,21 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
         let salahTimesLoader = SalahTimesLoader(client: client)
         
         return (salahTimesLoader, endpoint)
+    }
+    
+    private func getSalahTimesLoadingResult() -> SalahTimesLoader.Result? {
+        let (salahTimesLoader, endpoint) = makeSUT()
+        
+        let exp = expectation(description: "Wait for load completion")
+        
+        var receivedResult: SalahTimesLoader.Result?
+        salahTimesLoader.loadTimes(from: endpoint) { result in
+            receivedResult = result
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 5.0)
+        return receivedResult
     }
     
     private struct EndpointSpy: Endpoint {
