@@ -22,6 +22,7 @@
 		1BE005E026BCA172003F5F54 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; };
 		1BE005E726BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */; };
 		1BE005E826BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */; };
+		1BE005E926BCADAD003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D326BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -334,6 +335,7 @@
 			files = (
 				1BE005DE26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift in Sources */,
 				1BE005E826BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */,
+				1BE005E926BCADAD003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

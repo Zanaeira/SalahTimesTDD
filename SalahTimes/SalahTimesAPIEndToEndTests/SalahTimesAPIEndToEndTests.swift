@@ -30,6 +30,8 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
         let endpoint = EndpointSpy(urlString: "http://api.aladhan.com/v1/timingsByCity/05-08-2021?city=London&country=UK")
         let client = URLSessionHTTPClient()
         let salahTimesLoader = SalahTimesLoader(client: client)
+        trackForMemoryLeaks(salahTimesLoader)
+        trackForMemoryLeaks(client)
         
         return (salahTimesLoader, endpoint)
     }
