@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-import SalahTimes
+@testable import SalahTimes
 
 class SalahTimesLoaderTests: XCTestCase {
     
@@ -38,6 +38,39 @@ class SalahTimesLoaderTests: XCTestCase {
         expect(sut, toCompleteWith: .failure(.invalidData)) {
             let invalidJSON =  Data("invalid json".utf8)
             httpClient.complete(withStatusCode: 200, data: invalidJSON)
+        }
+    }
+    
+    func test_loadTimes_deliversTimesOn200HTTPResponseWithJSONItems() {
+        let (sut, httpClient) = makeSUT()
+        
+        let date = Date(timeIntervalSince1970: 1628118000)
+        
+        let salahTimes = SalahTimes(date: date, fajr: "03:27", sunrise: "05:31", zuhr: "13:07", asr: "17:14", maghrib: "20:42", isha: "22:44")
+        
+        let sampleJSON = [
+            "data": [
+                "timings": [
+                    "Fajr": "03:27",
+                    "Sunrise": "05:31",
+                    "Dhuhr": "13:07",
+                    "Asr": "17:14",
+                    "Sunset": "20:42",
+                    "Maghrib": "20:42",
+                    "Isha": "22:44",
+                    "Imsak": "03:17",
+                    "Midnight": "01:06",
+                ],
+                "date": [
+                    "readable": "05 Aug 2021",
+                    "timestamp": "1628118000",
+                ]
+            ]
+        ]
+        
+        expect(sut, toCompleteWith: .success(salahTimes)) {
+            let json = try! JSONSerialization.data(withJSONObject: sampleJSON)
+            httpClient.complete(withStatusCode: 200, data: json)
         }
     }
     

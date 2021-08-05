@@ -9,11 +9,10 @@ import Foundation
 
 public struct SalahTimes: Equatable {
     public let date: Date
-    public let location: String
-    public let fajr: Date
-    public let sunrise: Date
-    public let zuhr: Date
-    public let asr: Date
-    public let maghrib: Date
-    public let isha: Date
+    public let fajr: String
+    public let sunrise: String
+    public let zuhr: String
+    public let asr: String
+    public let maghrib: String
+    public let isha: String
 }

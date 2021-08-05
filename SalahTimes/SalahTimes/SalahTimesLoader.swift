@@ -28,12 +28,53 @@ public final class SalahTimesLoader {
         
         client.get(from: endpoint.url) { result in
             switch result {
-            case .success:
-                completion(.failure(.invalidData))
+            case let .success((data, _)):
+                if let root = try? JSONDecoder().decode(Root.self, from: data) {
+                    completion(.success(self.map(from: root.data)))
+                } else {
+                    completion(.failure(.invalidData))
+                }
             case .failure:
                 completion(.failure(.connectivity))
             }
         }
     }
     
+    private func map(from data: TimingsData) -> SalahTimes {
+        return SalahTimes(date: date(from: data.date.readable), fajr: data.timings.Fajr, sunrise: data.timings.Sunrise, zuhr: data.timings.Dhuhr, asr: data.timings.Asr, maghrib: data.timings.Maghrib, isha: data.timings.Isha)
+    }
+    
+    private func date(from readable: String) -> Date {
+        DateFormatter.readableDateFormatterForAladhanAPI.date(from: readable)!
+    }
+    
+}
+
+private struct Root: Decodable {
+    let data: TimingsData
+}
+
+private struct TimingsData: Decodable {
+    let timings: Timings
+    let date: TimingsDateData
+}
+
+private struct Timings: Decodable {
+    let Fajr, Sunrise, Dhuhr, Asr: String
+    let Sunset, Maghrib, Isha, Imsak: String
+    let Midnight: String
+}
+
+struct TimingsDateData: Decodable {
+    let readable: String
+    let timestamp: String
+}
+
+private extension DateFormatter {
+    static let readableDateFormatterForAladhanAPI: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM y"
+        
+        return dateFormatter
+    }()
 }
