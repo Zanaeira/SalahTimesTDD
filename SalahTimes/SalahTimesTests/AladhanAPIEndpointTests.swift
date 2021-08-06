@@ -9,13 +9,20 @@ import XCTest
 import SalahTimes
 
 struct AladhanAPIEndpoint {
+    
+    enum Madhhab: Int {
+        case shafii = 0
+        case hanafi = 1
+    }
+    
     let path: String
     let queryItems: [URLQueryItem]
     
-    static func timingsByLocation(_ location: Location, on date: Date) -> AladhanAPIEndpoint {
+    static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi) -> AladhanAPIEndpoint {
         return AladhanAPIEndpoint(path: "/v1/timingsByCity/\(dateFormattedForAPIRequest(date))", queryItems: [
             URLQueryItem(name: "city", value: location.city),
-            URLQueryItem(name: "country", value: location.country)
+            URLQueryItem(name: "country", value: location.country),
+            URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue))
         ])
     }
     
@@ -62,12 +69,25 @@ class AladhanAPIEndpointTests: XCTestCase {
             URLQueryItem(name: "country", value: location.country)
         ]
         
-        XCTAssertEqual(sut.queryItems, expectedQueryItems)
+        expectedQueryItems.forEach({
+            XCTAssertTrue(sut.queryItems.contains($0))
+        })
+    }
+    
+    func test_timingsByLocation_queryItemsIncludesSchoolForAsrTimeCalculation() {
+        let sut = AladhanAPIEndpoint.timingsByLocation(anyLocation(), on: anyDate(), madhhabForAsr: .shafii)
+        let schoolForAsrTimeQueryItem = URLQueryItem(name: "school", value: "0")
+        
+        XCTAssertTrue(sut.queryItems.contains(schoolForAsrTimeQueryItem))
     }
     
     // MARK: - Helpers
     private func anyLocation() -> Location {
         return Location(city: "Anywhere", country: "In The World")
+    }
+    
+    private func anyDate() -> Date {
+        return Date()
     }
     
 }
