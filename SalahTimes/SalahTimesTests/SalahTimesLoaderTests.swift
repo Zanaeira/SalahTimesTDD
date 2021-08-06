@@ -36,7 +36,7 @@ class SalahTimesLoaderTests: XCTestCase {
         let (sut, httpClient, endpointSpy) = makeSUT()
         
         expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
-            let invalidJSON =  Data("invalid json".utf8)
+            let invalidJSON = Data("invalid json".utf8)
             httpClient.complete(withStatusCode: 200, data: invalidJSON)
         }
     }
