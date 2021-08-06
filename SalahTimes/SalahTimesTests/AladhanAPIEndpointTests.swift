@@ -8,114 +8,6 @@
 import XCTest
 import SalahTimes
 
-struct AladhanAPIEndpoint: Endpoint {
-    
-    enum Madhhab: Int {
-        case shafii = 0
-        case hanafi = 1
-    }
-    
-    struct MethodSettings {
-        let fajrAngle: Double?
-        let maghribAngle: Double?
-        let ishaAngle: Double?
-        
-        fileprivate func value() -> String {
-            return "\(angleOrNull(fajrAngle)),\(angleOrNull(maghribAngle)),\(angleOrNull(ishaAngle))"
-        }
-        
-        private func angleOrNull(_ angle: Double?) -> String {
-            guard let angle = angle else { return "null" }
-            
-            return "\(angle)"
-        }
-        
-    }
-        
-    enum Method {
-        case standard(method: CalculationMethod)
-        case custom(methodSettings: MethodSettings)
-        
-        func queryItems() -> [URLQueryItem] {
-            switch self {
-            case let .standard(method):
-                return [URLQueryItem(name: "method", value: "\(method.rawValue)")]
-            case let .custom(methodSettings):
-                return [
-                    URLQueryItem(name: "method", value: "99"),
-                    URLQueryItem(name: "methodSettings", value: methodSettings.value())
-                ]
-            }
-        }
-        
-        func value() -> Int {
-            switch self {
-            case let .standard(method):
-                return method.rawValue
-            case .custom:
-                return 99
-            }
-        }
-    }
-    
-    enum CalculationMethod: Int {
-        case shiaIthnaAnsari = 0
-        case universityOfIslamicSciencesKarachi = 1
-        case islamicSocietyOfNorthAmerica = 2
-        case muslimWorldLeague = 3
-        case ummAlQuraUniversityMakkah = 4
-        case egyptianGeneralAuthorityOfSurvey = 5
-        case InstituteOfGeophysicsUniversityOfTehran = 7
-        case gulfRegion = 8
-        case kuwait = 9
-        case qatar = 10
-        case majlisUgamaIslamSingapuraSingapore = 11
-        case unionOrganizationislamicDeFrance = 12
-        case diyanetİşleriBaşkanlığıTurkey = 13
-        case spiritualAdministrationOfMuslimsOfRussia = 14
-    }
-    
-    let path: String
-    let queryItems: [URLQueryItem]
-    
-    var url: URL {
-        var components = URLComponents()
-        components.scheme = "http"
-        components.host = "api.aladhan.com"
-        components.path = path
-        components.queryItems = queryItems
-        
-        return components.url!
-    }
-    
-    static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
-        var queryItems = [
-            URLQueryItem(name: "city", value: location.city),
-            URLQueryItem(name: "country", value: location.country),
-            URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue))
-        ]
-        fajrIshaMethod.queryItems().forEach({queryItems.append($0)})
-        
-        return AladhanAPIEndpoint(path: "/v1/timingsByCity/\(dateFormattedForAPIRequest(date))", queryItems: queryItems)
-    }
-    
-    static func dateFormattedForAPIRequest(_ date: Date) -> String {
-        let dateFormatter = DateFormatter.dateFormatterForAladhanAPIRequest
-        
-        return dateFormatter.string(from: date)
-    }
-    
-}
-
-private extension DateFormatter {
-    static let dateFormatterForAladhanAPIRequest: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        
-        return dateFormatter
-    }()
-}
-
 class AladhanAPIEndpointTests: XCTestCase {
     
     func test_dateFormattedForAladhanAPIRequest_hasCorrectFormat() {
@@ -193,4 +85,13 @@ class AladhanAPIEndpointTests: XCTestCase {
         return Date()
     }
     
+}
+
+private extension DateFormatter {
+    static let dateFormatterForAladhanAPIRequest: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        
+        return dateFormatter
+    }()
 }
