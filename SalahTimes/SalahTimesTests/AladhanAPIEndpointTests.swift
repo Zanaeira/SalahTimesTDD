@@ -15,8 +15,23 @@ struct AladhanAPIEndpoint {
         case hanafi = 1
     }
     
-    typealias MethodSettings = (fajrAngle: String, maghribAngle: String, ishaAngle: String)
-    
+    struct MethodSettings {
+        let fajrAngle: Double?
+        let maghribAngle: Double?
+        let ishaAngle: Double?
+        
+        fileprivate func value() -> String {
+            return "\(angleOrNull(fajrAngle)),\(angleOrNull(maghribAngle)),\(angleOrNull(ishaAngle))"
+        }
+        
+        private func angleOrNull(_ angle: Double?) -> String {
+            guard let angle = angle else { return "null" }
+            
+            return "\(angle)"
+        }
+        
+    }
+        
     enum Method {
         case standard(method: CalculationMethod)
         case custom(methodSettings: MethodSettings)
@@ -28,7 +43,7 @@ struct AladhanAPIEndpoint {
             case let .custom(methodSettings):
                 return [
                     URLQueryItem(name: "method", value: "99"),
-                    URLQueryItem(name: "methodSettings", value: "\(methodSettings.fajrAngle),\(methodSettings.maghribAngle),\(methodSettings.ishaAngle)")
+                    URLQueryItem(name: "methodSettings", value: methodSettings.value())
                 ]
             }
         }
@@ -127,7 +142,8 @@ class AladhanAPIEndpointTests: XCTestCase {
     }
     
     func test_timingsByLocation_allowsCustomCalculationMethodForFajrAndIsha() {
-        let method = AladhanAPIEndpoint.Method.custom(methodSettings: ("18.5", "null", "17.5"))
+        let methodSettings = AladhanAPIEndpoint.MethodSettings(fajrAngle: 18.5, maghribAngle: nil, ishaAngle: 17.5)
+        let method = AladhanAPIEndpoint.Method.custom(methodSettings: methodSettings)
         let sut = AladhanAPIEndpoint.timingsByLocation(anyLocation(), on: anyDate(), fajrIshaMethod: method)
         let calculationMethodQueryItems = [URLQueryItem(name: "method", value: "99"),
                                            URLQueryItem(name: "methodSettings", value: "18.5,null,17.5")]
