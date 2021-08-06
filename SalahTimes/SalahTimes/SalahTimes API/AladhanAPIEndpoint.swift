@@ -22,6 +22,11 @@ public struct AladhanAPIEndpoint: Endpoint {
         return components.url!
     }
     
+    private init(path: String, queryItems: [URLQueryItem]) {
+        self.path = path
+        self.queryItems = queryItems
+    }
+    
     public static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
         var queryItems = [
             URLQueryItem(name: "city", value: location.city),
