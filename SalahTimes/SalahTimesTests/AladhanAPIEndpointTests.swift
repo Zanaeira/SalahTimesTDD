@@ -38,7 +38,13 @@ private extension DateFormatter {
 
 class AladhanAPIEndpointTests: XCTestCase {
     
-    func test_timingsByCity_pathIsCorrectForDate() {
+    func test_dateFormattedForAladhanAPIRequest_hasCorrectFormat() {
+        let testDate = Date()
+        
+        XCTAssertEqual(AladhanAPIEndpoint.dateFormattedForAPIRequest(testDate), DateFormatter.readableDateFormatterForAladhanAPI.string(from: testDate))
+    }
+    
+    func test_timingsByLocation_pathIsCorrectForDate() {
         let date = Date()
         let sut = AladhanAPIEndpoint.timingsByLocation(anyLocation(), on: date)
         let expectedPath = "/v1/timingsByCity/\(DateFormatter.readableDateFormatterForAladhanAPI.string(from: date))"
@@ -46,7 +52,7 @@ class AladhanAPIEndpointTests: XCTestCase {
         XCTAssertEqual(sut.path, expectedPath)
     }
     
-    func test_timingsByCity_queryItemsForCityAndCountryIncluded() {
+    func test_timingsByLocation_queryItemsForCityAndCountryIncluded() {
         let date = Date()
         let location = Location(city: "London", country: "UK")
         let sut = AladhanAPIEndpoint.timingsByLocation(location, on: date)
@@ -57,12 +63,6 @@ class AladhanAPIEndpointTests: XCTestCase {
         ]
         
         XCTAssertEqual(sut.queryItems, expectedQueryItems)
-    }
-    
-    func test_dateFormattedForAladhanAPIRequest_hasCorrectFormat() {
-        let testDate = Date()
-        
-        XCTAssertEqual(AladhanAPIEndpoint.dateFormattedForAPIRequest(testDate), DateFormatter.readableDateFormatterForAladhanAPI.string(from: testDate))
     }
     
     // MARK: - Helpers
