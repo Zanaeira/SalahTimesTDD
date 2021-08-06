@@ -15,6 +15,25 @@ struct AladhanAPIEndpoint {
         case hanafi = 1
     }
     
+    typealias MethodSettings = (fajrAngle: String, maghribAngle: String, ishaAngle: String)
+    
+    enum Method {
+        case standard(method: CalculationMethod)
+        case custom(methodSettings: MethodSettings)
+        
+        func queryItems() -> [URLQueryItem] {
+            switch self {
+            case let .standard(method):
+                return [URLQueryItem(name: "method", value: "\(method.rawValue)")]
+            case let .custom(methodSettings):
+                return [
+                    URLQueryItem(name: "method", value: "99"),
+                    URLQueryItem(name: "methodSettings", value: "\(methodSettings.fajrAngle),\(methodSettings.maghribAngle),\(methodSettings.ishaAngle)")
+                ]
+            }
+        }
+    }
+    
     enum CalculationMethod: Int {
         case shiaIthnaAnsari = 0
         case universityOfIslamicSciencesKarachi = 1
@@ -35,13 +54,15 @@ struct AladhanAPIEndpoint {
     let path: String
     let queryItems: [URLQueryItem]
     
-    static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: CalculationMethod = .islamicSocietyOfNorthAmerica) -> AladhanAPIEndpoint {
-        return AladhanAPIEndpoint(path: "/v1/timingsByCity/\(dateFormattedForAPIRequest(date))", queryItems: [
+    static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> AladhanAPIEndpoint {
+        var queryItems = [
             URLQueryItem(name: "city", value: location.city),
             URLQueryItem(name: "country", value: location.country),
-            URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue)),
-            URLQueryItem(name: "method", value: String(fajrIshaMethod.rawValue))
-        ])
+            URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue))
+        ]
+        fajrIshaMethod.queryItems().forEach({queryItems.append($0)})
+        
+        return AladhanAPIEndpoint(path: "/v1/timingsByCity/\(dateFormattedForAPIRequest(date))", queryItems: queryItems)
     }
     
     static func dateFormattedForAPIRequest(_ date: Date) -> String {
@@ -104,6 +125,16 @@ class AladhanAPIEndpointTests: XCTestCase {
         let calculationMethodQueryItem = URLQueryItem(name: "method", value: "2")
         
         XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
+    }
+    
+    func test_timingsByLocation_allowsCustomCalculationMethodForFajrAndIsha() {
+        let method = AladhanAPIEndpoint.Method.custom(methodSettings: ("18.5", "null", "17.5"))
+        let sut = AladhanAPIEndpoint.timingsByLocation(anyLocation(), on: anyDate(), fajrIshaMethod: method)
+        let calculationMethodQueryItems = [URLQueryItem(name: "method", value: "99"),
+                                           URLQueryItem(name: "methodSettings", value: "18.5,null,17.5")]
+        
+        XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[0]))
+        XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[1]))
     }
     
     // MARK: - Helpers
