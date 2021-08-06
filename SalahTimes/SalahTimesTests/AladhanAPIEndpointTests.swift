@@ -63,7 +63,7 @@ class AladhanAPIEndpointTests: XCTestCase {
         let madhhab = AladhanAPIEndpoint.Madhhab.shafii
         let method = AladhanAPIEndpoint.Method.standard(method: .universityOfIslamicSciencesKarachi)
         
-        let expectedURL = URL(string: "http://api.aladhan.com/v1/timingsByCity/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))?city=\(location.city)&country=\(location.country)&school=\(madhhab.rawValue)&method=\(method.value())")!
+        let expectedURL = URL(string: "http://api.aladhan.com/v1/timingsByCity/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))?city=\(location.city)&country=\(location.country)&school=\(madhhab.rawValue)&method=1")!
         
         let sut: Endpoint = AladhanAPIEndpoint.timingsByLocation(location, on: date, madhhabForAsr: madhhab, fajrIshaMethod: method)
         

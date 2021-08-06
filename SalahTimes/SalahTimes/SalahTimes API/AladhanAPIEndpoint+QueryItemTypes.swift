@@ -40,7 +40,7 @@ extension AladhanAPIEndpoint {
         case standard(method: CalculationMethod)
         case custom(methodSettings: MethodSettings)
         
-        public func queryItems() -> [URLQueryItem] {
+        func queryItems() -> [URLQueryItem] {
             switch self {
             case let .standard(method):
                 return [URLQueryItem(name: "method", value: "\(method.rawValue)")]
@@ -49,15 +49,6 @@ extension AladhanAPIEndpoint {
                     URLQueryItem(name: "method", value: "99"),
                     URLQueryItem(name: "methodSettings", value: methodSettings.value())
                 ]
-            }
-        }
-        
-        public func value() -> Int {
-            switch self {
-            case let .standard(method):
-                return method.rawValue
-            case .custom:
-                return 99
             }
         }
     }
