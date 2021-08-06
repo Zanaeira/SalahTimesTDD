@@ -41,7 +41,7 @@ class AladhanAPIEndpointTests: XCTestCase {
     func test_timingsByCity_pathIsCorrectForDate() {
         let date = Date()
         let sut = AladhanAPIEndpoint.timingsByLocation(anyLocation(), on: date)
-        let expectedPath = "/v1/timingsByCity/\(AladhanAPIEndpoint.dateFormattedForAPIRequest(date))"
+        let expectedPath = "/v1/timingsByCity/\(DateFormatter.readableDateFormatterForAladhanAPI.string(from: date))"
         
         XCTAssertEqual(sut.path, expectedPath)
     }
