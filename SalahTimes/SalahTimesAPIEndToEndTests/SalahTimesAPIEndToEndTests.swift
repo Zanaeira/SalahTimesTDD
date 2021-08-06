@@ -27,7 +27,9 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (salahTimesLoader: SalahTimesLoader, endpoint: Endpoint) {
-        let endpoint = EndpointSpy(urlString: "http://api.aladhan.com/v1/timingsByCity/05-08-2021?city=London&country=UK")
+        let date = Date(timeIntervalSince1970: 1628118000)
+        let location = Location(city: "London", country: "UK")
+        let endpoint: Endpoint = AladhanAPIEndpoint.timingsByLocation(location, on: date, madhhabForAsr: .shafii)
         let client = URLSessionHTTPClient()
         let salahTimesLoader = SalahTimesLoader(client: client)
         trackForMemoryLeaks(salahTimesLoader, file: file, line: line)
@@ -49,21 +51,6 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
         
         wait(for: [exp], timeout: 5.0)
         return receivedResult
-    }
-    
-    private struct EndpointSpy: Endpoint {
-        let path: String = ""
-        let queryItems: [URLQueryItem] = []
-        
-        private let testURLString: String
-        
-        var url: URL {
-            return URL(string: testURLString)!
-        }
-        
-        init(urlString: String) {
-            testURLString = urlString
-        }
     }
     
 }
