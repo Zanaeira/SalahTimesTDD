@@ -108,9 +108,8 @@ class AladhanAPIEndpointTests: XCTestCase {
             URLQueryItem(name: "country", value: location.country)
         ]
         
-        expectedQueryItems.forEach({
-            XCTAssertTrue(sut.queryItems.contains($0))
-        })
+        XCTAssertTrue(sut.queryItems.contains(expectedQueryItems[0]))
+        XCTAssertTrue(sut.queryItems.contains(expectedQueryItems[1]))
     }
     
     func test_timingsByLocation_queryItemsIncludesSchoolForAsrTimeCalculation() {
