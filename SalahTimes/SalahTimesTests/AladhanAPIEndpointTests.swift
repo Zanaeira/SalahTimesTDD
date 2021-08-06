@@ -27,7 +27,7 @@ struct AladhanAPIEndpoint {
     }
     
     static func dateFormattedForAPIRequest(_ date: Date) -> String {
-        let dateFormatter = DateFormatter.readableDateFormatterForAladhanAPI
+        let dateFormatter = DateFormatter.dateFormatterForAladhanAPIRequest
         
         return dateFormatter.string(from: date)
     }
@@ -35,7 +35,7 @@ struct AladhanAPIEndpoint {
 }
 
 private extension DateFormatter {
-    static let readableDateFormatterForAladhanAPI: DateFormatter = {
+    static let dateFormatterForAladhanAPIRequest: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         
@@ -48,13 +48,13 @@ class AladhanAPIEndpointTests: XCTestCase {
     func test_dateFormattedForAladhanAPIRequest_hasCorrectFormat() {
         let testDate = Date()
         
-        XCTAssertEqual(AladhanAPIEndpoint.dateFormattedForAPIRequest(testDate), DateFormatter.readableDateFormatterForAladhanAPI.string(from: testDate))
+        XCTAssertEqual(AladhanAPIEndpoint.dateFormattedForAPIRequest(testDate), DateFormatter.dateFormatterForAladhanAPIRequest.string(from: testDate))
     }
     
     func test_timingsByLocation_pathIsCorrectForDate() {
         let date = Date()
         let sut = AladhanAPIEndpoint.timingsByLocation(anyLocation(), on: date)
-        let expectedPath = "/v1/timingsByCity/\(DateFormatter.readableDateFormatterForAladhanAPI.string(from: date))"
+        let expectedPath = "/v1/timingsByCity/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))"
         
         XCTAssertEqual(sut.path, expectedPath)
     }
