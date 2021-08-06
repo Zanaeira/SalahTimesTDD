@@ -30,7 +30,7 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
         let date = Date(timeIntervalSince1970: 1628118000)
         let location = Location(city: "London", country: "UK")
         let endpoint: Endpoint = AladhanAPIEndpoint.timingsByLocation(location, on: date, madhhabForAsr: .shafii)
-        let client = URLSessionHTTPClient()
+        let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let salahTimesLoader = SalahTimesLoader(client: client)
         trackForMemoryLeaks(salahTimesLoader, file: file, line: line)
         trackForMemoryLeaks(client, file: file, line: line)
