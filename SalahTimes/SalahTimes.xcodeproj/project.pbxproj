@@ -23,6 +23,7 @@
 		1BE005E726BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */; };
 		1BE005E826BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */; };
 		1BE005E926BCADAD003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D326BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift */; };
+		1BE005EB26BCB1BC003F5F54 /* AladhanAPIEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005EA26BCB1BC003F5F54 /* AladhanAPIEndpointTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		1BE005DD26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesAPIEndToEndTests.swift; sourceTree = "<group>"; };
 		1BE005DF26BCA172003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+SampleSalahTimes.swift"; sourceTree = "<group>"; };
+		1BE005EA26BCB1BC003F5F54 /* AladhanAPIEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladhanAPIEndpointTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				1BE005B226B8069D003F5F54 /* Info.plist */,
 				1BE005D226BC3368003F5F54 /* Helpers */,
 				1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */,
+				1BE005EA26BCB1BC003F5F54 /* AladhanAPIEndpointTests.swift */,
 				1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = SalahTimesTests;
@@ -323,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE005C126BB5280003F5F54 /* SalahTimesLoaderTests.swift in Sources */,
+				1BE005EB26BCB1BC003F5F54 /* AladhanAPIEndpointTests.swift in Sources */,
 				1BE005E726BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */,
 				1BE005D126BBF723003F5F54 /* URLSessionHTTPClientTests.swift in Sources */,
 				1BE005D426BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
