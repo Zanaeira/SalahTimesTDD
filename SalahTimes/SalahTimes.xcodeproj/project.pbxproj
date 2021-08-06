@@ -145,11 +145,11 @@
 			children = (
 				1BE005C426BB5A49003F5F54 /* SalahTimesLoader.swift */,
 				1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */,
+				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
 				1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */,
 				1BE005C626BB5A69003F5F54 /* Endpoint.swift */,
 				1BE005ED26BCC82A003F5F54 /* AladhanAPIEndpoint.swift */,
 				1BE005EF26BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift */,
-				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
 				1BE005C826BB5A8C003F5F54 /* Location.swift */,
 			);
 			path = "SalahTimes API";

@@ -5,9 +5,8 @@
 //  Created by Suhayl Ahmed on 04/08/2021.
 //
 
-import Foundation
 import XCTest
-@testable import SalahTimes
+import SalahTimes
 
 class SalahTimesLoaderTests: XCTestCase {
     
