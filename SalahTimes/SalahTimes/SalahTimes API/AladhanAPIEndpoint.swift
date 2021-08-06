@@ -33,7 +33,7 @@ public struct AladhanAPIEndpoint: Endpoint {
         return AladhanAPIEndpoint(path: "/v1/timingsByCity/\(dateFormattedForAPIRequest(date))", queryItems: queryItems)
     }
     
-    public static func dateFormattedForAPIRequest(_ date: Date) -> String {
+    private static func dateFormattedForAPIRequest(_ date: Date) -> String {
         let dateFormatter = DateFormatter.dateFormatterForAladhanAPIRequest
         
         return dateFormatter.string(from: date)

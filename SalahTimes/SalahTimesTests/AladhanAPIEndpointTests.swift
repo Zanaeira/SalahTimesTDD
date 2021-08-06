@@ -10,12 +10,6 @@ import SalahTimes
 
 class AladhanAPIEndpointTests: XCTestCase {
     
-    func test_dateFormattedForAladhanAPIRequest_hasCorrectFormat() {
-        let testDate = Date()
-        
-        XCTAssertEqual(AladhanAPIEndpoint.dateFormattedForAPIRequest(testDate), DateFormatter.dateFormatterForAladhanAPIRequest.string(from: testDate))
-    }
-    
     func test_timingsByLocation_pathIsCorrectForDate() {
         let date = Date()
         let sut: Endpoint = AladhanAPIEndpoint.timingsByLocation(anyLocation(), on: date)
