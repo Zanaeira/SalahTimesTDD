@@ -25,6 +25,7 @@
 		1BE005E926BCADAD003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005D326BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift */; };
 		1BE005EB26BCB1BC003F5F54 /* AladhanAPIEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005EA26BCB1BC003F5F54 /* AladhanAPIEndpointTests.swift */; };
 		1BE005EE26BCC82A003F5F54 /* AladhanAPIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005ED26BCC82A003F5F54 /* AladhanAPIEndpoint.swift */; };
+		1BE005F026BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005EF26BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		1BE005E626BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+SampleSalahTimes.swift"; sourceTree = "<group>"; };
 		1BE005EA26BCB1BC003F5F54 /* AladhanAPIEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladhanAPIEndpointTests.swift; sourceTree = "<group>"; };
 		1BE005ED26BCC82A003F5F54 /* AladhanAPIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladhanAPIEndpoint.swift; sourceTree = "<group>"; };
+		1BE005EF26BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AladhanAPIEndpoint+QueryItemTypes.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 				1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */,
 				1BE005C626BB5A69003F5F54 /* Endpoint.swift */,
 				1BE005ED26BCC82A003F5F54 /* AladhanAPIEndpoint.swift */,
+				1BE005EF26BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift */,
 				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
 				1BE005C826BB5A8C003F5F54 /* Location.swift */,
 			);
@@ -319,6 +322,7 @@
 				1BE005CF26BB894D003F5F54 /* SalahTimesMapper.swift in Sources */,
 				1BE005CB26BB5AA1003F5F54 /* HTTPClient.swift in Sources */,
 				1BE005C726BB5A69003F5F54 /* Endpoint.swift in Sources */,
+				1BE005F026BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift in Sources */,
 				1BE005C926BB5A8C003F5F54 /* Location.swift in Sources */,
 				1BE005C526BB5A49003F5F54 /* SalahTimesLoader.swift in Sources */,
 				1BE005EE26BCC82A003F5F54 /* AladhanAPIEndpoint.swift in Sources */,
