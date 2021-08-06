@@ -15,14 +15,32 @@ struct AladhanAPIEndpoint {
         case hanafi = 1
     }
     
+    enum CalculationMethod: Int {
+        case shiaIthnaAnsari = 0
+        case universityOfIslamicSciencesKarachi = 1
+        case islamicSocietyOfNorthAmerica = 2
+        case muslimWorldLeague = 3
+        case ummAlQuraUniversityMakkah = 4
+        case egyptianGeneralAuthorityOfSurvey = 5
+        case InstituteOfGeophysicsUniversityOfTehran = 7
+        case gulfRegion = 8
+        case kuwait = 9
+        case qatar = 10
+        case majlisUgamaIslamSingapuraSingapore = 11
+        case unionOrganizationislamicDeFrance = 12
+        case diyanetİşleriBaşkanlığıTurkey = 13
+        case spiritualAdministrationOfMuslimsOfRussia = 14
+    }
+    
     let path: String
     let queryItems: [URLQueryItem]
     
-    static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi) -> AladhanAPIEndpoint {
+    static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: CalculationMethod = .islamicSocietyOfNorthAmerica) -> AladhanAPIEndpoint {
         return AladhanAPIEndpoint(path: "/v1/timingsByCity/\(dateFormattedForAPIRequest(date))", queryItems: [
             URLQueryItem(name: "city", value: location.city),
             URLQueryItem(name: "country", value: location.country),
-            URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue))
+            URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue)),
+            URLQueryItem(name: "method", value: String(fajrIshaMethod.rawValue))
         ])
     }
     
@@ -79,6 +97,13 @@ class AladhanAPIEndpointTests: XCTestCase {
         let schoolForAsrTimeQueryItem = URLQueryItem(name: "school", value: "0")
         
         XCTAssertTrue(sut.queryItems.contains(schoolForAsrTimeQueryItem))
+    }
+    
+    func test_timingsByLocation_queryItemsIncludesCalculationMethodForFajrAndIsha() {
+        let sut = AladhanAPIEndpoint.timingsByLocation(anyLocation(), on: anyDate())
+        let calculationMethodQueryItem = URLQueryItem(name: "method", value: "2")
+        
+        XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
     }
     
     // MARK: - Helpers
