@@ -47,6 +47,15 @@ struct AladhanAPIEndpoint {
                 ]
             }
         }
+        
+        func value() -> Int {
+            switch self {
+            case let .standard(method):
+                return method.rawValue
+            case .custom:
+                return 99
+            }
+        }
     }
     
     enum CalculationMethod: Int {
@@ -68,6 +77,16 @@ struct AladhanAPIEndpoint {
     
     let path: String
     let queryItems: [URLQueryItem]
+    
+    var url: URL {
+        var components = URLComponents()
+        components.scheme = "http"
+        components.host = "api.aladhan.com"
+        components.path = path
+        components.queryItems = queryItems
+        
+        return components.url!
+    }
     
     static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> AladhanAPIEndpoint {
         var queryItems = [
@@ -150,6 +169,19 @@ class AladhanAPIEndpointTests: XCTestCase {
         
         XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[0]))
         XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[1]))
+    }
+    
+    func test_timingsByLocation_urlContainsHostSchemePathAndAllQueryItemsSpecified() {
+        let location = Location(city: "London", country: "UK")
+        let date = Date()
+        let madhhab = AladhanAPIEndpoint.Madhhab.shafii
+        let method = AladhanAPIEndpoint.Method.standard(method: .universityOfIslamicSciencesKarachi)
+        
+        let expectedURL = URL(string: "http://api.aladhan.com/v1/timingsByCity/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))?city=\(location.city)&country=\(location.country)&school=\(madhhab.rawValue)&method=\(method.value())")!
+        
+        let sut = AladhanAPIEndpoint.timingsByLocation(location, on: date, madhhabForAsr: madhhab, fajrIshaMethod: method)
+        
+        XCTAssertEqual(sut.url, expectedURL)
     }
     
     // MARK: - Helpers
