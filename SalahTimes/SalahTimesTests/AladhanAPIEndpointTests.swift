@@ -59,6 +59,12 @@ class AladhanAPIEndpointTests: XCTestCase {
         XCTAssertEqual(sut.queryItems, expectedQueryItems)
     }
     
+    func test_dateFormattedForAladhanAPIRequest_hasCorrectFormat() {
+        let testDate = Date()
+        
+        XCTAssertEqual(AladhanAPIEndpoint.dateFormattedForAPIRequest(testDate), DateFormatter.readableDateFormatterForAladhanAPI.string(from: testDate))
+    }
+    
     // MARK: - Helpers
     private func anyLocation() -> Location {
         return Location(city: "Anywhere", country: "In The World")
