@@ -13,6 +13,7 @@
 		1BE0062526BDFC94003F5F54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BE0062426BDFC94003F5F54 /* Assets.xcassets */; };
 		1BE0062826BDFC94003F5F54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE0062626BDFC94003F5F54 /* LaunchScreen.storyboard */; };
 		1BE0063226BDFF0D003F5F54 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0063126BDFF0D003F5F54 /* SettingsViewController.swift */; };
+		1BE0063426BE0E8D003F5F54 /* StandardFajrIshaMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0063326BE0E8D003F5F54 /* StandardFajrIshaMethodViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		1BE0062726BDFC94003F5F54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BE0062926BDFC94003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE0063126BDFF0D003F5F54 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		1BE0063326BE0E8D003F5F54 /* StandardFajrIshaMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardFajrIshaMethodViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE0063126BDFF0D003F5F54 /* SettingsViewController.swift */,
+				1BE0063326BE0E8D003F5F54 /* StandardFajrIshaMethodViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			files = (
 				1BE0061C26BDFC91003F5F54 /* AppDelegate.swift in Sources */,
 				1BE0061E26BDFC91003F5F54 /* SceneDelegate.swift in Sources */,
+				1BE0063426BE0E8D003F5F54 /* StandardFajrIshaMethodViewController.swift in Sources */,
 				1BE0063226BDFF0D003F5F54 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
