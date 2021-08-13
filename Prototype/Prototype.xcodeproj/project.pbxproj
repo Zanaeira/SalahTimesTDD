@@ -12,6 +12,7 @@
 		1BE0062526BDFC94003F5F54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BE0062426BDFC94003F5F54 /* Assets.xcassets */; };
 		1BE0062826BDFC94003F5F54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BE0062626BDFC94003F5F54 /* LaunchScreen.storyboard */; };
 		1BE0063D26C6A010003F5F54 /* SalahTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0063C26C6A010003F5F54 /* SalahTimesViewController.swift */; };
+		1BE0063F26C6A3A0003F5F54 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0063E26C6A3A0003F5F54 /* UIKitExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		1BE0062726BDFC94003F5F54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BE0062926BDFC94003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE0063C26C6A010003F5F54 /* SalahTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewController.swift; sourceTree = "<group>"; };
+		1BE0063E26C6A3A0003F5F54 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		1BE0061A26BDFC91003F5F54 /* Prototype */ = {
 			isa = PBXGroup;
 			children = (
+				1BE0064026C6A3A5003F5F54 /* Utilities */,
 				1BE0062F26BDFEDD003F5F54 /* App+SceneDelegates */,
 				1BE0063026BDFEF1003F5F54 /* Controllers */,
 				1BE0062426BDFC94003F5F54 /* Assets.xcassets */,
@@ -78,6 +81,14 @@
 				1BE0063C26C6A010003F5F54 /* SalahTimesViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1BE0064026C6A3A5003F5F54 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1BE0063E26C6A3A0003F5F54 /* UIKitExtensions.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +162,7 @@
 			files = (
 				1BE0061C26BDFC91003F5F54 /* AppDelegate.swift in Sources */,
 				1BE0063D26C6A010003F5F54 /* SalahTimesViewController.swift in Sources */,
+				1BE0063F26C6A3A0003F5F54 /* UIKitExtensions.swift in Sources */,
 				1BE0061E26BDFC91003F5F54 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
