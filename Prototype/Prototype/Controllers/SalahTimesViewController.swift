@@ -17,17 +17,13 @@ final class SalahTimesViewController: UIViewController {
         searchBar.delegate = self
         
         configureUI()
-        showSearchButton(true)
+        setupSearchButton()
     }
     
     private func configureUI() {
         view.backgroundColor = .systemTeal
         
         title = "Salah Times"
-    }
-    
-    private func showSearchButton(_ shouldShow: Bool) {
-        shouldShow ? setupSearchButton() : hideSearchBar()
     }
     
     private func setupSearchButton() {
@@ -43,7 +39,7 @@ final class SalahTimesViewController: UIViewController {
     }
     
     private func hideSearchBar() {
-        showSearchButton(true)
+        setupSearchButton()
     }
     
 }
