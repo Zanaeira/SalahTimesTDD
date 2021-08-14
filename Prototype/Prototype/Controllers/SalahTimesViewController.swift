@@ -17,13 +17,14 @@ final class SalahTimesViewController: UIViewController {
         searchBar.delegate = self
         
         configureUI()
-        setupSearchButton()
     }
     
     private func configureUI() {
         view.backgroundColor = .systemTeal
         
         title = "Salah Times"
+        
+        setupSearchButton()
     }
     
     private func setupSearchButton() {
