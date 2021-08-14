@@ -25,6 +25,7 @@ final class SalahTimesViewController: UIViewController {
         title = "Salah Times"
         
         setupSearchButton()
+        setupAddLocationButton()
     }
     
     private func setupSearchButton() {
@@ -36,11 +37,21 @@ final class SalahTimesViewController: UIViewController {
     @objc private func showSearchBar() {
         navigationItem.titleView = searchBar
         navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
         searchBar.becomeFirstResponder()
     }
     
     private func hideSearchBar() {
         setupSearchButton()
+        setupAddLocationButton()
+    }
+    
+    private func setupAddLocationButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addLocation))
+    }
+    
+    @objc private func addLocation() {
+        print("Add new location")
     }
     
 }
