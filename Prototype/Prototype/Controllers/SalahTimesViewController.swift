@@ -24,6 +24,10 @@ final class SalahTimesViewController: UIViewController {
         
         title = "Salah Times"
         
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
         setupSearchButton()
         setupAddLocationButton()
     }
@@ -41,11 +45,6 @@ final class SalahTimesViewController: UIViewController {
         searchBar.becomeFirstResponder()
     }
     
-    private func hideSearchBar() {
-        setupSearchButton()
-        setupAddLocationButton()
-    }
-    
     private func setupAddLocationButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addLocation))
     }
@@ -59,7 +58,7 @@ final class SalahTimesViewController: UIViewController {
 extension SalahTimesViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        hideSearchBar()
+        setupNavigationBar()
     }
     
 }
