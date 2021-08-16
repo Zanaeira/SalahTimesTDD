@@ -11,6 +11,7 @@ final class SalahTimesViewController: UIViewController {
     
     private let searchBar = UISearchBar()
     private let tomorrowView = TomorrowView()
+    private let salahTimesCollectionViewController = SalahTimesCollectionViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ final class SalahTimesViewController: UIViewController {
         
         setupNavigationBar()
         setupTomorrowView()
+        setupSalahTimesCollectionView()
     }
     
     private func setupNavigationBar() {
@@ -40,6 +42,12 @@ final class SalahTimesViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         tomorrowView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 20, left: 20, bottom: 0, right: 20))
         tomorrowView.constrainHeight(constant: 100)
+    }
+    
+    private func setupSalahTimesCollectionView() {
+        add(salahTimesCollectionViewController)
+        let safeArea = view.safeAreaLayoutGuide
+        salahTimesCollectionViewController.view.anchor(top: tomorrowView.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 20, left: 20, bottom: 20, right: 20))
     }
     
     private func setupSearchButton() {
@@ -81,8 +89,8 @@ private final class TomorrowView: UIView {
     
     private let fajrHeadingLabel = UILabel(text: "Fajr tomorrow is at:", font: .preferredFont(forTextStyle: .title3))
     private let sunriseHeadingLabel = UILabel(text: "Sunrise tomorrow is at:", font: .preferredFont(forTextStyle: .title3))
-    private let fajrLabel = UILabel(text: "4:24am", font: .preferredFont(forTextStyle: .title3))
-    private let sunriseLabel = UILabel(text: "6:07am", font: .preferredFont(forTextStyle: .title3))
+    private let fajrLabel = UILabel(text: "03:29", font: .preferredFont(forTextStyle: .title3))
+    private let sunriseLabel = UILabel(text: "05:49", font: .preferredFont(forTextStyle: .title3))
     
     init() {
         super.init(frame: .zero)
