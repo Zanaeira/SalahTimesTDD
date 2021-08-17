@@ -64,6 +64,7 @@ extension SalahTimesCollectionViewController {
     private static func createLayout() -> UICollectionViewLayout {
         var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         config.headerMode = .supplementary
+        config.backgroundColor = .tertiarySystemGroupedBackground
         
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         
