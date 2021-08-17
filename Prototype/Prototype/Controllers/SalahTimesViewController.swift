@@ -11,7 +11,7 @@ final class SalahTimesViewController: UIViewController {
     
     private let searchBar = UISearchBar()
     private let tomorrowView = TomorrowView()
-    private let salahTimesCollectionViewController = SalahTimesCollectionViewController()
+    private let salahTimesCollectionViewController = SalahTimesCollectionViewController(headerText: "17 Aug 2021")
     
     override func viewDidLoad() {
         super.viewDidLoad()

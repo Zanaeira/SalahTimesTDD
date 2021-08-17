@@ -13,12 +13,16 @@ final class SalahTimesCollectionViewController: UIViewController {
         fatalError("Not implemented")
     }
     
-    private let dataSource: UICollectionViewDiffableDataSource<Section, Item>
+    private static let elementKindSectionHeader = "SupplementaryViewHeader"
+    
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Item> = createDataSource(for: collectionView)
     private let collectionView: UICollectionView
     
-    init() {
+    private let headerText: String
+    
+    init(headerText: String) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
-        dataSource = SalahTimesCollectionViewController.createDataSource(for: collectionView)
+        self.headerText = headerText
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -58,12 +62,15 @@ extension SalahTimesCollectionViewController {
 extension SalahTimesCollectionViewController {
     
     private static func createLayout() -> UICollectionViewLayout {
-        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        config.headerMode = .supplementary
         
-        return UICollectionViewCompositionalLayout.list(using: config)
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        
+        return layout
     }
     
-    private static func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, Item> {
+    private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, Item> {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { (cell, indexPath, item) in
             var content = cell.defaultContentConfiguration()
             content.image = item.image
@@ -77,9 +84,25 @@ extension SalahTimesCollectionViewController {
             cell.contentConfiguration = content
         }
         
-        return UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { collectionView, indexPath, item in
+        let headerRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewListCell>(elementKind: UICollectionView.elementKindSectionHeader) { listCell, elementKind, indexPath in
+            var config = listCell.defaultContentConfiguration()
+            config.text = self.headerText
+            config.textProperties.font = .preferredFont(forTextStyle: .title1)
+            config.textProperties.alignment = .center
+            config.directionalLayoutMargins = .init(top: 20, leading: 0, bottom: 10, trailing: 0)
+            
+            listCell.contentConfiguration = config
+        }
+        
+        let dataSource =  UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
+        
+        dataSource.supplementaryViewProvider = { (collectionView, elementKind, indexPath) -> UICollectionReusableView? in
+            return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+        }
+        
+        return dataSource
     }
     
     private func configureInitialSnapshot() {
