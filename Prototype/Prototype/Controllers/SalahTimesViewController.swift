@@ -10,6 +10,7 @@ import UIKit
 final class SalahTimesViewController: UIViewController {
     
     private let searchBar = UISearchBar()
+    private let headerLabel = UILabel(text: "London, UK", font: .preferredFont(forTextStyle: .title1))
     private let tomorrowView = TomorrowView()
     private let salahTimesCollectionViewController = SalahTimesCollectionViewController(headerText: "17 Aug 2021")
     
@@ -27,6 +28,7 @@ final class SalahTimesViewController: UIViewController {
         title = "Salah Times"
         
         setupNavigationBar()
+        setupHeaderLabel()
         setupTomorrowView()
         setupSalahTimesCollectionView()
     }
@@ -36,11 +38,19 @@ final class SalahTimesViewController: UIViewController {
         setupAddLocationButton()
     }
     
+    private func setupHeaderLabel() {
+        headerLabel.textAlignment = .center
+        view.addSubview(headerLabel)
+        
+        let safeArea = view.safeAreaLayoutGuide
+        headerLabel.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 20, left: 0, bottom: 0, right: 0))
+    }
+    
     private func setupTomorrowView() {
         view.addSubview(tomorrowView)
         
         let safeArea = view.safeAreaLayoutGuide
-        tomorrowView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 20, left: 20, bottom: 0, right: 20))
+        tomorrowView.anchor(top: headerLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 20, bottom: 0, right: 20))
         tomorrowView.constrainHeight(constant: 100)
     }
     
