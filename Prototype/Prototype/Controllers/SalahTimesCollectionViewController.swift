@@ -129,7 +129,7 @@ private extension UICollectionViewListCell {
         config.text = title
         config.textProperties.font = .preferredFont(forTextStyle: .title1)
         config.textProperties.alignment = .center
-        config.directionalLayoutMargins = .init(top: 20, leading: 0, bottom: 10, trailing: 0)
+        config.directionalLayoutMargins = .init(top: 4, leading: 0, bottom: 10, trailing: 0)
         
         contentConfiguration = config
 
