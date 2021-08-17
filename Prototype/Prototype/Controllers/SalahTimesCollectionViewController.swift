@@ -41,7 +41,7 @@ extension SalahTimesCollectionViewController {
     
     private enum Section { case main }
     
-    private struct Item: Hashable {
+    fileprivate struct Item: Hashable {
         let title: String
         let body: String
         let image: UIImage?
@@ -72,26 +72,11 @@ extension SalahTimesCollectionViewController {
     
     private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, Item> {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Item> { (cell, indexPath, item) in
-            var content = cell.defaultContentConfiguration()
-            content.image = item.image
-            content.imageProperties.tintColor = .systemOrange
-            content.text = item.title
-            content.textProperties.font = .preferredFont(forTextStyle: .title3)
-            content.secondaryText = item.body
-            content.secondaryTextProperties.font = .preferredFont(forTextStyle: .title3)
-            content.prefersSideBySideTextAndSecondaryText = true
-            
-            cell.contentConfiguration = content
+            cell.configure(with: item)
         }
         
         let headerRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewListCell>(elementKind: UICollectionView.elementKindSectionHeader) { listCell, elementKind, indexPath in
-            var config = listCell.defaultContentConfiguration()
-            config.text = self.headerText
-            config.textProperties.font = .preferredFont(forTextStyle: .title1)
-            config.textProperties.alignment = .center
-            config.directionalLayoutMargins = .init(top: 20, leading: 0, bottom: 10, trailing: 0)
-            
-            listCell.contentConfiguration = config
+            listCell.configureAsHeader(self.headerText)
         }
         
         let dataSource =  UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { collectionView, indexPath, item in
@@ -117,6 +102,36 @@ extension SalahTimesCollectionViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(collectionView)
         collectionView.fillSuperview()
+    }
+    
+}
+
+private extension UICollectionViewListCell {
+    
+    typealias Item = SalahTimesCollectionViewController.Item
+    
+    func configure(with item: Item) {
+        var content = defaultContentConfiguration()
+        content.image = item.image
+        content.imageProperties.tintColor = .systemOrange
+        content.text = item.title
+        content.textProperties.font = .preferredFont(forTextStyle: .title3)
+        content.secondaryText = item.body
+        content.secondaryTextProperties.font = .preferredFont(forTextStyle: .title3)
+        content.prefersSideBySideTextAndSecondaryText = true
+        
+        contentConfiguration = content
+    }
+    
+    func configureAsHeader(_ title: String) {
+        var config = defaultContentConfiguration()
+        config.text = title
+        config.textProperties.font = .preferredFont(forTextStyle: .title1)
+        config.textProperties.alignment = .center
+        config.directionalLayoutMargins = .init(top: 20, leading: 0, bottom: 10, trailing: 0)
+        
+        contentConfiguration = config
+
     }
     
 }
