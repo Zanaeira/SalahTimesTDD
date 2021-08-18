@@ -11,7 +11,7 @@ final class SalahTimesViewController: UIViewController {
     
     private let searchBar = UISearchBar()
     private let headerLabel = UILabel(text: "London, UK", font: .preferredFont(forTextStyle: .title1))
-    private let tomorrowView = TomorrowView()
+    private let tomorrowViewController = TomorrowViewController()
     private let salahTimesCollectionViewController = SalahTimesCollectionViewController(headerText: "17 Aug 2021")
     
     override func viewDidLoad() {
@@ -47,7 +47,8 @@ final class SalahTimesViewController: UIViewController {
     }
     
     private func setupTomorrowView() {
-        view.addSubview(tomorrowView)
+        add(tomorrowViewController)
+        let tomorrowView: UIView! = tomorrowViewController.view
         
         let safeArea = view.safeAreaLayoutGuide
         tomorrowView.anchor(top: headerLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 20, bottom: 0, right: 20))
@@ -56,6 +57,8 @@ final class SalahTimesViewController: UIViewController {
     
     private func setupSalahTimesCollectionView() {
         add(salahTimesCollectionViewController)
+        let tomorrowView: UIView! = tomorrowViewController.view
+        
         let safeArea = view.safeAreaLayoutGuide
         salahTimesCollectionViewController.view.anchor(top: tomorrowView.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 20, left: 20, bottom: 20, right: 20))
     }
@@ -87,57 +90,6 @@ extension SalahTimesViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         setupNavigationBar()
-    }
-    
-}
-
-private final class TomorrowView: UIView {
-    
-    required init?(coder: NSCoder) {
-        fatalError("Not implemented")
-    }
-    
-    private let fajrHeadingLabel = UILabel(text: "Fajr tomorrow is at:", font: .preferredFont(forTextStyle: .title3))
-    private let sunriseHeadingLabel = UILabel(text: "Sunrise tomorrow is at:", font: .preferredFont(forTextStyle: .title3))
-    private let fajrLabel = UILabel(text: "03:29", font: .preferredFont(forTextStyle: .title3))
-    private let sunriseLabel = UILabel(text: "05:49", font: .preferredFont(forTextStyle: .title3))
-    
-    init() {
-        super.init(frame: .zero)
-        
-        configureUI()
-    }
-    
-    private func configureUI() {
-        backgroundColor = .systemBlue.withAlphaComponent(0.6)
-        layer.cornerRadius = 6
-        setupLabels()
-    }
-    
-    private func setupLabels() {
-        let headingsStackView = getHeadingLabelsInStackView()
-        let timingsStackView = getTimingsLabelsInStackView()
-        
-        let stackView = UIStackView(arrangedSubviews: [headingsStackView, timingsStackView])
-        stackView.spacing = 10
-        
-        addSubview(stackView)
-        stackView.centerInSuperview()
-    }
-    
-    private func getHeadingLabelsInStackView() -> UIStackView {
-        [fajrHeadingLabel, sunriseHeadingLabel].forEach({$0.textAlignment = .right})
-        let headingsStackView = UIStackView(arrangedSubviews: [fajrHeadingLabel, sunriseHeadingLabel])
-        headingsStackView.axis = .vertical
-        
-        return headingsStackView
-    }
-    
-    private func getTimingsLabelsInStackView() -> UIStackView {
-        let timeingsStackView = UIStackView(arrangedSubviews: [fajrLabel, sunriseLabel])
-        timeingsStackView.axis = .vertical
-        
-        return timeingsStackView
     }
     
 }

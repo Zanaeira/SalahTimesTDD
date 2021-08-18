@@ -14,6 +14,7 @@
 		1BE0063D26C6A010003F5F54 /* SalahTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0063C26C6A010003F5F54 /* SalahTimesViewController.swift */; };
 		1BE0063F26C6A3A0003F5F54 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0063E26C6A3A0003F5F54 /* UIKitExtensions.swift */; };
 		1BE0064226C9F988003F5F54 /* SalahTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0064126C9F988003F5F54 /* SalahTimesCollectionViewController.swift */; };
+		1BECF27026CD4BA400C4C749 /* TomorrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF26F26CD4BA400C4C749 /* TomorrowViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		1BE0063C26C6A010003F5F54 /* SalahTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewController.swift; sourceTree = "<group>"; };
 		1BE0063E26C6A3A0003F5F54 /* UIKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		1BE0064126C9F988003F5F54 /* SalahTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCollectionViewController.swift; sourceTree = "<group>"; };
+		1BECF26F26CD4BA400C4C749 /* TomorrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomorrowViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE0063C26C6A010003F5F54 /* SalahTimesViewController.swift */,
+				1BECF26F26CD4BA400C4C749 /* TomorrowViewController.swift */,
 				1BE0064126C9F988003F5F54 /* SalahTimesCollectionViewController.swift */,
 			);
 			path = Controllers;
@@ -164,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE0064226C9F988003F5F54 /* SalahTimesCollectionViewController.swift in Sources */,
+				1BECF27026CD4BA400C4C749 /* TomorrowViewController.swift in Sources */,
 				1BE0061C26BDFC91003F5F54 /* AppDelegate.swift in Sources */,
 				1BE0063D26C6A010003F5F54 /* SalahTimesViewController.swift in Sources */,
 				1BE0063F26C6A3A0003F5F54 /* UIKitExtensions.swift in Sources */,
