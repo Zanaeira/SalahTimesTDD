@@ -110,27 +110,34 @@ private final class TomorrowView: UIView {
     
     private func configureUI() {
         backgroundColor = .systemBlue.withAlphaComponent(0.6)
+        layer.cornerRadius = 6
         setupLabels()
     }
     
     private func setupLabels() {
-        let headingsStackView = setupHeadingLabels()
+        let headingsStackView = getHeadingLabelsInStackView()
+        let timingsStackView = getTimingsLabelsInStackView()
         
-        let timesStackView = UIStackView(arrangedSubviews: [fajrLabel, sunriseLabel])
-        timesStackView.axis = .vertical
-        addSubview(timesStackView)
-        timesStackView.anchor(top: headingsStackView.topAnchor, leading: headingsStackView.trailingAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: 8, bottom: 0, right: 0))
+        let stackView = UIStackView(arrangedSubviews: [headingsStackView, timingsStackView])
+        stackView.spacing = 10
+        
+        addSubview(stackView)
+        stackView.centerInSuperview()
     }
     
-    @discardableResult
-    private func setupHeadingLabels() -> UIStackView {
+    private func getHeadingLabelsInStackView() -> UIStackView {
         [fajrHeadingLabel, sunriseHeadingLabel].forEach({$0.textAlignment = .right})
         let headingsStackView = UIStackView(arrangedSubviews: [fajrHeadingLabel, sunriseHeadingLabel])
         headingsStackView.axis = .vertical
-        addSubview(headingsStackView)
-        headingsStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 20, left: 20, bottom: 0, right: 0))
         
         return headingsStackView
+    }
+    
+    private func getTimingsLabelsInStackView() -> UIStackView {
+        let timeingsStackView = UIStackView(arrangedSubviews: [fajrLabel, sunriseLabel])
+        timeingsStackView.axis = .vertical
+        
+        return timeingsStackView
     }
     
 }
