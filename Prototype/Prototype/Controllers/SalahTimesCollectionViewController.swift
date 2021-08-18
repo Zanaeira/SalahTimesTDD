@@ -25,6 +25,8 @@ final class SalahTimesCollectionViewController: UIViewController {
         self.headerText = headerText
         
         super.init(nibName: nil, bundle: nil)
+        
+        collectionView.delegate = self
     }
     
     override func viewDidLoad() {
@@ -32,6 +34,15 @@ final class SalahTimesCollectionViewController: UIViewController {
         
         configureInitialSnapshot()
         configureHierarchy()
+    }
+    
+}
+
+// MARK: - CollectionViewDelegate
+extension SalahTimesCollectionViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
 }
