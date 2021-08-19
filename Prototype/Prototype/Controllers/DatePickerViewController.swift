@@ -18,7 +18,11 @@ final class DatePickerViewController: UIViewController {
     private let cancelButton = UIButton()
     private let dismissView = UIView()
     
-    init(mode: UIDatePicker.Mode, style: UIDatePickerStyle) {
+    private let onDateSelected: (Date) -> Void
+    
+    init(mode: UIDatePicker.Mode, style: UIDatePickerStyle, onDateSelected: @escaping (Date) -> Void) {
+        self.onDateSelected = onDateSelected
+        
         super.init(nibName: nil, bundle: nil)
         
         datePicker.datePickerMode = mode
@@ -69,7 +73,9 @@ final class DatePickerViewController: UIViewController {
     }
     
     @objc private func doneButtonPressed() {
-        self.dismiss(animated: true, completion: nil)
+        onDateSelected(datePicker.date)
+        
+        dismissDatePickerView()
     }
     
     @objc private func dismissDatePickerView() {

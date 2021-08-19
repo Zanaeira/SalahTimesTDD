@@ -18,7 +18,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Item> = createDataSource(for: collectionView)
     private let collectionView: UICollectionView
     
-    private let headerText: String
+    private var headerText: String
     
     init(headerText: String) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
@@ -32,7 +32,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateSnapshot()
+        configureInitialSnapshot()
         configureHierarchy()
     }
     
@@ -65,12 +65,9 @@ extension SalahTimesCollectionViewController {
             cell.configure(with: item)
         }
         
-        let headerText = self.headerText
-        let target = self
-        
         let headerRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewListCell>(elementKind: UICollectionView.elementKindSectionHeader) { listCell, elementKind, indexPath in
-            listCell.configureAsHeader(headerText)
-            let tapGestureRecognizer = UITapGestureRecognizer(target: target, action: #selector(target.showDatePicker))
+            listCell.configureAsHeader(self.headerText)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showDatePicker))
             listCell.addGestureRecognizer(tapGestureRecognizer)
         }
         
@@ -86,15 +83,29 @@ extension SalahTimesCollectionViewController {
     }
     
     @objc private func showDatePicker() {
-        let datePickerViewController = DatePickerViewController(mode: .date, style: .inline)
+        let datePickerViewController = DatePickerViewController(mode: .date, style: .inline) { date in
+            let dateFormatter = DateFormatter.headerDateFormatter
+            
+            let header = dateFormatter.string(from: date)
+            DispatchQueue.main.async {
+                self.updateSnapshot(header: header, items: Item.random())
+                self.collectionView.reloadData()
+            }
+        }
+        
         self.present(datePickerViewController, animated: true, completion: nil)
     }
     
-    private func updateSnapshot() {
+    private func configureInitialSnapshot() {
+        updateSnapshot(header: headerText, items: Item.random())
+    }
+    
+    private func updateSnapshot(header: String, items: [Item]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        let stubIndex = Int.random(in: 0...4)
-        snapshot.appendItems(Item.stubs[stubIndex], toSection: .main)
+        snapshot.appendItems(items, toSection: .main)
+        
+        self.headerText = header
         
         dataSource.apply(snapshot)
     }
@@ -130,7 +141,15 @@ private extension UICollectionViewListCell {
         config.directionalLayoutMargins = .init(top: 4, leading: 0, bottom: 10, trailing: 0)
         
         contentConfiguration = config
-
     }
     
+}
+
+private extension DateFormatter {
+    static let headerDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM yyyy"
+        
+        return dateFormatter
+    }()
 }

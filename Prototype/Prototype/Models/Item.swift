@@ -12,7 +12,13 @@ struct Item: Hashable {
     let body: String
     let image: UIImage?
     
-    static let stubs = [
+    static func random() -> [Item] {
+        let index = Int.random(in: 0...4)
+        
+        return stubs[index]
+    }
+    
+    private static let stubs = [
         [
             Item(title: "Fajr", body: "03:26", image: UIImage(systemName: "sun.haze.fill")),
             Item(title: "Sunrise", body: "05:48", image: UIImage(systemName: "sunrise.fill")),
