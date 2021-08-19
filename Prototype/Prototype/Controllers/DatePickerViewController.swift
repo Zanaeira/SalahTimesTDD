@@ -36,8 +36,8 @@ final class DatePickerViewController: UIViewController {
     }
     
     private func configure() {
-        configureDoneButton()
-        configureCancelButton()
+        configure(doneButton, title: "Done", selector: #selector(doneButtonPressed))
+        configure(cancelButton, title: "Cancel", selector: #selector(dismissDatePickerView))
         
         view.addSubview(datePicker)
         datePicker.centerInSuperview()
@@ -48,28 +48,21 @@ final class DatePickerViewController: UIViewController {
         stackView.distribution = .fillEqually
         stackView.spacing = 4
         view.addSubview(stackView)
-        stackView.anchor(top: datePicker.bottomAnchor, leading: datePicker.leadingAnchor, bottom: nil, trailing: datePicker.trailingAnchor, padding: .init(top: 2, left: 0, bottom: 0, right: 0))
+        stackView.anchor(top: datePicker.bottomAnchor, leading: datePicker.leadingAnchor, bottom: nil, trailing: datePicker.trailingAnchor, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
     }
     
-    private func configureDoneButton() {
-        doneButton.setTitle("Done", for: .normal)
-        doneButton.addTarget(self, action: #selector(doneButtonPressed), for: .touchUpInside)
-        doneButton.constrainHeight(constant: 50)
-        doneButton.backgroundColor = .systemBlue
-    }
-    
-    private func configureCancelButton() {
-        cancelButton.setTitle("Cancel", for: .normal)
-        cancelButton.addTarget(self, action: #selector(cancelButtonPressed), for: .touchUpInside)
-        cancelButton.constrainHeight(constant: 50)
-        cancelButton.backgroundColor = .systemBlue
+    private func configure(_ button: UIButton, title: String, selector: Selector) {
+        button.setTitle(title, for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        button.constrainHeight(constant: 50)
+        button.backgroundColor = .systemBlue
     }
     
     @objc private func doneButtonPressed() {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc private func cancelButtonPressed() {
+    @objc private func dismissDatePickerView() {
         self.dismiss(animated: true, completion: nil)
     }
     
