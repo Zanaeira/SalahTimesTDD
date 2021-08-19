@@ -93,7 +93,7 @@ extension SalahTimesCollectionViewController {
     private func configureInitialSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(Item.stubs, toSection: .main)
+        snapshot.appendItems(Item.stubs[0], toSection: .main)
         
         dataSource.apply(snapshot)
     }
