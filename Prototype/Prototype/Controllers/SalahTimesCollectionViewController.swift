@@ -32,7 +32,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureInitialSnapshot()
+        updateSnapshot()
         configureHierarchy()
     }
     
@@ -90,10 +90,11 @@ extension SalahTimesCollectionViewController {
         self.present(datePickerViewController, animated: true, completion: nil)
     }
     
-    private func configureInitialSnapshot() {
+    private func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(Item.stubs[0], toSection: .main)
+        let stubIndex = Int.random(in: 0...4)
+        snapshot.appendItems(Item.stubs[stubIndex], toSection: .main)
         
         dataSource.apply(snapshot)
     }
