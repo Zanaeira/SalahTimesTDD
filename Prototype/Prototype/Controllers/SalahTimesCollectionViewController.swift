@@ -18,7 +18,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Item> = createDataSource(for: collectionView)
     private let collectionView: UICollectionView
     
-    private var headerText: String {
+    private var header: Header {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -26,9 +26,9 @@ final class SalahTimesCollectionViewController: UIViewController {
         }
     }
     
-    init(headerText: String) {
+    init(header: Header) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
-        self.headerText = headerText
+        self.header = header
         
         super.init(nibName: nil, bundle: nil)
         
@@ -72,7 +72,7 @@ extension SalahTimesCollectionViewController {
         }
         
         let headerRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewListCell>(elementKind: UICollectionView.elementKindSectionHeader) { listCell, elementKind, indexPath in
-            listCell.configureAsHeader(self.headerText)
+            listCell.configureAsHeader(self.header)
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.showDatePicker))
             listCell.addGestureRecognizer(tapGestureRecognizer)
         }
@@ -90,9 +90,7 @@ extension SalahTimesCollectionViewController {
     
     @objc private func showDatePicker() {
         let datePickerViewController = DatePickerViewController(mode: .date, style: .inline) { date in
-            let dateFormatter = DateFormatter.headerDateFormatter
-            
-            self.headerText = dateFormatter.string(from: date)
+            self.header = Header(date: date)
             self.updateSnapshot()
         }
         
@@ -134,9 +132,9 @@ private extension UICollectionViewListCell {
         contentConfiguration = content
     }
     
-    func configureAsHeader(_ title: String) {
+    func configureAsHeader(_ header: Header) {
         var config = defaultContentConfiguration()
-        config.text = title
+        config.text = header.headerText
         config.textProperties.font = .preferredFont(forTextStyle: .title1)
         config.textProperties.alignment = .center
         config.directionalLayoutMargins = .init(top: 4, leading: 0, bottom: 10, trailing: 0)
@@ -144,13 +142,4 @@ private extension UICollectionViewListCell {
         contentConfiguration = config
     }
     
-}
-
-private extension DateFormatter {
-    static let headerDateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM yyyy"
-        
-        return dateFormatter
-    }()
 }
