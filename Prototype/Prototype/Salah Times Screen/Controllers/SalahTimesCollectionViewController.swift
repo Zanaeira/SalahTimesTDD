@@ -13,8 +13,6 @@ final class SalahTimesCollectionViewController: UIViewController {
         fatalError("Not implemented")
     }
     
-    private static let elementKindSectionHeader = "SupplementaryViewHeader"
-    
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Item> = createDataSource(for: collectionView)
     private let collectionView: UICollectionView
     
