@@ -20,13 +20,15 @@ final class DatePickerViewController: UIViewController {
     
     private let onDateSelected: (Date) -> Void
     
-    init(mode: UIDatePicker.Mode, style: UIDatePickerStyle, onDateSelected: @escaping (Date) -> Void) {
+    init(mode: UIDatePicker.Mode, style: UIDatePickerStyle, initialDate: Date, onDateSelected: @escaping (Date) -> Void) {
         self.onDateSelected = onDateSelected
         
         super.init(nibName: nil, bundle: nil)
         
         datePicker.datePickerMode = mode
         datePicker.preferredDatePickerStyle = style
+        
+        datePicker.date = initialDate
         
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overFullScreen
