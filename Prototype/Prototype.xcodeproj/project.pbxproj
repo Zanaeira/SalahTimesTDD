@@ -19,6 +19,7 @@
 		1BECF27926CE654A00C4C749 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27826CE654A00C4C749 /* Section.swift */; };
 		1BECF27B26CE654F00C4C749 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27A26CE654F00C4C749 /* Item.swift */; };
 		1BECF27D26CE7D9B00C4C749 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27C26CE7D9B00C4C749 /* Header.swift */; };
+		1BECF27F26CE834000C4C749 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27E26CE834000C4C749 /* MainTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		1BECF27826CE654A00C4C749 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		1BECF27A26CE654F00C4C749 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1BECF27C26CE7D9B00C4C749 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
+		1BECF27E26CE834000C4C749 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		1BE0063026BDFEF1003F5F54 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1BECF27E26CE834000C4C749 /* MainTabBarController.swift */,
 				1BE0063C26C6A010003F5F54 /* SalahTimesViewController.swift */,
 				1BECF26F26CD4BA400C4C749 /* TomorrowViewController.swift */,
 				1BE0064126C9F988003F5F54 /* SalahTimesCollectionViewController.swift */,
@@ -188,6 +191,7 @@
 			files = (
 				1BECF27D26CE7D9B00C4C749 /* Header.swift in Sources */,
 				1BE0064226C9F988003F5F54 /* SalahTimesCollectionViewController.swift in Sources */,
+				1BECF27F26CE834000C4C749 /* MainTabBarController.swift in Sources */,
 				1BECF27B26CE654F00C4C749 /* Item.swift in Sources */,
 				1BECF27026CD4BA400C4C749 /* TomorrowViewController.swift in Sources */,
 				1BECF27626CDD7C200C4C749 /* DatePickerViewController.swift in Sources */,

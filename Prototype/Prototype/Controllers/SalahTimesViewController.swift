@@ -25,8 +25,6 @@ final class SalahTimesViewController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .tertiarySystemGroupedBackground
         
-        title = "Salah Times"
-        
         setupNavigationBar()
         setupHeaderLabel()
         setupTomorrowView()
