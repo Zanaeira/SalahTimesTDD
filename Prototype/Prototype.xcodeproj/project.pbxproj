@@ -74,8 +74,9 @@
 			children = (
 				1BE0064026C6A3A5003F5F54 /* Utilities */,
 				1BE0062F26BDFEDD003F5F54 /* App+SceneDelegates */,
-				1BECF27726CE653900C4C749 /* Models */,
-				1BE0063026BDFEF1003F5F54 /* Controllers */,
+				1BECF28226CEB0E400C4C749 /* Main */,
+				1BECF28326CEB14A00C4C749 /* Salah Times Screen */,
+				1BECF28426CEB16C00C4C749 /* Overview Screen */,
 				1BE0062426BDFC94003F5F54 /* Assets.xcassets */,
 				1BE0062626BDFC94003F5F54 /* LaunchScreen.storyboard */,
 				1BE0062926BDFC94003F5F54 /* Info.plist */,
@@ -95,8 +96,6 @@
 		1BE0063026BDFEF1003F5F54 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1BECF27E26CE834000C4C749 /* MainTabBarController.swift */,
-				1BECF28026CEAC6100C4C749 /* OverviewViewController.swift */,
 				1BE0063C26C6A010003F5F54 /* SalahTimesViewController.swift */,
 				1BECF26F26CD4BA400C4C749 /* TomorrowViewController.swift */,
 				1BE0064126C9F988003F5F54 /* SalahTimesCollectionViewController.swift */,
@@ -121,6 +120,39 @@
 				1BECF27C26CE7D9B00C4C749 /* Header.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1BECF28226CEB0E400C4C749 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF27E26CE834000C4C749 /* MainTabBarController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		1BECF28326CEB14A00C4C749 /* Salah Times Screen */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF27726CE653900C4C749 /* Models */,
+				1BE0063026BDFEF1003F5F54 /* Controllers */,
+			);
+			path = "Salah Times Screen";
+			sourceTree = "<group>";
+		};
+		1BECF28426CEB16C00C4C749 /* Overview Screen */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF28526CEB17B00C4C749 /* Controllers */,
+			);
+			path = "Overview Screen";
+			sourceTree = "<group>";
+		};
+		1BECF28526CEB17B00C4C749 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF28026CEAC6100C4C749 /* OverviewViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
