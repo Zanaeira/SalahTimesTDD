@@ -43,7 +43,7 @@ final class DatePickerViewController: UIViewController {
         
         view.addSubview(datePicker)
         datePicker.centerInSuperview()
-        datePicker.constrainWidth(constant: view.frame.width - 40)
+        datePicker.constrainWidth(constant: view.frame.width - 8)
         datePicker.backgroundColor = .systemBackground
         
         let stackView = UIStackView(arrangedSubviews: [cancelButton, doneButton])
