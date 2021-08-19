@@ -18,7 +18,13 @@ final class SalahTimesCollectionViewController: UIViewController {
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Item> = createDataSource(for: collectionView)
     private let collectionView: UICollectionView
     
-    private var headerText: String
+    private var headerText: String {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
     
     init(headerText: String) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
@@ -86,26 +92,21 @@ extension SalahTimesCollectionViewController {
         let datePickerViewController = DatePickerViewController(mode: .date, style: .inline) { date in
             let dateFormatter = DateFormatter.headerDateFormatter
             
-            let header = dateFormatter.string(from: date)
-            DispatchQueue.main.async {
-                self.updateSnapshot(header: header, items: Item.random())
-                self.collectionView.reloadData()
-            }
+            self.headerText = dateFormatter.string(from: date)
+            self.updateSnapshot()
         }
         
         self.present(datePickerViewController, animated: true, completion: nil)
     }
     
     private func configureInitialSnapshot() {
-        updateSnapshot(header: headerText, items: Item.random())
+        updateSnapshot()
     }
     
-    private func updateSnapshot(header: String, items: [Item]) {
+    private func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(items, toSection: .main)
-        
-        self.headerText = header
+        snapshot.appendItems(Item.random(), toSection: .main)
         
         dataSource.apply(snapshot)
     }
