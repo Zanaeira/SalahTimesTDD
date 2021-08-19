@@ -16,6 +16,8 @@
 		1BE0064226C9F988003F5F54 /* SalahTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE0064126C9F988003F5F54 /* SalahTimesCollectionViewController.swift */; };
 		1BECF27026CD4BA400C4C749 /* TomorrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF26F26CD4BA400C4C749 /* TomorrowViewController.swift */; };
 		1BECF27626CDD7C200C4C749 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27526CDD7C200C4C749 /* DatePickerViewController.swift */; };
+		1BECF27926CE654A00C4C749 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27826CE654A00C4C749 /* Section.swift */; };
+		1BECF27B26CE654F00C4C749 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27A26CE654F00C4C749 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		1BE0064126C9F988003F5F54 /* SalahTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCollectionViewController.swift; sourceTree = "<group>"; };
 		1BECF26F26CD4BA400C4C749 /* TomorrowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TomorrowViewController.swift; sourceTree = "<group>"; };
 		1BECF27526CDD7C200C4C749 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		1BECF27826CE654A00C4C749 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		1BECF27A26CE654F00C4C749 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 			children = (
 				1BE0064026C6A3A5003F5F54 /* Utilities */,
 				1BE0062F26BDFEDD003F5F54 /* App+SceneDelegates */,
+				1BECF27726CE653900C4C749 /* Models */,
 				1BE0063026BDFEF1003F5F54 /* Controllers */,
 				1BE0062426BDFC94003F5F54 /* Assets.xcassets */,
 				1BE0062626BDFC94003F5F54 /* LaunchScreen.storyboard */,
@@ -98,6 +103,15 @@
 				1BE0063E26C6A3A0003F5F54 /* UIKitExtensions.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		1BECF27726CE653900C4C749 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF27826CE654A00C4C749 /* Section.swift */,
+				1BECF27A26CE654F00C4C749 /* Item.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,10 +184,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE0064226C9F988003F5F54 /* SalahTimesCollectionViewController.swift in Sources */,
+				1BECF27B26CE654F00C4C749 /* Item.swift in Sources */,
 				1BECF27026CD4BA400C4C749 /* TomorrowViewController.swift in Sources */,
 				1BECF27626CDD7C200C4C749 /* DatePickerViewController.swift in Sources */,
 				1BE0061C26BDFC91003F5F54 /* AppDelegate.swift in Sources */,
 				1BE0063D26C6A010003F5F54 /* SalahTimesViewController.swift in Sources */,
+				1BECF27926CE654A00C4C749 /* Section.swift in Sources */,
 				1BE0063F26C6A3A0003F5F54 /* UIKitExtensions.swift in Sources */,
 				1BE0061E26BDFC91003F5F54 /* SceneDelegate.swift in Sources */,
 			);
