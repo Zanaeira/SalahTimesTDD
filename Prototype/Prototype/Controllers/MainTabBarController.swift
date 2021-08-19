@@ -9,21 +9,25 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
+    private let overviewViewController = OverviewViewController()
     private let salahTimesViewController = SalahTimesViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configure()
+        setupViewControllers()
     }
     
-    private func configure() {
-        let salahTimesNavigationController = UINavigationController(rootViewController: salahTimesViewController)
+    private func setupViewControllers() {
+        let overviewNavigationController = UINavigationController(rootViewController: overviewViewController)
+        overviewViewController.title = "Overview"
+        overviewViewController.tabBarItem.image = UIImage(systemName: "globe")
         
+        let salahTimesNavigationController = UINavigationController(rootViewController: salahTimesViewController)
         salahTimesViewController.title = "Salah Times"
         salahTimesViewController.tabBarItem.image = UIImage(systemName: "calendar")
         
-        viewControllers = [salahTimesNavigationController]
+        viewControllers = [overviewNavigationController, salahTimesNavigationController]
     }
     
 }
