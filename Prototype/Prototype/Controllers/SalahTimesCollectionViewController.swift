@@ -87,8 +87,13 @@ extension SalahTimesCollectionViewController {
             cell.configure(with: item)
         }
         
+        let headerText = self.headerText
+        let target = self
+        
         let headerRegistration = UICollectionView.SupplementaryRegistration<UICollectionViewListCell>(elementKind: UICollectionView.elementKindSectionHeader) { listCell, elementKind, indexPath in
-            listCell.configureAsHeader(self.headerText)
+            listCell.configureAsHeader(headerText)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: target, action: #selector(target.showDatePicker))
+            listCell.addGestureRecognizer(tapGestureRecognizer)
         }
         
         let dataSource =  UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) { collectionView, indexPath, item in
@@ -100,6 +105,11 @@ extension SalahTimesCollectionViewController {
         }
         
         return dataSource
+    }
+    
+    @objc private func showDatePicker() {
+        let datePickerViewController = DatePickerViewController(mode: .date, style: .inline)
+        self.present(datePickerViewController, animated: true, completion: nil)
     }
     
     private func configureInitialSnapshot() {
