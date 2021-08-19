@@ -16,7 +16,7 @@ final class DatePickerViewController: UIViewController {
     private let datePicker = UIDatePicker()
     private let doneButton = UIButton()
     private let cancelButton = UIButton()
-    private let dismissViewButton = UIButton()
+    private let dismissView = UIView()
     
     init(mode: UIDatePicker.Mode, style: UIDatePickerStyle) {
         super.init(nibName: nil, bundle: nil)
@@ -37,7 +37,7 @@ final class DatePickerViewController: UIViewController {
     }
     
     private func configure() {
-        configureDismissButton()
+        configureDismissView()
         configure(doneButton, title: "Done", selector: #selector(doneButtonPressed))
         configure(cancelButton, title: "Cancel", selector: #selector(dismissDatePickerView))
         
@@ -53,10 +53,12 @@ final class DatePickerViewController: UIViewController {
         stackView.anchor(top: datePicker.bottomAnchor, leading: datePicker.leadingAnchor, bottom: nil, trailing: datePicker.trailingAnchor, padding: .init(top: 4, left: 0, bottom: 0, right: 0))
     }
     
-    private func configureDismissButton() {
-        view.addSubview(dismissViewButton)
-        dismissViewButton.fillSuperview()
-        dismissViewButton.addTarget(self, action: #selector(dismissDatePickerView), for: .touchUpInside)
+    private func configureDismissView() {
+        view.addSubview(dismissView)
+        dismissView.backgroundColor = .clear
+        dismissView.fillSuperview()
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissDatePickerView))
+        dismissView.addGestureRecognizer(tapRecognizer)
     }
     
     private func configure(_ button: UIButton, title: String, selector: Selector) {
