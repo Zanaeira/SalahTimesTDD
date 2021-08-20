@@ -58,7 +58,7 @@ extension OverviewViewController {
     }
     
     private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, OverviewItem> {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, OverviewItem> { (cell, indexPath, item) in
+        let cellRegistration = UICollectionView.CellRegistration<OverviewCell, OverviewItem> { (cell, indexPath, item) in
             cell.configure(with: item)
             cell.contentView.backgroundColor = .secondarySystemGroupedBackground
         }
@@ -121,14 +121,28 @@ private struct OverviewItem: Hashable {
     
 }
 
-private extension UICollectionViewListCell {
+private final class OverviewCell: UICollectionViewCell {
+    
+    required init?(coder: NSCoder) {
+        fatalError("Not implemented")
+    }
+    
+    private let headerLabel = UILabel(text: "", font: .preferredFont(forTextStyle: .title1))
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configureUI()
+    }
+    
+    private func configureUI() {
+        contentView.addSubview(headerLabel)
+        headerLabel.centerXInSuperview()
+        headerLabel.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
+    }
     
     func configure(with item: OverviewItem) {
-        var config = defaultContentConfiguration()
-        config.text = item.header
-        config.textProperties.font = .preferredFont(forTextStyle: .title1)
-        
-        contentConfiguration = config
+        headerLabel.text = item.header
     }
     
 }
