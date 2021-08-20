@@ -21,6 +21,7 @@
 		1BECF27D26CE7D9B00C4C749 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27C26CE7D9B00C4C749 /* Header.swift */; };
 		1BECF27F26CE834000C4C749 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27E26CE834000C4C749 /* MainTabBarController.swift */; };
 		1BECF28126CEAC6100C4C749 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF28026CEAC6100C4C749 /* OverviewViewController.swift */; };
+		1BECF28726CFE49F00C4C749 /* DateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF28626CFE49F00C4C749 /* DateHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		1BECF27C26CE7D9B00C4C749 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		1BECF27E26CE834000C4C749 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1BECF28026CEAC6100C4C749 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
+		1BECF28626CFE49F00C4C749 /* DateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				1BECF27826CE654A00C4C749 /* Section.swift */,
 				1BECF27A26CE654F00C4C749 /* Item.swift */,
 				1BECF27C26CE7D9B00C4C749 /* Header.swift */,
+				1BECF28626CFE49F00C4C749 /* DateHeader.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				1BECF27F26CE834000C4C749 /* MainTabBarController.swift in Sources */,
 				1BECF27B26CE654F00C4C749 /* Item.swift in Sources */,
 				1BECF27026CD4BA400C4C749 /* TomorrowViewController.swift in Sources */,
+				1BECF28726CFE49F00C4C749 /* DateHeader.swift in Sources */,
 				1BECF28126CEAC6100C4C749 /* OverviewViewController.swift in Sources */,
 				1BECF27626CDD7C200C4C749 /* DatePickerViewController.swift in Sources */,
 				1BE0061C26BDFC91003F5F54 /* AppDelegate.swift in Sources */,

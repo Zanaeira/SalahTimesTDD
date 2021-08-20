@@ -87,8 +87,9 @@ extension SalahTimesCollectionViewController {
     }
     
     @objc private func showDatePicker() {
-        let datePickerViewController = DatePickerViewController(mode: .date, style: .inline, initialDate: header.date) { date in
-            self.header = Header(date: date)
+        
+        let datePickerViewController = DatePickerViewController(mode: .date, style: .inline, initialDate: (header as? DateHeader)?.date ?? Date()) { date in
+            self.header = DateHeader(date: date)
             self.updateSnapshot()
         }
         

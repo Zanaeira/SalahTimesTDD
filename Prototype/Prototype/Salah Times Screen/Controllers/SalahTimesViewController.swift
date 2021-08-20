@@ -12,7 +12,7 @@ final class SalahTimesViewController: UIViewController {
     private let searchBar = UISearchBar()
     private let headerLabel = UILabel(text: "London, UK", font: .preferredFont(forTextStyle: .title1))
     private let tomorrowViewController = TomorrowViewController()
-    private let salahTimesCollectionViewController = SalahTimesCollectionViewController(header: Header(date: Date()))
+    private let salahTimesCollectionViewController = SalahTimesCollectionViewController(header: DateHeader(date: Date()))
     
     override func viewDidLoad() {
         super.viewDidLoad()
