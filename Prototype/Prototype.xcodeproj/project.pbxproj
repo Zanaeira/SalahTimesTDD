@@ -22,6 +22,11 @@
 		1BECF27F26CE834000C4C749 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF27E26CE834000C4C749 /* MainTabBarController.swift */; };
 		1BECF28126CEAC6100C4C749 /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF28026CEAC6100C4C749 /* OverviewViewController.swift */; };
 		1BECF28726CFE49F00C4C749 /* DateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF28626CFE49F00C4C749 /* DateHeader.swift */; };
+		1BECF28A26D3BC0100C4C749 /* OverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF28926D3BC0100C4C749 /* OverviewCell.swift */; };
+		1BECF28D26D3BC2A00C4C749 /* OverviewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF28C26D3BC2A00C4C749 /* OverviewItem.swift */; };
+		1BECF28F26D3BC6B00C4C749 /* OverviewSalahTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF28E26D3BC6B00C4C749 /* OverviewSalahTimesCollectionViewController.swift */; };
+		1BECF29126D3BC9600C4C749 /* SalahCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF29026D3BC9600C4C749 /* SalahCell.swift */; };
+		1BECF29526D3BCE100C4C749 /* TitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BECF29426D3BCE100C4C749 /* TitleHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,11 @@
 		1BECF27E26CE834000C4C749 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		1BECF28026CEAC6100C4C749 /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		1BECF28626CFE49F00C4C749 /* DateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHeader.swift; sourceTree = "<group>"; };
+		1BECF28926D3BC0100C4C749 /* OverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCell.swift; sourceTree = "<group>"; };
+		1BECF28C26D3BC2A00C4C749 /* OverviewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewItem.swift; sourceTree = "<group>"; };
+		1BECF28E26D3BC6B00C4C749 /* OverviewSalahTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewSalahTimesCollectionViewController.swift; sourceTree = "<group>"; };
+		1BECF29026D3BC9600C4C749 /* SalahCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahCell.swift; sourceTree = "<group>"; };
+		1BECF29426D3BCE100C4C749 /* TitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +129,6 @@
 			children = (
 				1BECF27826CE654A00C4C749 /* Section.swift */,
 				1BECF27A26CE654F00C4C749 /* Item.swift */,
-				1BECF27C26CE7D9B00C4C749 /* Header.swift */,
 				1BECF28626CFE49F00C4C749 /* DateHeader.swift */,
 			);
 			path = Models;
@@ -128,7 +137,8 @@
 		1BECF28226CEB0E400C4C749 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				1BECF27E26CE834000C4C749 /* MainTabBarController.swift */,
+				1BECF29326D3BCCE00C4C749 /* Models */,
+				1BECF29226D3BCC800C4C749 /* Controllers */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -145,6 +155,8 @@
 		1BECF28426CEB16C00C4C749 /* Overview Screen */ = {
 			isa = PBXGroup;
 			children = (
+				1BECF28B26D3BC2100C4C749 /* Models */,
+				1BECF28826D3BBF100C4C749 /* Views */,
 				1BECF28526CEB17B00C4C749 /* Controllers */,
 			);
 			path = "Overview Screen";
@@ -154,8 +166,43 @@
 			isa = PBXGroup;
 			children = (
 				1BECF28026CEAC6100C4C749 /* OverviewViewController.swift */,
+				1BECF28E26D3BC6B00C4C749 /* OverviewSalahTimesCollectionViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1BECF28826D3BBF100C4C749 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF28926D3BC0100C4C749 /* OverviewCell.swift */,
+				1BECF29026D3BC9600C4C749 /* SalahCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1BECF28B26D3BC2100C4C749 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF28C26D3BC2A00C4C749 /* OverviewItem.swift */,
+				1BECF29426D3BCE100C4C749 /* TitleHeader.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1BECF29226D3BCC800C4C749 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF27E26CE834000C4C749 /* MainTabBarController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1BECF29326D3BCCE00C4C749 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1BECF27C26CE7D9B00C4C749 /* Header.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,10 +280,15 @@
 				1BECF27B26CE654F00C4C749 /* Item.swift in Sources */,
 				1BECF27026CD4BA400C4C749 /* TomorrowViewController.swift in Sources */,
 				1BECF28726CFE49F00C4C749 /* DateHeader.swift in Sources */,
+				1BECF28A26D3BC0100C4C749 /* OverviewCell.swift in Sources */,
 				1BECF28126CEAC6100C4C749 /* OverviewViewController.swift in Sources */,
+				1BECF28F26D3BC6B00C4C749 /* OverviewSalahTimesCollectionViewController.swift in Sources */,
 				1BECF27626CDD7C200C4C749 /* DatePickerViewController.swift in Sources */,
 				1BE0061C26BDFC91003F5F54 /* AppDelegate.swift in Sources */,
 				1BE0063D26C6A010003F5F54 /* SalahTimesViewController.swift in Sources */,
+				1BECF29126D3BC9600C4C749 /* SalahCell.swift in Sources */,
+				1BECF29526D3BCE100C4C749 /* TitleHeader.swift in Sources */,
+				1BECF28D26D3BC2A00C4C749 /* OverviewItem.swift in Sources */,
 				1BECF27926CE654A00C4C749 /* Section.swift in Sources */,
 				1BE0063F26C6A3A0003F5F54 /* UIKitExtensions.swift in Sources */,
 				1BE0061E26BDFC91003F5F54 /* SceneDelegate.swift in Sources */,
