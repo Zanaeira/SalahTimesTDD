@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SalahTimes
+import SalahTimesiOS
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,12 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         
-        let mainController = UIViewController()
-        mainController.view.backgroundColor = .systemPink
+        let client = URLSessionHTTPClient()
+        let salahTimesLoader = SalahTimesLoader(client: client)
+        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader)
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = mainController
+        window?.rootViewController = UINavigationController(rootViewController: salahTimesViewController)
         window?.makeKeyAndVisible()
     }
     
