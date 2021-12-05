@@ -42,6 +42,8 @@ public final class SalahTimesViewController: UIViewController {
     }
     
     private func configureUI() {
+        title = "Salāh Times"
+        
         let black = UIColor(red: 0.00, green: 0.00, blue: 0.03, alpha: 1.00).cgColor
         let darkPurple = UIColor(red: 0.13, green: 0.07, blue: 0.36, alpha: 1.00).cgColor
         let purple = UIColor(red: 0.45, green: 0.20, blue: 0.95, alpha: 1.00).cgColor
