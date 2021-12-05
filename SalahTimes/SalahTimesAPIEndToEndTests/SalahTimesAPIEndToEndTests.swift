@@ -28,8 +28,8 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (salahTimesLoader: SalahTimesLoader, endpoint: Endpoint) {
         let date = Date(timeIntervalSince1970: 1628118000)
-        let location = Location(city: "London", country: "UK")
-        let endpoint: Endpoint = AladhanAPIEndpoint.timingsByLocation(location, on: date, madhhabForAsr: .shafii)
+        let address = "London, UK"
+        let endpoint: Endpoint = AladhanAPIEndpoint.timingsByAddress(address, on: date, madhhabForAsr: .shafii)
         let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
         let salahTimesLoader = SalahTimesLoader(client: client)
         trackForMemoryLeaks(salahTimesLoader, file: file, line: line)

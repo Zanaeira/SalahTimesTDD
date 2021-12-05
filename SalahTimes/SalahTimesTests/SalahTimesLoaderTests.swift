@@ -90,8 +90,8 @@ class SalahTimesLoaderTests: XCTestCase {
         XCTAssertEqual(capturedResults, [result], file: file, line: line)
     }
     
-    private func anyLocation() -> Location {
-        return Location(city: "London", country: "UK")
+    private func anyLocation() -> String {
+        return "London, UK"
     }
     
     private func anyDate() -> Date {

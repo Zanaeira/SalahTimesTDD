@@ -27,17 +27,16 @@ public struct AladhanAPIEndpoint: Endpoint {
         self.queryItems = queryItems
     }
     
-    public static func timingsByLocation(_ location: Location, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
+    public static func timingsByAddress(_ address: String, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
         var queryItems = [
-            URLQueryItem(name: "city", value: location.city),
-            URLQueryItem(name: "country", value: location.country),
+            URLQueryItem(name: "address", value: address),
             URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue))
         ]
         fajrIshaMethod.queryItems().forEach({queryItems.append($0)})
         
-        return AladhanAPIEndpoint(path: "/v1/timingsByCity/\(dateFormattedForAPIRequest(date))", queryItems: queryItems)
+        return AladhanAPIEndpoint(path: "/v1/timingsByAddress/\(dateFormattedForAPIRequest(date))", queryItems: queryItems)
     }
-    
+        
     // MARK: - Helpers
     
     private static func dateFormattedForAPIRequest(_ date: Date) -> String {

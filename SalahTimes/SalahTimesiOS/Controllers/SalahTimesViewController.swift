@@ -97,7 +97,7 @@ public final class SalahTimesViewController: UIViewController {
     
     @objc private func refresh() {
         print("Getting salāh times for: \(searchLocation ?? defaultLocation), on \(headerView.selectedDate)")
-        let endpoint = AladhanAPIEndpoint.timingsByLocation(.init(city: "London", country: "UK"), on: headerView.selectedDate)
+        let endpoint = AladhanAPIEndpoint.timingsByAddress(searchLocation ?? defaultLocation, on: headerView.selectedDate)
         
         salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
             guard let self = self else { return }
