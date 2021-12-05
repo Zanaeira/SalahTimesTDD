@@ -11,7 +11,26 @@
 		1B9D0A4A275C37220090CB2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A49275C37220090CB2A /* SceneDelegate.swift */; };
 		1B9D0A51275C37230090CB2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9D0A50275C37230090CB2A /* Assets.xcassets */; };
 		1B9D0A54275C37230090CB2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B9D0A52275C37230090CB2A /* LaunchScreen.storyboard */; };
+		1B9D0A5E275C38A00090CB2A /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9D0A5C275C38A00090CB2A /* SalahTimes.framework */; };
+		1B9D0A5F275C38A00090CB2A /* SalahTimes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9D0A5C275C38A00090CB2A /* SalahTimes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1B9D0A60275C38A00090CB2A /* SalahTimesiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9D0A5D275C38A00090CB2A /* SalahTimesiOS.framework */; };
+		1B9D0A61275C38A00090CB2A /* SalahTimesiOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9D0A5D275C38A00090CB2A /* SalahTimesiOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1B9D0A62275C38A00090CB2A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1B9D0A5F275C38A00090CB2A /* SalahTimes.framework in Embed Frameworks */,
+				1B9D0A61275C38A00090CB2A /* SalahTimesiOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1B9D0A44275C37220090CB2A /* SalahTimesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SalahTimesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -20,6 +39,8 @@
 		1B9D0A50275C37230090CB2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B9D0A53275C37230090CB2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B9D0A55275C37230090CB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B9D0A5C275C38A00090CB2A /* SalahTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SalahTimes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B9D0A5D275C38A00090CB2A /* SalahTimesiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SalahTimesiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +48,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B9D0A5E275C38A00090CB2A /* SalahTimes.framework in Frameworks */,
+				1B9D0A60275C38A00090CB2A /* SalahTimesiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +61,7 @@
 			children = (
 				1B9D0A46275C37220090CB2A /* SalahTimesApp */,
 				1B9D0A45275C37220090CB2A /* Products */,
+				1B9D0A5B275C38A00090CB2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +85,15 @@
 			path = SalahTimesApp;
 			sourceTree = "<group>";
 		};
+		1B9D0A5B275C38A00090CB2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1B9D0A5C275C38A00090CB2A /* SalahTimes.framework */,
+				1B9D0A5D275C38A00090CB2A /* SalahTimesiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,6 +104,7 @@
 				1B9D0A40275C37220090CB2A /* Sources */,
 				1B9D0A41275C37220090CB2A /* Frameworks */,
 				1B9D0A42275C37220090CB2A /* Resources */,
+				1B9D0A62275C38A00090CB2A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
