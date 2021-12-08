@@ -14,7 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         
-        let salahTimesViewController = SalahTimesViewController()
+        let salahTimesLoader = SalahTimesLoader()
+        
+        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader)
         salahTimesViewController.title = "Salāh Times"
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
