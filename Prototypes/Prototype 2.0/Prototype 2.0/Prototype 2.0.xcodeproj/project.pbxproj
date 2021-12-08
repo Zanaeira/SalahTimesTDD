@@ -12,6 +12,8 @@
 		1B9D0A7927610D8F0090CB2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B9D0A7827610D8F0090CB2A /* Assets.xcassets */; };
 		1B9D0A7C27610D8F0090CB2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B9D0A7A27610D8F0090CB2A /* LaunchScreen.storyboard */; };
 		1B9D0A8427610ECB0090CB2A /* SalahTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A8327610ECB0090CB2A /* SalahTimesViewController.swift */; };
+		1B9D0A87276116060090CB2A /* SalahTimesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A86276116060090CB2A /* SalahTimesLoader.swift */; };
+		1B9D0A8A2761161E0090CB2A /* SalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A892761161E0090CB2A /* SalahTimes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		1B9D0A7B27610D8F0090CB2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B9D0A7D27610D8F0090CB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B9D0A8327610ECB0090CB2A /* SalahTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewController.swift; sourceTree = "<group>"; };
+		1B9D0A86276116060090CB2A /* SalahTimesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesLoader.swift; sourceTree = "<group>"; };
+		1B9D0A892761161E0090CB2A /* SalahTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,12 +60,38 @@
 			children = (
 				1B9D0A6F27610D8C0090CB2A /* AppDelegate.swift */,
 				1B9D0A7127610D8C0090CB2A /* SceneDelegate.swift */,
-				1B9D0A8327610ECB0090CB2A /* SalahTimesViewController.swift */,
+				1B9D0A8B276116240090CB2A /* Model */,
+				1B9D0A88276116140090CB2A /* API */,
+				1B9D0A85276115F50090CB2A /* Controllers */,
 				1B9D0A7827610D8F0090CB2A /* Assets.xcassets */,
 				1B9D0A7A27610D8F0090CB2A /* LaunchScreen.storyboard */,
 				1B9D0A7D27610D8F0090CB2A /* Info.plist */,
 			);
 			path = "Prototype 2.0";
+			sourceTree = "<group>";
+		};
+		1B9D0A85276115F50090CB2A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1B9D0A8327610ECB0090CB2A /* SalahTimesViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		1B9D0A88276116140090CB2A /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1B9D0A86276116060090CB2A /* SalahTimesLoader.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		1B9D0A8B276116240090CB2A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B9D0A892761161E0090CB2A /* SalahTimes.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +167,8 @@
 				1B9D0A7027610D8C0090CB2A /* AppDelegate.swift in Sources */,
 				1B9D0A8427610ECB0090CB2A /* SalahTimesViewController.swift in Sources */,
 				1B9D0A7227610D8C0090CB2A /* SceneDelegate.swift in Sources */,
+				1B9D0A87276116060090CB2A /* SalahTimesLoader.swift in Sources */,
+				1B9D0A8A2761161E0090CB2A /* SalahTimes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
