@@ -14,7 +14,9 @@ final class SalahTimesViewController: UIViewController {
     }
     
     private let searchController = UISearchController()
+    private var defaultLocation = "London"
     private var location: String?
+    private lazy var salahTimesCollectionViewController = SalahTimesCollectionViewController(onRefresh: refresh)
     
     private let salahTimesLoader: SalahTimesLoader
     
@@ -29,6 +31,8 @@ final class SalahTimesViewController: UIViewController {
         
         configureUI()
         setupSearchBar()
+        setupSalahTimesCollectionView()
+        performInitialDataLoad()
     }
     
     private func configureUI() {
@@ -49,9 +53,34 @@ final class SalahTimesViewController: UIViewController {
         view.layer.addSublayer(gradient)
     }
     
+    private func setupSalahTimesCollectionView() {
+        let safeArea = view.safeAreaLayoutGuide
+        
+        add(salahTimesCollectionViewController)
+        salahTimesCollectionViewController.view.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 0))
+    }
+    
+    private func performInitialDataLoad() {
+        refresh()
+    }
+    
     private func refresh() {
-        if let location = location {
-            print("Getting Salah Times for: \(location)")
+        salahTimesLoader.loadTimes(from: location ?? defaultLocation) { [weak self] result in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                self.handleResult(result)
+            }
+        }
+    }
+    
+    private func handleResult(_ result: SalahTimesLoader.Result) {
+        switch result {
+        case .success(let salahTimes):
+            self.salahTimesCollectionViewController.updateSalahTimes(salahTimes, for: location ?? defaultLocation)
+            print(salahTimes)
+        case .failure:
+            break
         }
     }
     
