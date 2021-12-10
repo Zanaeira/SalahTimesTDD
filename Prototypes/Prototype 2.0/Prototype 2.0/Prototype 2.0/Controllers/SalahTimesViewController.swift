@@ -13,6 +13,8 @@ final class SalahTimesViewController: UIViewController {
         fatalError("Not implemented")
     }
     
+    private let backgroundGradient = CAGradientLayer()
+    
     private let searchController = UISearchController()
     private var defaultLocation = "London"
     private var location: String?
@@ -35,6 +37,12 @@ final class SalahTimesViewController: UIViewController {
         performInitialDataLoad()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        backgroundGradient.frame = view.bounds
+    }
+    
     private func configureUI() {
         setupGradientBackground()
     }
@@ -43,21 +51,21 @@ final class SalahTimesViewController: UIViewController {
         let purple = UIColor(red: 0.45, green: 0.40, blue: 1.00, alpha: 1.00).cgColor
         let blue = UIColor.systemBlue.withAlphaComponent(0.4).cgColor
         
-        let gradient = CAGradientLayer()
-        gradient.type = .axial
-        gradient.colors = [blue, purple]
-        gradient.startPoint = .init(x: 0, y: 0)
-        gradient.endPoint = .init(x: 0.25, y: 1)
+        backgroundGradient.type = .axial
+        backgroundGradient.colors = [blue, purple]
+        backgroundGradient.startPoint = .init(x: 0, y: 0)
+        backgroundGradient.endPoint = .init(x: 0.25, y: 1)
         
-        gradient.frame = view.bounds
-        view.layer.addSublayer(gradient)
+        backgroundGradient.frame = view.bounds
+        view.layer.addSublayer(backgroundGradient)
     }
     
     private func setupSalahTimesCollectionView() {
         let safeArea = view.safeAreaLayoutGuide
         
         add(salahTimesCollectionViewController)
-        salahTimesCollectionViewController.view.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 0))
+        salahTimesCollectionViewController.view.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
+//        salahTimesCollectionViewController.view.heightAnchor.constraint(greaterThanOrEqualToConstant: 300).isActive = true
     }
     
     private func performInitialDataLoad() {
