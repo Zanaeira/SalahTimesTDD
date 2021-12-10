@@ -32,7 +32,21 @@ final class SalahTimesViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .systemTeal
+        setupGradientBackground()
+    }
+    
+    private func setupGradientBackground() {
+        let purple = UIColor(red: 0.45, green: 0.40, blue: 1.00, alpha: 1.00).cgColor
+        let blue = UIColor.systemBlue.withAlphaComponent(0.4).cgColor
+        
+        let gradient = CAGradientLayer()
+        gradient.type = .axial
+        gradient.colors = [blue, purple]
+        gradient.startPoint = .init(x: 0, y: 0)
+        gradient.endPoint = .init(x: 0.25, y: 1)
+        
+        gradient.frame = view.bounds
+        view.layer.addSublayer(gradient)
     }
     
     private func refresh() {
