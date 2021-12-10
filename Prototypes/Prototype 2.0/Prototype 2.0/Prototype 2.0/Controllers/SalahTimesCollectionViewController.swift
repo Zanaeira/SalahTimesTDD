@@ -115,9 +115,6 @@ private extension SalahTimesCollectionViewController {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, SalahTimesViewModel> { (cell, indexPath, item) in
             cell.configure(with: item)
             
-//            let darkViolet = UIColor(red: 0.32, green: 0.24, blue: 0.43, alpha: 1.00)
-//            cell.contentView.backgroundColor = darkViolet
-            
             let transparentBlue = UIColor.systemBlue.withAlphaComponent(0.4)
             cell.contentView.backgroundColor = transparentBlue
         }
