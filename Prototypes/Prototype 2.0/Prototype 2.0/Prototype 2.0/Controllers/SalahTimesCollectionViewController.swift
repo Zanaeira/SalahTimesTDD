@@ -86,7 +86,6 @@ final class SalahTimesCollectionViewController: UIViewController {
         
     private func configureHierarchy() {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.contentInset = .init(top: -10, left: 0, bottom: 0, right: 0)
         view.addSubview(collectionView)
         collectionView.fillSuperview()
     }
