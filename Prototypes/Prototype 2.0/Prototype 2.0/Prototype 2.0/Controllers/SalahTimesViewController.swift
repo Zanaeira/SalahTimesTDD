@@ -65,7 +65,6 @@ final class SalahTimesViewController: UIViewController {
         
         add(salahTimesCollectionViewController)
         salahTimesCollectionViewController.view.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
-//        salahTimesCollectionViewController.view.heightAnchor.constraint(greaterThanOrEqualToConstant: 300).isActive = true
     }
     
     private func performInitialDataLoad() {
