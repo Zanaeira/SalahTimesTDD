@@ -117,9 +117,17 @@
 		1B9D0A952764D39F0090CB2A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1B9D0A962764D3C00090CB2A /* SalahTimesBackgroundDecorationView.swift */,
+				1B9D0A982765533A0090CB2A /* Supplementary Views */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1B9D0A982765533A0090CB2A /* Supplementary Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B9D0A962764D3C00090CB2A /* SalahTimesBackgroundDecorationView.swift */,
+			);
+			path = "Supplementary Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
