@@ -125,10 +125,10 @@ private extension SalahTimesCollectionViewController {
     
     private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, SalahTimesViewModel> {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, SalahTimesViewModel> { (cell, indexPath, item) in
-            cell.configure(with: item)
+            let background = UIBackgroundConfiguration.listSidebarCell()
+            cell.backgroundConfiguration = background
             
-            let transparentBlue = UIColor.systemBlue.withAlphaComponent(0.4)
-            cell.contentView.backgroundColor = transparentBlue
+            cell.configure(with: item)
         }
                 
         let dataSource = UICollectionViewDiffableDataSource<Section, SalahTimesViewModel>(collectionView: collectionView) { collectionView, indexPath, item in
