@@ -15,6 +15,18 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private enum Section {
         case main
+        
+        static func mainLayout() -> NSCollectionLayoutSection {
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+            
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+            
+            let section = NSCollectionLayoutSection(group: group)
+            
+            return section
+        }
     }
     
     private let collectionView: UICollectionView
@@ -103,12 +115,9 @@ private struct SalahTimesViewModel: Hashable {
 private extension SalahTimesCollectionViewController {
     
     private static func createLayout() -> UICollectionViewLayout {
-        var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        config.backgroundColor = .clear
-        
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
-        
-        return layout
+        return UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+            return Section.mainLayout()
+        }
     }
     
     private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, SalahTimesViewModel> {
