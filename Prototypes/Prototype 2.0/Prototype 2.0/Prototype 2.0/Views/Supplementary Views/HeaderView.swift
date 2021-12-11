@@ -14,6 +14,7 @@ final class HeaderView: UICollectionReusableView {
     }
     
     private let label = UILabel()
+    private let datePicker = UIDatePicker()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,7 +30,11 @@ final class HeaderView: UICollectionReusableView {
     private func configureUI() {
         backgroundColor = .systemTeal.withAlphaComponent(0.4)
         
-        let stackView = UIStackView(arrangedSubviews: [label])
+        setupDatePicker()
+        
+        let stackView = UIStackView(arrangedSubviews: [label, datePicker])
+        stackView.axis = .vertical
+        stackView.spacing = 2
         stackView.layoutMargins = .init(top: 10, left: 0, bottom: 10, right: 0)
         stackView.isLayoutMarginsRelativeArrangement = true
         addSubview(stackView)
@@ -40,6 +45,11 @@ final class HeaderView: UICollectionReusableView {
         label.adjustsFontForContentSizeCategory = true
         label.font = .preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
+    }
+    
+    private func setupDatePicker() {
+        datePicker.datePickerMode = .date
+        datePicker.contentHorizontalAlignment = .center
     }
     
     private func roundCorners(_ corners: UIRectCorner, byRadius radius: CGFloat) {
