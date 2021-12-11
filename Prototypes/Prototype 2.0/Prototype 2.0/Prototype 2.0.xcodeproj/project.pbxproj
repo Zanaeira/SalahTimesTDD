@@ -18,6 +18,7 @@
 		1B9D0A922762D43D0090CB2A /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A912762D43D0090CB2A /* UIViewController+Ext.swift */; };
 		1B9D0A942762D4530090CB2A /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A932762D4530090CB2A /* UIView+Ext.swift */; };
 		1B9D0A972764D3C00090CB2A /* SalahTimesBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A962764D3C00090CB2A /* SalahTimesBackgroundDecorationView.swift */; };
+		1B9D0A9A2765537D0090CB2A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A992765537D0090CB2A /* HeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		1B9D0A912762D43D0090CB2A /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		1B9D0A932762D4530090CB2A /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		1B9D0A962764D3C00090CB2A /* SalahTimesBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesBackgroundDecorationView.swift; sourceTree = "<group>"; };
+		1B9D0A992765537D0090CB2A /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				1B9D0A962764D3C00090CB2A /* SalahTimesBackgroundDecorationView.swift */,
+				1B9D0A992765537D0090CB2A /* HeaderView.swift */,
 			);
 			path = "Supplementary Views";
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				1B9D0A7027610D8C0090CB2A /* AppDelegate.swift in Sources */,
 				1B9D0A8D276140CC0090CB2A /* SalahTimesCollectionViewController.swift in Sources */,
 				1B9D0A922762D43D0090CB2A /* UIViewController+Ext.swift in Sources */,
+				1B9D0A9A2765537D0090CB2A /* HeaderView.swift in Sources */,
 				1B9D0A8427610ECB0090CB2A /* SalahTimesViewController.swift in Sources */,
 				1B9D0A7227610D8C0090CB2A /* SceneDelegate.swift in Sources */,
 				1B9D0A87276116060090CB2A /* SalahTimesLoader.swift in Sources */,

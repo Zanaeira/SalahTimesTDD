@@ -109,12 +109,16 @@ private extension SalahTimesCollectionViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 6)
+        
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 6, leading: 6, bottom: 6, trailing: 10)
-        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SalahTimesCollectionViewController.sectionBackgroundDecorationElementKind)
         
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
+        
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SalahTimesCollectionViewController.sectionBackgroundDecorationElementKind)
         section.decorationItems = [sectionBackgroundDecoration]
         
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -130,9 +134,15 @@ private extension SalahTimesCollectionViewController {
             
             cell.configure(with: item)
         }
-                
+        
+        let headerRegistration = UICollectionView.SupplementaryRegistration<HeaderView>(elementKind: UICollectionView.elementKindSectionHeader) { (_, _, _) in }
+        
         let dataSource = UICollectionViewDiffableDataSource<Section, SalahTimesViewModel>(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        }
+        
+        dataSource.supplementaryViewProvider = { (_, _, indexPath) in
+            return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
         }
                 
         return dataSource
