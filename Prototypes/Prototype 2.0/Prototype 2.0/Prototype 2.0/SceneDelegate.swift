@@ -21,31 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = NavigationController(rootViewController: salahTimesViewController).controller
+        window?.rootViewController = UINavigationController(rootViewController: salahTimesViewController)
         window?.makeKeyAndVisible()
-    }
-    
-}
-
-private final class NavigationController {
-    
-    let controller: UINavigationController
-    
-    init(rootViewController viewController: UIViewController) {
-        controller = UINavigationController(rootViewController: viewController)
-        
-        configureUI()
-    }
-    
-    private func configureUI() {
-        if #available(iOS 15.0, *) {
-            let appearance = UINavigationBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .systemGray6
-            
-            controller.navigationBar.standardAppearance = appearance
-            controller.navigationBar.scrollEdgeAppearance = appearance
-        }
     }
     
 }
