@@ -30,16 +30,18 @@ final class HeaderView: UICollectionReusableView {
     private func configureUI() {
         backgroundColor = .systemTeal.withAlphaComponent(0.4)
         
+        setupLabel()
+        addSubview(label)
+        label.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
+        
         setupDatePicker()
         
-        let stackView = UIStackView(arrangedSubviews: [label, datePicker])
-        stackView.axis = .vertical
-        stackView.spacing = 2
-        stackView.layoutMargins = .init(top: 10, left: 0, bottom: 10, right: 0)
-        stackView.isLayoutMarginsRelativeArrangement = true
-        addSubview(stackView)
-        stackView.fillSuperview()
-        
+        addSubview(datePicker)
+        datePicker.centerXInSuperview()
+        datePicker.anchor(top: label.bottomAnchor, leading: nil, bottom: bottomAnchor, trailing: nil, padding: .init(top: 2, left: 0, bottom: 10, right: 0))
+    }
+    
+    private func setupLabel() {
         label.text = "London"
         label.numberOfLines = 0
         label.adjustsFontForContentSizeCategory = true
@@ -50,6 +52,7 @@ final class HeaderView: UICollectionReusableView {
     private func setupDatePicker() {
         datePicker.datePickerMode = .date
         datePicker.contentHorizontalAlignment = .center
+        datePicker.tintColor = .systemTeal
     }
     
     private func roundCorners(_ corners: UIRectCorner, byRadius radius: CGFloat) {
