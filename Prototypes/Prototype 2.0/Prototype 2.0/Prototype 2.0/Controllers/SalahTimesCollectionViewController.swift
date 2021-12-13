@@ -77,9 +77,9 @@ final class SalahTimesCollectionViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.handleResult(result)
-                self.collectionView.refreshControl?.endRefreshing()
             }
         }
+        self.collectionView.refreshControl?.endRefreshing()
     }
     
     private func handleResult(_ result: SalahTimesLoader.Result) {
