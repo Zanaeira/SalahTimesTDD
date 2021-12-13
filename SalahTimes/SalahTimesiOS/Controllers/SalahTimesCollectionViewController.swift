@@ -66,39 +66,59 @@ final class SalahTimesCollectionViewController: UIViewController {
     }
     
     private func performInitialDataLoad() {
-        refresh()
+        loadSalahTimes(forLocation: location ?? defaultLocation, onDate: date ?? Date())
     }
     
     func updateLocation(to location: String) {
-        self.location = location
-        refresh()
+        loadSalahTimes(forLocation: location, onDate: date ?? Date())
     }
     
     private func updateDate(to date: Date) {
-        self.date = date
-        refresh()
+        loadSalahTimes(forLocation: location ?? defaultLocation, onDate: date)
     }
     
     @objc private func refresh() {
-        let endpoint = AladhanAPIEndpoint.timingsByAddress(location ?? defaultLocation, on: date ?? Date())
+        let location = self.location ?? defaultLocation
+        let date = self.date ?? Date()
+        
+        loadSalahTimes(forLocation: location, onDate: date)
+        
+        self.collectionView.refreshControl?.endRefreshing()
+    }
+    
+    private func loadSalahTimes(forLocation location: String, onDate date: Date) {
+        let endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date)
         
         salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
-                self.handleResult(result)
+                self.handleResult(result, forLocation: location, onDate: date)
             }
         }
-        self.collectionView.refreshControl?.endRefreshing()
     }
     
-    private func handleResult(_ result: SalahTimesLoader.Result) {
+    private func handleResult(_ result: SalahTimesLoader.Result, forLocation location: String, onDate date: Date) {
         switch result {
         case .success(let salahTimes):
+            self.location = location
+            self.date = date
+            
             self.updateSalahTimes(salahTimes)
-        case .failure:
-            break
+        case .failure(let error):
+            handleError(error, location: location)
         }
+    }
+    
+    private func handleError(_ error: SalahTimesLoader.Error, location: String) {
+        let errorMessage = error == .invalidData ?
+            "Sorry, we were unable to find any Salāh Times for: \(location)" :
+            "Sorry, an error occured when trying to load the Salāh Times. Please check your internet connection and try again."
+        
+        let alert = UIAlertController(title: "An error occurred", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default))
+        
+        present(alert, animated: true)
     }
     
     private func updateSalahTimes(_ salahTimes: SalahTimes) {
