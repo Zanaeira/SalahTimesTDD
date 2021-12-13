@@ -26,6 +26,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private var location: String? {
         didSet {
+            refresh()
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -63,12 +64,11 @@ final class SalahTimesCollectionViewController: UIViewController {
     }
     
     private func performInitialDataLoad() {
-        loadSalahTimes(forLocation: location ?? defaultLocation)
+        refresh()
     }
     
-    func loadSalahTimes(forLocation location: String) {
+    func updateLocation(to location: String) {
         self.location = location
-        refresh()
     }
     
     @objc private func refresh() {

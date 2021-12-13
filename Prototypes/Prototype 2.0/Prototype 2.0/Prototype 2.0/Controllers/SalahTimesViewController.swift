@@ -88,7 +88,7 @@ extension SalahTimesViewController: UISearchBarDelegate {
             return
         }
         
-        salahTimesCollectionViewController.loadSalahTimes(forLocation: location)
+        salahTimesCollectionViewController.updateLocation(to: location)
         searchController.isActive = false
     }
     
