@@ -26,13 +26,14 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private var location: String? {
         didSet {
-            refresh()
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
     private let defaultLocation = "London"
+    
+    private var date: Date?
     
     init(salahTimesLoader: SalahTimesLoader) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
@@ -69,10 +70,16 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     func updateLocation(to location: String) {
         self.location = location
+        refresh()
+    }
+    
+    private func updateDate(to date: Date) {
+        self.date = date
+        refresh()
     }
     
     @objc private func refresh() {
-        let endpoint = Endpoint.timingsByAddress(location ?? defaultLocation, on: Date())
+        let endpoint = Endpoint.timingsByAddress(location ?? defaultLocation, on: date ?? Date())
         
         salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
             guard let self = self else { return }
@@ -165,6 +172,7 @@ private extension SalahTimesCollectionViewController {
         
         let headerRegistration = UICollectionView.SupplementaryRegistration<HeaderView>(elementKind: UICollectionView.elementKindSectionHeader) { (headerView, _, _) in
             headerView.setLabelText(self.location ?? self.defaultLocation)
+            headerView.setDateSelectedAction(self.updateDate)
         }
         
         let dataSource = UICollectionViewDiffableDataSource<Section, SalahTimesViewModel>(collectionView: collectionView) { collectionView, indexPath, item in
