@@ -42,11 +42,14 @@ final class HeaderView: UICollectionReusableView {
     }
     
     private func setupLabel() {
-        label.text = "London"
         label.numberOfLines = 0
         label.adjustsFontForContentSizeCategory = true
         label.font = .preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
+    }
+    
+    func setLabelText(_ text: String) {
+        label.text = text
     }
     
     private func setupDatePicker() {

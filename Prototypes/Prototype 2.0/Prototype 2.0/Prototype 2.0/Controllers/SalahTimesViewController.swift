@@ -16,14 +16,10 @@ final class SalahTimesViewController: UIViewController {
     private let backgroundGradient = CAGradientLayer()
     
     private let searchController = UISearchController()
-    private var defaultLocation = "London"
-    private var location: String?
-    private lazy var salahTimesCollectionViewController = SalahTimesCollectionViewController(onRefresh: refresh)
-    
-    private let salahTimesLoader: SalahTimesLoader
+    private let salahTimesCollectionViewController: SalahTimesCollectionViewController
     
     init(salahTimesLoader: SalahTimesLoader) {
-        self.salahTimesLoader = salahTimesLoader
+        self.salahTimesCollectionViewController = SalahTimesCollectionViewController(salahTimesLoader: salahTimesLoader)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,7 +30,6 @@ final class SalahTimesViewController: UIViewController {
         configureUI()
         setupSearchBar()
         setupSalahTimesCollectionView()
-        performInitialDataLoad()
     }
     
     override func viewDidLayoutSubviews() {
@@ -67,30 +62,6 @@ final class SalahTimesViewController: UIViewController {
         salahTimesCollectionViewController.view.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
     }
     
-    private func performInitialDataLoad() {
-        refresh()
-    }
-    
-    private func refresh() {
-        salahTimesLoader.loadTimes(from: location ?? defaultLocation) { [weak self] result in
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.handleResult(result)
-            }
-        }
-    }
-    
-    private func handleResult(_ result: SalahTimesLoader.Result) {
-        switch result {
-        case .success(let salahTimes):
-            self.salahTimesCollectionViewController.updateSalahTimes(salahTimes, for: location ?? defaultLocation)
-            print(salahTimes)
-        case .failure:
-            break
-        }
-    }
-    
 }
 
 // MARK: - Search Controller functionality
@@ -113,9 +84,12 @@ extension SalahTimesViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        location = searchBar.text
+        guard let location = searchBar.text else {
+            return
+        }
+        
+        salahTimesCollectionViewController.loadSalahTimes(forLocation: location)
         searchController.isActive = false
-        refresh()
     }
     
 }

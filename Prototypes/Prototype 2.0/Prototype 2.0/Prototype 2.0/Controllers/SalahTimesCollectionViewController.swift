@@ -19,21 +19,23 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     static let sectionBackgroundDecorationElementKind = "section-background-element-kind"
     
+    private let salahTimesLoader: SalahTimesLoader
+    
     private let collectionView: UICollectionView
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SalahTimesViewModel> = createDataSource(for: collectionView)
     
-    private let onRefresh: (() -> Void)?
-    private var locationTitle: String? {
+    private var location: String? {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
+    private let defaultLocation = "London"
     
-    init(onRefresh: @escaping () -> Void) {
+    init(salahTimesLoader: SalahTimesLoader) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
-        self.onRefresh = onRefresh
+        self.salahTimesLoader = salahTimesLoader
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,6 +46,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         configureUI()
         configurePullToRefresh()
         configureHierarchy()
+        performInitialDataLoad()
     }
     
     private func configureUI() {
@@ -59,14 +62,36 @@ final class SalahTimesCollectionViewController: UIViewController {
         collectionView.refreshControl = refreshControl
     }
     
-    @objc private func refresh() {
-        onRefresh?()
-        collectionView.refreshControl?.endRefreshing()
+    private func performInitialDataLoad() {
+        loadSalahTimes(forLocation: location ?? defaultLocation)
     }
     
-    func updateSalahTimes(_ salahTimes: SalahTimes, for location: String) {
-        locationTitle = location
-        
+    func loadSalahTimes(forLocation location: String) {
+        self.location = location
+        refresh()
+    }
+    
+    @objc private func refresh() {
+        salahTimesLoader.loadTimes(from: location ?? defaultLocation) { [weak self] result in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                self.handleResult(result)
+                self.collectionView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+    
+    private func handleResult(_ result: SalahTimesLoader.Result) {
+        switch result {
+        case .success(let salahTimes):
+            self.updateSalahTimes(salahTimes)
+        case .failure:
+            break
+        }
+    }
+    
+    private func updateSalahTimes(_ salahTimes: SalahTimes) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, SalahTimesViewModel>()
         snapshot.appendSections([.main])
         snapshot.appendItems(map(salahTimes), toSection: .main)
@@ -136,7 +161,9 @@ private extension SalahTimesCollectionViewController {
             cell.configure(with: item)
         }
         
-        let headerRegistration = UICollectionView.SupplementaryRegistration<HeaderView>(elementKind: UICollectionView.elementKindSectionHeader) { (_, _, _) in }
+        let headerRegistration = UICollectionView.SupplementaryRegistration<HeaderView>(elementKind: UICollectionView.elementKindSectionHeader) { (headerView, _, _) in
+            headerView.setLabelText(self.location ?? self.defaultLocation)
+        }
         
         let dataSource = UICollectionViewDiffableDataSource<Section, SalahTimesViewModel>(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
