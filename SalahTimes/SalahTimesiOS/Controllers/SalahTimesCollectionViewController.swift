@@ -2,7 +2,7 @@
 //  SalahTimesCollectionViewController.swift
 //  SalahTimesiOS
 //
-//  Created by Suhayl Ahmed on 04/12/2021.
+//  Created by Suhayl Ahmed on 08/12/2021.
 //
 
 import UIKit
@@ -18,21 +18,27 @@ final class SalahTimesCollectionViewController: UIViewController {
         case main
     }
     
+    static let sectionBackgroundDecorationElementKind = "section-background-element-kind"
+    
+    private let salahTimesLoader: SalahTimesLoader
+    
     private let collectionView: UICollectionView
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SalahTimesViewModel> = createDataSource(for: collectionView)
     
-    private let onRefresh: (() -> Void)?
-    private var locationTitle: String? {
+    private var location: String? {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
+    private let defaultLocation = "London"
     
-    init(onRefresh: @escaping () -> Void) {
+    private var date: Date?
+    
+    init(salahTimesLoader: SalahTimesLoader) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
-        self.onRefresh = onRefresh
+        self.salahTimesLoader = salahTimesLoader
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,10 +49,12 @@ final class SalahTimesCollectionViewController: UIViewController {
         configureUI()
         configurePullToRefresh()
         configureHierarchy()
+        performInitialDataLoad()
     }
     
     private func configureUI() {
         view.backgroundColor = .clear
+        collectionView.backgroundColor = .clear
     }
     
     private func configurePullToRefresh() {
@@ -57,14 +65,43 @@ final class SalahTimesCollectionViewController: UIViewController {
         collectionView.refreshControl = refreshControl
     }
     
-    @objc private func refresh() {
-        onRefresh?()
-        collectionView.refreshControl?.endRefreshing()
+    private func performInitialDataLoad() {
+        refresh()
     }
     
-    func updateSalahTimes(_ salahTimes: SalahTimes, for location: String) {
-        locationTitle = location
+    func updateLocation(to location: String) {
+        self.location = location
+        refresh()
+    }
+    
+    private func updateDate(to date: Date) {
+        self.date = date
+        refresh()
+    }
+    
+    @objc private func refresh() {
+        let endpoint = AladhanAPIEndpoint.timingsByAddress(location ?? defaultLocation, on: date ?? Date())
         
+        salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
+            guard let self = self else { return }
+            
+            DispatchQueue.main.async {
+                self.handleResult(result)
+            }
+        }
+        self.collectionView.refreshControl?.endRefreshing()
+    }
+    
+    private func handleResult(_ result: SalahTimesLoader.Result) {
+        switch result {
+        case .success(let salahTimes):
+            self.updateSalahTimes(salahTimes)
+        case .failure:
+            break
+        }
+    }
+    
+    private func updateSalahTimes(_ salahTimes: SalahTimes) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, SalahTimesViewModel>()
         snapshot.appendSections([.main])
         snapshot.appendItems(map(salahTimes), toSection: .main)
@@ -86,9 +123,9 @@ final class SalahTimesCollectionViewController: UIViewController {
         
     private func configureHierarchy() {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.contentInset = .init(top: -10, left: 0, bottom: 0, right: 0)
         view.addSubview(collectionView)
         collectionView.fillSuperview()
+        collectionView.delegate = self
     }
     
 }
@@ -96,27 +133,58 @@ final class SalahTimesCollectionViewController: UIViewController {
 private extension SalahTimesCollectionViewController {
     
     private static func createLayout() -> UICollectionViewLayout {
-        var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        config.backgroundColor = .clear
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
         
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 6)
+        
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
+        
+        let sectionBackgroundDecoration = NSCollectionLayoutDecorationItem.background(elementKind: SalahTimesCollectionViewController.sectionBackgroundDecorationElementKind)
+        section.decorationItems = [sectionBackgroundDecoration]
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        layout.register(SalahTimesBackgroundDecorationView.self, forDecorationViewOfKind: SalahTimesCollectionViewController.sectionBackgroundDecorationElementKind)
         
         return layout
     }
     
     private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, SalahTimesViewModel> {
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, SalahTimesViewModel> { (cell, indexPath, item) in
-            cell.configure(with: item)
+            let background = UIBackgroundConfiguration.listSidebarCell()
+            cell.backgroundConfiguration = background
             
-            let darkViolet = UIColor(red: 0.32, green: 0.24, blue: 0.43, alpha: 1.00)
-            cell.contentView.backgroundColor = darkViolet
+            cell.configure(with: item)
         }
-                
+        
+        let headerRegistration = UICollectionView.SupplementaryRegistration<HeaderView>(elementKind: UICollectionView.elementKindSectionHeader) { (headerView, _, _) in
+            headerView.setLabelText(self.location ?? self.defaultLocation)
+            headerView.setDateSelectedAction(self.updateDate)
+        }
+        
         let dataSource = UICollectionViewDiffableDataSource<Section, SalahTimesViewModel>(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
+        
+        dataSource.supplementaryViewProvider = { (_, _, indexPath) in
+            return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+        }
                 
         return dataSource
+    }
+    
+}
+
+extension SalahTimesCollectionViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
     }
     
 }
@@ -139,3 +207,4 @@ private extension UICollectionViewListCell {
     }
     
 }
+
