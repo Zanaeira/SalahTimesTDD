@@ -72,7 +72,9 @@ final class SalahTimesCollectionViewController: UIViewController {
     }
     
     @objc private func refresh() {
-        salahTimesLoader.loadTimes(from: location ?? defaultLocation) { [weak self] result in
+        let endpoint = Endpoint.timingsByAddress(location ?? defaultLocation, on: Date())
+        
+        salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {

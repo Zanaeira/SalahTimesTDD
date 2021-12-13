@@ -11,7 +11,7 @@ final class SalahTimesLoader {
     
     typealias Result = Swift.Result<SalahTimes, Error>
     
-    func loadTimes(from endpoint: String, completion: @escaping (Result) -> Void) {
+    func loadTimes(from endpoint: Endpoint, completion: @escaping (Result) -> Void) {
         print(endpoint)
         completion(.success(SalahTimes.sampleTimes))
     }
