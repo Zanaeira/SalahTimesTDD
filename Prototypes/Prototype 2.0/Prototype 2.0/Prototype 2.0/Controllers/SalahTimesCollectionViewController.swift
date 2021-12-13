@@ -90,6 +90,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(collectionView)
         collectionView.fillSuperview()
+        collectionView.delegate = self
     }
     
 }
@@ -146,6 +147,14 @@ private extension SalahTimesCollectionViewController {
         }
                 
         return dataSource
+    }
+    
+}
+
+extension SalahTimesCollectionViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return false
     }
     
 }
