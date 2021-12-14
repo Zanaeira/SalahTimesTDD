@@ -9,12 +9,24 @@ import UIKit
 
 public final class SettingsViewController: UIViewController {
     
+    public required init?(coder: NSCoder) {
+        fatalError("Not implemented")
+    }
+    
     private let backgroundGradient = CAGradientLayer()
     
     private let leftInset: CGFloat = 40
     private let rightInset: CGFloat = 40
     
     private let segmentedController = UISegmentedControl(items: ["Mithl 1", "Mithl 2"])
+    
+    let userDefaults: UserDefaults
+    
+    public init(userDefaults: UserDefaults) {
+        self.userDefaults = userDefaults
+        
+        super.init(nibName: nil, bundle: nil)
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +64,7 @@ public final class SettingsViewController: UIViewController {
         let asrLabel = UILabel()
         asrLabel.text = "'Asr Method:"
         asrLabel.adjustsFontForContentSizeCategory = true
-        let preferredMithl = UserDefaults.standard.integer(forKey: "Mithl")
+        let preferredMithl = userDefaults.integer(forKey: "Mithl")
         segmentedController.selectedSegmentIndex = preferredMithl == 2 ? 1 : 0
         
         let safeArea = view.safeAreaLayoutGuide
