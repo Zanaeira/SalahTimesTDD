@@ -52,7 +52,8 @@ public final class SettingsViewController: UIViewController {
         let asrLabel = UILabel()
         asrLabel.text = "'Asr Method:"
         asrLabel.adjustsFontForContentSizeCategory = true
-        segmentedController.selectedSegmentIndex = 1
+        let preferredMithl = UserDefaults.standard.integer(forKey: "Mithl")
+        segmentedController.selectedSegmentIndex = preferredMithl == 2 ? 1 : 0
         
         let safeArea = view.safeAreaLayoutGuide
         let topInset: CGFloat = 60
