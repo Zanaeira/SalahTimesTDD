@@ -20,10 +20,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let salahTimesLoader = SalahTimesLoader(client: client)
         let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader)
         salahTimesViewController.title = "Salāh Times"
+        salahTimesViewController.tabBarItem.image = UIImage(systemName: "calendar")
+        
+        let settingsViewController = SettingsViewController()
+        settingsViewController.title = "Settings"
+        settingsViewController.tabBarItem.image = UIImage(systemName: "gearshape.fill")
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [UINavigationController(rootViewController: salahTimesViewController), UINavigationController(rootViewController: settingsViewController)]
+        tabBarController.tabBar.tintColor = .systemTeal
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = UINavigationController(rootViewController: salahTimesViewController)
+        window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
     }
     
