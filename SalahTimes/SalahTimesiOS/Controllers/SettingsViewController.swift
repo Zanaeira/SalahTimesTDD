@@ -66,6 +66,7 @@ public final class SettingsViewController: UIViewController {
         asrLabel.adjustsFontForContentSizeCategory = true
         let preferredMithl = userDefaults.integer(forKey: "Mithl")
         segmentedController.selectedSegmentIndex = preferredMithl == 2 ? 1 : 0
+        segmentedController.addTarget(self, action: #selector(mithlChanged), for: .valueChanged)
         
         let safeArea = view.safeAreaLayoutGuide
         let topInset: CGFloat = 60
@@ -82,6 +83,12 @@ public final class SettingsViewController: UIViewController {
         asrStackView.layer.cornerRadius = 16
         asrStackView.layer.borderColor = UIColor.label.cgColor
         asrStackView.layer.borderWidth = 1
+    }
+    
+    @objc private func mithlChanged() {
+        let preferredMithl = segmentedController.selectedSegmentIndex == 0 ? 1 : 2
+        
+        userDefaults.set(preferredMithl, forKey: "Mithl")
     }
     
 }
