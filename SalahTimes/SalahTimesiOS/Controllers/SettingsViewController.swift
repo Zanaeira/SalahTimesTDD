@@ -64,14 +64,19 @@ public final class SettingsViewController: UIViewController {
     
     private func setupAsrTimingSettings() {
         let asrLabel = UILabel()
-        asrLabel.text = "'Asr Method:"
+        asrLabel.text = "'Asr Mithl"
         asrLabel.adjustsFontForContentSizeCategory = true
+        asrLabel.font = .preferredFont(forTextStyle: .title3)
+        asrLabel.textAlignment = .center
         let preferredMithl = userDefaults.integer(forKey: "Mithl")
         segmentedController.selectedSegmentIndex = preferredMithl == 2 ? 1 : 0
         segmentedController.addTarget(self, action: #selector(mithlChanged), for: .valueChanged)
         
         let safeArea = view.safeAreaLayoutGuide
         let topInset: CGFloat = 60
+        
+        asrStackView.axis = .vertical
+        asrStackView.spacing = 8
         
         asrStackView.addArrangedSubview(asrLabel)
         asrStackView.addArrangedSubview(segmentedController)
@@ -141,13 +146,11 @@ private class FajrIshaSettingsView: UIView {
         label.numberOfLines = 0
         label.adjustsFontForContentSizeCategory = true
         label.textAlignment = .justified
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .title3)
         
         let stackView = UIStackView(arrangedSubviews: [label])
         addSubview(stackView)
         stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 20, left: 20, bottom: 20, right: 20))
-        
-        
     }
     
 }
