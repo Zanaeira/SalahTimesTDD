@@ -21,7 +21,7 @@ public final class SettingsViewController: UIViewController {
     private let segmentedController = UISegmentedControl(items: ["Mithl 1", "Mithl 2"])
     private let asrStackView = UIStackView()
     
-    let userDefaults: UserDefaults
+    private let userDefaults: UserDefaults
     
     public init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
