@@ -30,10 +30,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.viewControllers = [UINavigationController(rootViewController: salahTimesViewController), UINavigationController(rootViewController: settingsViewController)]
         tabBarController.tabBar.tintColor = .systemTeal
         
+        registerDefaults()
+        
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+    }
+    
+    private func registerDefaults() {
+        let userDefaults = UserDefaults.standard
+        userDefaults.register(defaults: [
+            "Mithl": 2
+        ])
     }
     
 }
