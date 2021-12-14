@@ -19,6 +19,7 @@ public final class SettingsViewController: UIViewController {
     private let rightInset: CGFloat = 40
     
     private let segmentedController = UISegmentedControl(items: ["Mithl 1", "Mithl 2"])
+    private let asrStackView = UIStackView()
     
     let userDefaults: UserDefaults
     
@@ -33,6 +34,7 @@ public final class SettingsViewController: UIViewController {
         
         configureUI()
         setupAsrTimingSettings()
+        setupFajrIshaSettingsView()
     }
     
     public override func viewDidLayoutSubviews() {
@@ -71,7 +73,8 @@ public final class SettingsViewController: UIViewController {
         let safeArea = view.safeAreaLayoutGuide
         let topInset: CGFloat = 60
         
-        let asrStackView = UIStackView(arrangedSubviews: [asrLabel, segmentedController])
+        asrStackView.addArrangedSubview(asrLabel)
+        asrStackView.addArrangedSubview(segmentedController)
         view.addSubview(asrStackView)
         asrStackView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: topInset, left: leftInset, bottom: 0, right: rightInset))
         
@@ -85,10 +88,66 @@ public final class SettingsViewController: UIViewController {
         asrStackView.layer.borderWidth = 1
     }
     
+    private func setupFajrIshaSettingsView() {
+        let fajrIshaSettingsView = FajrIshaSettingsView(frame: .zero)
+        view.addSubview(fajrIshaSettingsView)
+        fajrIshaSettingsView.anchor(top: asrStackView.bottomAnchor, leading: asrStackView.leadingAnchor, bottom: nil, trailing: asrStackView.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
+    }
+    
     @objc private func mithlChanged() {
         let preferredMithl = segmentedController.selectedSegmentIndex == 0 ? 1 : 2
         
         userDefaults.set(preferredMithl, forKey: "Mithl")
+    }
+    
+}
+
+private class FajrIshaSettingsView: UIView {
+    
+    required init?(coder: NSCoder) {
+        fatalError("Not implemented")
+    }
+    
+    private let label = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configureUI()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        configureUI()
+    }
+    
+    private func configureUI() {
+        setupBackgroundAndBorder()
+        setupLabel()
+    }
+    
+    private func setupBackgroundAndBorder() {
+        backgroundColor = .systemTeal.withAlphaComponent(0.4)
+        layer.cornerRadius = 12
+        layer.borderColor = UIColor.label.cgColor
+        layer.borderWidth = 1
+    }
+    
+    private func setupLabel() {
+        label.text = """
+        This app defaults to calculating the times for Fajr and Isha using 12.0º. In future updates, this setting will be customisable, In Shā Allah.
+        """
+        label.numberOfLines = 0
+        label.adjustsFontForContentSizeCategory = true
+        label.textAlignment = .justified
+        label.font = .preferredFont(forTextStyle: .body)
+        
+        let stackView = UIStackView(arrangedSubviews: [label])
+        addSubview(stackView)
+        stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 20, left: 20, bottom: 20, right: 20))
+        
+        
     }
     
 }
