@@ -21,6 +21,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     static let sectionBackgroundDecorationElementKind = "section-background-element-kind"
     
     private let salahTimesLoader: SalahTimesLoader
+    private let userDefaults: UserDefaults
     
     private let collectionView: UICollectionView
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SalahTimesViewModel> = createDataSource(for: collectionView)
@@ -36,9 +37,10 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private var date: Date?
     
-    init(salahTimesLoader: SalahTimesLoader) {
+    init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
         self.salahTimesLoader = salahTimesLoader
+        self.userDefaults = userDefaults
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -50,6 +52,12 @@ final class SalahTimesCollectionViewController: UIViewController {
         configurePullToRefresh()
         configureHierarchy()
         performInitialDataLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        refresh()
     }
     
     private func configureUI() {
@@ -87,7 +95,8 @@ final class SalahTimesCollectionViewController: UIViewController {
     }
     
     private func loadSalahTimes(forLocation location: String, onDate date: Date) {
-        let endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date)
+        let preferredMithl: AladhanAPIEndpoint.Madhhab = userDefaults.integer(forKey: "Mithl") == 2 ? .hanafi : .shafii
+        let endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date, madhhabForAsr: preferredMithl)
         
         salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
             guard let self = self else { return }

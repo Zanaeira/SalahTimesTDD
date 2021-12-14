@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let client = URLSessionHTTPClient()
         let salahTimesLoader = SalahTimesLoader(client: client)
-        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader)
+        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
         salahTimesViewController.title = "Salāh Times"
         salahTimesViewController.tabBarItem.image = UIImage(systemName: "calendar")
         

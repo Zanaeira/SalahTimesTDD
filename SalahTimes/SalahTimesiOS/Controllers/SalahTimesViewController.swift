@@ -19,8 +19,8 @@ public final class SalahTimesViewController: UIViewController {
     private let searchController = UISearchController()
     private let salahTimesCollectionViewController: SalahTimesCollectionViewController
     
-    public init(salahTimesLoader: SalahTimesLoader) {
-        self.salahTimesCollectionViewController = SalahTimesCollectionViewController(salahTimesLoader: salahTimesLoader)
+    public init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults) {
+        self.salahTimesCollectionViewController = SalahTimesCollectionViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
         
         super.init(nibName: nil, bundle: nil)
     }
