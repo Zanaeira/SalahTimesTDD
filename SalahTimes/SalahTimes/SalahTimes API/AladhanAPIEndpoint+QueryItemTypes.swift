@@ -14,7 +14,7 @@ extension AladhanAPIEndpoint {
         case hanafi = 1
     }
     
-    public struct MethodSettings {
+    public struct MethodSettings: Codable {
         let fajrAngle: Double?
         let maghribAngle: Double?
         let ishaAngle: Double?
@@ -36,7 +36,7 @@ extension AladhanAPIEndpoint {
         }
     }
         
-    public enum Method {
+    public enum Method: Codable {
         case standard(method: CalculationMethod)
         case custom(methodSettings: MethodSettings)
         
@@ -53,7 +53,7 @@ extension AladhanAPIEndpoint {
         }
     }
     
-    public enum CalculationMethod: Int {
+    public enum CalculationMethod: Int, Codable {
         case shiaIthnaAnsari = 0
         case universityOfIslamicSciencesKarachi = 1
         case islamicSocietyOfNorthAmerica = 2

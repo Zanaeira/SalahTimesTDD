@@ -44,7 +44,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             "Mithl": 2
         ])
         
+        if let fajrIshaMethod = getEncodedFajrIshaMethod() {
+            userDefaults.register(defaults: [
+                "FajrIsha": fajrIshaMethod
+            ])
+        }
+        
         return userDefaults
+    }
+    
+    private func getEncodedFajrIshaMethod() -> Data? {
+        let fajrIshaMethod = AladhanAPIEndpoint.Method.custom(methodSettings: .init(fajrAngle: 12.0, maghribAngle: nil, ishaAngle: 12.0))
+        
+        let encoder = JSONEncoder()
+        return try? encoder.encode(fajrIshaMethod)
     }
     
 }

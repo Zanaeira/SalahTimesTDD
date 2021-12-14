@@ -95,8 +95,17 @@ final class SalahTimesCollectionViewController: UIViewController {
     }
     
     private func loadSalahTimes(forLocation location: String, onDate date: Date) {
+        let endpoint: Endpoint
+        
         let preferredMithl: AladhanAPIEndpoint.Madhhab = userDefaults.integer(forKey: "Mithl") == 2 ? .hanafi : .shafii
-        let endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date, madhhabForAsr: preferredMithl)
+        
+        let decoder = JSONDecoder()
+        if let loadedFajrIshaCalculationMethod = userDefaults.object(forKey: "FajrIsha") as? Data,
+           let fajrIshaCalculationMethod: AladhanAPIEndpoint.Method = try? decoder.decode(AladhanAPIEndpoint.Method.self, from: loadedFajrIshaCalculationMethod) {
+            endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date, madhhabForAsr: preferredMithl, fajrIshaMethod: fajrIshaCalculationMethod)
+        } else {
+            endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date, madhhabForAsr: preferredMithl)
+        }
         
         salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
             guard let self = self else { return }
