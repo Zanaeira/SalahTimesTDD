@@ -77,6 +77,7 @@ public final class SettingsViewController: UIViewController {
         
         asrStackView.axis = .vertical
         asrStackView.spacing = 8
+        asrStackView.maximumContentSizeCategory = .accessibilityMedium
         
         asrStackView.addArrangedSubview(asrLabel)
         asrStackView.addArrangedSubview(segmentedController)
@@ -149,6 +150,7 @@ private class FajrIshaSettingsView: UIView {
         label.font = .preferredFont(forTextStyle: .title3)
         
         let stackView = UIStackView(arrangedSubviews: [label])
+        stackView.maximumContentSizeCategory = .accessibilityMedium
         addSubview(stackView)
         stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 20, left: 20, bottom: 20, right: 20))
     }
