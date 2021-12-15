@@ -234,7 +234,6 @@ private extension UICollectionViewListCell {
         
         content.text = viewModel.name
         content.textProperties.font = .preferredFont(forTextStyle: .title2)
-        content.textProperties.alignment = .center
         content.secondaryText = viewModel.time
         content.secondaryTextProperties.font = .preferredFont(forTextStyle: .title2)
         content.prefersSideBySideTextAndSecondaryText = true
