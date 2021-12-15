@@ -41,7 +41,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func getUserDefaults() -> UserDefaults {
         let userDefaults = UserDefaults.standard
         userDefaults.register(defaults: [
-            "Mithl": 2
+            "Mithl": 2,
+            "Location": "London"
         ])
         
         if let fajrIshaMethod = getEncodedFajrIshaMethod() {

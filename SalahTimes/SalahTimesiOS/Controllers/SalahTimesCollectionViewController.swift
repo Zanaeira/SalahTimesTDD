@@ -28,12 +28,13 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private var location: String? {
         didSet {
+            userDefaults.set(location, forKey: "Location")
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
     }
-    private let defaultLocation = "London"
+    private lazy var defaultLocation = userDefaults.string(forKey: "Location") ?? "London"
     
     private var date: Date?
     
