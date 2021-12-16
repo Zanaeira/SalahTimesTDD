@@ -172,7 +172,10 @@ final class SalahTimesCollectionViewController: UIViewController {
         }
         
         self.date = Date()
-        refresh()
+        
+        DispatchQueue.main.async {
+            self.refresh()
+        }
     }
     
     private func configureHierarchy() {
