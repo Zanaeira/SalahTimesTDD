@@ -131,7 +131,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private func handleError(_ error: SalahTimesLoader.Error, location: String) {
         let errorMessage = error == .invalidData ?
-            "Sorry, we were unable to find any Salāh Times for: \(location)" :
+            "Sorry, we were unable to find any Salāh Times for: \(location).\n\nIf you think this is a mistake, then please try again later." :
             "Sorry, an error occured when trying to load the Salāh Times. Please check your internet connection and try again."
         
         let alert = UIAlertController(title: "An error occurred", message: errorMessage, preferredStyle: .alert)
