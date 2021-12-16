@@ -146,7 +146,7 @@ private class FajrIshaSettingsView: UIView {
         """
         label.numberOfLines = 0
         label.adjustsFontForContentSizeCategory = true
-        label.textAlignment = .justified
+        label.textAlignment = .center
         label.font = .preferredFont(forTextStyle: .title3)
         
         let stackView = UIStackView(arrangedSubviews: [label])
