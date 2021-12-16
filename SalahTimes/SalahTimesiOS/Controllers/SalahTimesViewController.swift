@@ -19,8 +19,6 @@ public final class SalahTimesViewController: UIViewController {
     private let searchController = UISearchController()
     private let salahTimesCollectionViewController: SalahTimesCollectionViewController
     
-    private let datePicker = UIDatePicker()
-    
     public init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults) {
         self.salahTimesCollectionViewController = SalahTimesCollectionViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
         
@@ -32,7 +30,6 @@ public final class SalahTimesViewController: UIViewController {
         
         configureUI()
         setupSearchBar()
-        setupDatePicker()
         setupSalahTimesCollectionView()
     }
     
@@ -59,27 +56,11 @@ public final class SalahTimesViewController: UIViewController {
         view.layer.addSublayer(backgroundGradient)
     }
     
-    private func setupDatePicker() {
-        datePicker.datePickerMode = .date
-        datePicker.tintColor = .systemTeal
-        datePicker.contentHorizontalAlignment = .center
-        datePicker.addTarget(self, action: #selector(dateSelected), for: .valueChanged)
-                
-        let safeArea = view.safeAreaLayoutGuide
-        
-        view.addSubview(datePicker)
-        datePicker.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 30, left: 16, bottom: 0, right: 16))
-    }
-    
-    @objc private func dateSelected() {
-        salahTimesCollectionViewController.updateDate(to: datePicker.date)
-    }
-    
     private func setupSalahTimesCollectionView() {
         let safeArea = view.safeAreaLayoutGuide
         
         add(salahTimesCollectionViewController)
-        salahTimesCollectionViewController.view.anchor(top: datePicker.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
+        salahTimesCollectionViewController.view.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 16, bottom: 0, right: 16))
     }
     
 }

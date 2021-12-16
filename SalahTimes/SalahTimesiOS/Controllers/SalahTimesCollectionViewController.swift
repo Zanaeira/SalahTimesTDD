@@ -82,7 +82,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         loadSalahTimes(forLocation: location, onDate: date ?? Date())
     }
     
-    func updateDate(to date: Date) {
+    private func updateDate(to date: Date) {
         loadSalahTimes(forLocation: location ?? defaultLocation, onDate: date)
     }
     
@@ -204,6 +204,8 @@ private extension SalahTimesCollectionViewController {
         
         let headerRegistration = UICollectionView.SupplementaryRegistration<HeaderView>(elementKind: UICollectionView.elementKindSectionHeader) { (headerView, _, _) in
             headerView.setLabelText(self.location ?? self.defaultLocation)
+            headerView.setDate(self.date ?? Date())
+            headerView.onDateSelected = self.updateDate
         }
         
         let dataSource = UICollectionViewDiffableDataSource<Section, SalahTimesViewModel>(collectionView: collectionView) { collectionView, indexPath, item in
