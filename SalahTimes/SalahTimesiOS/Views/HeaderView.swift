@@ -14,9 +14,6 @@ final class HeaderView: UICollectionReusableView {
     }
     
     private let label = UILabel()
-    private let datePicker = UIDatePicker()
-    
-    private var onDateSelected: ((Date) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,13 +31,7 @@ final class HeaderView: UICollectionReusableView {
         
         setupLabel()
         addSubview(label)
-        label.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
-        
-        setupDatePicker()
-        
-        addSubview(datePicker)
-        datePicker.centerXInSuperview()
-        datePicker.anchor(top: label.bottomAnchor, leading: nil, bottom: bottomAnchor, trailing: nil, padding: .init(top: 2, left: 0, bottom: 10, right: 0))
+        label.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 20, left: 0, bottom: 20, right: 0))
     }
     
     private func setupLabel() {
@@ -52,21 +43,6 @@ final class HeaderView: UICollectionReusableView {
     
     func setLabelText(_ text: String) {
         label.text = text
-    }
-    
-    func setDateSelectedAction(_ action: @escaping (Date) -> Void) {
-        self.onDateSelected = action
-    }
-    
-    private func setupDatePicker() {
-        datePicker.datePickerMode = .date
-        datePicker.contentHorizontalAlignment = .center
-        datePicker.tintColor = .systemTeal
-        datePicker.addTarget(self, action: #selector(dateSelected), for: .valueChanged)
-    }
-    
-    @objc private func dateSelected() {
-        onDateSelected?(datePicker.date)
     }
     
     private func roundCorners(_ corners: UIRectCorner, byRadius radius: CGFloat) {
