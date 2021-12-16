@@ -53,6 +53,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         configurePullToRefresh()
         configureHierarchy()
         performInitialDataLoad()
+        ensureDateStaysUpToDate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -159,7 +160,21 @@ final class SalahTimesCollectionViewController: UIViewController {
         
         return salahTimesViewModel
     }
+    
+    private func ensureDateStaysUpToDate() {
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDateAndUpdateIfNeeded), name: .NSCalendarDayChanged, object: nil)
+    }
+    
+    @objc private func checkDateAndUpdateIfNeeded() {
+        guard let date = date,
+              Calendar.current.isDateInYesterday(date) else {
+            return
+        }
         
+        self.date = Date()
+        refresh()
+    }
+    
     private func configureHierarchy() {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(collectionView)
