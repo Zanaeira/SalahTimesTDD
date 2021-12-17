@@ -38,7 +38,8 @@ final class HeaderView: UICollectionReusableView {
         
         setupDatePicker()
         addSubview(datePicker)
-        datePicker.anchor(top: label.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 2, left: 0, bottom: 10, right: 0))
+        datePicker.centerXInSuperview()
+        datePicker.anchor(top: label.bottomAnchor, leading: nil, bottom: bottomAnchor, trailing: nil, padding: .init(top: 2, left: 0, bottom: 10, right: 0))
     }
     
     private func setupLabel() {
