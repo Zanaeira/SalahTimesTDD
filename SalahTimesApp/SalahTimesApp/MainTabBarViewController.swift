@@ -15,7 +15,7 @@ final class MainTabBarViewController: UITabBarController {
         fatalError("Not implemented")
     }
     
-    let client: HTTPClient
+    private let client: HTTPClient
     
     init(client: HTTPClient) {
         self.client = client
