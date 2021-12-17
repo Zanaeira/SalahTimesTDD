@@ -30,18 +30,9 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        let userDefaults = getUserDefaults()
+        viewControllers = [UINavigationController(rootViewController: makeSalahTimesViewController()),
+                           UINavigationController(rootViewController: makeSettingsViewController())]
         
-        let salahTimesLoader = SalahTimesLoader(client: client)
-        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
-        salahTimesViewController.title = "Salāh Times"
-        salahTimesViewController.tabBarItem.image = UIImage(systemName: "calendar")
-        
-        let settingsViewController = SettingsViewController(userDefaults: userDefaults)
-        settingsViewController.title = "Settings"
-        settingsViewController.tabBarItem.image = UIImage(systemName: "gearshape.fill")
-        
-        viewControllers = [UINavigationController(rootViewController: salahTimesViewController), UINavigationController(rootViewController: settingsViewController)]
         tabBar.tintColor = .systemTeal
     }
     
@@ -67,6 +58,22 @@ final class MainTabBarViewController: UITabBarController {
         let encoder = JSONEncoder()
         return try? encoder.encode(fajrIshaMethod)
     }
-
+    
+    private func makeSalahTimesViewController() -> SalahTimesViewController {
+        let salahTimesLoader = SalahTimesLoader(client: client)
+        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: getUserDefaults())
+        salahTimesViewController.title = "Salāh Times"
+        salahTimesViewController.tabBarItem.image = UIImage(systemName: "calendar")
+        
+        return salahTimesViewController
+    }
+    
+    private func makeSettingsViewController() -> SettingsViewController {
+        let settingsViewController = SettingsViewController(userDefaults: getUserDefaults())
+        settingsViewController.title = "Settings"
+        settingsViewController.tabBarItem.image = UIImage(systemName: "gearshape.fill")
+        
+        return settingsViewController
+    }
     
 }
