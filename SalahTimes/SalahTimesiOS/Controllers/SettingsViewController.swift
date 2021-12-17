@@ -77,10 +77,15 @@ public final class SettingsViewController: UIViewController {
         
         asrStackView.axis = .vertical
         asrStackView.spacing = 8
-        asrStackView.maximumContentSizeCategory = .accessibilityMedium
-        
         asrStackView.addArrangedSubview(asrLabel)
         asrStackView.addArrangedSubview(segmentedController)
+        
+        if #available(iOS 15, *) {
+            asrStackView.maximumContentSizeCategory = .accessibilityMedium
+        } else {
+            asrLabel.font = SettingsViewController.preferredFontForSettingsLabels()
+        }
+        
         view.addSubview(asrStackView)
         asrStackView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: topInset, left: leftInset, bottom: 0, right: rightInset))
         
@@ -104,6 +109,12 @@ public final class SettingsViewController: UIViewController {
         let preferredMithl = segmentedController.selectedSegmentIndex == 0 ? 1 : 2
         
         userDefaults.set(preferredMithl, forKey: "Mithl")
+    }
+    
+    fileprivate static func preferredFontForSettingsLabels() -> UIFont {
+        let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .title3)
+        
+        return UIFont(descriptor: fontDescriptor, size: min(fontDescriptor.pointSize, 30))
     }
     
 }
@@ -150,7 +161,12 @@ private class FajrIshaSettingsView: UIView {
         label.font = .preferredFont(forTextStyle: .title3)
         
         let stackView = UIStackView(arrangedSubviews: [label])
-        stackView.maximumContentSizeCategory = .accessibilityMedium
+        if #available(iOS 15, *) {
+            stackView.maximumContentSizeCategory = .accessibilityMedium
+        } else {
+            label.font = SettingsViewController.preferredFontForSettingsLabels()
+        }
+        
         addSubview(stackView)
         stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 20, left: 20, bottom: 20, right: 20))
     }
