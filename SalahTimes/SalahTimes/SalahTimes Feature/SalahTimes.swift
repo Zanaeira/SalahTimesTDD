@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SalahTimes: Equatable {
-    public let date: Date
+    public let date: Date?
     public let fajr: String
     public let sunrise: String
     public let zuhr: String

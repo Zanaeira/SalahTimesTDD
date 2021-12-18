@@ -35,8 +35,8 @@ private struct TimingsData: Decodable {
         return SalahTimes(date: date(from: date.readable), fajr: timings.Fajr, sunrise: timings.Sunrise, zuhr: timings.Dhuhr, asr: timings.Asr, maghrib: timings.Maghrib, isha: timings.Isha)
     }
     
-    private func date(from readable: String) -> Date {
-        DateFormatter.readableDateFormatterForAladhanAPI.date(from: readable)!
+    private func date(from readable: String) -> Date? {
+        DateFormatter.readableDateFormatterForAladhanAPI.date(from: readable)
     }
 }
 
