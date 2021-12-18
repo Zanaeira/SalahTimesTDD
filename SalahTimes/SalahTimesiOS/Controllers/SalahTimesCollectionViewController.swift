@@ -24,7 +24,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     private let userDefaults: UserDefaults
     
     private let collectionView: UICollectionView
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SalahTimesViewModel> = createDataSource(for: collectionView)
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SalahTimesCellModel> = createDataSource(for: collectionView)
     
     private var location: String? {
         didSet {
@@ -142,15 +142,15 @@ final class SalahTimesCollectionViewController: UIViewController {
     }
     
     private func updateSalahTimes(_ salahTimes: SalahTimes) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, SalahTimesViewModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, SalahTimesCellModel>()
         snapshot.appendSections([.main])
         snapshot.appendItems(map(salahTimes), toSection: .main)
         
         dataSource.apply(snapshot)
     }
     
-    private func map(_ salahTimes: SalahTimes) -> [SalahTimesViewModel] {
-        var salahTimesViewModel = [SalahTimesViewModel]()
+    private func map(_ salahTimes: SalahTimes) -> [SalahTimesCellModel] {
+        var salahTimesViewModel = [SalahTimesCellModel]()
         salahTimesViewModel.append(.init(name: "Fajr", time: salahTimes.fajr, imageName: "sun.haze.fill"))
         salahTimesViewModel.append(.init(name: "Sunrise", time: salahTimes.sunrise, imageName: "sunrise.fill"))
         salahTimesViewModel.append(.init(name: "Zuhr", time: salahTimes.zuhr, imageName: "sun.max.fill"))
@@ -212,8 +212,8 @@ private extension SalahTimesCollectionViewController {
         return layout
     }
     
-    private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, SalahTimesViewModel> {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, SalahTimesViewModel> { (cell, indexPath, item) in
+    private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, SalahTimesCellModel> {
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, SalahTimesCellModel> { (cell, indexPath, item) in
             let background = UIBackgroundConfiguration.listSidebarCell()
             cell.backgroundConfiguration = background
             
@@ -226,7 +226,7 @@ private extension SalahTimesCollectionViewController {
             headerView.onDateSelected = self.updateDate
         }
         
-        let dataSource = UICollectionViewDiffableDataSource<Section, SalahTimesViewModel>(collectionView: collectionView) { collectionView, indexPath, item in
+        let dataSource = UICollectionViewDiffableDataSource<Section, SalahTimesCellModel>(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
@@ -249,7 +249,7 @@ extension SalahTimesCollectionViewController: UICollectionViewDelegate {
 
 private extension UICollectionViewListCell {
     
-    func configure(with viewModel: SalahTimesViewModel) {
+    func configure(with viewModel: SalahTimesCellModel) {
         var content = defaultContentConfiguration()
         
         content.text = viewModel.name

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1B73A8CF275C248600C1D934 /* SalahTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */; };
 		1B73A8D1275C24C600C1D934 /* SalahTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */; };
-		1B73A8D6275C252000C1D934 /* SalahTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D5275C252000C1D934 /* SalahTimesViewModel.swift */; };
+		1B73A8D6275C252000C1D934 /* SalahTimesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */; };
 		1B73A8D8275C254100C1D934 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D7275C254100C1D934 /* HeaderView.swift */; };
 		1B830F76275C34FF0060186E /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; platformFilter = ios; };
 		1B830F77275C34FF0060186E /* SalahTimes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -86,7 +86,7 @@
 /* Begin PBXFileReference section */
 		1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewController.swift; sourceTree = "<group>"; };
 		1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCollectionViewController.swift; sourceTree = "<group>"; };
-		1B73A8D5275C252000C1D934 /* SalahTimesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewModel.swift; sourceTree = "<group>"; };
+		1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCellModel.swift; sourceTree = "<group>"; };
 		1B73A8D7275C254100C1D934 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		1B830F7C275C35650060186E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesBackgroundDecorationView.swift; sourceTree = "<group>"; };
@@ -183,7 +183,7 @@
 		1B73A8D4275C251300C1D934 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1B73A8D5275C252000C1D934 /* SalahTimesViewModel.swift */,
+				1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -555,7 +555,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B73A8D6275C252000C1D934 /* SalahTimesViewModel.swift in Sources */,
+				1B73A8D6275C252000C1D934 /* SalahTimesCellModel.swift in Sources */,
 				1B73A8CF275C248600C1D934 /* SalahTimesViewController.swift in Sources */,
 				1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */,
 				1B830F7D275C35650060186E /* UIView+Extensions.swift in Sources */,
