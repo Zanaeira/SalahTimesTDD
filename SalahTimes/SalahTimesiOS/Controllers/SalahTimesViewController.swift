@@ -19,8 +19,11 @@ public final class SalahTimesViewController: UIViewController {
     private let searchController = UISearchController()
     private let salahTimesCollectionViewController: SalahTimesCollectionViewController
     
+    private let settingsViewController: SettingsViewController
+    
     public init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults) {
         self.salahTimesCollectionViewController = SalahTimesCollectionViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
+        self.settingsViewController = SettingsViewController(userDefaults: userDefaults, onDismiss: salahTimesCollectionViewController.refresh)
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,6 +44,7 @@ public final class SalahTimesViewController: UIViewController {
     
     private func configureUI() {
         setupGradientBackground()
+        setupSettingsButtonAndViewController()
     }
     
     private func setupGradientBackground() {
@@ -54,6 +58,16 @@ public final class SalahTimesViewController: UIViewController {
         
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
+    }
+    
+    private func setupSettingsButtonAndViewController() {
+        navigationItem.leftBarButtonItem = .init(image: UIImage(systemName: "gearshape.fill"), style: .plain, target: self, action: #selector(openSettings))
+        navigationController?.navigationBar.tintColor = .systemTeal
+    }
+    
+    @objc private func openSettings() {
+        settingsViewController.view.backgroundColor = .systemBackground
+        present(settingsViewController, animated: true)
     }
     
     private func setupSalahTimesCollectionView() {

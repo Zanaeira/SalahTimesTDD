@@ -22,9 +22,11 @@ public final class SettingsViewController: UIViewController {
     private let asrStackView = UIStackView()
     
     private let userDefaults: UserDefaults
+    private let onDismiss: (() -> Void)?
     
-    public init(userDefaults: UserDefaults) {
+    public init(userDefaults: UserDefaults, onDismiss: ((() -> Void))?) {
         self.userDefaults = userDefaults
+        self.onDismiss = onDismiss
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,6 +43,12 @@ public final class SettingsViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         backgroundGradient.frame = view.bounds
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        onDismiss?()
     }
     
     private func configureUI() {

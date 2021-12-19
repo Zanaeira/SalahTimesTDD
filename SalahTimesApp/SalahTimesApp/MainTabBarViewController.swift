@@ -30,8 +30,7 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        viewControllers = [UINavigationController(rootViewController: makeSalahTimesViewController()),
-                           UINavigationController(rootViewController: makeSettingsViewController())]
+        viewControllers = [UINavigationController(rootViewController: makeSalahTimesViewController())]
         
         tabBar.tintColor = .systemTeal
     }
@@ -67,13 +66,5 @@ final class MainTabBarViewController: UITabBarController {
         
         return salahTimesViewController
     }
-    
-    private func makeSettingsViewController() -> SettingsViewController {
-        let settingsViewController = SettingsViewController(userDefaults: getUserDefaults())
-        settingsViewController.title = "Settings"
-        settingsViewController.tabBarItem.image = UIImage(systemName: "gearshape.fill")
         
-        return settingsViewController
-    }
-    
 }

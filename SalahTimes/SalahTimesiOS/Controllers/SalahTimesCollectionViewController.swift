@@ -87,7 +87,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         loadSalahTimes(forLocation: location ?? defaultLocation, onDate: date)
     }
     
-    @objc private func refresh() {
+    @objc func refresh() {
         let location = self.location ?? defaultLocation
         let date = self.date ?? Date()
         
