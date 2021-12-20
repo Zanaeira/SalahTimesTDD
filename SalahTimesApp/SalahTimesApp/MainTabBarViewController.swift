@@ -30,7 +30,8 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        viewControllers = [UINavigationController(rootViewController: makeSalahTimesViewController())]
+        viewControllers = [UINavigationController(rootViewController: makeSalahTimesViewController()),
+                           makeLocationsPageViewController()]
         
         tabBar.tintColor = .systemTeal
     }
@@ -66,5 +67,15 @@ final class MainTabBarViewController: UITabBarController {
         
         return salahTimesViewController
     }
+    
+    private func makeLocationsPageViewController() -> LocationsPageViewController {
+        let locationsPageViewController = LocationsPageViewController()
         
+        locationsPageViewController.title = "Locations"
+        locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe")
+        
+        return locationsPageViewController
+    }
+
+    
 }
