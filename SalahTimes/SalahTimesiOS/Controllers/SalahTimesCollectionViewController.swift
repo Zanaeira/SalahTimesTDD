@@ -56,12 +56,6 @@ final class SalahTimesCollectionViewController: UIViewController {
         ensureDateStaysUpToDate()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        refresh()
-    }
-    
     private func configureUI() {
         view.backgroundColor = .clear
         collectionView.backgroundColor = .clear
