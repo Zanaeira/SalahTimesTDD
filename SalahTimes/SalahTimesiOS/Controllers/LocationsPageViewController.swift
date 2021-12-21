@@ -10,9 +10,17 @@ import SalahTimes
 
 public final class LocationsPageViewController: UIViewController {
     
+    public required init?(coder: NSCoder) {
+        fatalError("Not implemented")
+    }
+    
     private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     
-    private var locations = [String]()
+    private var locations: [String] {
+        get {
+            userDefaults.stringArray(forKey: "locations") ?? ["London"]
+        }
+    }
     private var salahTimesViewControllers = [UINavigationController]()
     
     private var currentIndex: Int {
@@ -20,6 +28,14 @@ public final class LocationsPageViewController: UIViewController {
               let index = salahTimesViewControllers.firstIndex(of: currentViewController) else { return 0 }
         
         return index
+    }
+    
+    private let userDefaults: UserDefaults
+    
+    public init(userDefaults: UserDefaults) {
+        self.userDefaults = userDefaults
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
     public override func viewDidLoad() {
@@ -61,8 +77,6 @@ public final class LocationsPageViewController: UIViewController {
     }
     
     private func loadSalahTimesViewControllersForLocations() {
-        locations.append(contentsOf: ["London", "Dhaka", "Paris"])
-        
         let client = URLSessionHTTPClient()
         
         for (index, location) in locations.enumerated() {

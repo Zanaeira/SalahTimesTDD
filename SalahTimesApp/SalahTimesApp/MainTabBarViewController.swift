@@ -35,37 +35,22 @@ final class MainTabBarViewController: UITabBarController {
         tabBar.tintColor = .systemTeal
     }
     
-    private func getUserDefaults() -> UserDefaults {
-        let userDefaults = UserDefaults.standard
-        userDefaults.register(defaults: [
-            "Mithl": 2,
-            "Location": "London"
-        ])
-        
-        if let fajrIshaMethod = getEncodedFajrIshaMethod() {
-            userDefaults.register(defaults: [
-                "FajrIsha": fajrIshaMethod
-            ])
-        }
-        
-        return userDefaults
-    }
-    
-    private func getEncodedFajrIshaMethod() -> Data? {
-        let fajrIshaMethod = AladhanAPIEndpoint.Method.custom(methodSettings: .init(fajrAngle: 12.0, maghribAngle: nil, ishaAngle: 12.0))
-        
-        let encoder = JSONEncoder()
-        return try? encoder.encode(fajrIshaMethod)
-    }
-    
     private func makeLocationsPageViewController() -> LocationsPageViewController {
-        let locationsPageViewController = LocationsPageViewController()
+        let locationsPageViewController = LocationsPageViewController(userDefaults: getUserDefaults())
         
         locationsPageViewController.title = "Locations"
         locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe")
         
         return locationsPageViewController
     }
-
+    
+    private func getUserDefaults() -> UserDefaults {
+        let userDefaults = UserDefaults.standard
+        userDefaults.register(defaults: [
+            "locations": ["London", "Makkah", "Madinah", "Dhaka", "France"]
+        ])
+        
+        return userDefaults
+    }
     
 }
