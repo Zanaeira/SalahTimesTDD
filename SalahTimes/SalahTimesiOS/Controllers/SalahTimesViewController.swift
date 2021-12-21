@@ -62,7 +62,7 @@ extension SalahTimesViewController: UISearchBarDelegate {
     
     private func setupSearchBar() {
         navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = true
+        navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.placeholder = "Enter location. E.g. London"
         
         searchController.searchBar.delegate = self
