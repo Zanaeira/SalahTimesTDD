@@ -14,8 +14,6 @@ public final class SalahTimesViewController: UIViewController {
         fatalError("Not implemented")
     }
     
-    private let backgroundGradient = CAGradientLayer()
-    
     private let searchController = UISearchController()
     private let salahTimesCollectionViewController: SalahTimesCollectionViewController
     
@@ -28,36 +26,16 @@ public final class SalahTimesViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    func setLocation(_ location: String) {
+        salahTimesCollectionViewController.updateLocation(to: location)
+    }
+    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
         setupSearchBar()
         setupSalahTimesCollectionView()
-    }
-    
-    public override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        backgroundGradient.frame = view.bounds
-    }
-    
-    private func configureUI() {
-        setupGradientBackground()
         setupSettingsButtonAndViewController()
-    }
-    
-    private func setupGradientBackground() {
-        let purple = UIColor(red: 0.45, green: 0.40, blue: 1.00, alpha: 1.00).cgColor
-        let blue = UIColor.systemBlue.withAlphaComponent(0.4).cgColor
-        
-        backgroundGradient.type = .axial
-        backgroundGradient.colors = [blue, purple]
-        backgroundGradient.startPoint = .init(x: 0, y: 0)
-        backgroundGradient.endPoint = .init(x: 0.25, y: 1)
-        
-        backgroundGradient.frame = view.bounds
-        view.layer.addSublayer(backgroundGradient)
     }
     
     private func setupSettingsButtonAndViewController() {
