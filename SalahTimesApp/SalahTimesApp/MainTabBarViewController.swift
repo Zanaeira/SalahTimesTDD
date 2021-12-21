@@ -30,8 +30,7 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        viewControllers = [UINavigationController(rootViewController: makeSalahTimesViewController()),
-                           makeLocationsPageViewController()]
+        viewControllers = [makeLocationsPageViewController()]
         
         tabBar.tintColor = .systemTeal
     }
@@ -57,15 +56,6 @@ final class MainTabBarViewController: UITabBarController {
         
         let encoder = JSONEncoder()
         return try? encoder.encode(fajrIshaMethod)
-    }
-    
-    private func makeSalahTimesViewController() -> SalahTimesViewController {
-        let salahTimesLoader = SalahTimesLoader(client: client)
-        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: getUserDefaults())
-        salahTimesViewController.title = "Salāh Times"
-        salahTimesViewController.tabBarItem.image = UIImage(systemName: "calendar")
-        
-        return salahTimesViewController
     }
     
     private func makeLocationsPageViewController() -> LocationsPageViewController {
