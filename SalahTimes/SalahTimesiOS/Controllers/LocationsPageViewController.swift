@@ -157,7 +157,7 @@ extension LocationsPageViewController: UIPageViewControllerDataSource {
     }
     
     public func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return salahTimesViewControllers.count
+        return salahTimesViewControllers.count == 1 ? 0 : salahTimesViewControllers.count
     }
     
     public func presentationIndex(for pageViewController: UIPageViewController) -> Int {
