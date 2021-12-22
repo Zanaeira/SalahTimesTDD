@@ -48,7 +48,6 @@ final class MainTabBarViewController: UITabBarController {
         let userDefaults = UserDefaults.standard
         
         userDefaults.register(defaults: [
-            "locations": ["London"],
             "suiteNames": ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
         ])
         

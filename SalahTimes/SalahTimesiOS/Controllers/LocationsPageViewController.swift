@@ -16,11 +16,13 @@ public final class LocationsPageViewController: UIViewController {
     
     private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     
-    private var locations: [String] {
-        userDefaults.stringArray(forKey: "locations") ?? ["London"]
-    }
     private var suiteNames: [String] {
-        userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
+        get {
+            userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
+        }
+        set {
+            userDefaults.set(newValue, forKey: "suiteNames")
+        }
     }
     private var salahTimesViewControllers = [UINavigationController]()
     
@@ -80,8 +82,8 @@ public final class LocationsPageViewController: UIViewController {
     private func loadSalahTimesViewControllersForLocations() {
         let client = URLSessionHTTPClient()
         
-        for (location, suiteName) in zip(locations, suiteNames) {
-            let salahTimesViewController = makeSalahTimesViewController(client: client, location: location, suiteName: suiteName)
+        for suiteName in suiteNames {
+            let salahTimesViewController = makeSalahTimesViewController(client: client, suiteName: suiteName)
             let navigationController = UINavigationController(rootViewController: salahTimesViewController)
             
             salahTimesViewControllers.append(navigationController)
@@ -90,18 +92,19 @@ public final class LocationsPageViewController: UIViewController {
     
     private func addLocation() {
         let client = URLSessionHTTPClient()
-        let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(client: client, location: "London", suiteName: UUID().uuidString))
+        let suiteName = UUID().uuidString
+        suiteNames.append(suiteName)
+        let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(client: client, suiteName: suiteName))
         
         salahTimesViewControllers.append(navigationController)
         pageViewController.setViewControllers([salahTimesViewControllers[salahTimesViewControllers.count-1]], direction: .forward, animated: true)
     }
     
-    private func makeSalahTimesViewController(client: HTTPClient, location: String, suiteName: String) -> SalahTimesViewController {
+    private func makeSalahTimesViewController(client: HTTPClient, suiteName: String) -> SalahTimesViewController {
         let salahTimesLoader = SalahTimesLoader(client: client)
         let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName)
         let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
         salahTimesViewController.title = "Salāh Times"
-        salahTimesViewController.setLocation(location)
         salahTimesViewController.onAddLocation = addLocation
 
         return salahTimesViewController
