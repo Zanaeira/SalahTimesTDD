@@ -135,7 +135,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         self.dismiss(animated: false)
         present(alert, animated: true)
         
-        refresh()
+        collectionView.reloadData()
     }
     
     private func updateSalahTimes(_ salahTimes: SalahTimes) {
