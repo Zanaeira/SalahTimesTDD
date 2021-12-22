@@ -150,14 +150,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1B053A6827739B460027024C /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				1B053A6927739B4F0027024C /* Overview */,
+				1B053A6A27739B5A0027024C /* Locations */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		1B053A6927739B4F0027024C /* Overview */ = {
+			isa = PBXGroup;
+			children = (
+				1B053A662773963D0027024C /* OverviewViewController.swift */,
+			);
+			path = Overview;
+			sourceTree = "<group>";
+		};
+		1B053A6A27739B5A0027024C /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				1B73A8D4275C251300C1D934 /* Model */,
+				1B73A8D3275C250C00C1D934 /* Views */,
+				1B73A8D2275C24E700C1D934 /* Controllers */,
+				1B053A6B27739B6C0027024C /* Settings */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		1B053A6B27739B6C0027024C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		1B73A8D2275C24E700C1D934 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				1BF40B7C2770D64400AA55FB /* LocationsPageViewController.swift */,
 				1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */,
 				1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */,
-				1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */,
-				1B053A662773963D0027024C /* OverviewViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -280,9 +314,7 @@
 			children = (
 				1BE005FB26BDD984003F5F54 /* Info.plist */,
 				1B830F7B275C35550060186E /* Helpers */,
-				1B73A8D4275C251300C1D934 /* Model */,
-				1B73A8D3275C250C00C1D934 /* Views */,
-				1B73A8D2275C24E700C1D934 /* Controllers */,
+				1B053A6827739B460027024C /* Screens */,
 			);
 			path = SalahTimesiOS;
 			sourceTree = "<group>";
