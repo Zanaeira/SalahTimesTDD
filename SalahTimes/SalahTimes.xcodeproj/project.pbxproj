@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B053A672773963D0027024C /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B053A662773963D0027024C /* OverviewViewController.swift */; };
+		1B053A7127739EB70027024C /* OverviewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */; };
 		1B73A8CF275C248600C1D934 /* SalahTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */; };
 		1B73A8D1275C24C600C1D934 /* SalahTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */; };
 		1B73A8D6275C252000C1D934 /* SalahTimesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */; };
@@ -72,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		1B053A662773963D0027024C /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
+		1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCollectionViewController.swift; sourceTree = "<group>"; };
 		1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewController.swift; sourceTree = "<group>"; };
 		1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCollectionViewController.swift; sourceTree = "<group>"; };
 		1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCellModel.swift; sourceTree = "<group>"; };
@@ -162,7 +164,7 @@
 		1B053A6927739B4F0027024C /* Overview */ = {
 			isa = PBXGroup;
 			children = (
-				1B053A662773963D0027024C /* OverviewViewController.swift */,
+				1B053A6C27739BE70027024C /* Controllers */,
 			);
 			path = Overview;
 			sourceTree = "<group>";
@@ -170,7 +172,6 @@
 		1B053A6A27739B5A0027024C /* Locations */ = {
 			isa = PBXGroup;
 			children = (
-				1B73A8D4275C251300C1D934 /* Model */,
 				1B73A8D3275C250C00C1D934 /* Views */,
 				1B73A8D2275C24E700C1D934 /* Controllers */,
 				1B053A6B27739B6C0027024C /* Settings */,
@@ -184,6 +185,15 @@
 				1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		1B053A6C27739BE70027024C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1B053A662773963D0027024C /* OverviewViewController.swift */,
+				1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		1B73A8D2275C24E700C1D934 /* Controllers */ = {
@@ -205,12 +215,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		1B73A8D4275C251300C1D934 /* Model */ = {
+		1B73A8D4275C251300C1D934 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1B830F7B275C35550060186E /* Helpers */ = {
@@ -314,6 +324,7 @@
 			children = (
 				1BE005FB26BDD984003F5F54 /* Info.plist */,
 				1B830F7B275C35550060186E /* Helpers */,
+				1B73A8D4275C251300C1D934 /* Models */,
 				1B053A6827739B460027024C /* Screens */,
 			);
 			path = SalahTimesiOS;
@@ -579,6 +590,7 @@
 			files = (
 				1B73A8D6275C252000C1D934 /* SalahTimesCellModel.swift in Sources */,
 				1B73A8CF275C248600C1D934 /* SalahTimesViewController.swift in Sources */,
+				1B053A7127739EB70027024C /* OverviewCollectionViewController.swift in Sources */,
 				1B053A672773963D0027024C /* OverviewViewController.swift in Sources */,
 				1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */,
 				1B830F7D275C35650060186E /* UIView+Extensions.swift in Sources */,

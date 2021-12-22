@@ -6,8 +6,21 @@
 //
 
 import UIKit
+import SalahTimes
 
 public final class OverviewViewController: UIViewController {
+    
+    public required init?(coder: NSCoder) {
+        fatalError("Not implemented")
+    }
+    
+    private let overviewCollectionViewController: OverviewCollectionViewController
+    
+    public init(client: HTTPClient, userDefaults: UserDefaults) {
+        overviewCollectionViewController = OverviewCollectionViewController(client: client, userDefaults: userDefaults)
+        
+        super.init(nibName: nil, bundle: nil)
+    }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +36,12 @@ public final class OverviewViewController: UIViewController {
     
     private func configureUI() {
         setupBackground()
+        setupCollectionViewController()
+    }
+    
+    private func setupCollectionViewController() {
+        add(overviewCollectionViewController)
+        overviewCollectionViewController.view.fillSuperview()
     }
     
     private let backgroundGradient = CAGradientLayer()
