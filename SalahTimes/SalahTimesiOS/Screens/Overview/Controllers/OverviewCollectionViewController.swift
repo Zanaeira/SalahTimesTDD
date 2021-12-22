@@ -49,6 +49,12 @@ final class OverviewCollectionViewController: UIViewController {
         collectionView.backgroundColor = .clear
     }
     
+    private func configureHierarchy() {
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(collectionView)
+        collectionView.fillSuperview()
+    }
+    
     private func loadLocations() {
         let suiteNames = userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
         let allLocationsUserDefaults = suiteNames.compactMap(UserDefaults.init(suiteName:))
@@ -64,40 +70,6 @@ final class OverviewCollectionViewController: UIViewController {
                 }
             }
         }
-    }
-    
-}
-
-// MARK: - UICollectionView
-extension OverviewCollectionViewController {
-    
-    private static func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
-        
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        
-        return layout
-    }
-    
-    private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, OverviewCellModel> {
-        let cellRegistration = UICollectionView.CellRegistration<OverviewCell, OverviewCellModel> { (cell, indexPath, item) in
-            cell.configure(with: item)
-        }
-        
-        let dataSource = UICollectionViewDiffableDataSource<Section, OverviewCellModel>(collectionView: collectionView) { collectionView, indexPath, item in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
-        }
-        
-        return dataSource
     }
     
     private func loadSalahTimes(usingUserDefaults userDefaults: UserDefaults, onDate date: Date = Date(), completion: @escaping (SalahTimes) -> Void) {
@@ -139,6 +111,40 @@ extension OverviewCollectionViewController {
         }
     }
     
+}
+
+// MARK: - UICollectionView
+extension OverviewCollectionViewController {
+    
+    private static func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(1))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        group.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 10
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        
+        return layout
+    }
+    
+    private func createDataSource(for collectionView: UICollectionView) -> UICollectionViewDiffableDataSource<Section, OverviewCellModel> {
+        let cellRegistration = UICollectionView.CellRegistration<OverviewCell, OverviewCellModel> { (cell, indexPath, item) in
+            cell.configure(with: item)
+        }
+        
+        let dataSource = UICollectionViewDiffableDataSource<Section, OverviewCellModel>(collectionView: collectionView) { collectionView, indexPath, item in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        }
+        
+        return dataSource
+    }
+    
     private func updateSnapshot(_ loadedTimes: [OverviewCellModel]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, OverviewCellModel>()
         snapshot.appendSections([.main])
@@ -146,11 +152,5 @@ extension OverviewCollectionViewController {
         
         dataSource.apply(snapshot, animatingDifferences: true)
     }
-    
-    private func configureHierarchy() {
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(collectionView)
-        collectionView.fillSuperview()
-    }
-    
+        
 }
