@@ -46,11 +46,24 @@ final class MainTabBarViewController: UITabBarController {
     
     private func getUserDefaults() -> UserDefaults {
         let userDefaults = UserDefaults.standard
-        userDefaults.register(defaults: [
-            "locations": ["London", "Makkah", "Madinah", "Dhaka", "France"]
-        ])
+        
+        let locationsSuiteNames: [LocationSuiteName] = [
+            .init(location: "London", suiteName: "253FAFE2-96C6-42AF-8908-33DA339BD6C7")
+        ]
+        
+        if let encodedLocationsSuiteNames = getEncodedLocationsSuiteNames(forLocationsSuiteNames: locationsSuiteNames) {
+            userDefaults.register(defaults: [
+                "locations": encodedLocationsSuiteNames
+            ])
+        }
         
         return userDefaults
+    }
+    
+    private func getEncodedLocationsSuiteNames(forLocationsSuiteNames locationsSuiteNames: [LocationSuiteName]) -> Data? {
+        let encoder = JSONEncoder()
+        
+        return try? encoder.encode(locationsSuiteNames)
     }
     
 }

@@ -16,10 +16,18 @@ public final class LocationsPageViewController: UIViewController {
     
     private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     
-    private var locations: [String] {
+    private var locationsSuiteNames: [LocationSuiteName] {
         get {
-            userDefaults.stringArray(forKey: "locations") ?? ["London"]
+            guard let encodedLocationsSuiteNames = userDefaults.object(forKey: "locations") as? Data,
+                  let decodedLocationsSuiteNames = try? JSONDecoder().decode([LocationSuiteName].self, from: encodedLocationsSuiteNames) else {
+                      return [.init(location: "London", suiteName: "253FAFE2-96C6-42AF-8908-33DA339BD6C7")]
+                  }
+            
+            return decodedLocationsSuiteNames
         }
+    }
+    private var locations: [String] {
+        locationsSuiteNames.map({$0.location})
     }
     private var salahTimesViewControllers = [UINavigationController]()
     
@@ -79,9 +87,12 @@ public final class LocationsPageViewController: UIViewController {
     private func loadSalahTimesViewControllersForLocations() {
         let client = URLSessionHTTPClient()
         
-        for (index, location) in locations.enumerated() {
+        for locationsSuiteName in locationsSuiteNames {
+            let location = locationsSuiteName.location
+            let suiteName = locationsSuiteName.suiteName
+            
             let salahTimesLoader = SalahTimesLoader(client: client)
-            let userDefaults = getBaseUserDefaults(usingSuiteName: "\(location): #\(index)")
+            let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName)
             
             let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
             salahTimesViewController.title = "Salāh Times"
