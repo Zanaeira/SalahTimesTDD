@@ -132,7 +132,10 @@ final class SalahTimesCollectionViewController: UIViewController {
         let alert = UIAlertController(title: "An error occurred", message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default))
         
+        self.dismiss(animated: false)
         present(alert, animated: true)
+        
+        refresh()
     }
     
     private func updateSalahTimes(_ salahTimes: SalahTimes) {
