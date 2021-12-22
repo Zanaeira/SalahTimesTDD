@@ -91,15 +91,29 @@ public final class LocationsPageViewController: UIViewController {
             let location = locationsSuiteName.location
             let suiteName = locationsSuiteName.suiteName
             
-            let salahTimesLoader = SalahTimesLoader(client: client)
-            let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName)
+            let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(client: client, location: location, suiteName: suiteName))
             
-            let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
-            salahTimesViewController.title = "Salāh Times"
-            salahTimesViewController.setLocation(location)
-            
-            salahTimesViewControllers.append(UINavigationController(rootViewController: salahTimesViewController))
+            salahTimesViewControllers.append(navigationController)
         }
+    }
+    
+    private func addLocation() {
+        let client = URLSessionHTTPClient()
+        let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(client: client, location: "London", suiteName: UUID().uuidString))
+        
+        salahTimesViewControllers.append(navigationController)
+        pageViewController.setViewControllers([salahTimesViewControllers[salahTimesViewControllers.count-1]], direction: .forward, animated: true)
+    }
+    
+    private func makeSalahTimesViewController(client: HTTPClient, location: String, suiteName: String) -> SalahTimesViewController {
+        let salahTimesLoader = SalahTimesLoader(client: client)
+        let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName)
+        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
+        salahTimesViewController.title = "Salāh Times"
+        salahTimesViewController.setLocation(location)
+        salahTimesViewController.onAddLocation = addLocation
+
+        return salahTimesViewController
     }
     
     private func getBaseUserDefaults(usingSuiteName suiteName: String) -> UserDefaults {

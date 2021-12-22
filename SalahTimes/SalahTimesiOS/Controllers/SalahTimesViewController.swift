@@ -18,6 +18,7 @@ public final class SalahTimesViewController: UIViewController {
     private let salahTimesCollectionViewController: SalahTimesCollectionViewController
     
     private let settingsViewController: SettingsViewController
+    var onAddLocation: (() -> Void)?
     
     public init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults) {
         self.salahTimesCollectionViewController = SalahTimesCollectionViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
@@ -36,6 +37,7 @@ public final class SalahTimesViewController: UIViewController {
         setupSearchBar()
         setupSalahTimesCollectionView()
         setupSettingsButtonAndViewController()
+        setupAddLocationButton()
     }
     
     private func setupSettingsButtonAndViewController() {
@@ -46,6 +48,14 @@ public final class SalahTimesViewController: UIViewController {
     @objc private func openSettings() {
         settingsViewController.view.backgroundColor = .systemBackground
         present(settingsViewController, animated: true)
+    }
+    
+    private func setupAddLocationButton() {
+        navigationItem.rightBarButtonItem = .init(barButtonSystemItem: .add, target: self, action: #selector(addLocation))
+    }
+    
+    @objc private func addLocation() {
+        onAddLocation?()
     }
     
     private func setupSalahTimesCollectionView() {
