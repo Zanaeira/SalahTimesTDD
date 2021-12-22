@@ -30,50 +30,28 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        viewControllers = [UINavigationController(rootViewController: makeSalahTimesViewController()),
-                           UINavigationController(rootViewController: makeSettingsViewController())]
+        viewControllers = [makeLocationsPageViewController()]
         
         tabBar.tintColor = .systemTeal
     }
     
+    private func makeLocationsPageViewController() -> LocationsPageViewController {
+        let locationsPageViewController = LocationsPageViewController(client: client, userDefaults: getUserDefaults())
+        
+        locationsPageViewController.title = "Locations"
+        locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe")
+        
+        return locationsPageViewController
+    }
+    
     private func getUserDefaults() -> UserDefaults {
         let userDefaults = UserDefaults.standard
+        
         userDefaults.register(defaults: [
-            "Mithl": 2,
-            "Location": "London"
+            "suiteNames": ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
         ])
         
-        if let fajrIshaMethod = getEncodedFajrIshaMethod() {
-            userDefaults.register(defaults: [
-                "FajrIsha": fajrIshaMethod
-            ])
-        }
-        
         return userDefaults
-    }
-    
-    private func getEncodedFajrIshaMethod() -> Data? {
-        let fajrIshaMethod = AladhanAPIEndpoint.Method.custom(methodSettings: .init(fajrAngle: 12.0, maghribAngle: nil, ishaAngle: 12.0))
-        
-        let encoder = JSONEncoder()
-        return try? encoder.encode(fajrIshaMethod)
-    }
-    
-    private func makeSalahTimesViewController() -> SalahTimesViewController {
-        let salahTimesLoader = SalahTimesLoader(client: client)
-        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: getUserDefaults())
-        salahTimesViewController.title = "Salāh Times"
-        salahTimesViewController.tabBarItem.image = UIImage(systemName: "calendar")
-        
-        return salahTimesViewController
-    }
-    
-    private func makeSettingsViewController() -> SettingsViewController {
-        let settingsViewController = SettingsViewController(userDefaults: getUserDefaults())
-        settingsViewController.title = "Settings"
-        settingsViewController.tabBarItem.image = UIImage(systemName: "gearshape.fill")
-        
-        return settingsViewController
     }
     
 }

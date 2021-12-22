@@ -56,12 +56,6 @@ final class SalahTimesCollectionViewController: UIViewController {
         ensureDateStaysUpToDate()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        refresh()
-    }
-    
     private func configureUI() {
         view.backgroundColor = .clear
         collectionView.backgroundColor = .clear
@@ -87,7 +81,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         loadSalahTimes(forLocation: location ?? defaultLocation, onDate: date)
     }
     
-    @objc private func refresh() {
+    @objc func refresh() {
         let location = self.location ?? defaultLocation
         let date = self.date ?? Date()
         
@@ -138,7 +132,10 @@ final class SalahTimesCollectionViewController: UIViewController {
         let alert = UIAlertController(title: "An error occurred", message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .default))
         
+        self.dismiss(animated: false)
         present(alert, animated: true)
+        
+        refresh()
     }
     
     private func updateSalahTimes(_ salahTimes: SalahTimes) {
