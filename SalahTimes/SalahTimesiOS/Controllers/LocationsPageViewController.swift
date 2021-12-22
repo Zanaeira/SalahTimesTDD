@@ -16,18 +16,11 @@ public final class LocationsPageViewController: UIViewController {
     
     private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     
-    private var locationsSuiteNames: [LocationSuiteName] {
-        get {
-            guard let encodedLocationsSuiteNames = userDefaults.object(forKey: "locations") as? Data,
-                  let decodedLocationsSuiteNames = try? JSONDecoder().decode([LocationSuiteName].self, from: encodedLocationsSuiteNames) else {
-                      return [.init(location: "London", suiteName: "253FAFE2-96C6-42AF-8908-33DA339BD6C7")]
-                  }
-            
-            return decodedLocationsSuiteNames
-        }
-    }
     private var locations: [String] {
-        locationsSuiteNames.map({$0.location})
+        userDefaults.stringArray(forKey: "locations") ?? ["London"]
+    }
+    private var suiteNames: [String] {
+        userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
     }
     private var salahTimesViewControllers = [UINavigationController]()
     
@@ -87,11 +80,9 @@ public final class LocationsPageViewController: UIViewController {
     private func loadSalahTimesViewControllersForLocations() {
         let client = URLSessionHTTPClient()
         
-        for locationsSuiteName in locationsSuiteNames {
-            let location = locationsSuiteName.location
-            let suiteName = locationsSuiteName.suiteName
-            
-            let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(client: client, location: location, suiteName: suiteName))
+        for (location, suiteName) in zip(locations, suiteNames) {
+            let salahTimesViewController = makeSalahTimesViewController(client: client, location: location, suiteName: suiteName)
+            let navigationController = UINavigationController(rootViewController: salahTimesViewController)
             
             salahTimesViewControllers.append(navigationController)
         }
