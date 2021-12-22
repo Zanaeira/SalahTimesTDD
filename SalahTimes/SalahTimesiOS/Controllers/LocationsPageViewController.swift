@@ -33,9 +33,11 @@ public final class LocationsPageViewController: UIViewController {
         return index
     }
     
+    private let client: HTTPClient
     private let userDefaults: UserDefaults
     
-    public init(userDefaults: UserDefaults) {
+    public init(client: HTTPClient, userDefaults: UserDefaults) {
+        self.client = client
         self.userDefaults = userDefaults
         
         super.init(nibName: nil, bundle: nil)
@@ -80,10 +82,8 @@ public final class LocationsPageViewController: UIViewController {
     }
     
     private func loadSalahTimesViewControllersForLocations() {
-        let client = URLSessionHTTPClient()
-        
         for suiteName in suiteNames {
-            let salahTimesViewController = makeSalahTimesViewController(client: client, suiteName: suiteName)
+            let salahTimesViewController = makeSalahTimesViewController(suiteName: suiteName)
             let navigationController = UINavigationController(rootViewController: salahTimesViewController)
             
             salahTimesViewControllers.append(navigationController)
@@ -91,16 +91,15 @@ public final class LocationsPageViewController: UIViewController {
     }
     
     private func addLocation() {
-        let client = URLSessionHTTPClient()
         let suiteName = UUID().uuidString
         suiteNames.append(suiteName)
-        let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(client: client, suiteName: suiteName))
+        let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(suiteName: suiteName))
         
         salahTimesViewControllers.append(navigationController)
         pageViewController.setViewControllers([salahTimesViewControllers[salahTimesViewControllers.count-1]], direction: .forward, animated: true)
     }
     
-    private func makeSalahTimesViewController(client: HTTPClient, suiteName: String) -> SalahTimesViewController {
+    private func makeSalahTimesViewController(suiteName: String) -> SalahTimesViewController {
         let salahTimesLoader = SalahTimesLoader(client: client)
         let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName)
         let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)

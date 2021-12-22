@@ -36,7 +36,7 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func makeLocationsPageViewController() -> LocationsPageViewController {
-        let locationsPageViewController = LocationsPageViewController(userDefaults: getUserDefaults())
+        let locationsPageViewController = LocationsPageViewController(client: client, userDefaults: getUserDefaults())
         
         locationsPageViewController.title = "Locations"
         locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe")
