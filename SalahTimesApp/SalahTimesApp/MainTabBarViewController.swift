@@ -30,7 +30,7 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        viewControllers = [makeLocationsPageViewController()]
+        viewControllers = [makeOverviewViewController(), makeLocationsPageViewController()]
         
         tabBar.tintColor = .systemTeal
     }
@@ -39,9 +39,18 @@ final class MainTabBarViewController: UITabBarController {
         let locationsPageViewController = LocationsPageViewController(client: client, userDefaults: getUserDefaults())
         
         locationsPageViewController.title = "Locations"
-        locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe")
+        locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe.europe.africa.fill")
         
         return locationsPageViewController
+    }
+    
+    private func makeOverviewViewController() -> UINavigationController {
+        let overviewViewController = OverviewViewController()
+        
+        overviewViewController.title = "Overview"
+        overviewViewController.tabBarItem.image = UIImage(systemName: "globe")
+        
+        return UINavigationController(rootViewController: overviewViewController)
     }
     
     private func getUserDefaults() -> UserDefaults {
