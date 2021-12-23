@@ -45,6 +45,10 @@ final class OverviewCollectionViewController: UIViewController {
         loadLocations()
     }
     
+    func refresh() {
+        loadLocations()
+    }
+    
     private func configureUI() {
         collectionView.backgroundColor = .clear
     }

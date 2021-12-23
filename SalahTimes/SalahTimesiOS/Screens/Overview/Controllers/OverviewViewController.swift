@@ -40,6 +40,7 @@ public final class OverviewViewController: UIViewController {
     private func configureUI() {
         setupBackground()
         setupDateLabel()
+        ensureDateStaysUpToDate()
         setupCollectionViewController()
     }
     
@@ -58,6 +59,19 @@ public final class OverviewViewController: UIViewController {
     private func updateDateLabelText(date: Date) {
         let dateString = DateFormatter.presentableDateFormatter.string(from: date)
         dateLabel.text = dateString
+    }
+    
+    private func ensureDateStaysUpToDate() {
+        NotificationCenter.default.addObserver(self, selector: #selector(checkDateAndUpdateIfNeeded), name: .NSCalendarDayChanged, object: nil)
+    }
+    
+    @objc private func checkDateAndUpdateIfNeeded() {
+        if Calendar.current.isDateInYesterday(date) {
+            DispatchQueue.main.async {
+                self.updateDateLabelText(date: Date())
+                self.overviewCollectionViewController.refresh()
+            }
+        }
     }
     
     private func setupCollectionViewController() {
