@@ -18,6 +18,7 @@ public final class SettingsViewController: UIViewController {
     private let leftInset: CGFloat = 40
     private let rightInset: CGFloat = 40
     
+    private let locationLabel = UILabel()
     private let segmentedController = UISegmentedControl(items: ["Mithl 1", "Mithl 2"])
     private let asrStackView = UIStackView()
     
@@ -35,6 +36,7 @@ public final class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        setupLocationLabel()
         setupAsrTimingSettings()
         setupFajrIshaSettingsView()
     }
@@ -49,6 +51,10 @@ public final class SettingsViewController: UIViewController {
         super.viewDidDisappear(animated)
         
         onDismiss?()
+    }
+    
+    func setLocation(_ location: String) {
+        locationLabel.text = "Settings for\n\(location)"
     }
     
     private func configureUI() {
@@ -68,7 +74,17 @@ public final class SettingsViewController: UIViewController {
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
     }
-
+    
+    private func setupLocationLabel() {
+        locationLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        locationLabel.adjustsFontForContentSizeCategory = true
+        locationLabel.numberOfLines = 0
+        locationLabel.textAlignment = .center
+        
+        view.addSubview(locationLabel)
+        locationLabel.centerXInSuperview()
+        locationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+    }
     
     private func setupAsrTimingSettings() {
         let asrLabel = UILabel()
@@ -81,7 +97,6 @@ public final class SettingsViewController: UIViewController {
         segmentedController.addTarget(self, action: #selector(mithlChanged), for: .valueChanged)
         
         let safeArea = view.safeAreaLayoutGuide
-        let topInset: CGFloat = 60
         
         asrStackView.axis = .vertical
         asrStackView.spacing = 8
@@ -95,7 +110,7 @@ public final class SettingsViewController: UIViewController {
         }
         
         view.addSubview(asrStackView)
-        asrStackView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: topInset, left: leftInset, bottom: 0, right: rightInset))
+        asrStackView.anchor(top: locationLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: leftInset, bottom: 0, right: rightInset))
         
         asrStackView.backgroundColor = .systemTeal.withAlphaComponent(0.4)
         let stackViewInset: CGFloat = 16

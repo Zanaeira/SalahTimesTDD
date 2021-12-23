@@ -43,6 +43,9 @@ public final class SalahTimesViewController: UIViewController {
     
     @objc private func openSettings() {
         settingsViewController.view.backgroundColor = .systemBackground
+        if let location = salahTimesCollectionViewController.location {
+            settingsViewController.setLocation(location)
+        }
         present(settingsViewController, animated: true)
     }
     
