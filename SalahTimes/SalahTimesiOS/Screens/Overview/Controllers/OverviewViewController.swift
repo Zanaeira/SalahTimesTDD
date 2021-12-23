@@ -14,6 +14,9 @@ public final class OverviewViewController: UIViewController {
         fatalError("Not implemented")
     }
     
+    private var date = Date()
+    
+    private let dateLabel = UILabel()
     private let overviewCollectionViewController: OverviewCollectionViewController
     
     public init(client: HTTPClient, userDefaults: UserDefaults) {
@@ -36,12 +39,32 @@ public final class OverviewViewController: UIViewController {
     
     private func configureUI() {
         setupBackground()
+        setupDateLabel()
         setupCollectionViewController()
+    }
+    
+    private func setupDateLabel() {
+        updateDateLabelText(date: date)
+        dateLabel.font = .preferredFont(forTextStyle: .title1)
+        dateLabel.adjustsFontForContentSizeCategory = true
+        dateLabel.textAlignment = .center
+        
+        let safeArea = view.safeAreaLayoutGuide
+        view.addSubview(dateLabel)
+        dateLabel.centerXInSuperview()
+        dateLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16).isActive = true
+    }
+    
+    private func updateDateLabelText(date: Date) {
+        let dateString = DateFormatter.presentableDateFormatter.string(from: date)
+        dateLabel.text = dateString
     }
     
     private func setupCollectionViewController() {
         add(overviewCollectionViewController)
-        overviewCollectionViewController.view.fillSuperview()
+        
+        let safeArea = view.safeAreaLayoutGuide
+        overviewCollectionViewController.view.anchor(top: dateLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 0))
     }
     
     private let backgroundGradient = CAGradientLayer()
@@ -58,5 +81,16 @@ public final class OverviewViewController: UIViewController {
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
     }
+    
+}
+
+private extension DateFormatter {
+    
+    static let presentableDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        
+        return dateFormatter
+    }()
     
 }
