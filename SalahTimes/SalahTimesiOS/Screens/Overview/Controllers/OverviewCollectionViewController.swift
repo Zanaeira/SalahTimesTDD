@@ -130,7 +130,7 @@ extension OverviewCollectionViewController {
         group.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
+        section.interGroupSpacing = 16
         
         let layout = UICollectionViewCompositionalLayout(section: section)
         
