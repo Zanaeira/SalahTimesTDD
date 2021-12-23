@@ -65,6 +65,9 @@ final class SingleSalahTimeView: UIView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        let isCompactSizeClass = traitCollection.verticalSizeClass == .compact
+        if isCompactSizeClass { return }
+        
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
         
         [stackView, innerStackView].forEach { $0.axis = isAccessibilityCategory ? .horizontal : .vertical }

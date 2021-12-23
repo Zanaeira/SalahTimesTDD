@@ -83,11 +83,18 @@ final class OverviewCell: UICollectionViewCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
+        let isCompactSizeClass = traitCollection.verticalSizeClass == .compact
+        let displayOnTwoRows = (isCompactSizeClass && traitCollection.preferredContentSizeCategory >= .accessibilityLarge) ||
+                               (!isCompactSizeClass && traitCollection.preferredContentSizeCategory >= .large)
+        
+        timesStackView.axis = displayOnTwoRows ? .vertical : .horizontal
+        
+        if isCompactSizeClass {
+            return
+        }
+        
         let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
         [topTimesStackView, bottomTimesStackView].forEach { $0.axis = isAccessibilityCategory ? .vertical : .horizontal }
-        
-        let shouldUseTwoRows = traitCollection.preferredContentSizeCategory >= .large
-        timesStackView.axis = shouldUseTwoRows ? .vertical : .horizontal
     }
     
 }
