@@ -20,15 +20,11 @@ public final class SalahTimesViewController: UIViewController {
     private let settingsViewController: SettingsViewController
     var onAddLocation: (() -> Void)?
     
-    public init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults) {
+    public init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults, onDelete: (() -> Void)?) {
         self.salahTimesCollectionViewController = SalahTimesCollectionViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
-        self.settingsViewController = SettingsViewController(userDefaults: userDefaults, onDismiss: salahTimesCollectionViewController.refresh)
+        self.settingsViewController = SettingsViewController(userDefaults: userDefaults, onDismiss: salahTimesCollectionViewController.refresh, onDelete: onDelete)
         
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    func setLocation(_ location: String) {
-        salahTimesCollectionViewController.updateLocation(to: location)
     }
     
     public override func viewDidLoad() {
@@ -47,6 +43,9 @@ public final class SalahTimesViewController: UIViewController {
     
     @objc private func openSettings() {
         settingsViewController.view.backgroundColor = .systemBackground
+        if let location = salahTimesCollectionViewController.location {
+            settingsViewController.setLocation(location)
+        }
         present(settingsViewController, animated: true)
     }
     

@@ -16,6 +16,7 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private let client: HTTPClient
+    private let userDefaults = makeStandardUserDefaults()
     
     init(client: HTTPClient) {
         self.client = client
@@ -30,21 +31,31 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func setupViewControllers() {
-        viewControllers = [makeLocationsPageViewController()]
+        viewControllers = [makeOverviewViewController(), makeLocationsPageViewController()]
+        selectedIndex = 1
         
         tabBar.tintColor = .systemTeal
     }
     
     private func makeLocationsPageViewController() -> LocationsPageViewController {
-        let locationsPageViewController = LocationsPageViewController(client: client, userDefaults: getUserDefaults())
+        let locationsPageViewController = LocationsPageViewController(client: client, userDefaults: userDefaults)
         
         locationsPageViewController.title = "Locations"
-        locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe")
+        locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe.europe.africa.fill")
         
         return locationsPageViewController
     }
     
-    private func getUserDefaults() -> UserDefaults {
+    private func makeOverviewViewController() -> UINavigationController {
+        let overviewViewController = OverviewViewController(client: client, userDefaults: userDefaults)
+        
+        overviewViewController.title = "Overview"
+        overviewViewController.tabBarItem.image = UIImage(systemName: "globe")
+        
+        return UINavigationController(rootViewController: overviewViewController)
+    }
+    
+    private static func makeStandardUserDefaults() -> UserDefaults {
         let userDefaults = UserDefaults.standard
         
         userDefaults.register(defaults: [

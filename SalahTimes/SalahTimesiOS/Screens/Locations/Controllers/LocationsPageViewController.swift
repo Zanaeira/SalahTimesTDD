@@ -78,7 +78,9 @@ public final class LocationsPageViewController: UIViewController {
         
         pageViewController.dataSource = self
         
-        pageViewController.setViewControllers([salahTimesViewControllers[0]], direction: .forward, animated: true)
+        DispatchQueue.main.async {
+            self.pageViewController.setViewControllers([self.salahTimesViewControllers[0]], direction: .forward, animated: true)
+        }
     }
     
     private func loadSalahTimesViewControllersForLocations() {
@@ -96,13 +98,18 @@ public final class LocationsPageViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(suiteName: suiteName))
         
         salahTimesViewControllers.append(navigationController)
-        pageViewController.setViewControllers([salahTimesViewControllers[salahTimesViewControllers.count-1]], direction: .forward, animated: true)
+        DispatchQueue.main.async {
+            self.pageViewController.setViewControllers([self.salahTimesViewControllers[self.salahTimesViewControllers.count-1]], direction: .forward, animated: true)
+        }
     }
     
     private func makeSalahTimesViewController(suiteName: String) -> SalahTimesViewController {
         let salahTimesLoader = SalahTimesLoader(client: client)
         let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName)
-        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
+        let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults, onDelete: {
+            self.dismiss(animated: true)
+            self.deleteLocation(suiteName: suiteName)
+        })
         salahTimesViewController.title = "Salāh Times"
         salahTimesViewController.onAddLocation = addLocation
 
@@ -132,6 +139,25 @@ public final class LocationsPageViewController: UIViewController {
         return try? encoder.encode(fajrIshaMethod)
     }
     
+    private func deleteLocation(suiteName: String) {
+        if suiteNames.count == 1 {
+            let alert = UIAlertController(title: "Cannot delete", message: "You cannot delete a location if you do not have more than one location.", preferredStyle: .alert)
+            alert.addAction(.init(title: "Dismiss", style: .default))
+            
+            present(alert, animated: true)
+            return
+        }
+        
+        suiteNames.removeAll(where: {
+            $0 == suiteName
+        })
+        
+        salahTimesViewControllers.remove(at: currentIndex)
+        DispatchQueue.main.async {
+            self.pageViewController.setViewControllers([self.salahTimesViewControllers[0]], direction: .reverse, animated: true)
+        }
+    }
+    
 }
 
 extension LocationsPageViewController: UIPageViewControllerDataSource {
@@ -155,9 +181,18 @@ extension LocationsPageViewController: UIPageViewControllerDataSource {
         
         return salahTimesViewControllers[index+1]
     }
-    
+        
     public func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return salahTimesViewControllers.count == 1 ? 0 : salahTimesViewControllers.count
+        togglePageControlVisibilityIfOnlyOneViewController()
+        return salahTimesViewControllers.count
+    }
+    
+    private func togglePageControlVisibilityIfOnlyOneViewController() {
+        let hidden = salahTimesViewControllers.count == 1 ? true : false
+        
+        for subview in pageViewController.view.subviews where subview is UIPageControl {
+            subview.isHidden = hidden
+        }
     }
     
     public func presentationIndex(for pageViewController: UIPageViewController) -> Int {

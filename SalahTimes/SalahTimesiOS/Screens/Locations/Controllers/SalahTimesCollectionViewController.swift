@@ -26,7 +26,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     private let collectionView: UICollectionView
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SalahTimesCellModel> = createDataSource(for: collectionView)
     
-    private var location: String? {
+    private(set) var location: String? {
         didSet {
             userDefaults.set(location, forKey: "Location")
             DispatchQueue.main.async {
@@ -135,7 +135,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         self.dismiss(animated: false)
         present(alert, animated: true)
         
-        refresh()
+        collectionView.reloadData()
     }
     
     private func updateSalahTimes(_ salahTimes: SalahTimes) {
