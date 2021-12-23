@@ -20,9 +20,9 @@ public final class SalahTimesViewController: UIViewController {
     private let settingsViewController: SettingsViewController
     var onAddLocation: (() -> Void)?
     
-    public init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults) {
+    public init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults, onDelete: (() -> Void)?) {
         self.salahTimesCollectionViewController = SalahTimesCollectionViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
-        self.settingsViewController = SettingsViewController(userDefaults: userDefaults, onDismiss: salahTimesCollectionViewController.refresh)
+        self.settingsViewController = SettingsViewController(userDefaults: userDefaults, onDismiss: salahTimesCollectionViewController.refresh, onDelete: onDelete)
         
         super.init(nibName: nil, bundle: nil)
     }

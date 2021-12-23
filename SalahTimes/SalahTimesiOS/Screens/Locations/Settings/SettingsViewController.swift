@@ -21,13 +21,17 @@ public final class SettingsViewController: UIViewController {
     private let locationLabel = UILabel()
     private let segmentedController = UISegmentedControl(items: ["Mithl 1", "Mithl 2"])
     private let asrStackView = UIStackView()
+    private let fajrIshaSettingsView = FajrIshaSettingsView(frame: .zero)
+    private let deleteButton = UIButton()
     
     private let userDefaults: UserDefaults
     private let onDismiss: (() -> Void)?
+    private let onDelete: (() -> Void)?
     
-    public init(userDefaults: UserDefaults, onDismiss: ((() -> Void))?) {
+    public init(userDefaults: UserDefaults, onDismiss: ((() -> Void))?, onDelete: (() -> Void)?) {
         self.userDefaults = userDefaults
         self.onDismiss = onDismiss
+        self.onDelete = onDelete
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -39,6 +43,7 @@ public final class SettingsViewController: UIViewController {
         setupLocationLabel()
         setupAsrTimingSettings()
         setupFajrIshaSettingsView()
+        setupDeleteButton()
     }
     
     public override func viewDidLayoutSubviews() {
@@ -126,9 +131,29 @@ public final class SettingsViewController: UIViewController {
     }
     
     private func setupFajrIshaSettingsView() {
-        let fajrIshaSettingsView = FajrIshaSettingsView(frame: .zero)
         view.addSubview(fajrIshaSettingsView)
         fajrIshaSettingsView.anchor(top: asrStackView.bottomAnchor, leading: asrStackView.leadingAnchor, bottom: nil, trailing: asrStackView.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
+    }
+    
+    private func setupDeleteButton() {
+        deleteButton.setTitle("Delete", for: .normal)
+        deleteButton.setTitleColor(.systemRed, for: .normal)
+        deleteButton.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
+        
+        view.addSubview(deleteButton)
+        deleteButton.centerXInSuperview()
+        deleteButton.topAnchor.constraint(equalTo: fajrIshaSettingsView.bottomAnchor, constant: 16).isActive = true
+    }
+    
+    @objc private func deleteButtonPressed() {
+        let deleteActionSheet = UIAlertController(title: "Are you sure you want to delete this location?", message: "", preferredStyle: .actionSheet)
+        deleteActionSheet.addAction(.init(title: "Delete", style: .destructive, handler: { action in
+            print("Delete selected")
+            self.onDelete?()
+        }))
+        deleteActionSheet.addAction(.init(title: "Cancel", style: .cancel))
+        
+        present(deleteActionSheet, animated: true)
     }
     
     @objc private func mithlChanged() {
