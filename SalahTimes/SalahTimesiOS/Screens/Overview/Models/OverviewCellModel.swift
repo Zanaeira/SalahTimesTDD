@@ -10,6 +10,8 @@ import SalahTimes
 
 struct OverviewCellModel: Hashable {
     
+    private let id = UUID()
+    
     let location: String
     let fajr: SalahTimesCellModel
     let sunrise: SalahTimesCellModel
