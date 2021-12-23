@@ -27,10 +27,6 @@ public final class SalahTimesViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    func setLocation(_ location: String) {
-        salahTimesCollectionViewController.updateLocation(to: location)
-    }
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         
