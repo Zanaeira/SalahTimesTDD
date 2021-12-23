@@ -14,15 +14,15 @@ final class OverviewCell: UICollectionViewCell {
     }
     
     private let locationLabel = dynamicLabel(font: .preferredFont(forTextStyle: .title1))
-    private let fajrLabel = dynamicLabel()
-    private let sunriseLabel = dynamicLabel()
-    private let zuhrLabel = dynamicLabel()
-    private let asrLabel = dynamicLabel()
-    private let maghribLabel = dynamicLabel()
-    private let ishaLabel = dynamicLabel()
+    private let fajr = SingleSalahTimeView()
+    private let sunrise = SingleSalahTimeView()
+    private let zuhr = SingleSalahTimeView()
+    private let asr = SingleSalahTimeView()
+    private let maghrib = SingleSalahTimeView()
+    private let isha = SingleSalahTimeView()
     
-    private var timesLabels: [UILabel] {
-        [fajrLabel, sunriseLabel, zuhrLabel, asrLabel, maghribLabel, ishaLabel]
+    private var times: [SingleSalahTimeView] {
+        [fajr, sunrise, zuhr, asr, maghrib, isha]
     }
     
     override init(frame: CGRect) {
@@ -33,11 +33,12 @@ final class OverviewCell: UICollectionViewCell {
     
     private func configureUI() {
         let topTimesStackView = UIStackView(arrangedSubviews: [
-            fajrLabel, sunriseLabel, zuhrLabel
+            fajr, sunrise, zuhr
         ])
         let bottomTimesStackView = UIStackView(arrangedSubviews: [
-            asrLabel, maghribLabel, ishaLabel
+            asr, maghrib, isha
         ])
+        [topTimesStackView, bottomTimesStackView].forEach { $0.distribution = .fillEqually }
         
         let timesStackView = UIStackView(arrangedSubviews: [topTimesStackView, bottomTimesStackView])
         timesStackView.axis = .vertical
@@ -61,9 +62,61 @@ final class OverviewCell: UICollectionViewCell {
     
     func configure(with overviewCellModel: OverviewCellModel) {
         locationLabel.text = overviewCellModel.location
-        for (label, times) in zip(timesLabels, overviewCellModel.times) {
-            label.text = "\(times.name)\n\(times.time)"
+        for (singleSalahTimeView, times) in zip(times, overviewCellModel.times) {
+            singleSalahTimeView.configure(with: times)
         }
+    }
+    
+    private static func dynamicLabel(font: UIFont = .preferredFont(forTextStyle: .title3), textAlignment: NSTextAlignment = .center) -> UILabel {
+        let label = UILabel()
+        
+        label.adjustsFontForContentSizeCategory = true
+        label.numberOfLines = 0
+        label.textAlignment = textAlignment
+        label.font = font
+        
+        return label
+    }
+    
+}
+
+private final class SingleSalahTimeView: UIView {
+    
+    required init?(coder: NSCoder) {
+        fatalError("Not implemented")
+    }
+    
+    let stackView = UIStackView()
+    
+    private let nameLabel = SingleSalahTimeView.dynamicLabel(font: .preferredFont(forTextStyle: .title3))
+    private let timeLabel = SingleSalahTimeView.dynamicLabel(font: .preferredFont(forTextStyle: .title3))
+    private let imageView = UIImageView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        configureUI()
+    }
+    
+    func configure(with salahTimesCellModel: SalahTimesCellModel) {
+        let image = UIImage(systemName: salahTimesCellModel.imageName)
+        imageView.image = image
+        nameLabel.text = salahTimesCellModel.name
+        timeLabel.text = salahTimesCellModel.time
+    }
+    
+    private func configureUI() {
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .systemOrange
+        imageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
+        
+        [imageView, nameLabel, timeLabel].forEach(stackView.addArrangedSubview)
+        stackView.axis = .vertical
+        stackView.spacing = 2
+        stackView.distribution = .fill
+        
+        addSubview(stackView)
+        stackView.fillSuperview()
     }
     
     private static func dynamicLabel(font: UIFont = .preferredFont(forTextStyle: .title3), textAlignment: NSTextAlignment = .center) -> UILabel {
