@@ -25,6 +25,14 @@ final class OverviewCell: UICollectionViewCell {
         [fajr, sunrise, zuhr, asr, maghrib, isha]
     }
     
+    private lazy var topTimesStackView = UIStackView(arrangedSubviews: [
+        fajr, sunrise, zuhr
+    ])
+    private lazy var bottomTimesStackView = UIStackView(arrangedSubviews: [
+        asr, maghrib, isha
+    ])
+    private lazy var timesStackView = UIStackView(arrangedSubviews: [topTimesStackView, bottomTimesStackView])
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -32,17 +40,11 @@ final class OverviewCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        let topTimesStackView = UIStackView(arrangedSubviews: [
-            fajr, sunrise, zuhr
-        ])
-        let bottomTimesStackView = UIStackView(arrangedSubviews: [
-            asr, maghrib, isha
-        ])
         [topTimesStackView, bottomTimesStackView].forEach { $0.distribution = .fillEqually }
         
-        let timesStackView = UIStackView(arrangedSubviews: [topTimesStackView, bottomTimesStackView])
-        timesStackView.axis = .vertical
-        timesStackView.spacing = 10
+        timesStackView.axis = .horizontal
+        timesStackView.distribution = .fillEqually
+        timesStackView.spacing = 2
         
         let outerStackView = UIStackView(arrangedSubviews: [locationLabel, timesStackView])
         outerStackView.axis = .vertical
@@ -76,6 +78,16 @@ final class OverviewCell: UICollectionViewCell {
         label.font = font
         
         return label
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        [topTimesStackView, bottomTimesStackView].forEach { $0.axis = isAccessibilityCategory ? .vertical : .horizontal }
+        
+        let shouldUseTwoRows = traitCollection.preferredContentSizeCategory >= .large
+        timesStackView.axis = shouldUseTwoRows ? .vertical : .horizontal
     }
     
 }

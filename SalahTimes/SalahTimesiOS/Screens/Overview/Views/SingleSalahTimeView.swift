@@ -14,6 +14,7 @@ final class SingleSalahTimeView: UIView {
     }
     
     private let stackView = UIStackView()
+    private lazy var innerStackView = UIStackView(arrangedSubviews: [nameLabel, timeLabel])
     
     private let nameLabel = SingleSalahTimeView.dynamicLabel(font: .preferredFont(forTextStyle: .title3))
     private let timeLabel = SingleSalahTimeView.dynamicLabel(font: .preferredFont(forTextStyle: .title3))
@@ -28,9 +29,13 @@ final class SingleSalahTimeView: UIView {
     private func configureUI() {
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .systemOrange
-        imageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 35).isActive = true
+        imageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 25).isActive = true
         
-        [imageView, nameLabel, timeLabel].forEach(stackView.addArrangedSubview)
+        innerStackView.axis = .vertical
+        innerStackView.spacing = 2
+        innerStackView.distribution = .fill
+        
+        [imageView, innerStackView].forEach(stackView.addArrangedSubview)
         stackView.axis = .vertical
         stackView.spacing = 2
         stackView.distribution = .fill
@@ -50,11 +55,20 @@ final class SingleSalahTimeView: UIView {
         let label = UILabel()
         
         label.adjustsFontForContentSizeCategory = true
-        label.numberOfLines = 0
+        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = textAlignment
         label.font = font
         
         return label
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        
+        [stackView, innerStackView].forEach { $0.axis = isAccessibilityCategory ? .horizontal : .vertical }
+        stackView.distribution = isAccessibilityCategory ? .fillProportionally : .fill
     }
     
 }
