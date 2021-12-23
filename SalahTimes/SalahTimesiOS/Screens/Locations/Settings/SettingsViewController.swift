@@ -81,9 +81,12 @@ public final class SettingsViewController: UIViewController {
         locationLabel.numberOfLines = 0
         locationLabel.textAlignment = .center
         
-        view.addSubview(locationLabel)
-        locationLabel.centerXInSuperview()
-        locationLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        let stackView = UIStackView(arrangedSubviews: [locationLabel])
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
+        view.addSubview(stackView)
+        stackView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 30, left: leftInset, bottom: 0, right: rightInset))
     }
     
     private func setupAsrTimingSettings() {
