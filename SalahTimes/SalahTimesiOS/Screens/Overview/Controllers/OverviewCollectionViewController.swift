@@ -61,7 +61,7 @@ final class OverviewCollectionViewController: UIViewController {
     
     private func loadLocations() {
         let suiteNames = userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
-        let allLocationsUserDefaults = suiteNames.compactMap(UserDefaults.init(suiteName:))
+        let allLocationsUserDefaults = suiteNames.compactMap(getBaseUserDefaults(usingSuiteName:))
         
         var loadedTimes = [OverviewCellModel]()
         
@@ -74,6 +74,29 @@ final class OverviewCollectionViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func getBaseUserDefaults(usingSuiteName suiteName: String) -> UserDefaults {
+        let userDefaults = UserDefaults(suiteName: suiteName) ?? .standard
+        userDefaults.register(defaults: [
+            "Mithl": 2,
+            "Location": "London"
+        ])
+        
+        if let fajrIshaMethod = getEncodedFajrIshaMethod() {
+            userDefaults.register(defaults: [
+                "FajrIsha": fajrIshaMethod
+            ])
+        }
+        
+        return userDefaults
+    }
+    
+    private func getEncodedFajrIshaMethod() -> Data? {
+        let fajrIshaMethod = AladhanAPIEndpoint.Method.custom(methodSettings: .init(fajrAngle: 12.0, maghribAngle: nil, ishaAngle: 12.0))
+        
+        let encoder = JSONEncoder()
+        return try? encoder.encode(fajrIshaMethod)
     }
     
     private func loadSalahTimes(usingUserDefaults userDefaults: UserDefaults, onDate date: Date = Date(), completion: @escaping (SalahTimes) -> Void) {
