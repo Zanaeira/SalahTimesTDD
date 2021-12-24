@@ -37,11 +37,6 @@ final class OverviewCollectionViewController: UIViewController {
         
         configureUI()
         configureHierarchy()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
         loadLocations()
     }
     
