@@ -66,7 +66,7 @@ public final class OverviewViewController: UIViewController {
     }
     
     @objc private func checkDateAndUpdateIfNeeded() {
-        if Calendar.current.isDateInYesterday(date) {
+        if !Calendar.current.isDateInToday(date) {
             DispatchQueue.main.async {
                 self.updateDateLabelText(date: Date())
                 self.overviewCollectionViewController.refresh()
