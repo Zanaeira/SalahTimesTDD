@@ -92,6 +92,12 @@ final class OverviewCell: UICollectionViewCell {
         } else {
             timesStackView.axis = .horizontal
         }
+        
+        if traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
+            [topTimesStackView, bottomTimesStackView].forEach { $0.axis = .vertical }
+        } else {
+            [topTimesStackView, bottomTimesStackView].forEach { $0.axis = .horizontal }
+        }
     }
     
     override func prepareForReuse() {

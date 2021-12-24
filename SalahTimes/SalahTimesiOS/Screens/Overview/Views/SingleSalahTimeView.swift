@@ -13,12 +13,11 @@ final class SingleSalahTimeView: UIView {
         fatalError("Not implemented")
     }
     
-    private let stackView = UIStackView()
-    private lazy var innerStackView = UIStackView(arrangedSubviews: [nameLabel, timeLabel])
+    private lazy var stackView = UIStackView(arrangedSubviews: [imageView, nameLabel, timeLabel])
     
+    private let imageView = UIImageView()
     private let nameLabel = SingleSalahTimeView.dynamicLabel(font: .preferredFont(forTextStyle: .title3))
     private let timeLabel = SingleSalahTimeView.dynamicLabel(font: .preferredFont(forTextStyle: .title3))
-    private let imageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,17 +30,13 @@ final class SingleSalahTimeView: UIView {
         imageView.tintColor = .systemOrange
         imageView.heightAnchor.constraint(greaterThanOrEqualToConstant: 25).isActive = true
         
-        innerStackView.axis = .vertical
-        innerStackView.spacing = 2
-        innerStackView.distribution = .fill
-        
-        [imageView, innerStackView].forEach(stackView.addArrangedSubview)
         stackView.axis = .vertical
         stackView.spacing = 2
         stackView.distribution = .fill
         
         addSubview(stackView)
         stackView.fillSuperview()
+        
     }
     
     func configure(with salahTimesCellModel: SalahTimesCellModel) {
@@ -60,6 +55,23 @@ final class SingleSalahTimeView: UIView {
         label.font = font
         
         return label
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        updateStackView(isAccessibilityCategory: isAccessibilityCategory)
+    }
+    
+    private func updateStackView(isAccessibilityCategory: Bool) {
+        if isAccessibilityCategory {
+            stackView.axis = .horizontal
+            stackView.distribution = .fillEqually
+        } else {
+            stackView.axis = .vertical
+            stackView.distribution = .fill
+        }
     }
     
 }
