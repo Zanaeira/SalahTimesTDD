@@ -83,14 +83,11 @@ final class OverviewCell: UICollectionViewCell {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         
-        let isAccessibilityCategory = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
-        if isAccessibilityCategory != previousTraitCollection?.preferredContentSizeCategory.isAccessibilityCategory {
-            updateStackViews()
-        }
+        updateStackViews()
     }
     
     private func updateStackViews() {
-        if traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
+        if traitCollection.preferredContentSizeCategory > .medium {
             timesStackView.axis = .vertical
         } else {
             timesStackView.axis = .horizontal
