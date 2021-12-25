@@ -14,33 +14,23 @@ final class OverviewCell: UICollectionViewCell {
     }
     
     private let locationLabel = dynamicLabel(font: .preferredFont(forTextStyle: .title1))
-    private let fajr = SingleSalahTimeView()
-    private let sunrise = SingleSalahTimeView()
-    private let zuhr = SingleSalahTimeView()
-    private let asr = SingleSalahTimeView()
-    private let maghrib = SingleSalahTimeView()
-    private let isha = SingleSalahTimeView()
     
-    private var fajrStackView: UIStackView { fajr.stackView }
-    private var sunriseStackView: UIStackView { sunrise.stackView }
-    private var zuhrStackView: UIStackView { zuhr.stackView }
-    private var asrStackView: UIStackView { asr.stackView }
-    private var maghribStackView: UIStackView { maghrib.stackView }
-    private var ishaStackView: UIStackView { isha.stackView }
-    
-    private var times: [SingleSalahTimeView] {
-        [fajr, sunrise, zuhr, asr, maghrib, isha]
-    }
+    private var fajrStackView = SalahImageNameTimeStackViewBuilder.build()
+    private var sunriseStackView = SalahImageNameTimeStackViewBuilder.build()
+    private var zuhrStackView = SalahImageNameTimeStackViewBuilder.build()
+    private var asrStackView = SalahImageNameTimeStackViewBuilder.build()
+    private var maghribStackView = SalahImageNameTimeStackViewBuilder.build()
+    private var ishaStackView = SalahImageNameTimeStackViewBuilder.build()
     
     private var timesStackViews: [UIStackView] {
-        [fajr.stackView, sunrise.stackView, zuhr.stackView, asr.stackView, maghrib.stackView, isha.stackView]
+        [fajrStackView.stackView, sunriseStackView.stackView, zuhrStackView.stackView, asrStackView.stackView, maghribStackView.stackView, ishaStackView.stackView]
     }
     
     private lazy var topTimesStackView = UIStackView(arrangedSubviews: [
-        fajrStackView, sunriseStackView, zuhrStackView
+        fajrStackView.stackView, sunriseStackView.stackView, zuhrStackView.stackView
     ])
     private lazy var bottomTimesStackView = UIStackView(arrangedSubviews: [
-        asrStackView, maghribStackView, ishaStackView
+        asrStackView.stackView, maghribStackView.stackView, ishaStackView.stackView
     ])
     private lazy var bothRowsOfTimesStackView = UIStackView(arrangedSubviews: [topTimesStackView, bottomTimesStackView])
     
@@ -51,9 +41,6 @@ final class OverviewCell: UICollectionViewCell {
     }
     
     private func configureUI() {
-        [topTimesStackView, bottomTimesStackView].forEach { $0.distribution = .fillEqually }
-        bothRowsOfTimesStackView.distribution = .fillEqually
-        
         updateStackViews()
         
         let outerStackView = UIStackView(arrangedSubviews: [locationLabel, bothRowsOfTimesStackView])
@@ -74,9 +61,13 @@ final class OverviewCell: UICollectionViewCell {
     
     func configure(with overviewCellModel: OverviewCellModel) {
         locationLabel.text = overviewCellModel.location
-        for (singleSalahTimeView, times) in zip(times, overviewCellModel.times) {
-            singleSalahTimeView.configure(with: times)
-        }
+        
+        fajrStackView.configure(with: overviewCellModel.fajr)
+        sunriseStackView.configure(with: overviewCellModel.sunrise)
+        zuhrStackView.configure(with: overviewCellModel.zuhr)
+        asrStackView.configure(with: overviewCellModel.asr)
+        maghribStackView.configure(with: overviewCellModel.maghrib)
+        ishaStackView.configure(with: overviewCellModel.isha)
     }
     
     private static func dynamicLabel(font: UIFont = .preferredFont(forTextStyle: .title3), textAlignment: NSTextAlignment = .center) -> UILabel {
@@ -98,6 +89,9 @@ final class OverviewCell: UICollectionViewCell {
     
     private func updateStackViews() {
         let isAccessibility = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
+        
+        [topTimesStackView, bottomTimesStackView].forEach { $0.distribution = .fillEqually }
+        bothRowsOfTimesStackView.distribution = .fillEqually
         
         if !isAccessibility {
             timesStackViews.forEach {

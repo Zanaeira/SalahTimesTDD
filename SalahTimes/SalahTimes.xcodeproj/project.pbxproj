@@ -19,7 +19,7 @@
 		1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */; };
 		1BAEF7BE2773EB720029A02F /* OverviewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7BD2773EB720029A02F /* OverviewCellModel.swift */; };
 		1BAEF7C12773EBB60029A02F /* OverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7C02773EBB60029A02F /* OverviewCell.swift */; };
-		1BAEF7C42773FB1C0029A02F /* SingleSalahTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7C32773FB1C0029A02F /* SingleSalahTimeView.swift */; };
+		1BAEF7C42773FB1C0029A02F /* SalahImageNameTimeStackViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7C32773FB1C0029A02F /* SalahImageNameTimeStackViewBuilder.swift */; };
 		1BE005AC26B8069D003F5F54 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; };
 		1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005BC26B80701003F5F54 /* SalahTimes.swift */; };
 		1BE005C126BB5280003F5F54 /* SalahTimesLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */; };
@@ -86,7 +86,7 @@
 		1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1BAEF7BD2773EB720029A02F /* OverviewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCellModel.swift; sourceTree = "<group>"; };
 		1BAEF7C02773EBB60029A02F /* OverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCell.swift; sourceTree = "<group>"; };
-		1BAEF7C32773FB1C0029A02F /* SingleSalahTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSalahTimeView.swift; sourceTree = "<group>"; };
+		1BAEF7C32773FB1C0029A02F /* SalahImageNameTimeStackViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahImageNameTimeStackViewBuilder.swift; sourceTree = "<group>"; };
 		1BE005A226B8069D003F5F54 /* SalahTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SalahTimes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE005A626B8069D003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE005AB26B8069D003F5F54 /* SalahTimesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalahTimesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,7 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				1BAEF7C02773EBB60029A02F /* OverviewCell.swift */,
-				1BAEF7C32773FB1C0029A02F /* SingleSalahTimeView.swift */,
+				1BAEF7C32773FB1C0029A02F /* SalahImageNameTimeStackViewBuilder.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -621,7 +621,7 @@
 				1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */,
 				1B830F7D275C35650060186E /* UIView+Extensions.swift in Sources */,
 				1BF40B7D2770D64400AA55FB /* LocationsPageViewController.swift in Sources */,
-				1BAEF7C42773FB1C0029A02F /* SingleSalahTimeView.swift in Sources */,
+				1BAEF7C42773FB1C0029A02F /* SalahImageNameTimeStackViewBuilder.swift in Sources */,
 				1B73A8D1275C24C600C1D934 /* SalahTimesCollectionViewController.swift in Sources */,
 				1B73A8D8275C254100C1D934 /* HeaderView.swift in Sources */,
 				1BAEF7BE2773EB720029A02F /* OverviewCellModel.swift in Sources */,
