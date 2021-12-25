@@ -62,15 +62,13 @@ public final class OverviewViewController: UIViewController {
     }
     
     private func ensureDateStaysUpToDate() {
-        NotificationCenter.default.addObserver(self, selector: #selector(checkDateAndUpdateIfNeeded), name: .NSCalendarDayChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDateToMatchSystemDate), name: .NSCalendarDayChanged, object: nil)
     }
     
-    @objc private func checkDateAndUpdateIfNeeded() {
-        if !Calendar.current.isDateInToday(date) {
-            DispatchQueue.main.async {
-                self.updateDateLabelText(date: Date())
-                self.overviewCollectionViewController.refresh()
-            }
+    @objc private func updateDateToMatchSystemDate() {
+        DispatchQueue.main.async {
+            self.updateDateLabelText(date: Date())
+            self.overviewCollectionViewController.refresh()
         }
     }
     
