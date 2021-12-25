@@ -15,12 +15,12 @@ final class OverviewCell: UICollectionViewCell {
     
     private let locationLabel = dynamicLabel(font: .preferredFont(forTextStyle: .title1))
     
-    private var fajrStackView = SalahImageNameTimeStackViewBuilder.build()
-    private var sunriseStackView = SalahImageNameTimeStackViewBuilder.build()
-    private var zuhrStackView = SalahImageNameTimeStackViewBuilder.build()
-    private var asrStackView = SalahImageNameTimeStackViewBuilder.build()
-    private var maghribStackView = SalahImageNameTimeStackViewBuilder.build()
-    private var ishaStackView = SalahImageNameTimeStackViewBuilder.build()
+    private var fajrStackView = SalahImageNameTimeStackViewWrapper.Builder.build()
+    private var sunriseStackView = SalahImageNameTimeStackViewWrapper.Builder.build()
+    private var zuhrStackView = SalahImageNameTimeStackViewWrapper.Builder.build()
+    private var asrStackView = SalahImageNameTimeStackViewWrapper.Builder.build()
+    private var maghribStackView = SalahImageNameTimeStackViewWrapper.Builder.build()
+    private var ishaStackView = SalahImageNameTimeStackViewWrapper.Builder.build()
     
     private var timesStackViews: [UIStackView] {
         [fajrStackView.stackView, sunriseStackView.stackView, zuhrStackView.stackView, asrStackView.stackView, maghribStackView.stackView, ishaStackView.stackView]
