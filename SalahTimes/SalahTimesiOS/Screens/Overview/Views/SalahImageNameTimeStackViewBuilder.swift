@@ -7,11 +7,7 @@
 
 import UIKit
 
-final class SalahImageNameTimeView: UIView {
-    
-    required init?(coder: NSCoder) {
-        fatalError("Not implemented")
-    }
+final class SalahImageNameTimeStackViewWrapper {
     
     let stackView: UIStackView
     private let imageView: UIImageView
@@ -23,8 +19,6 @@ final class SalahImageNameTimeView: UIView {
         self.imageView = imageView
         self.nameLabel = nameLabel
         self.timeLabel = timeLabel
-        
-        super.init(frame: .zero)
     }
     
     func configure(with salahTimesCellModel: SalahTimesCellModel) {
@@ -40,14 +34,14 @@ final class SalahImageNameTimeStackViewBuilder {
     
     private init() {}
     
-    static func build() -> SalahImageNameTimeView {
+    static func build() -> SalahImageNameTimeStackViewWrapper {
         let imageView = makeImageView()
         let nameLabel = dynamicLabel(font: .preferredFont(forTextStyle: .title3))
         let timeLabel = dynamicLabel(font: .preferredFont(forTextStyle: .title3))
         
         let stackView = makeStackView(fromArrangedSubviews: [imageView, nameLabel, timeLabel])
         
-        return SalahImageNameTimeView(stackView: stackView, imageView: imageView, nameLabel: nameLabel, timeLabel: timeLabel)
+        return SalahImageNameTimeStackViewWrapper(stackView: stackView, imageView: imageView, nameLabel: nameLabel, timeLabel: timeLabel)
     }
     
     private static func makeImageView() -> UIImageView {
