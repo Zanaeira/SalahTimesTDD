@@ -21,17 +21,28 @@ final class OverviewCell: UICollectionViewCell {
     private let maghrib = SingleSalahTimeView()
     private let isha = SingleSalahTimeView()
     
+    private var fajrStackView: UIStackView { fajr.stackView }
+    private var sunriseStackView: UIStackView { sunrise.stackView }
+    private var zuhrStackView: UIStackView { zuhr.stackView }
+    private var asrStackView: UIStackView { asr.stackView }
+    private var maghribStackView: UIStackView { maghrib.stackView }
+    private var ishaStackView: UIStackView { isha.stackView }
+    
     private var times: [SingleSalahTimeView] {
         [fajr, sunrise, zuhr, asr, maghrib, isha]
     }
     
+    private var timesStackViews: [UIStackView] {
+        [fajr.stackView, sunrise.stackView, zuhr.stackView, asr.stackView, maghrib.stackView, isha.stackView]
+    }
+    
     private lazy var topTimesStackView = UIStackView(arrangedSubviews: [
-        fajr, sunrise, zuhr
+        fajrStackView, sunriseStackView, zuhrStackView
     ])
     private lazy var bottomTimesStackView = UIStackView(arrangedSubviews: [
-        asr, maghrib, isha
+        asrStackView, maghribStackView, ishaStackView
     ])
-    private lazy var timesStackView = UIStackView(arrangedSubviews: [topTimesStackView, bottomTimesStackView])
+    private lazy var bothRowsOfTimesStackView = UIStackView(arrangedSubviews: [topTimesStackView, bottomTimesStackView])
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,12 +52,11 @@ final class OverviewCell: UICollectionViewCell {
     
     private func configureUI() {
         [topTimesStackView, bottomTimesStackView].forEach { $0.distribution = .fillEqually }
+        bothRowsOfTimesStackView.distribution = .fillEqually
         
-        timesStackView.axis = .horizontal
-        timesStackView.distribution = .fillEqually
-        timesStackView.spacing = 2
+        updateStackViews()
         
-        let outerStackView = UIStackView(arrangedSubviews: [locationLabel, timesStackView])
+        let outerStackView = UIStackView(arrangedSubviews: [locationLabel, bothRowsOfTimesStackView])
         outerStackView.axis = .vertical
         outerStackView.distribution = .fill
         outerStackView.spacing = 10
@@ -87,16 +97,28 @@ final class OverviewCell: UICollectionViewCell {
     }
     
     private func updateStackViews() {
-        if traitCollection.preferredContentSizeCategory > .medium {
-            timesStackView.axis = .vertical
-        } else {
-            timesStackView.axis = .horizontal
-        }
+        let isAccessibility = traitCollection.preferredContentSizeCategory.isAccessibilityCategory
         
-        if traitCollection.preferredContentSizeCategory.isAccessibilityCategory {
-            [topTimesStackView, bottomTimesStackView].forEach { $0.axis = .vertical }
+        if !isAccessibility {
+            timesStackViews.forEach {
+                $0.axis = .vertical
+                $0.distribution = .fill
+            }
+            topTimesStackView.axis = .horizontal
+            bottomTimesStackView.axis = .horizontal
+            if traitCollection.preferredContentSizeCategory > .medium {
+                bothRowsOfTimesStackView.axis = .vertical
+            } else {
+                bothRowsOfTimesStackView.axis = .horizontal
+            }
         } else {
-            [topTimesStackView, bottomTimesStackView].forEach { $0.axis = .horizontal }
+            timesStackViews.forEach {
+                $0.axis = .horizontal
+                $0.distribution = .fillEqually
+            }
+            topTimesStackView.axis = .vertical
+            bottomTimesStackView.axis = .vertical
+            bothRowsOfTimesStackView.axis = .vertical
         }
     }
     

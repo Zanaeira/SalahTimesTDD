@@ -13,7 +13,7 @@ final class SingleSalahTimeView: UIView {
         fatalError("Not implemented")
     }
     
-    private lazy var stackView = UIStackView(arrangedSubviews: [imageView, nameLabel, timeLabel])
+    lazy var stackView = UIStackView(arrangedSubviews: [imageView, nameLabel, timeLabel])
     
     private let imageView = UIImageView()
     private let nameLabel = SingleSalahTimeView.dynamicLabel(font: .preferredFont(forTextStyle: .title3))
@@ -36,7 +36,6 @@ final class SingleSalahTimeView: UIView {
         
         addSubview(stackView)
         stackView.fillSuperview()
-        
     }
     
     func configure(with salahTimesCellModel: SalahTimesCellModel) {
