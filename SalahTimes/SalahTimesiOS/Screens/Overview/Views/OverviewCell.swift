@@ -94,16 +94,9 @@ final class OverviewCell: UICollectionViewCell {
         bothRowsOfTimesStackView.distribution = .fillEqually
         
         if !isAccessibility {
-            timesStackViews.forEach {
-                $0.axis = .vertical
-                $0.distribution = .fill
-            }
-            topTimesStackView.axis = .horizontal
-            bottomTimesStackView.axis = .horizontal
+            layoutStackViewsOnOneLine()
             if traitCollection.preferredContentSizeCategory > .medium {
                 bothRowsOfTimesStackView.axis = .vertical
-            } else {
-                bothRowsOfTimesStackView.axis = .horizontal
             }
         } else {
             timesStackViews.forEach {
@@ -114,6 +107,16 @@ final class OverviewCell: UICollectionViewCell {
             bottomTimesStackView.axis = .vertical
             bothRowsOfTimesStackView.axis = .vertical
         }
+    }
+    
+    private func layoutStackViewsOnOneLine() {
+        timesStackViews.forEach {
+            $0.axis = .vertical
+            $0.distribution = .fill
+        }
+        topTimesStackView.axis = .horizontal
+        bottomTimesStackView.axis = .horizontal
+        bothRowsOfTimesStackView.axis = .horizontal
     }
     
     override func prepareForReuse() {
