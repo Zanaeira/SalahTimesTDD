@@ -148,13 +148,25 @@ public final class LocationsPageViewController: UIViewController {
             return
         }
         
-        suiteNames.removeAll(where: {
-            $0 == suiteName
-        })
+        let newIndex: Int
+        let direction: UIPageViewController.NavigationDirection
         
+        if currentIndex == 0 {
+            newIndex = 0
+            direction = .reverse
+        } else if currentIndex == salahTimesViewControllers.count - 1 {
+            newIndex = currentIndex - 1
+            direction = .reverse
+        } else {
+            newIndex = currentIndex
+            direction = .forward
+        }
+        
+        suiteNames.remove(at: currentIndex)
         salahTimesViewControllers.remove(at: currentIndex)
+        
         DispatchQueue.main.async {
-            self.pageViewController.setViewControllers([self.salahTimesViewControllers[0]], direction: .reverse, animated: true)
+            self.pageViewController.setViewControllers([self.salahTimesViewControllers[newIndex]], direction: direction, animated: true)
         }
     }
     
