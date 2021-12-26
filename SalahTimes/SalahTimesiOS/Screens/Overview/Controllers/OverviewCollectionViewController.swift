@@ -40,6 +40,12 @@ final class OverviewCollectionViewController: UIViewController {
         loadLocations()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        refresh()
+    }
+    
     func refresh() {
         loadLocations()
     }
@@ -172,7 +178,7 @@ extension OverviewCollectionViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(loadedTimes, toSection: .main)
         
-        dataSource.apply(snapshot, animatingDifferences: true)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
         
 }
