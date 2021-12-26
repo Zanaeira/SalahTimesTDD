@@ -66,14 +66,31 @@ final class OverviewCollectionViewController: UIViewController {
         
         var loadedTimes = [OverviewCellModel]()
         
+        let dispatchGroup = DispatchGroup()
+        let dispatchSemaphore = DispatchSemaphore(value: 0)
+        
         for userDefaults in allLocationsUserDefaults {
+            dispatchGroup.enter()
             let location = userDefaults.string(forKey: "Location") ?? "London"
-            loadSalahTimes(usingUserDefaults: userDefaults) { salahTimes in
-                loadedTimes.append(.init(location: location, salahTimes: salahTimes))
-                DispatchQueue.main.async {
-                    self.updateSnapshot(loadedTimes)
+            let (endpoint, salahTimesLoader) = makeEndpointAndSalahTimesLoader(usingUserDefaults: userDefaults)
+            salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let salahTimes):
+                    loadedTimes.append(.init(location: location, salahTimes: salahTimes))
+                case .failure(let error):
+                    self.handleError(error)
                 }
+                
+                dispatchSemaphore.signal()
+                dispatchGroup.leave()
             }
+            dispatchSemaphore.wait()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.updateSnapshot(loadedTimes)
         }
     }
     
@@ -100,7 +117,7 @@ final class OverviewCollectionViewController: UIViewController {
         return try? encoder.encode(fajrIshaMethod)
     }
     
-    private func loadSalahTimes(usingUserDefaults userDefaults: UserDefaults, onDate date: Date = Date(), completion: @escaping (SalahTimes) -> Void) {
+    private func makeEndpointAndSalahTimesLoader(usingUserDefaults userDefaults: UserDefaults, onDate date: Date = Date()) -> (Endpoint, SalahTimesLoader) {
         let endpoint: Endpoint
         
         let location = userDefaults.string(forKey: "Location") ?? "London"
@@ -114,16 +131,7 @@ final class OverviewCollectionViewController: UIViewController {
             endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date, madhhabForAsr: preferredMithl)
         }
         
-        salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let salahTimes):
-                completion(salahTimes)
-            case .failure(let error):
-                self.handleError(error)
-            }
-        }
+        return (endpoint, salahTimesLoader)
     }
     
     private func handleError(_ error: SalahTimesLoader.Error) {
