@@ -1,5 +1,5 @@
 //
-//  DeleteCell.swift
+//  DeleteLocationFooterView.swift
 //  SalahTimesiOS
 //
 //  Created by Suhayl Ahmed on 26/12/2021.
@@ -7,45 +7,47 @@
 
 import UIKit
 
-final class DeleteCell: UITableViewCell {
+final class DeleteLocationFooterView: UIView {
     
     required init?(coder: NSCoder) {
-        fatalError("Not implemented.")
+        fatalError("Not implemented")
     }
     
-    private lazy var stackView = UIStackView(arrangedSubviews: [deleteButton])
+    private let stackView = UIStackView()
+    private let button = UIButton()
     
-    private let deleteButton = UIButton()
     private var onDelete: (() -> Void)?
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    init() {
+        super.init(frame: .zero)
         
-        setupBackground()
+        configureUI()
         setupDeleteButton()
         setupStackView()
+        
     }
     
     func setDeleteAction(_ action: @escaping () -> Void) {
         self.onDelete = action
     }
     
-    private func setupBackground() {
+    private func configureUI() {
         backgroundColor = .clear
     }
     
     private func setupDeleteButton() {
-        deleteButton.setTitle("Delete", for: .normal)
-        deleteButton.setTitleColor(.systemRed, for: .normal)
-        deleteButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        deleteButton.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
+        button.setTitle("Delete", for: .normal)
+        button.setTitleColor(.systemRed, for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
     }
     
     private func setupStackView() {
+        stackView.addArrangedSubview(button)
         configureStackViewBackgroundAndBorder()
         addInsetsToStackView(inset: 16)
         
-        contentView.addSubview(stackView)
+        addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 10, right: 0))
     }
     
@@ -63,5 +65,5 @@ final class DeleteCell: UITableViewCell {
     @objc private func deleteButtonPressed() {
         onDelete?()
     }
-
+    
 }

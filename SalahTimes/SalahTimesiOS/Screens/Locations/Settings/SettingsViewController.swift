@@ -89,7 +89,7 @@ public final class SettingsViewController: UIViewController {
         add(settingsTableViewController)
         
         let safeArea = view.safeAreaLayoutGuide
-        settingsTableViewController.view.anchor(top: locationLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: leftInset, bottom: 16, right: rightInset))
+        settingsTableViewController.view.anchor(top: locationLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 0, left: leftInset, bottom: 16, right: rightInset))
     }
     
     private func deleteButtonPressed() {

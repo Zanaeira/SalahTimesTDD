@@ -13,14 +13,13 @@ final class SettingsTableViewController: UIViewController {
         fatalError("Not implemented")
     }
     
-    private let tableView = UITableView()
+    private let tableView = UITableView(frame: .zero, style: .grouped)
     private let userDefaults: UserDefaults
     
-    private let deleteCell = DeleteCell(style: .default, reuseIdentifier: nil)
     
     private lazy var cells: [UITableViewCell] = [MithlCell(userDefaults: userDefaults),
-                                                 FajrIshaAngleCell(style: .default, reuseIdentifier: nil),
-                                                 deleteCell]
+                                                 FajrIshaAngleCell(style: .default, reuseIdentifier: nil)]
+    private let deleteButtonFooter = DeleteLocationFooterView()
     
     init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
@@ -29,7 +28,7 @@ final class SettingsTableViewController: UIViewController {
     }
     
     func setDeleteAction(deleteAction: @escaping () -> Void) {
-        deleteCell.setDeleteAction(deleteAction)
+        deleteButtonFooter.setDeleteAction(deleteAction)
     }
     
     override func viewDidLoad() {
@@ -46,8 +45,6 @@ final class SettingsTableViewController: UIViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.fillSuperview()
-        
-        tableView.tableFooterView = UIView()
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -75,6 +72,10 @@ extension SettingsTableViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return deleteButtonFooter
     }
     
 }
