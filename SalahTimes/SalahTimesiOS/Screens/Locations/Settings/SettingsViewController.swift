@@ -148,7 +148,6 @@ public final class SettingsViewController: UIViewController {
     @objc private func deleteButtonPressed() {
         let deleteActionSheet = UIAlertController(title: "Are you sure you want to delete this location?", message: "", preferredStyle: .actionSheet)
         deleteActionSheet.addAction(.init(title: "Delete", style: .destructive, handler: { action in
-            print("Delete selected")
             self.onDelete?()
         }))
         deleteActionSheet.addAction(.init(title: "Cancel", style: .cancel))
