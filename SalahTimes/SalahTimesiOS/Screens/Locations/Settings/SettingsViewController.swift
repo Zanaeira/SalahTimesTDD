@@ -20,7 +20,6 @@ public final class SettingsViewController: UIViewController {
     
     private let locationLabel = UILabel()
     private let settingsTableViewController: SettingsTableViewController
-    private let fajrIshaSettingsView = FajrIshaSettingsView(frame: .zero)
     private let deleteButton = UIButton()
     
     private let userDefaults: UserDefaults
@@ -42,7 +41,6 @@ public final class SettingsViewController: UIViewController {
         setupGradientBackground()
         setupLocationLabel()
         configureSettingsTableView()
-        setupFajrIshaSettingsView()
         setupDeleteButton()
     }
     
@@ -90,18 +88,13 @@ public final class SettingsViewController: UIViewController {
         
         let safeArea = view.safeAreaLayoutGuide
         settingsTableViewController.view.anchor(top: locationLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: leftInset, bottom: 0, right: rightInset))
-        settingsTableViewController.view.constrainHeight(constant: 120)
+        settingsTableViewController.view.constrainHeight(constant: 300)
     }
         
     func setLocation(_ location: String) {
         locationLabel.text = location
     }
-    
-    private func setupFajrIshaSettingsView() {
-        view.addSubview(fajrIshaSettingsView)
-        fajrIshaSettingsView.anchor(top: settingsTableViewController.view.bottomAnchor, leading: settingsTableViewController.view.leadingAnchor, bottom: nil, trailing: settingsTableViewController.view.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
-    }
-    
+        
     private func setupDeleteButton() {
         deleteButton.setTitle("Delete", for: .normal)
         deleteButton.setTitleColor(.systemRed, for: .normal)
@@ -109,7 +102,7 @@ public final class SettingsViewController: UIViewController {
         
         view.addSubview(deleteButton)
         deleteButton.centerXInSuperview()
-        deleteButton.topAnchor.constraint(equalTo: fajrIshaSettingsView.bottomAnchor, constant: 16).isActive = true
+        deleteButton.topAnchor.constraint(equalTo: settingsTableViewController.view.bottomAnchor, constant: 16).isActive = true
     }
     
     @objc private func deleteButtonPressed() {
@@ -122,66 +115,4 @@ public final class SettingsViewController: UIViewController {
         present(deleteActionSheet, animated: true)
     }
         
-}
-
-private class FajrIshaSettingsView: UIView {
-    
-    required init?(coder: NSCoder) {
-        fatalError("Not implemented")
-    }
-    
-    private let label = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        configureUI()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        configureUI()
-    }
-    
-    private func configureUI() {
-        setupBackgroundAndBorder()
-        setupLabel()
-    }
-    
-    private func setupBackgroundAndBorder() {
-        backgroundColor = .systemTeal.withAlphaComponent(0.4)
-        layer.cornerRadius = 12
-        layer.borderColor = UIColor.label.cgColor
-        layer.borderWidth = 1
-    }
-    
-    private func setupLabel() {
-        label.text = """
-        Fajr & Isha calculation: 12º.
-        In future updates, this setting will be customisable, In Shā Allah.
-        """
-        label.numberOfLines = 0
-        label.adjustsFontForContentSizeCategory = true
-        label.textAlignment = .center
-        label.font = .preferredFont(forTextStyle: .title3)
-        
-        let stackView = UIStackView(arrangedSubviews: [label])
-        if #available(iOS 15, *) {
-            stackView.maximumContentSizeCategory = .accessibilityMedium
-        } else {
-            label.font = preferredFontForSettingsLabels()
-        }
-        
-        addSubview(stackView)
-        stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 20, left: 20, bottom: 20, right: 20))
-    }
-    
-    // TODO: - Get rid of this if not needed
-    private func preferredFontForSettingsLabels() -> UIFont {
-        let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .title3)
-        
-        return UIFont(descriptor: fontDescriptor, size: min(fontDescriptor.pointSize, 30))
-    }
-    
 }

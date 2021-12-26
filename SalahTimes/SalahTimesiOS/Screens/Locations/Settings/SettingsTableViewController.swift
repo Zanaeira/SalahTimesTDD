@@ -16,7 +16,8 @@ final class SettingsTableViewController: UIViewController {
     private let tableView = UITableView()
     private let userDefaults: UserDefaults
     
-    private lazy var cells: [UITableViewCell] = [MithlCell(userDefaults: userDefaults)]
+    private lazy var cells: [UITableViewCell] = [MithlCell(userDefaults: userDefaults),
+                                                 FajrIshaAngleCell(style: .default, reuseIdentifier: nil)]
     
     init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults

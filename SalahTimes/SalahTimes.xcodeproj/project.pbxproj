@@ -22,6 +22,7 @@
 		1BAEF7C42773FB1C0029A02F /* SalahImageNameTimeStackViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7C32773FB1C0029A02F /* SalahImageNameTimeStackViewWrapper.swift */; };
 		1BAEF7CA27789DA40029A02F /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7C927789DA40029A02F /* SettingsTableViewController.swift */; };
 		1BAEF7CC2778B2CC0029A02F /* MithlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7CB2778B2CC0029A02F /* MithlCell.swift */; };
+		1BAEF7CF2778B5C70029A02F /* FajrIshaAngleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7CE2778B5C70029A02F /* FajrIshaAngleCell.swift */; };
 		1BE005AC26B8069D003F5F54 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; };
 		1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005BC26B80701003F5F54 /* SalahTimes.swift */; };
 		1BE005C126BB5280003F5F54 /* SalahTimesLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */; };
@@ -91,6 +92,7 @@
 		1BAEF7C32773FB1C0029A02F /* SalahImageNameTimeStackViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahImageNameTimeStackViewWrapper.swift; sourceTree = "<group>"; };
 		1BAEF7C927789DA40029A02F /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		1BAEF7CB2778B2CC0029A02F /* MithlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MithlCell.swift; sourceTree = "<group>"; };
+		1BAEF7CE2778B5C70029A02F /* FajrIshaAngleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FajrIshaAngleCell.swift; sourceTree = "<group>"; };
 		1BE005A226B8069D003F5F54 /* SalahTimes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SalahTimes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE005A626B8069D003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE005AB26B8069D003F5F54 /* SalahTimesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalahTimesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				1BAEF7CB2778B2CC0029A02F /* MithlCell.swift */,
+				1BAEF7CE2778B5C70029A02F /* FajrIshaAngleCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BAEF7C12773EBB60029A02F /* OverviewCell.swift in Sources */,
+				1BAEF7CF2778B5C70029A02F /* FajrIshaAngleCell.swift in Sources */,
 				1B73A8D6275C252000C1D934 /* SalahTimesCellModel.swift in Sources */,
 				1B73A8CF275C248600C1D934 /* SalahTimesViewController.swift in Sources */,
 				1B053A7127739EB70027024C /* OverviewCollectionViewController.swift in Sources */,

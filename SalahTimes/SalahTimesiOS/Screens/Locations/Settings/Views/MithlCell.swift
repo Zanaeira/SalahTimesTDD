@@ -71,7 +71,7 @@ final class MithlCell: UITableViewCell {
         }
         
         contentView.addSubview(stackView)
-        stackView.fillSuperview(padding: .init(top: 10, left: 10, bottom: 10, right: 10))
+        stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 10, right: 0))
         
         configureStackViewBackgroundAndBorder()
         addInsetsToStackView(inset: 16)
