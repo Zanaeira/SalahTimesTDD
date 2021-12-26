@@ -18,7 +18,6 @@ public final class SettingsViewController: UIViewController {
     private let leftInset: CGFloat = 20
     private let rightInset: CGFloat = 20
     
-    private let locationLabel = UILabel()
     private let settingsTableViewController: SettingsTableViewController
     
     private let onDismiss: (() -> Void)?
@@ -35,14 +34,13 @@ public final class SettingsViewController: UIViewController {
     }
     
     func setLocation(_ location: String) {
-        locationLabel.text = location
+        settingsTableViewController.setLocation(location)
     }
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         setupGradientBackground()
-        setupLocationLabel()
         configureSettingsTableView()
     }
     
@@ -70,26 +68,12 @@ public final class SettingsViewController: UIViewController {
         backgroundGradient.frame = view.bounds
         view.layer.addSublayer(backgroundGradient)
     }
-    
-    private func setupLocationLabel() {
-        locationLabel.font = .preferredFont(forTextStyle: .title1)
-        locationLabel.adjustsFontForContentSizeCategory = true
-        locationLabel.numberOfLines = 0
-        locationLabel.textAlignment = .center
         
-        let stackView = UIStackView(arrangedSubviews: [locationLabel])
-        
-        let safeArea = view.safeAreaLayoutGuide
-        
-        view.addSubview(stackView)
-        stackView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 30, left: leftInset, bottom: 0, right: rightInset))
-    }
-    
     private func configureSettingsTableView() {
         add(settingsTableViewController)
         
         let safeArea = view.safeAreaLayoutGuide
-        settingsTableViewController.view.anchor(top: locationLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 0, left: leftInset, bottom: 16, right: rightInset))
+        settingsTableViewController.view.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 30, left: leftInset, bottom: 16, right: rightInset))
     }
     
     private func deleteButtonPressed() {

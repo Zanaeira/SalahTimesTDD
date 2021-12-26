@@ -16,7 +16,7 @@ final class SettingsTableViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let userDefaults: UserDefaults
     
-    
+    private var locationHeader = LocationHeaderTitleView()
     private lazy var cells: [UITableViewCell] = [MithlCell(userDefaults: userDefaults),
                                                  FajrIshaAngleCell(style: .default, reuseIdentifier: nil)]
     private let deleteButtonFooter = DeleteLocationFooterView()
@@ -29,6 +29,10 @@ final class SettingsTableViewController: UIViewController {
     
     func setDeleteAction(deleteAction: @escaping () -> Void) {
         deleteButtonFooter.setDeleteAction(deleteAction)
+    }
+    
+    func setLocation(_ location: String) {
+        locationHeader.setLocation(location)
     }
     
     override func viewDidLoad() {
@@ -72,6 +76,10 @@ extension SettingsTableViewController: UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return locationHeader
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
