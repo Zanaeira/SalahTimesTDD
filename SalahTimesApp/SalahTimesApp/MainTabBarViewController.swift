@@ -41,7 +41,7 @@ final class MainTabBarViewController: UITabBarController {
         let locationsPageViewController = LocationsPageViewController(client: client, userDefaults: userDefaults)
         
         locationsPageViewController.title = "Locations"
-        locationsPageViewController.tabBarItem.image = UIImage(systemName: "globe.europe.africa.fill")
+        locationsPageViewController.tabBarItem.image = UIImage(systemName: "calendar")
         
         return locationsPageViewController
     }
