@@ -81,7 +81,7 @@ final class OverviewCollectionViewController: UIViewController {
         for userDefaults in allLocationsUserDefaults {
             dispatchGroup.enter()
             let location = userDefaults.string(forKey: "Location") ?? "London"
-            let (endpoint, salahTimesLoader) = makeEndpointAndSalahTimesLoader(usingUserDefaults: userDefaults)
+            let endpoint = makeEndpoint(usingUserDefaults: userDefaults)
             salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
                 guard let self = self else { return }
                 
@@ -127,7 +127,7 @@ final class OverviewCollectionViewController: UIViewController {
         return try? encoder.encode(fajrIshaMethod)
     }
     
-    private func makeEndpointAndSalahTimesLoader(usingUserDefaults userDefaults: UserDefaults, onDate date: Date = Date()) -> (Endpoint, SalahTimesLoader) {
+    private func makeEndpoint(usingUserDefaults userDefaults: UserDefaults, onDate date: Date = Date()) -> Endpoint {
         let endpoint: Endpoint
         
         let location = userDefaults.string(forKey: "Location") ?? "London"
@@ -141,7 +141,7 @@ final class OverviewCollectionViewController: UIViewController {
             endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date, madhhabForAsr: preferredMithl)
         }
         
-        return (endpoint, salahTimesLoader)
+        return endpoint
     }
     
     private func handleError(_ error: SalahTimesLoader.Error) {
