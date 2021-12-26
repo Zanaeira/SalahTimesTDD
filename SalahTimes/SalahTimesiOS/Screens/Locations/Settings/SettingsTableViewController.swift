@@ -44,6 +44,7 @@ final class SettingsTableViewController: UIViewController {
     
     private func configureUI() {
         tableView.backgroundColor = .clear
+        tableView.separatorColor = .clear
     }
     
     private func setupTableView() {
