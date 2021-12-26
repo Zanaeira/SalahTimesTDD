@@ -50,13 +50,17 @@ final class OverviewCollectionViewController: UIViewController {
     private func configurePullToRefresh() {
         let refreshControl = UIRefreshControl()
         collectionView.alwaysBounceVertical = true
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(refreshAndAnimate), for: .valueChanged)
         
         collectionView.refreshControl = refreshControl
     }
     
-    @objc func refresh() {
+    func refresh() {
         loadLocations()
+    }
+    
+    @objc private func refreshAndAnimate() {
+        loadLocations(animated: true)
     }
     
     private func configureUI() {
@@ -69,7 +73,7 @@ final class OverviewCollectionViewController: UIViewController {
         collectionView.fillSuperview()
     }
     
-    private func loadLocations() {
+    private func loadLocations(animated: Bool = false) {
         let suiteNames = userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
         let allLocationsUserDefaults = suiteNames.compactMap(getBaseUserDefaults(usingSuiteName:))
         
@@ -100,7 +104,7 @@ final class OverviewCollectionViewController: UIViewController {
         
         dispatchGroup.notify(queue: .main) {
             self.collectionView.refreshControl?.endRefreshing()
-            self.updateSnapshot(loadedTimes)
+            self.updateSnapshot(loadedTimes, animated: animated)
         }
     }
     
@@ -191,12 +195,12 @@ extension OverviewCollectionViewController {
         return dataSource
     }
     
-    private func updateSnapshot(_ loadedTimes: [OverviewCellModel]) {
+    private func updateSnapshot(_ loadedTimes: [OverviewCellModel], animated: Bool) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, OverviewCellModel>()
         snapshot.appendSections([.main])
         snapshot.appendItems(loadedTimes, toSection: .main)
         
-        dataSource.apply(snapshot, animatingDifferences: false)
+        dataSource.apply(snapshot, animatingDifferences: animated)
     }
         
 }
