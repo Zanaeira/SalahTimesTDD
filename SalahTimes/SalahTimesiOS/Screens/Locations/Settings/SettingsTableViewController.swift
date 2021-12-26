@@ -16,13 +16,20 @@ final class SettingsTableViewController: UIViewController {
     private let tableView = UITableView()
     private let userDefaults: UserDefaults
     
+    private let deleteCell = DeleteCell(style: .default, reuseIdentifier: nil)
+    
     private lazy var cells: [UITableViewCell] = [MithlCell(userDefaults: userDefaults),
-                                                 FajrIshaAngleCell(style: .default, reuseIdentifier: nil)]
+                                                 FajrIshaAngleCell(style: .default, reuseIdentifier: nil),
+                                                 deleteCell]
     
     init(userDefaults: UserDefaults) {
         self.userDefaults = userDefaults
         
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    func setDeleteAction(deleteAction: @escaping () -> Void) {
+        deleteCell.setDeleteAction(deleteAction)
     }
     
     override func viewDidLoad() {

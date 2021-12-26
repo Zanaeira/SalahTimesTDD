@@ -20,7 +20,6 @@ public final class SettingsViewController: UIViewController {
     
     private let locationLabel = UILabel()
     private let settingsTableViewController: SettingsTableViewController
-    private let deleteButton = UIButton()
     
     private let userDefaults: UserDefaults
     private let onDismiss: (() -> Void)?
@@ -33,6 +32,12 @@ public final class SettingsViewController: UIViewController {
         self.onDelete = onDelete
         
         super.init(nibName: nil, bundle: nil)
+        
+        settingsTableViewController.setDeleteAction(deleteAction: deleteButtonPressed)
+    }
+    
+    func setLocation(_ location: String) {
+        locationLabel.text = location
     }
     
     public override func viewDidLoad() {
@@ -41,7 +46,6 @@ public final class SettingsViewController: UIViewController {
         setupGradientBackground()
         setupLocationLabel()
         configureSettingsTableView()
-        setupDeleteButton()
     }
     
     public override func viewDidLayoutSubviews() {
@@ -87,25 +91,10 @@ public final class SettingsViewController: UIViewController {
         add(settingsTableViewController)
         
         let safeArea = view.safeAreaLayoutGuide
-        settingsTableViewController.view.anchor(top: locationLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: leftInset, bottom: 0, right: rightInset))
-        settingsTableViewController.view.constrainHeight(constant: 300)
-    }
-        
-    func setLocation(_ location: String) {
-        locationLabel.text = location
-    }
-        
-    private func setupDeleteButton() {
-        deleteButton.setTitle("Delete", for: .normal)
-        deleteButton.setTitleColor(.systemRed, for: .normal)
-        deleteButton.addTarget(self, action: #selector(deleteButtonPressed), for: .touchUpInside)
-        
-        view.addSubview(deleteButton)
-        deleteButton.centerXInSuperview()
-        deleteButton.topAnchor.constraint(equalTo: settingsTableViewController.view.bottomAnchor, constant: 16).isActive = true
+        settingsTableViewController.view.anchor(top: locationLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: leftInset, bottom: 16, right: rightInset))
     }
     
-    @objc private func deleteButtonPressed() {
+    private func deleteButtonPressed() {
         let deleteActionSheet = UIAlertController(title: "Are you sure you want to delete this location?", message: "", preferredStyle: .actionSheet)
         deleteActionSheet.addAction(.init(title: "Delete", style: .destructive, handler: { action in
             self.onDelete?()
