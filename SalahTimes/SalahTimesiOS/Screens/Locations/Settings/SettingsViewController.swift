@@ -59,7 +59,7 @@ public final class SettingsViewController: UIViewController {
     }
     
     func setLocation(_ location: String) {
-        locationLabel.text = "Settings for\n\(location)"
+        locationLabel.text = location
     }
     
     private func configureUI() {
@@ -81,7 +81,7 @@ public final class SettingsViewController: UIViewController {
     }
     
     private func setupLocationLabel() {
-        locationLabel.font = .preferredFont(forTextStyle: .largeTitle)
+        locationLabel.font = .preferredFont(forTextStyle: .title1)
         locationLabel.adjustsFontForContentSizeCategory = true
         locationLabel.numberOfLines = 0
         locationLabel.textAlignment = .center
@@ -204,7 +204,8 @@ private class FajrIshaSettingsView: UIView {
     
     private func setupLabel() {
         label.text = """
-        This app defaults to calculating the times for Fajr and Isha using 12.0º. In future updates, this setting will be customisable, In Shā Allah.
+        Fajr & Isha calculation: 12º.
+        In future updates, this setting will be customisable, In Shā Allah.
         """
         label.numberOfLines = 0
         label.adjustsFontForContentSizeCategory = true
