@@ -36,6 +36,7 @@ final class OverviewCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        configurePullToRefresh()
         configureHierarchy()
         loadLocations()
     }
@@ -46,7 +47,15 @@ final class OverviewCollectionViewController: UIViewController {
         refresh()
     }
     
-    func refresh() {
+    private func configurePullToRefresh() {
+        let refreshControl = UIRefreshControl()
+        collectionView.alwaysBounceVertical = true
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
+        collectionView.refreshControl = refreshControl
+    }
+    
+    @objc func refresh() {
         loadLocations()
     }
     
@@ -90,6 +99,7 @@ final class OverviewCollectionViewController: UIViewController {
         }
         
         dispatchGroup.notify(queue: .main) {
+            self.collectionView.refreshControl?.endRefreshing()
             self.updateSnapshot(loadedTimes)
         }
     }
