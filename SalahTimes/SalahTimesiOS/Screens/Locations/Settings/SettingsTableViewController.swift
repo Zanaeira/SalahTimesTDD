@@ -44,9 +44,8 @@ final class SettingsTableViewController: UIViewController {
     }
     
     private func setupTableView() {
-        let safeArea = view.safeAreaLayoutGuide
         view.addSubview(tableView)
-        tableView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor)
+        tableView.fillSuperview()
         
         tableView.tableFooterView = UIView()
         
