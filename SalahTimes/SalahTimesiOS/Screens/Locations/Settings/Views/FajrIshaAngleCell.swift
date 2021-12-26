@@ -44,21 +44,8 @@ final class FajrIshaAngleCell: UITableViewCell {
         label.font = .preferredFont(forTextStyle: .title3)
         
         let stackView = UIStackView(arrangedSubviews: [label])
-        if #available(iOS 15, *) {
-            stackView.maximumContentSizeCategory = .accessibilityMedium
-        } else {
-            label.font = preferredFontForSettingsLabels()
-        }
-        
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 10, right: 0))
     }
-    
-    // TODO: - Get rid of this if not needed
-    private func preferredFontForSettingsLabels() -> UIFont {
-        let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .title3)
         
-        return UIFont(descriptor: fontDescriptor, size: min(fontDescriptor.pointSize, 30))
-    }
-    
 }

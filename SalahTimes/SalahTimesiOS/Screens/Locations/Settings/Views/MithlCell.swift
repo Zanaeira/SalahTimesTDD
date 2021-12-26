@@ -63,25 +63,11 @@ final class MithlCell: UITableViewCell {
         stackView.axis = .vertical
         stackView.spacing = 8
         
-        // TODO: - Get rid of this if not needed
-        if #available(iOS 15, *) {
-            stackView.maximumContentSizeCategory = .accessibilityMedium
-        } else {
-            label.font = preferredFontForSettingsLabels()
-        }
-        
         contentView.addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 10, right: 0))
         
         configureStackViewBackgroundAndBorder()
         addInsetsToStackView(inset: 16)
-    }
-    
-    // TODO: - Get rid of this if not needed
-    private func preferredFontForSettingsLabels() -> UIFont {
-        let fontDescriptor = UIFontDescriptor.preferredFontDescriptor(withTextStyle: .title3)
-        
-        return UIFont(descriptor: fontDescriptor, size: min(fontDescriptor.pointSize, 30))
     }
     
     private func configureStackViewBackgroundAndBorder() {
