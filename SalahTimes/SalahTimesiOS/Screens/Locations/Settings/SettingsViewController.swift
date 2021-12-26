@@ -21,12 +21,10 @@ public final class SettingsViewController: UIViewController {
     private let locationLabel = UILabel()
     private let settingsTableViewController: SettingsTableViewController
     
-    private let userDefaults: UserDefaults
     private let onDismiss: (() -> Void)?
     private let onDelete: (() -> Void)?
     
     public init(userDefaults: UserDefaults, onDismiss: ((() -> Void))?, onDelete: (() -> Void)?) {
-        self.userDefaults = userDefaults
         self.settingsTableViewController = SettingsTableViewController(userDefaults: userDefaults)
         self.onDismiss = onDismiss
         self.onDelete = onDelete
