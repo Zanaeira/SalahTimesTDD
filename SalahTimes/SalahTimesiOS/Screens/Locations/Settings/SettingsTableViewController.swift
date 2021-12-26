@@ -44,11 +44,12 @@ final class SettingsTableViewController: UIViewController {
         tableView.tableFooterView = UIView()
         
         tableView.dataSource = self
+        tableView.delegate = self
     }
     
 }
 
-extension SettingsTableViewController: UITableViewDataSource {
+extension SettingsTableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -60,6 +61,14 @@ extension SettingsTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return cells[indexPath.row]
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
     
 }
