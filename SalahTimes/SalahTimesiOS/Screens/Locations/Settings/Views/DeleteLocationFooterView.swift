@@ -44,19 +44,12 @@ final class DeleteLocationFooterView: UIView {
     
     private func setupStackView() {
         stackView.addArrangedSubview(button)
-        configureStackViewBackgroundAndBorder()
         addInsetsToStackView(inset: 16)
         
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 10, right: 0))
     }
-    
-    private func configureStackViewBackgroundAndBorder() {
-        stackView.layer.cornerRadius = 16
-        stackView.layer.borderColor = UIColor.systemRed.cgColor
-        stackView.layer.borderWidth = 1
-    }
-    
+        
     private func addInsetsToStackView(inset: CGFloat) {
         stackView.layoutMargins = .init(top: inset, left: 0, bottom: inset, right: 0)
         stackView.isLayoutMarginsRelativeArrangement = true
