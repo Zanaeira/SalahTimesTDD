@@ -18,6 +18,7 @@ final class OverviewCollectionViewController: UIViewController {
         case main
     }
     
+    private let dateHeaderView = TitleHeaderView()
     private let collectionView: UICollectionView
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, OverviewCellModel> = createDataSource(for: collectionView)
     
@@ -39,6 +40,7 @@ final class OverviewCollectionViewController: UIViewController {
         configurePullToRefresh()
         configureHierarchy()
         loadLocations()
+        ensureDateStaysUpToDate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,8 +71,12 @@ final class OverviewCollectionViewController: UIViewController {
     
     private func configureHierarchy() {
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        view.addSubview(dateHeaderView)
         view.addSubview(collectionView)
-        collectionView.fillSuperview()
+        
+        let safeArea = view.safeAreaLayoutGuide
+        dateHeaderView.anchor(top: safeArea.topAnchor, leading: safeArea.leadingAnchor, bottom: nil, trailing: safeArea.trailingAnchor)
+        collectionView.anchor(top: dateHeaderView.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 0))
     }
     
     private func loadLocations(animated: Bool = false) {
@@ -105,6 +111,7 @@ final class OverviewCollectionViewController: UIViewController {
         dispatchGroup.notify(queue: .main) {
             self.collectionView.refreshControl?.endRefreshing()
             self.updateSnapshot(loadedTimes, animated: animated)
+            self.dateHeaderView.setTitle(DateFormatter.presentableDateFormatter.string(from: Date()))
         }
     }
     
@@ -161,6 +168,16 @@ final class OverviewCollectionViewController: UIViewController {
         }
     }
     
+    private func ensureDateStaysUpToDate() {
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDateToMatchSystemDate), name: .NSCalendarDayChanged, object: nil)
+    }
+    
+    @objc private func updateDateToMatchSystemDate() {
+        DispatchQueue.main.async {
+            self.refresh()
+        }
+    }
+    
 }
 
 // MARK: - UICollectionView
@@ -203,4 +220,15 @@ extension OverviewCollectionViewController {
         dataSource.apply(snapshot, animatingDifferences: animated)
     }
         
+}
+
+private extension DateFormatter {
+    
+    static let presentableDateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        
+        return dateFormatter
+    }()
+    
 }

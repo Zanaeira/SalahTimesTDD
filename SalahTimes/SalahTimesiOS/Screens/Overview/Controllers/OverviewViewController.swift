@@ -14,9 +14,6 @@ public final class OverviewViewController: UIViewController {
         fatalError("Not implemented")
     }
     
-    private var date = Date()
-    
-    private let dateLabel = UILabel()
     private let overviewCollectionViewController: OverviewCollectionViewController
     
     public init(client: HTTPClient, userDefaults: UserDefaults) {
@@ -39,44 +36,13 @@ public final class OverviewViewController: UIViewController {
     
     private func configureUI() {
         setupBackground()
-        setupDateLabel()
-        ensureDateStaysUpToDate()
         setupCollectionViewController()
-    }
-    
-    private func setupDateLabel() {
-        updateDateLabelText(date: date)
-        dateLabel.font = .preferredFont(forTextStyle: .title1)
-        dateLabel.adjustsFontForContentSizeCategory = true
-        dateLabel.textAlignment = .center
-        
-        let safeArea = view.safeAreaLayoutGuide
-        view.addSubview(dateLabel)
-        dateLabel.centerXInSuperview()
-        dateLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16).isActive = true
-    }
-    
-    private func updateDateLabelText(date: Date) {
-        let dateString = DateFormatter.presentableDateFormatter.string(from: date)
-        dateLabel.text = dateString
-    }
-    
-    private func ensureDateStaysUpToDate() {
-        NotificationCenter.default.addObserver(self, selector: #selector(updateDateToMatchSystemDate), name: .NSCalendarDayChanged, object: nil)
-    }
-    
-    @objc private func updateDateToMatchSystemDate() {
-        DispatchQueue.main.async {
-            self.updateDateLabelText(date: Date())
-            self.overviewCollectionViewController.refresh()
-        }
     }
     
     private func setupCollectionViewController() {
         add(overviewCollectionViewController)
         
-        let safeArea = view.safeAreaLayoutGuide
-        overviewCollectionViewController.view.anchor(top: dateLabel.bottomAnchor, leading: safeArea.leadingAnchor, bottom: safeArea.bottomAnchor, trailing: safeArea.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 0))
+        overviewCollectionViewController.view.fillSuperview()
     }
     
     private let backgroundGradient = CAGradientLayer()
@@ -96,13 +62,3 @@ public final class OverviewViewController: UIViewController {
     
 }
 
-private extension DateFormatter {
-    
-    static let presentableDateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        
-        return dateFormatter
-    }()
-    
-}
