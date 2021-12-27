@@ -16,7 +16,7 @@ final class SettingsTableViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let userDefaults: UserDefaults
     
-    private var locationHeader = LocationHeaderTitleView()
+    private var locationHeader = TitleHeaderView()
     private lazy var cells: [UITableViewCell] = [MithlCell(userDefaults: userDefaults),
                                                  FajrIshaAngleCell(style: .default, reuseIdentifier: nil)]
     private let deleteButtonFooter = DeleteLocationFooterView()
@@ -32,7 +32,7 @@ final class SettingsTableViewController: UIViewController {
     }
     
     func setLocation(_ location: String) {
-        locationHeader.setLocation(location)
+        locationHeader.setTitle(location)
     }
     
     override func viewDidLoad() {

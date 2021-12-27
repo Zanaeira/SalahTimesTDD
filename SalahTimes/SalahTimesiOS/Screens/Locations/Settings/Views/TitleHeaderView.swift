@@ -1,5 +1,5 @@
 //
-//  LocationHeaderTitleView.swift
+//  TitleHeaderView.swift
 //  SalahTimesiOS
 //
 //  Created by Suhayl Ahmed on 26/12/2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class LocationHeaderTitleView: UIView {
+final class TitleHeaderView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("Not implemented")
@@ -22,8 +22,8 @@ final class LocationHeaderTitleView: UIView {
         configureUI()
     }
     
-    func setLocation(_ location: String) {
-        label.text = location
+    func setTitle(_ title: String) {
+        label.text = title
     }
     
     private func setupLabel() {
