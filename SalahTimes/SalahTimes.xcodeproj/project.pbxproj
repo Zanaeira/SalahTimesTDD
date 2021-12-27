@@ -171,6 +171,7 @@
 		1B053A6827739B460027024C /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				1B917252277950700009628F /* Shared components */,
 				1B053A6927739B4F0027024C /* Overview */,
 				1B053A6A27739B5A0027024C /* Locations */,
 			);
@@ -251,6 +252,22 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1B9172512779505F0009628F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1B91724F277909800009628F /* TitleHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1B917252277950700009628F /* Shared components */ = {
+			isa = PBXGroup;
+			children = (
+				1B9172512779505F0009628F /* Views */,
+			);
+			path = "Shared components";
+			sourceTree = "<group>";
+		};
 		1BAEF7BF2773EB780029A02F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -274,7 +291,6 @@
 				1BAEF7CB2778B2CC0029A02F /* MithlCell.swift */,
 				1BAEF7CE2778B5C70029A02F /* FajrIshaAngleCell.swift */,
 				1BAEF7D22778ED3D0029A02F /* DeleteLocationFooterView.swift */,
-				1B91724F277909800009628F /* TitleHeaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
