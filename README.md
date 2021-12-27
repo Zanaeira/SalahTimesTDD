@@ -105,7 +105,7 @@ This app uses UIStackView which is great for not just laying things out on the s
 
 This app considers accessibility. Namely, dynamic type:
 
-## Dynamic Type
+### Dynamic Type
 
 The app supports dynamic type and larger accessibility sizes. The Overview screen reacts to various system font sizes and ensures that the text is always legible. The Locations screen uses UICollectionViewListCell which automatically leverages the in-built support for Dynamic Type.
 
