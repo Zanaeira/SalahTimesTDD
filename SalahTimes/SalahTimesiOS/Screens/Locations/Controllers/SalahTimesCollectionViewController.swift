@@ -159,15 +159,10 @@ final class SalahTimesCollectionViewController: UIViewController {
     }
     
     private func ensureDateStaysUpToDate() {
-        NotificationCenter.default.addObserver(self, selector: #selector(checkDateAndUpdateIfNeeded), name: .NSCalendarDayChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateDateToMatchSystemDate), name: .NSCalendarDayChanged, object: nil)
     }
     
-    @objc private func checkDateAndUpdateIfNeeded() {
-        guard let date = date,
-              Calendar.current.isDateInYesterday(date) else {
-            return
-        }
-        
+    @objc private func updateDateToMatchSystemDate() {
         self.date = Date()
         
         DispatchQueue.main.async {
