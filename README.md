@@ -4,7 +4,15 @@ This App is primarily a portfolio piece to demonstrate good practices and iOS / 
 
 ## TDD
 
-The Networking module was all coded using Test-Driven Development. Unit tests run on a Mac OS framework to harness the speed of Mac instead of having slow tests running on the simulator. End-to-end API tests run on a separate target so as not to slow down the unit tests.
+The Networking module was all coded using Test-Driven Development.
+
+### Unit tests
+
+Unit tests run on a Mac OS framework to harness the speed of Mac instead of having slow tests running on the simulator.
+
+### End-to-end tests
+
+End-to-end API tests run on a separate target so as not to slow down the unit tests.
 
 ## Separated project into a framework and main App
 
@@ -18,9 +26,15 @@ In the Composition Root, a caching strategy of "load from cache if available, el
 
 In the Composition Root, the dependencies are injected into the view controllers instead of relying on global Singletons. For example, instead of using UserDefaults.standard everywhere in the application, or URLSession.shared, instances of UserDefaults and URLSession are configured and injected in the Composition Root. Thus, no ViewController knows what instance of UserDefaults or URLSession is being used.
 
+This has also allowed me to inject different instances of UserDefaults for different locations. Thus, the user can set specific settings based on a location.
+
 ## UserDefaults
 
-The app uses UserDefaults in order to register default settings that can subsequently be overridden by the end user. UserDefaults has been used with both primitives as well as custom object types, using JSON encoding and decoding.
+The app uses UserDefaults in order to register default settings that can subsequently be overridden by the end user. UserDefaults has been used with both primitives as well as custom object types, using JSON encoding and decoding. UserDefault suites have been used so that users can save location-specific settings. I.e. for whichever locations they have added, they can specify the settings for that location.
+
+## Grand Central Dispatch (GCD)
+
+Other than updating the UI on the main thread, this app makes use of GCD. The Overview screen makes API calls for each location the user has searched for and then displays them all. In order to ensure that the order remains consistent, the app uses DispatchGroup and DispatchSemaphore. Thus, we have a way to synchronously wait for a group of asynchronous API calls to be made, ensuring that the app's state is always consistent.
 
 ## JSON encoding and decoding
 
@@ -32,7 +46,11 @@ The network layer uses protocols to abstract details and thus the usage of URLSe
 
 ## Programmatic UIKit
 
-The entire user interface has been coded using programmatic UIKit. Storyboards have not been used at all.
+The entire user interface has been coded using programmatic UIKit. Storyboards have not been used at all other than for the launch screen. In order to simulate fast loading, the launch screen is embedded in a UINavigationController with UIBarButtonItems and a UIImageView to mimic the first screen.
+
+### AutoLayout
+
+AutoLayout has been used throughout this App, programmatically. In the launch screen, AutoLayout has been used in the Storyboard.
 
 ## Modern Collection Views
 
@@ -43,15 +61,26 @@ The UICollectionView APIs from iOS 13/14 have been used. Namely:
 * SupplementaryRegistration
 * NSCollectionLayoutDecorationItem
 
+## UITableView
+
+The Settings page is a static UITableView.
+
+## UIPageViewController
+
+The app allows users to add multiple locations and displays them in a UIPageViewController.
+
 ## MVC
 
 The app is coded using an MVC approach. The simplicity of the app, and focus on trying to make appropriate architectural choices based on the current requirements, meant that there was no need to superficially implement a different architecture such as MVVM or MVP. MVC was very suitable and clean and hence I did not opt for any alternative.
 
 ## Dynamic Type
 
-The app supports dynamic type and larger accessibility sizes. Where the largest accessibility sizes would actually cause the text to be less readable and result in a lot of scrolling (namely, on the Settings page), I have restricted the maximum font size. Where iOS 15 is available, I have used the new API to restrict this maximum size to .accessibilityMedium. For iOS 14, I have restricted the maximum size by providing the appropriate font size.
+The app supports dynamic type and larger accessibility sizes. The Overview screen reacts to various system font sizes and ensures that the text is always legible. The Locations screen uses UICollectionViewListCell which automatically leverages the in-built support for Dynamic Type.
 
 ## NotificationCenter
 
-The app has a very minimalistic usage of the NotificationCenter due to the simplicity of its needs. At midnight, the app ensures that the prayer times being displayed are up to date by setting the new date and making a new API call.
+The app has a minimalistic usage of the NotificationCenter due to the simplicity of its needs. If the system time changes (mainly at midnight, but all if the user changes the date on their device), the app ensures that the prayer times being displayed are up to date by setting the new date and making a new API call.
 
+## Git / Github
+
+I used Git throughout coding this project in order to ensure that changes were incrementally made and that the commited code was always in a working state. I used GitTower and then eventually switched to GitKraken, which I prefer, though am comfortable in using both.
