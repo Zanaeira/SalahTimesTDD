@@ -37,7 +37,6 @@ final class OverviewCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
-        configurePullToRefresh()
         configureHierarchy()
         loadLocations()
         ensureDateStaysUpToDate()
@@ -49,22 +48,10 @@ final class OverviewCollectionViewController: UIViewController {
         refresh()
     }
     
-    private func configurePullToRefresh() {
-        let refreshControl = UIRefreshControl()
-        collectionView.alwaysBounceVertical = true
-        refreshControl.addTarget(self, action: #selector(refreshAndAnimate), for: .valueChanged)
-        
-        collectionView.refreshControl = refreshControl
-    }
-    
     func refresh() {
         loadLocations()
     }
-    
-    @objc private func refreshAndAnimate() {
-        loadLocations(animated: true)
-    }
-    
+        
     private func configureUI() {
         collectionView.backgroundColor = .clear
     }
