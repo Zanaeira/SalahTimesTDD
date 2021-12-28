@@ -50,7 +50,6 @@ final class SalahTimesCollectionViewController: UIViewController {
         super.viewDidLoad()
         
         configureUI()
-        configurePullToRefresh()
         configureHierarchy()
         performInitialDataLoad()
         ensureDateStaysUpToDate()
@@ -60,15 +59,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         view.backgroundColor = .clear
         collectionView.backgroundColor = .clear
     }
-    
-    private func configurePullToRefresh() {
-        let refreshControl = UIRefreshControl()
-        collectionView.alwaysBounceVertical = true
-        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         
-        collectionView.refreshControl = refreshControl
-    }
-    
     private func performInitialDataLoad() {
         loadSalahTimes(forLocation: location ?? defaultLocation, onDate: date ?? Date())
     }
