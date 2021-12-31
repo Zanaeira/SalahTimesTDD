@@ -2,6 +2,29 @@
 
 This App is primarily a portfolio piece to demonstrate good practices and iOS / Swift skills. You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques I would like to demonstrate in this app.
 
+## Table of Contents
+
+  * [Architecture](#architecture)
+    + [Design / Architectural Patterns](#design--architectural-patterns)
+    + [Modularity](#modularity)
+    + [Dependency Injection](#dependency-injection)
+    + [Protocol-oriented programming](#protocol-oriented-programming)
+  * [TDD](#tdd)
+    + [Unit tests](#unit-tests)
+    + [End-to-end tests](#end-to-end-tests)
+  * [Programmatic UIKit](#programmatic-uikit)
+    + [AutoLayout](#autolayout)
+    + [Modern Collection Views](#modern-collection-views)
+  * [Accessibility](#accessibility)
+    + [Dynamic Type](#dynamic-type)
+  * [NotificationCenter](#notificationcenter)
+  * [Grand Central Dispatch (GCD)](#grand-central-dispatch-gcd)
+  * [UserDefaults](#userdefaults)
+  * [Networking](#networking)
+    + [URLSession](#urlsession)
+    + [URLCache](#urlcache)
+    + [Codable & JSON](#codable--json)
+
 ## Architecture
 
 This app attempts to use good architectural practices, as mentioned below.
