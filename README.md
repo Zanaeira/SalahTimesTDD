@@ -1,6 +1,6 @@
 # Salāh Times App
 
-This App is primarily a portfolio piece to demonstrate good practices and iOS / Swift skills. You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques I would like to demonstrate in this app.
+This App is primarily a portfolio piece to demonstrate good practices and iOS / Swift skills. The app allows users to add multiple locations and see the muslim prayer times for those locations. You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques I would like to demonstrate in this app.
 
 ## Table of Contents
 
@@ -27,7 +27,7 @@ This App is primarily a portfolio piece to demonstrate good practices and iOS / 
 
 ## Architecture
 
-This app attempts to use good architectural practices, as mentioned below.
+This app makes use of the following good architectural practices:
 
 ### Design / Architectural Patterns
 
@@ -92,6 +92,8 @@ This app considers accessibility. Namely, dynamic type:
 
 The app supports dynamic type and larger accessibility sizes. The Overview screen reacts to various system font sizes and ensures that the text is always legible. The Locations screen uses UICollectionViewListCell which automatically leverages the in-built support for Dynamic Type.
 
+![image showing different layouts side-by-side depending on user-selected dynamic type or accessibility larger font](https://github.com/Zanaeira/SalahTimesTDD/blob/main/Media/Dynamic%20Type/dynamic-type-side-by-side.png)
+
 ## NotificationCenter
 
 The app has a minimalistic usage of the NotificationCenter due to the simplicity of its needs. If the system time changes (mainly at midnight, but all if the user changes the date on their device), the app ensures that the prayer times being displayed are up to date by setting the new date and making a new API call.
@@ -119,4 +121,3 @@ In the Composition Root, a caching strategy of "load from cache if available, el
 ### Codable & JSON
 
 The app makes a GET request to the API and decodes the JSON returned. The API details are kept private in the Networking layer and then mapped to match the model type. In the UI layer, this model is then mapped to match the underlying model for the cells displayed in the UICollectionView. Thus, the model types do not need to conform to Codable and the representation is not tied to the backend API (which could change, or go down), but rather to the needs of the app. The API representation is now just an implementation detail that can be replaced without breaking the rest of the app.
-
