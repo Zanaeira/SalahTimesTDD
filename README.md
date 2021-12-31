@@ -1,6 +1,6 @@
 # Salāh Times App
 
-This App is primarily a portfolio piece to demonstrate good practices and iOS / Swift skills. The app allows users to add multiple locations and see the muslim prayer times for those locations. You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques I would like to demonstrate in this app.
+This App is primarily a portfolio piece to demonstrate good practices and iOS / Swift skills. The app allows users to add multiple locations and see the muslim prayer times for those locations. It is currently in [TestFlight](https://testflight.apple.com/join/8HD7k4AB). You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques I would like to demonstrate in this app.
 
 ## Table of Contents
 
