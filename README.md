@@ -96,7 +96,7 @@ The app supports dynamic type and larger accessibility sizes. The Overview scree
 
 ## NotificationCenter
 
-The app has a minimalistic usage of the NotificationCenter due to the simplicity of its needs. If the system time changes (mainly at midnight, but all if the user changes the date on their device), the app ensures that the prayer times being displayed are up to date by setting the new date and making a new API call.
+The app has a minimalistic usage of the NotificationCenter due to the simplicity of its needs. If the system time changes (mainly at midnight, but also if the user changes the date on their device), the app ensures that the prayer times being displayed are up to date by setting the new date and making a new API call.
 
 ## Grand Central Dispatch (GCD)
 
