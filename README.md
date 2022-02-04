@@ -24,6 +24,7 @@ This App allows users to add multiple locations and see the muslim prayer times 
     + [URLSession](#urlsession)
     + [URLCache](#urlcache)
     + [Codable & JSON](#codable--json)
+  * [Contact](#contact)
 
 ## Architecture
 
@@ -121,3 +122,6 @@ In the Composition Root, a caching strategy of "load from cache if available, el
 ### Codable & JSON
 
 The app makes a GET request to the API and decodes the JSON returned. The API details are kept private in the Networking layer and then mapped to match the model type. In the UI layer, this model is then mapped to match the underlying model for the cells displayed in the UICollectionView. Thus, the model types do not need to conform to Codable and the representation is not tied to the backend API (which could change, or go down), but rather to the needs of the app. The API representation is now just an implementation detail that can be replaced without breaking the rest of the app.
+
+## Contact
+If you have any questions please do not hesitate to contact me on: suhayl.ahmed@icloud.com
