@@ -81,13 +81,13 @@ AutoLayout has been used throughout this App, programmatically. In the launch sc
 The UICollectionView APIs from iOS 13/14 have been used. Namely:
 * DiffableDataSource
 * CompositionalLayout
-* ListCell
+* UICollectionViewListCell
 * SupplementaryRegistration
 * NSCollectionLayoutDecorationItem
 
 ## Accessibility
 
-This app considers accessibility. Namely, dynamic type:
+This app considers accessibility; namely, dynamic type for users who are visually impaired, or simply prefer to use larger font sizes on their phone.
 
 ### Dynamic Type
 
