@@ -92,10 +92,30 @@ public final class LocationsPageViewController: UIViewController {
         }
     }
     
-    private func addLocation() {
+    private func promptToAddLocation() {
+        let alertController = UIAlertController(title: "Add Location", message: "Enter the location you would like to add", preferredStyle: .alert)
+        alertController.addTextField()
+        alertController.textFields?.first?.autocapitalizationType = .words
+        
+        let addLocationAction = UIAlertAction(title: "Add", style: .default) { [weak self] _ in
+            guard let locationToAdd = alertController.textFields?.first?.text?.trimmingCharacters(in: .whitespaces),
+                  !locationToAdd.isEmpty else {
+                return
+            }
+            
+            self?.addLocation(locationToAdd)
+        }
+        
+        alertController.addAction(addLocationAction)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(alertController, animated: true)
+    }
+    
+    private func addLocation(_ location: String) {
         let suiteName = UUID().uuidString
         suiteNames.append(suiteName)
-        let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(suiteName: suiteName))
+        let navigationController = UINavigationController(rootViewController: makeSalahTimesViewController(suiteName: suiteName, forLocation: location))
         
         salahTimesViewControllers.append(navigationController)
         DispatchQueue.main.async {
@@ -103,24 +123,24 @@ public final class LocationsPageViewController: UIViewController {
         }
     }
     
-    private func makeSalahTimesViewController(suiteName: String) -> SalahTimesViewController {
+    private func makeSalahTimesViewController(suiteName: String, forLocation location: String = "London") -> SalahTimesViewController {
         let salahTimesLoader = SalahTimesLoader(client: client)
-        let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName)
+        let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName, forLocation: location)
         let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults, onDelete: {
             self.dismiss(animated: true)
             self.deleteLocation(suiteName: suiteName)
         })
         salahTimesViewController.title = "Salāh Times"
-        salahTimesViewController.onAddLocation = addLocation
+        salahTimesViewController.onAddLocation = promptToAddLocation
 
         return salahTimesViewController
     }
     
-    private func getBaseUserDefaults(usingSuiteName suiteName: String) -> UserDefaults {
+    private func getBaseUserDefaults(usingSuiteName suiteName: String, forLocation location: String) -> UserDefaults {
         let userDefaults = UserDefaults(suiteName: suiteName) ?? .standard
         userDefaults.register(defaults: [
             "Mithl": 2,
-            "Location": "London"
+            "Location": location
         ])
         
         if let fajrIshaMethod = getEncodedFajrIshaMethod() {
