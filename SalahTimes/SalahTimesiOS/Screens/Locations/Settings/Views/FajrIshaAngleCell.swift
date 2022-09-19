@@ -52,10 +52,6 @@ final class FajrIshaAngleCell: UITableViewCell {
     private func setupCalculationMethodSegmentedControl() {
         segmentedControl.selectedSegmentTintColor = .systemTeal
         
-        let stackView = UIStackView(arrangedSubviews: [segmentedControl])
-        addSubview(stackView)
-        stackView.fillSuperview(padding: .init(top: 10, left: 0, bottom: 10, right: 0))
-        
         guard let loadedFajrIshaCalculationMethod = userDefaults.object(forKey: "FajrIsha") as? Data,
               let fajrIshaCalculationMethod: AladhanAPIEndpoint.Method = try? JSONDecoder().decode(AladhanAPIEndpoint.Method.self, from: loadedFajrIshaCalculationMethod),
               case let AladhanAPIEndpoint.Method.custom(methodSettings) = fajrIshaCalculationMethod else {
