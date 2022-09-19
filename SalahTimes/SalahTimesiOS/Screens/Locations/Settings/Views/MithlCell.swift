@@ -46,10 +46,14 @@ final class MithlCell: UITableViewCell {
     }
     
     private func setupSegmentedController() {
-        let preferredMithl = userDefaults.integer(forKey: "Mithl")
-        segmentedControl.selectedSegmentIndex = preferredMithl == 1 ? 0 : 1
+        updateMithlView()
         segmentedControl.selectedSegmentTintColor = .systemTeal
         segmentedControl.addTarget(self, action: #selector(mithlChanged), for: .valueChanged)
+    }
+    
+    func updateMithlView() {
+        let preferredMithl = userDefaults.integer(forKey: "Mithl")
+        segmentedControl.selectedSegmentIndex = preferredMithl == 1 ? 0 : 1
     }
     
     @objc private func mithlChanged() {

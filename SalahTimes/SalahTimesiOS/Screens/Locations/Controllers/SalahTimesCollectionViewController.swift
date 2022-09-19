@@ -26,6 +26,8 @@ final class SalahTimesCollectionViewController: UIViewController {
     private let collectionView: UICollectionView
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, SalahTimesCellModel> = createDataSource(for: collectionView)
     
+    private var salahTimesCellModels = [SalahTimesCellModel]()
+    
     private(set) var location: String? {
         didSet {
             userDefaults.set(location, forKey: "Location")
@@ -132,21 +134,22 @@ final class SalahTimesCollectionViewController: UIViewController {
     private func updateSalahTimes(_ salahTimes: SalahTimes) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, SalahTimesCellModel>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(map(salahTimes), toSection: .main)
+        salahTimesCellModels = map(salahTimes)
+        snapshot.appendItems(salahTimesCellModels, toSection: .main)
         
         dataSource.apply(snapshot)
     }
     
     private func map(_ salahTimes: SalahTimes) -> [SalahTimesCellModel] {
-        var salahTimesViewModel = [SalahTimesCellModel]()
-        salahTimesViewModel.append(.init(name: "Fajr", time: salahTimes.fajr, imageName: "sun.haze.fill"))
-        salahTimesViewModel.append(.init(name: "Sunrise", time: salahTimes.sunrise, imageName: "sunrise.fill"))
-        salahTimesViewModel.append(.init(name: "Zuhr", time: salahTimes.zuhr, imageName: "sun.max.fill"))
-        salahTimesViewModel.append(.init(name: "Asr", time: salahTimes.asr, imageName: "sun.min.fill"))
-        salahTimesViewModel.append(.init(name: "Maghrib", time: salahTimes.maghrib, imageName: "sunset.fill"))
-        salahTimesViewModel.append(.init(name: "Isha", time: salahTimes.isha, imageName: "moon.stars.fill"))
+        var salahTimesCellModels = [SalahTimesCellModel]()
+        salahTimesCellModels.append(.init(name: "Fajr", time: salahTimes.fajr, imageName: "sun.haze.fill"))
+        salahTimesCellModels.append(.init(name: "Sunrise", time: salahTimes.sunrise, imageName: "sunrise.fill"))
+        salahTimesCellModels.append(.init(name: "Zuhr", time: salahTimes.zuhr, imageName: "sun.max.fill"))
+        salahTimesCellModels.append(.init(name: "Asr", time: salahTimes.asr, imageName: "sun.min.fill"))
+        salahTimesCellModels.append(.init(name: "Maghrib", time: salahTimes.maghrib, imageName: "sunset.fill"))
+        salahTimesCellModels.append(.init(name: "Isha", time: salahTimes.isha, imageName: "moon.stars.fill"))
         
-        return salahTimesViewModel
+        return salahTimesCellModels
     }
     
     private func ensureDateStaysUpToDate() {
@@ -225,7 +228,21 @@ private extension SalahTimesCollectionViewController {
 extension SalahTimesCollectionViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return false
+        return didSelectAsr(at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let currentPreferredMithl = userDefaults.integer(forKey: "Mithl")
+        let newPreferredMithl = currentPreferredMithl == 2 ? 1 : 2
+        
+        userDefaults.set(newPreferredMithl, forKey: "Mithl")
+        refresh()
+    }
+    
+    private func didSelectAsr(at indexPath: IndexPath) -> Bool {
+        return salahTimesCellModels[indexPath.item].name == "Asr"
     }
     
 }

@@ -27,6 +27,14 @@ final class SettingsTableViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let mithlCell = cells[0] as? MithlCell else { return }
+        
+        mithlCell.updateMithlView()
+    }
+    
     func setDeleteAction(deleteAction: @escaping () -> Void) {
         deleteButtonFooter.setDeleteAction(deleteAction)
     }

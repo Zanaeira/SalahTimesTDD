@@ -77,6 +77,7 @@ extension SalahTimesViewController: UISearchBarDelegate {
         searchController.searchBar.delegate = self
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     
