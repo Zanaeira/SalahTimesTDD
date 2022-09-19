@@ -1,6 +1,6 @@
 # Salāh Times App
 
-This App allows users to add multiple locations and see the muslim prayer times for those locations. It is currently in [TestFlight](https://testflight.apple.com/join/8HD7k4AB). You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques deomnstrated in this app.
+This App allows users to add multiple locations and see the muslim prayer times for those locations. It is currently in [TestFlight](https://testflight.apple.com/join/8HD7k4AB). You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques demonstrated in this app.
 
 ## Table of Contents
 
@@ -81,13 +81,13 @@ AutoLayout has been used throughout this App, programmatically. In the launch sc
 The UICollectionView APIs from iOS 13/14 have been used. Namely:
 * DiffableDataSource
 * CompositionalLayout
-* ListCell
+* UICollectionViewListCell
 * SupplementaryRegistration
 * NSCollectionLayoutDecorationItem
 
 ## Accessibility
 
-This app considers accessibility. Namely, dynamic type:
+This app considers accessibility; namely, dynamic type for users who are visually impaired, or simply prefer to use larger font sizes on their phone.
 
 ### Dynamic Type
 
