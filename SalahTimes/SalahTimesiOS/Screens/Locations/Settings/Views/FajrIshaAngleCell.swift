@@ -51,6 +51,7 @@ final class FajrIshaAngleCell: UITableViewCell {
     
     private func setupCalculationMethodSegmentedControl() {
         segmentedControl.selectedSegmentTintColor = .systemTeal
+        segmentedControl.addTarget(self, action: #selector(fajrIshaCalculationMethodChanged), for: .valueChanged)
         
         guard let loadedFajrIshaCalculationMethod = userDefaults.object(forKey: "FajrIsha") as? Data,
               let fajrIshaCalculationMethod: AladhanAPIEndpoint.Method = try? JSONDecoder().decode(AladhanAPIEndpoint.Method.self, from: loadedFajrIshaCalculationMethod),
@@ -64,6 +65,32 @@ final class FajrIshaAngleCell: UITableViewCell {
         case 18.0: segmentedControl.selectedSegmentIndex = 2
         default: return
         }
+    }
+    
+    @objc private func fajrIshaCalculationMethodChanged() {
+        if let fajrIshaMethod = getEncodedFajrIshaMethod() {
+            userDefaults.set(fajrIshaMethod, forKey: "FajrIsha")
+        }
+    }
+    
+    private func mapSegmentedIndexToCalculationMethod() -> AladhanAPIEndpoint.Method {
+        let angle: Double
+        
+        switch segmentedControl.selectedSegmentIndex {
+        case 0: angle = 12.0
+        case 1: angle = 15.0
+        case 2: angle = 18.0
+        default: angle = 12.0
+        }
+        
+        return .custom(methodSettings: .init(fajrAngle: angle, maghribAngle: nil, ishaAngle: angle))
+    }
+    
+    private func getEncodedFajrIshaMethod() -> Data? {
+        let fajrIshaMethod = mapSegmentedIndexToCalculationMethod()
+        
+        let encoder = JSONEncoder()
+        return try? encoder.encode(fajrIshaMethod)
     }
     
     private func setupStackView() {
