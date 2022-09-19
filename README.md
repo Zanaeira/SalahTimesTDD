@@ -1,6 +1,6 @@
-# Salāh Times App
+# Salāh Times App - [App Store](https://apps.apple.com/gb/app/sal%C4%81h-times/id1600994680)
 
-This App allows users to add multiple locations and see the muslim prayer times for those locations. It is currently in [TestFlight](https://testflight.apple.com/join/8HD7k4AB). You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques demonstrated in this app.
+This App allows users to add multiple locations and see the muslim prayer times for those locations. You can find below a summary of the various things included in this project. The below list is not exhaustive, but shows a nice range of the skills and techniques demonstrated in this app.
 
 ## Table of Contents
 
