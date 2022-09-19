@@ -18,7 +18,7 @@ final class SettingsTableViewController: UIViewController {
     
     private var locationHeader = TitleHeaderView()
     private lazy var cells: [UITableViewCell] = [MithlCell(userDefaults: userDefaults),
-                                                 FajrIshaAngleCell(style: .default, reuseIdentifier: nil)]
+                                                 FajrIshaAngleCell(userDefaults: userDefaults, style: .default, reuseIdentifier: nil)]
     private let deleteButtonFooter = DeleteLocationFooterView()
     
     init(userDefaults: UserDefaults) {
