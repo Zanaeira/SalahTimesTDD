@@ -16,8 +16,8 @@ public final class OverviewViewController: UIViewController {
     
     private let overviewCollectionViewController: OverviewCollectionViewController
     
-    public init(client: HTTPClient, userDefaults: UserDefaults) {
-        overviewCollectionViewController = OverviewCollectionViewController(client: client, userDefaults: userDefaults)
+    public init(salahTimesLoader: TimesLoader, userDefaults: UserDefaults) {
+        overviewCollectionViewController = OverviewCollectionViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
         
         super.init(nibName: nil, bundle: nil)
     }

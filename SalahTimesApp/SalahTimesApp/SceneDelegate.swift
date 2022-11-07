@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let session = URLSession(configuration: config)
         
         let client = URLSessionHTTPClient(session: session)
-        let tabBarController = MainTabBarViewController(client: client)
+        let salahTimesLoader = SalahTimesLoader(client: client)
+        let tabBarController = MainTabBarViewController(salahTimesLoader: salahTimesLoader)
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene

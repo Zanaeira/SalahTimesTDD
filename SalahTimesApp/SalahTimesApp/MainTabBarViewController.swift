@@ -15,11 +15,11 @@ final class MainTabBarViewController: UITabBarController {
         fatalError("Not implemented")
     }
     
-    private let client: HTTPClient
+    private let salahTimesLoader: TimesLoader
     private let userDefaults = makeStandardUserDefaults()
     
-    init(client: HTTPClient) {
-        self.client = client
+    init(salahTimesLoader: TimesLoader) {
+        self.salahTimesLoader = salahTimesLoader
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,7 +38,7 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func makeLocationsPageViewController() -> LocationsPageViewController {
-        let locationsPageViewController = LocationsPageViewController(client: client, userDefaults: userDefaults)
+        let locationsPageViewController = LocationsPageViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
         
         locationsPageViewController.title = "Locations"
         locationsPageViewController.tabBarItem.image = UIImage(systemName: "calendar")
@@ -47,7 +47,7 @@ final class MainTabBarViewController: UITabBarController {
     }
     
     private func makeOverviewViewController() -> UINavigationController {
-        let overviewViewController = OverviewViewController(client: client, userDefaults: userDefaults)
+        let overviewViewController = OverviewViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults)
         
         overviewViewController.title = "Overview"
         overviewViewController.tabBarItem.image = UIImage(systemName: "globe")

@@ -33,11 +33,11 @@ public final class LocationsPageViewController: UIViewController {
         return index
     }
     
-    private let client: HTTPClient
+    private let salahTimesLoader: TimesLoader
     private let userDefaults: UserDefaults
     
-    public init(client: HTTPClient, userDefaults: UserDefaults) {
-        self.client = client
+    public init(salahTimesLoader: TimesLoader, userDefaults: UserDefaults) {
+        self.salahTimesLoader = salahTimesLoader
         self.userDefaults = userDefaults
         
         super.init(nibName: nil, bundle: nil)
@@ -124,7 +124,6 @@ public final class LocationsPageViewController: UIViewController {
     }
     
     private func makeSalahTimesViewController(suiteName: String, forLocation location: String = "London") -> SalahTimesViewController {
-        let salahTimesLoader = SalahTimesLoader(client: client)
         let userDefaults = getBaseUserDefaults(usingSuiteName: suiteName, forLocation: location)
         let salahTimesViewController = SalahTimesViewController(salahTimesLoader: salahTimesLoader, userDefaults: userDefaults, onDelete: {
             self.dismiss(animated: true)

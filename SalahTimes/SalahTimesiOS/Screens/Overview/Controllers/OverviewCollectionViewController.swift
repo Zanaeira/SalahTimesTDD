@@ -25,8 +25,8 @@ final class OverviewCollectionViewController: UIViewController {
     private let userDefaults: UserDefaults
     private let salahTimesLoader: TimesLoader
     
-    init(client: HTTPClient, userDefaults: UserDefaults) {
-        salahTimesLoader = SalahTimesLoader(client: client)
+    init(salahTimesLoader: TimesLoader, userDefaults: UserDefaults) {
+        self.salahTimesLoader = salahTimesLoader
         self.userDefaults = userDefaults
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: OverviewCollectionViewController.createLayout())
         
