@@ -14,7 +14,7 @@ extension XCTestCase {
         let timestamp: Double = 1628118000
         
         let (salahTimes, salahTimesJSON) = makeSalahTimes(
-            fajr: "03:27", sunrise: "05:31", zuhr: "13:07", asr: "17:14",
+            fajr: "03:27", sunrise: "05:31", zuhr: "13:07", asr: "17:12",
             sunset: "20:42", maghrib: "20:42", isha: "22:44", imsak: "03:17",
             midnight: "01:06", readableDate: "05 Aug 2021", timestamp: timestamp)
         
