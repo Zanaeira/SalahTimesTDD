@@ -11,7 +11,7 @@ import SalahTimes
 class AladhanAPIEndpointTests: XCTestCase {
     
     func test_timingsByLocation_pathIsCorrectForDate() {
-        let date = Date()
+        let date = tomorrow()
         let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(anyAddress(), on: date)
         let expectedPath = "/v1/timingsByAddress/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))"
         
@@ -57,7 +57,7 @@ class AladhanAPIEndpointTests: XCTestCase {
     
     func test_timingsByLocation_urlContainsHostSchemePathAndAllQueryItemsSpecified() {
         let address = "London"
-        let date = Date()
+        let date = tomorrow()
         let madhhab = AladhanAPIEndpoint.Madhhab.shafii
         let method = AladhanAPIEndpoint.Method.standard(method: .universityOfIslamicSciencesKarachi)
         
@@ -75,6 +75,15 @@ class AladhanAPIEndpointTests: XCTestCase {
     
     private func anyDate() -> Date {
         return Date()
+    }
+    
+    private func tomorrow() -> Date {
+        let calendar = Calendar.current
+        let today = Date()
+        
+        let components = calendar.dateComponents([.hour, .minute, .second, .nanosecond], from: today)
+        
+        return calendar.nextDate(after: today, matching: components, matchingPolicy: .nextTime)!
     }
     
 }
