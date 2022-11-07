@@ -7,14 +7,9 @@
 
 import Foundation
 
-public final class SalahTimesLoader {
+public final class SalahTimesLoader: TimesLoader {
     
-    public typealias Result = Swift.Result<SalahTimes, Error>
-    
-    public enum Error: Swift.Error {
-        case connectivity
-        case invalidData
-    }
+    public typealias Result = TimesLoader.Result
     
     private let client: HTTPClient
     

@@ -56,7 +56,7 @@ class SalahTimesLoaderTests: XCTestCase {
         var sut: SalahTimesLoader? = SalahTimesLoader(client: httpClient)
         let (_, data) = salahTimesModelAndDataFor5thAug2021LondonUK()
         
-        var capturedResults = [SalahTimesLoader.Result]()
+        var capturedResults = [TimesLoader.Result]()
         sut?.loadTimes(from: endpointSpy) {
             capturedResults.append($0)
         }
@@ -79,8 +79,8 @@ class SalahTimesLoaderTests: XCTestCase {
         return (sut, httpClient, endpointSpy)
     }
         
-    private func expect(_ sut: SalahTimesLoader, toCompleteWith result: SalahTimesLoader.Result, using endpoint: Endpoint, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
-        var capturedResults = [SalahTimesLoader.Result]()
+    private func expect(_ sut: SalahTimesLoader, toCompleteWith result: TimesLoader.Result, using endpoint: Endpoint, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
+        var capturedResults = [TimesLoader.Result]()
         sut.loadTimes(from: endpoint) {
             capturedResults.append($0)
         }

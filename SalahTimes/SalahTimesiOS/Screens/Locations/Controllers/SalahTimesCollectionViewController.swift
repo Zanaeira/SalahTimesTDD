@@ -20,7 +20,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     static let sectionBackgroundDecorationElementKind = "section-background-element-kind"
     
-    private let salahTimesLoader: SalahTimesLoader
+    private let salahTimesLoader: TimesLoader
     private let userDefaults: UserDefaults
     
     private let collectionView: UICollectionView
@@ -40,7 +40,7 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private var date: Date?
     
-    init(salahTimesLoader: SalahTimesLoader, userDefaults: UserDefaults) {
+    init(salahTimesLoader: TimesLoader, userDefaults: UserDefaults) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
         self.salahTimesLoader = salahTimesLoader
         self.userDefaults = userDefaults
@@ -105,7 +105,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         }
     }
     
-    private func handleResult(_ result: SalahTimesLoader.Result, forLocation location: String, onDate date: Date) {
+    private func handleResult(_ result: TimesLoader.Result, forLocation location: String, onDate date: Date) {
         switch result {
         case .success(let salahTimes):
             self.location = location
@@ -117,7 +117,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         }
     }
     
-    private func handleError(_ error: SalahTimesLoader.Error, location: String) {
+    private func handleError(_ error: TimesLoaderError, location: String) {
         let errorMessage = error == .invalidData ?
             "Sorry, we were unable to find any Salāh Times for: \(location).\n\nIf you think this is a mistake, then please try again later." :
             "Sorry, an error occured when trying to load the Salāh Times. Please check your internet connection and try again."

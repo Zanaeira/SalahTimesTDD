@@ -23,7 +23,7 @@ final class OverviewCollectionViewController: UIViewController {
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, OverviewCellModel> = createDataSource(for: collectionView)
     
     private let userDefaults: UserDefaults
-    private let salahTimesLoader: SalahTimesLoader
+    private let salahTimesLoader: TimesLoader
     
     init(client: HTTPClient, userDefaults: UserDefaults) {
         salahTimesLoader = SalahTimesLoader(client: client)
@@ -142,7 +142,7 @@ final class OverviewCollectionViewController: UIViewController {
         return endpoint
     }
     
-    private func handleError(_ error: SalahTimesLoader.Error) {
+    private func handleError(_ error: TimesLoaderError) {
         let errorMessage = error == .invalidData ?
             "Sorry, something went wrong.\n\nIf you think this is a mistake, then please try again later." :
             "Sorry, an error occured when trying to load the Salāh Times. Please check your internet connection and try again."

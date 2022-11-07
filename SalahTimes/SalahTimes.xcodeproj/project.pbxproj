@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1B053A672773963D0027024C /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B053A662773963D0027024C /* OverviewViewController.swift */; };
 		1B053A7127739EB70027024C /* OverviewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */; };
+		1B5BA6D62919912E00EE6D97 /* TimesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */; };
+		1B5BA6D82919940000EE6D97 /* TimesLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */; };
 		1B73A8CF275C248600C1D934 /* SalahTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */; };
 		1B73A8D1275C24C600C1D934 /* SalahTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */; };
 		1B73A8D6275C252000C1D934 /* SalahTimesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */; };
@@ -82,6 +84,8 @@
 /* Begin PBXFileReference section */
 		1B053A662773963D0027024C /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCollectionViewController.swift; sourceTree = "<group>"; };
+		1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesLoader.swift; sourceTree = "<group>"; };
+		1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesLoaderError.swift; sourceTree = "<group>"; };
 		1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewController.swift; sourceTree = "<group>"; };
 		1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCollectionViewController.swift; sourceTree = "<group>"; };
 		1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCellModel.swift; sourceTree = "<group>"; };
@@ -345,7 +349,9 @@
 		1BE005CC26BB891E003F5F54 /* SalahTimes API */ = {
 			isa = PBXGroup;
 			children = (
+				1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */,
 				1BE005C426BB5A49003F5F54 /* SalahTimesLoader.swift */,
+				1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */,
 				1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */,
 				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
 				1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */,
@@ -615,10 +621,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE005D626BC6527003F5F54 /* URLSessionHTTPClient.swift in Sources */,
+				1B5BA6D82919940000EE6D97 /* TimesLoaderError.swift in Sources */,
 				1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */,
 				1BE005CF26BB894D003F5F54 /* SalahTimesMapper.swift in Sources */,
 				1BE005CB26BB5AA1003F5F54 /* HTTPClient.swift in Sources */,
 				1BE005C726BB5A69003F5F54 /* Endpoint.swift in Sources */,
+				1B5BA6D62919912E00EE6D97 /* TimesLoader.swift in Sources */,
 				1BE005F026BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift in Sources */,
 				1BE005C526BB5A49003F5F54 /* SalahTimesLoader.swift in Sources */,
 				1BE005EE26BCC82A003F5F54 /* AladhanAPIEndpoint.swift in Sources */,

@@ -13,7 +13,7 @@ final class SalahTimesMapper {
     
     static func map(_ data: Data, _ response: HTTPURLResponse) throws -> SalahTimes {
         guard response.statusCode == OK_200 else {
-            throw SalahTimesLoader.Error.invalidData
+            throw TimesLoaderError.invalidData
         }
         
         let root = try JSONDecoder().decode(Root.self, from: data)

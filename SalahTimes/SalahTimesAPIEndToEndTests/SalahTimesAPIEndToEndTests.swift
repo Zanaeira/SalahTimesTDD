@@ -38,12 +38,12 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
         return (salahTimesLoader, endpoint)
     }
     
-    private func getSalahTimesLoadingResult() -> SalahTimesLoader.Result? {
+    private func getSalahTimesLoadingResult() -> TimesLoader.Result? {
         let (salahTimesLoader, endpoint) = makeSUT()
         
         let exp = expectation(description: "Wait for load completion")
         
-        var receivedResult: SalahTimesLoader.Result?
+        var receivedResult: TimesLoader.Result?
         salahTimesLoader.loadTimes(from: endpoint) { result in
             receivedResult = result
             exp.fulfill()
