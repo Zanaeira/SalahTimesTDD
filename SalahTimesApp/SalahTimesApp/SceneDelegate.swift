@@ -15,20 +15,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
         
-        let config = URLSessionConfiguration.default
-        config.urlCache = makeCache()
-        config.requestCachePolicy = .returnCacheDataElseLoad
-                
-        let session = URLSession(configuration: config)
-        
-        let client = URLSessionHTTPClient(session: session)
-        let salahTimesLoader = SalahTimesLoader(client: client)
+        let salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: makePrimaryLoader(), fallbackLoader: makeFallbackLoader())
         let tabBarController = MainTabBarViewController(salahTimesLoader: salahTimesLoader)
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
+    }
+    
+    private func makePrimaryLoader() -> TimesLoader {
+        return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData))
+    }
+    
+    private func makeFallbackLoader() -> TimesLoader {
+        return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad))
+    }
+    
+    private func makeHTTPClient(withRequestCachePolicy policy: NSURLRequest.CachePolicy) -> HTTPClient {
+        let config = URLSessionConfiguration.default
+        config.urlCache = makeCache()
+        config.requestCachePolicy = policy
+                
+        let session = URLSession(configuration: config)
+        
+        return URLSessionHTTPClient(session: session)
     }
     
     private func makeCache() -> URLCache {
