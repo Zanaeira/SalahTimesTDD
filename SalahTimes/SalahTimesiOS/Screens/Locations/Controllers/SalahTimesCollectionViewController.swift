@@ -40,6 +40,9 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private var date: Date?
     
+    private var preferredMithl: AladhanAPIEndpoint.Madhhab { userDefaults.integer(forKey: "Mithl") == 2 ? .hanafi : .shafii }
+    private var asrSubtitle: String { preferredMithl == .hanafi ? "[2]" : "[1]" }
+    
     init(salahTimesLoader: TimesLoader, userDefaults: UserDefaults) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: SalahTimesCollectionViewController.createLayout())
         self.salahTimesLoader = salahTimesLoader
@@ -85,8 +88,6 @@ final class SalahTimesCollectionViewController: UIViewController {
     
     private func loadSalahTimes(forLocation location: String, onDate date: Date) {
         let endpoint: Endpoint
-        
-        let preferredMithl: AladhanAPIEndpoint.Madhhab = userDefaults.integer(forKey: "Mithl") == 2 ? .hanafi : .shafii
         
         let decoder = JSONDecoder()
         if let loadedFajrIshaCalculationMethod = userDefaults.object(forKey: "FajrIsha") as? Data,
@@ -145,7 +146,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         salahTimesCellModels.append(.init(name: "Fajr", time: salahTimes.fajr, imageName: "sun.haze.fill"))
         salahTimesCellModels.append(.init(name: "Sunrise", time: salahTimes.sunrise, imageName: "sunrise.fill"))
         salahTimesCellModels.append(.init(name: "Zuhr", time: salahTimes.zuhr, imageName: "sun.max.fill"))
-        salahTimesCellModels.append(.init(name: "Asr", time: salahTimes.asr, imageName: "sun.min.fill"))
+        salahTimesCellModels.append(.init(name: "Asr \(asrSubtitle)", time: salahTimes.asr, imageName: "sun.min.fill"))
         salahTimesCellModels.append(.init(name: "Maghrib", time: salahTimes.maghrib, imageName: "sunset.fill"))
         salahTimesCellModels.append(.init(name: "Isha", time: salahTimes.isha, imageName: "moon.stars.fill"))
         
@@ -242,7 +243,7 @@ extension SalahTimesCollectionViewController: UICollectionViewDelegate {
     }
     
     private func didSelectAsr(at indexPath: IndexPath) -> Bool {
-        return salahTimesCellModels[indexPath.item].name == "Asr"
+        return salahTimesCellModels[indexPath.item].name.starts(with: "Asr")
     }
     
 }
