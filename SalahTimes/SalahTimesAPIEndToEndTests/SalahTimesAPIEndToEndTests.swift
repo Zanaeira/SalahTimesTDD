@@ -27,7 +27,7 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (salahTimesLoader: SalahTimesLoader, endpoint: Endpoint) {
-        let date = Date(timeIntervalSince1970: 1628118000)
+        let date = Date(timeIntervalSince1970: 1628143200)
         let address = "London, UK"
         let endpoint: Endpoint = AladhanAPIEndpoint.timingsByAddress(address, on: date, madhhabForAsr: .shafii)
         let client = URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))

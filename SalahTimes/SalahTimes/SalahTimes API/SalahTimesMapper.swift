@@ -32,11 +32,7 @@ private struct TimingsData: Decodable {
     let date: TimingsDateData
     
     var salahTimes: SalahTimes {
-        return SalahTimes(date: date(from: date.readable), fajr: timings.Fajr, sunrise: timings.Sunrise, zuhr: timings.Dhuhr, asr: timings.Asr, maghrib: timings.Maghrib, isha: timings.Isha)
-    }
-    
-    private func date(from readable: String) -> Date? {
-        DateFormatter.readableDateFormatterForAladhanAPI.date(from: readable)
+        return SalahTimes(timestamp: date.timestamp, date: date.readable, fajr: timings.Fajr, sunrise: timings.Sunrise, zuhr: timings.Dhuhr, asr: timings.Asr, maghrib: timings.Maghrib, isha: timings.Isha)
     }
 }
 
@@ -49,13 +45,4 @@ private struct Timings: Decodable {
 private struct TimingsDateData: Decodable {
     let readable: String
     let timestamp: String
-}
-
-private extension DateFormatter {
-    static let readableDateFormatterForAladhanAPI: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMM y"
-        
-        return dateFormatter
-    }()
 }
