@@ -250,6 +250,24 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		1B7F8B3B29D2021600F621F2 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				1B830F7B275C35550060186E /* Helpers */,
+				1B73A8D4275C251300C1D934 /* Models */,
+				1B053A6827739B460027024C /* Screens */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		1B7F8B3C29D2022200F621F2 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1B7F8B3B29D2021600F621F2 /* UIKit */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		1B830F7B275C35550060186E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,9 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE005FB26BDD984003F5F54 /* Info.plist */,
-				1B830F7B275C35550060186E /* Helpers */,
-				1B73A8D4275C251300C1D934 /* Models */,
-				1B053A6827739B460027024C /* Screens */,
+				1B7F8B3C29D2022200F621F2 /* UI */,
 			);
 			path = SalahTimesiOS;
 			sourceTree = "<group>";
