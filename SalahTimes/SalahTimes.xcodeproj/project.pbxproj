@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -130,6 +130,10 @@
 		1BE0060726BDD984003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BF40B7C2770D64400AA55FB /* LocationsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1B6845702D823C3000884914 /* SwiftUI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SwiftUI; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1BE0059F26B8069D003F5F54 /* Frameworks */ = {
@@ -263,6 +267,7 @@
 		1B7F8B3C29D2022200F621F2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				1B6845702D823C3000884914 /* SwiftUI */,
 				1B7F8B3B29D2021600F621F2 /* UIKit */,
 			);
 			path = UI;
@@ -521,6 +526,9 @@
 			);
 			dependencies = (
 				1B830F79275C34FF0060186E /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1B6845702D823C3000884914 /* SwiftUI */,
 			);
 			name = SalahTimesiOS;
 			productName = SalahTimesiOS;
