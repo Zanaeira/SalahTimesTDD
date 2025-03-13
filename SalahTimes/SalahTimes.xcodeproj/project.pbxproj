@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		1B5BA6D62919912E00EE6D97 /* TimesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */; };
 		1B5BA6D82919940000EE6D97 /* TimesLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */; };
 		1B5BA6DA291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */; };
+		1B6845A62D82704700884914 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; platformFilter = ios; };
+		1B6845B12D8270CF00884914 /* PrayerTimesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6845B02D8270CF00884914 /* PrayerTimesScreen.swift */; };
 		1B73A8CF275C248600C1D934 /* SalahTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */; };
 		1B73A8D1275C24C600C1D934 /* SalahTimesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */; };
 		1B73A8D6275C252000C1D934 /* SalahTimesCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */; };
@@ -52,6 +54,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1B6845A82D82704700884914 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE0059926B8069D003F5F54 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE005A126B8069D003F5F54;
+			remoteInfo = SalahTimes;
+		};
 		1B830F78275C34FF0060186E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1BE0059926B8069D003F5F54 /* Project object */;
@@ -88,6 +97,8 @@
 		1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesLoader.swift; sourceTree = "<group>"; };
 		1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesLoaderError.swift; sourceTree = "<group>"; };
 		1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
+		1B68459B2D82701C00884914 /* SalahTimesSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SalahTimesSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B6845B02D8270CF00884914 /* PrayerTimesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesScreen.swift; sourceTree = "<group>"; };
 		1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewController.swift; sourceTree = "<group>"; };
 		1B73A8D0275C24C600C1D934 /* SalahTimesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCollectionViewController.swift; sourceTree = "<group>"; };
 		1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCellModel.swift; sourceTree = "<group>"; };
@@ -131,11 +142,15 @@
 		1BF40B7C2770D64400AA55FB /* LocationsPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		1B6845702D823C3000884914 /* SwiftUI */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = SwiftUI; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
+		1B6845982D82701C00884914 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B6845A62D82704700884914 /* SalahTimes.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1BE0059F26B8069D003F5F54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -227,6 +242,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		1B6845A42D82703000884914 /* SalahTimesSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				1B6845B02D8270CF00884914 /* PrayerTimesScreen.swift */,
+			);
+			path = SalahTimesSwiftUI;
+			sourceTree = "<group>";
+		};
 		1B73A8D2275C24E700C1D934 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,7 +290,6 @@
 		1B7F8B3C29D2022200F621F2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1B6845702D823C3000884914 /* SwiftUI */,
 				1B7F8B3B29D2021600F621F2 /* UIKit */,
 			);
 			path = UI;
@@ -332,6 +354,7 @@
 				1BE005DC26BCA172003F5F54 /* SalahTimesAPIEndToEndTests */,
 				1BE005F926BDD984003F5F54 /* SalahTimesiOS */,
 				1BE0060426BDD984003F5F54 /* SalahTimesiOSTests */,
+				1B6845A42D82703000884914 /* SalahTimesSwiftUI */,
 				1BE005A326B8069D003F5F54 /* Products */,
 				1BEF7715275C262D00FEB78A /* Frameworks */,
 			);
@@ -345,6 +368,7 @@
 				1BE005DB26BCA172003F5F54 /* SalahTimesAPIEndToEndTests.xctest */,
 				1BE005F826BDD984003F5F54 /* SalahTimesiOS.framework */,
 				1BE0060026BDD984003F5F54 /* SalahTimesiOSTests.xctest */,
+				1B68459B2D82701C00884914 /* SalahTimesSwiftUI.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -442,6 +466,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		1B6845962D82701C00884914 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1BE0059D26B8069D003F5F54 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -459,6 +490,27 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		1B68459A2D82701C00884914 /* SalahTimesSwiftUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B6845A22D82701C00884914 /* Build configuration list for PBXNativeTarget "SalahTimesSwiftUI" */;
+			buildPhases = (
+				1B6845962D82701C00884914 /* Headers */,
+				1B6845972D82701C00884914 /* Sources */,
+				1B6845982D82701C00884914 /* Frameworks */,
+				1B6845992D82701C00884914 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1B6845A92D82704700884914 /* PBXTargetDependency */,
+			);
+			name = SalahTimesSwiftUI;
+			packageProductDependencies = (
+			);
+			productName = SalahTimesSwiftUI;
+			productReference = 1B68459B2D82701C00884914 /* SalahTimesSwiftUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		1BE005A126B8069D003F5F54 /* SalahTimes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1BE005B626B8069D003F5F54 /* Build configuration list for PBXNativeTarget "SalahTimes" */;
@@ -527,9 +579,6 @@
 			dependencies = (
 				1B830F79275C34FF0060186E /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				1B6845702D823C3000884914 /* SwiftUI */,
-			);
 			name = SalahTimesiOS;
 			productName = SalahTimesiOS;
 			productReference = 1BE005F826BDD984003F5F54 /* SalahTimesiOS.framework */;
@@ -562,6 +611,10 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					1B68459A2D82701C00884914 = {
+						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
+					};
 					1BE005A126B8069D003F5F54 = {
 						CreatedOnToolsVersion = 12.5.1;
 						LastSwiftMigration = 1250;
@@ -600,11 +653,19 @@
 				1BE005DA26BCA172003F5F54 /* SalahTimesAPIEndToEndTests */,
 				1BE005F726BDD984003F5F54 /* SalahTimesiOS */,
 				1BE005FF26BDD984003F5F54 /* SalahTimesiOSTests */,
+				1B68459A2D82701C00884914 /* SalahTimesSwiftUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1B6845992D82701C00884914 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1BE005A026B8069D003F5F54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -643,6 +704,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1B6845972D82701C00884914 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B6845B12D8270CF00884914 /* PrayerTimesScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1BE0059E26B8069D003F5F54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -719,6 +788,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1B6845A92D82704700884914 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			platformFilter = ios;
+			target = 1BE005A126B8069D003F5F54 /* SalahTimes */;
+			targetProxy = 1B6845A82D82704700884914 /* PBXContainerItemProxy */;
+		};
 		1B830F79275C34FF0060186E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -743,6 +818,91 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1B68459F2D82701C00884914 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = HHWJTGZ862;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zanaeira.SalahTimesSwiftUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1B6845A02D82701C00884914 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = HHWJTGZ862;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zanaeira.SalahTimesSwiftUI;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		1BE005B426B8069D003F5F54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1102,6 +1262,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1B6845A22D82701C00884914 /* Build configuration list for PBXNativeTarget "SalahTimesSwiftUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B68459F2D82701C00884914 /* Debug */,
+				1B6845A02D82701C00884914 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1BE0059C26B8069D003F5F54 /* Build configuration list for PBXProject "SalahTimes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

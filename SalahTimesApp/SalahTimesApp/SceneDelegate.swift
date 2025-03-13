@@ -12,17 +12,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = scene as? UIWindowScene else { return }
-        
-        let salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: makePrimaryLoader(), fallbackLoader: makeFallbackLoader())
-        let tabBarController = MainTabBarViewController(salahTimesLoader: salahTimesLoader)
-        
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = tabBarController
-        window?.makeKeyAndVisible()
-    }
+//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+//        guard let windowScene = scene as? UIWindowScene else { return }
+//        
+//        let salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: makePrimaryLoader(), fallbackLoader: makeFallbackLoader())
+//        let tabBarController = MainTabBarViewController(salahTimesLoader: salahTimesLoader)
+//        
+//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//        window?.windowScene = windowScene
+//        window?.rootViewController = tabBarController
+//        window?.makeKeyAndVisible()
+//    }
     
     private func makePrimaryLoader() -> TimesLoader {
         return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData))
