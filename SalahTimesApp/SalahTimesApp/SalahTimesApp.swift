@@ -13,7 +13,13 @@ struct SalahTimesApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			PrayerTimesScreen()
+			TabView {
+				PrayerTimesScreen()
+					.tabItem { Label("Today", systemImage: "clock") }
+
+				CalendarScreen()
+					.tabItem { Label("Calendar", systemImage: "calendar") }
+			}
 		}
 	}
 
