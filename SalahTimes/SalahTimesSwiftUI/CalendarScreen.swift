@@ -12,7 +12,12 @@ public struct CalendarScreen: View {
 	public init() {}
 
 	public var body: some View {
-		Label("Calendar", systemImage: "calendar")
+		VStack {
+			Label("Calendar", systemImage: "calendar")
+		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
+		.background(BackgroundView())
+		.ignoresSafeArea()
 	}
 
 }
