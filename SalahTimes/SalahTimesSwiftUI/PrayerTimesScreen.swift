@@ -19,14 +19,8 @@ public struct PrayerTimesScreen: View {
 		}
 		.task { await viewModel.load() }
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.background(background)
+		.background(BackgroundView())
 		.ignoresSafeArea()
-	}
-
-	private var background: some View {
-		let purple = Color(red: 0.45, green: 0.4, blue: 1.0)
-		let blue = Color.blue.opacity(0.4)
-		return LinearGradient(colors: [blue, purple], startPoint: .init(x: 0, y: 0), endPoint: .init(x: 0.25, y: 1))
 	}
 
 	@StateObject private var viewModel: PrayerTimesViewModel = .init()
