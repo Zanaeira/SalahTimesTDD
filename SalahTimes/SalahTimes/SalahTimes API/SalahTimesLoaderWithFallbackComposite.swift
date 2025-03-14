@@ -26,5 +26,13 @@ public final class SalahTimesLoaderWithFallbackComposite: TimesLoader {
             }
         }
     }
-    
+
+		public func loadTimes(from endpoint: any Endpoint) async -> TimesLoader.Result {
+			await withCheckedContinuation { continuation in
+				loadTimes(from: endpoint) { result in
+					continuation.resume(returning: result)
+				}
+			}
+		}
+
 }

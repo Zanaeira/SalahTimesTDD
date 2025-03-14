@@ -33,5 +33,13 @@ public final class SalahTimesLoader: TimesLoader {
             }
         }
     }
-    
+
+	public func loadTimes(from endpoint: any Endpoint) async -> Result {
+		await withCheckedContinuation { continuation in
+			loadTimes(from: endpoint) { result in
+				continuation.resume(returning: result)
+			}
+		}
+	}
+
 }
