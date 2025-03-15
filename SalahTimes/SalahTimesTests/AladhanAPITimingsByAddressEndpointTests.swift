@@ -1,5 +1,5 @@
 //
-//  AladhanAPIEndpointTests.swift
+//  AladhanAPITimingsByAddressEndpointTests.swift
 //  SalahTimes
 //
 //  Created by Suhayl Ahmed on 06/08/2021.
@@ -8,7 +8,7 @@
 import XCTest
 import SalahTimes
 
-class AladhanAPIEndpointTests: XCTestCase {
+class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
     
     func test_timingsByLocation_pathIsCorrectForDate() {
         let date = tomorrow()
