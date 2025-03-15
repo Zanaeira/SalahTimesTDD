@@ -10,7 +10,7 @@ import SalahTimes
 
 class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
     
-    func test_timingsByLocation_pathIsCorrectForDate() {
+    func test_timingsByAddress_pathIsCorrectForDate() {
         let date = tomorrow()
         let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(anyAddress(), on: date)
         let expectedPath = "/v1/timingsByAddress/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))"
@@ -18,7 +18,7 @@ class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
         XCTAssertEqual(sut.path, expectedPath)
     }
     
-    func test_timingsByLocation_queryItemsForCityAndCountryIncluded() {
+    func test_timingsByAddress_queryItemsForCityAndCountryIncluded() {
         let date = Date()
         let address = anyAddress()
         let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(address, on: date)
@@ -30,21 +30,21 @@ class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
         XCTAssertTrue(sut.queryItems.contains(expectedQueryItems[0]))
     }
     
-    func test_timingsByLocation_queryItemsIncludesSchoolForAsrTimeCalculation() {
+    func test_timingsByAddress_queryItemsIncludesSchoolForAsrTimeCalculation() {
         let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(anyAddress(), on: anyDate(), madhhabForAsr: .shafii)
         let schoolForAsrTimeQueryItem = URLQueryItem(name: "school", value: "0")
         
         XCTAssertTrue(sut.queryItems.contains(schoolForAsrTimeQueryItem))
     }
     
-    func test_timingsByLocation_queryItemsIncludesCalculationMethodForFajrAndIsha() {
+    func test_timingsByAddress_queryItemsIncludesCalculationMethodForFajrAndIsha() {
         let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(anyAddress(), on: anyDate())
         let calculationMethodQueryItem = URLQueryItem(name: "method", value: "2")
         
         XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
     }
     
-    func test_timingsByLocation_allowsCustomCalculationMethodForFajrAndIsha() {
+    func test_timingsByAddress_allowsCustomCalculationMethodForFajrAndIsha() {
         let methodSettings = AladhanAPIEndpoint.MethodSettings(fajrAngle: 18.5, maghribAngle: nil, ishaAngle: 17.5)
         let method = AladhanAPIEndpoint.Method.custom(methodSettings: methodSettings)
         let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(anyAddress(), on: anyDate(), fajrIshaMethod: method)
@@ -55,7 +55,7 @@ class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
         XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[1]))
     }
     
-    func test_timingsByLocation_urlContainsHostSchemePathAndAllQueryItemsSpecified() {
+    func test_timingsByAddress_urlContainsHostSchemePathAndAllQueryItemsSpecified() {
         let address = "London"
         let date = tomorrow()
         let madhhab = AladhanAPIEndpoint.Madhhab.shafii
