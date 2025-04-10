@@ -37,29 +37,28 @@ class PrayerTimesViewModel: ObservableObject {
 	private let salahTimesLoader: TimesLoader
 
 	private static func makePrimaryLoader() -> TimesLoader {
-			return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData))
+		return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData))
 	}
 
 	private static func makeFallbackLoader() -> TimesLoader {
-			return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad))
+		return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad))
 	}
 
 	private static func makeHTTPClient(withRequestCachePolicy policy: NSURLRequest.CachePolicy) -> HTTPClient {
-			let config = URLSessionConfiguration.default
-			config.urlCache = makeCache()
-			config.requestCachePolicy = policy
+		let config = URLSessionConfiguration.default
+		config.urlCache = makeCache()
+		config.requestCachePolicy = policy
 
-			let session = URLSession(configuration: config)
+		let session = URLSession(configuration: config)
 
-			return URLSessionHTTPClient(session: session)
+		return URLSessionHTTPClient(session: session)
 	}
 
 	private static func makeCache() -> URLCache {
-			let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-			let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
+		let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+		let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
 
-			return URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: diskCacheURL)
+		return URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: diskCacheURL)
 	}
-
 
 }
