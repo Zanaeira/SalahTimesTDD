@@ -18,10 +18,28 @@ struct SalahTimesApp: App {
 				PrayerTimesScreen()
 					.tabItem { Label("Today", systemImage: "clock") }
 
-				CalendarScreen()
+				CalendarScreen(locations: locations)
 					.tabItem { Label("Calendar", systemImage: "calendar") }
 			}
 			.onAppear { registerDefaults() }
+		}
+	}
+
+	private let userDefaults = UserDefaults.standard
+
+	private var suiteNames: [String] { userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"] }
+	private var locations: [Location] {
+		suiteNames.compactMap { suiteName in
+			guard let defaults = UserDefaults(suiteName: suiteName), let location = defaults.string(forKey: "Location") else {
+				return nil
+			}
+
+			let mithl = AladhanAPIEndpoint.Madhhab(rawValue: defaults.integer(forKey: "Mithl")) ?? .hanafi
+			guard let fajrIshaMethod = defaults.object(forKey: "FajrIsha") as? Data, let angleCalculationMethod: AladhanAPIEndpoint.Method = try? JSONDecoder().decode(AladhanAPIEndpoint.Method.self, from: fajrIshaMethod) else {
+				return .init(location: location, mithl: mithl, calculationAngle: .custom(methodSettings: .init(fajrAngle: 12, maghribAngle: nil, ishaAngle: 12)))
+			}
+
+			return .init(location: location, mithl: mithl, calculationAngle: angleCalculationMethod)
 		}
 	}
 
@@ -31,7 +49,6 @@ struct SalahTimesApp: App {
 			"suiteNames": ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
 		])
 
-		let suiteNames = suiteDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"]
 		for suiteName in suiteNames {
 			if let defaults = UserDefaults(suiteName: suiteName) {
 				registerSalahTimes(defaults, forDefaultLocation: "London")
