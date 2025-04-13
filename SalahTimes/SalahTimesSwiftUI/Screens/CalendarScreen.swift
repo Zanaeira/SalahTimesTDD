@@ -18,13 +18,13 @@ public struct CalendarScreen: View {
 
 	public var body: some View {
 		VStack {
-			Text(locations.count, format: .number)
-			Text(locations.map(\.location).joined(separator: ", "))
-			ForEach(locations) { location in
-				Text(location.location)
-				Text(location.calculationAngle.toString())
+			ScrollView {
+				ForEach(locations) {
+					SalahTimesOverview(location: $0)
+				}
 			}
 		}
+		.padding(.top, 48)
 		.onAppear { print(locations.count); print(locations) }
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(BackgroundView())
@@ -33,11 +33,33 @@ public struct CalendarScreen: View {
 
 }
 
-extension AladhanAPIEndpoint.Method {
-	func toString() -> String {
-		switch self {
-		case .standard(let method): "\(method)"
-		case .custom(let methodSettings): "Fajr Angle: \(methodSettings.fajrAngle ?? 0)\nIsha Angle: \(methodSettings.ishaAngle ?? 0)"
+fileprivate struct SalahTimesOverview: View {
+
+	let location: Location
+
+	var body: some View {
+		GroupBox {
+			VStack(spacing: 16) {
+				Text(viewModel.location)
+					.font(.title)
+					.placeholder(viewModel.showLoading)
+			}
+		}
+		.task {
+			await viewModel.load(location: location)
+		}
+	}
+
+	@StateObject private var viewModel = PrayerTimesViewModel()
+}
+
+extension View {
+	@ViewBuilder
+	func placeholder(_ showPlaceholder: Bool) -> some View {
+		if showPlaceholder {
+			redacted(reason: .placeholder)
+		} else {
+			self
 		}
 	}
 }

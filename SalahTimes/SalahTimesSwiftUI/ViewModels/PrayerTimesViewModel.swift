@@ -15,9 +15,11 @@ final class PrayerTimesViewModel: ObservableObject {
 		salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: Self.makePrimaryLoader(), fallbackLoader: Self.makeFallbackLoader())
 	}
 
-	@Published var location = "London"
+	@Published var location: String = ""
 	@Published var date = Date()
 	@Published var salahTimes = [SalahTime]()
+
+	var showLoading: Bool { location.isEmpty }
 
 	func load(location: Location) async {
 		let endpoint = AladhanAPIEndpoint.timingsByAddress(location.location, on: date, madhhabForAsr: location.mithl, fajrIshaMethod: location.calculationAngle)
@@ -25,6 +27,7 @@ final class PrayerTimesViewModel: ObservableObject {
 
 		switch result {
 		case .success(let times):
+			self.location = location.location
 			salahTimes.append(.fajr(time: times.fajr))
 			salahTimes.append(.sunrise(time: times.sunrise))
 			salahTimes.append(.zuhr(time: times.zuhr))
