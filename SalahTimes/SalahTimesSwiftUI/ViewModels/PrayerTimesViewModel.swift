@@ -6,30 +6,31 @@
 //
 
 import Foundation
-internal import SalahTimes
+import SalahTimes
 
 @MainActor
-class PrayerTimesViewModel: ObservableObject {
+final class PrayerTimesViewModel: ObservableObject {
 
 	init() {
 		salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: Self.makePrimaryLoader(), fallbackLoader: Self.makeFallbackLoader())
 	}
 
+	@Published var location = "London"
 	@Published var date = Date()
-	@Published var label = ""
+	@Published var salahTimes = [SalahTime]()
 
-	func load() async {
-		let endpoint = AladhanAPIEndpoint.timingsByAddress("London", on: .now)
+	func load(location: Location) async {
+		let endpoint = AladhanAPIEndpoint.timingsByAddress(location.location, on: date, madhhabForAsr: location.mithl, fajrIshaMethod: location.calculationAngle)
 		let result = await salahTimesLoader.loadTimes(from: endpoint)
 
 		switch result {
 		case .success(let times):
-			self.label = "Fajr: \(times.fajr)\n"
-			self.label += "Sunrise: \(times.sunrise)\n"
-			self.label += "Zuhr: \(times.zuhr)\n"
-			self.label += "Asr: \(times.asr)\n"
-			self.label += "Maghrib: \(times.maghrib)\n"
-			self.label += "Isha: \(times.isha)\n"
+			salahTimes.append(.fajr(time: times.fajr))
+			salahTimes.append(.sunrise(time: times.sunrise))
+			salahTimes.append(.zuhr(time: times.zuhr))
+			salahTimes.append(.asr(time: times.asr))
+			salahTimes.append(.maghrib(time: times.maghrib))
+			salahTimes.append(.isha(time: times.isha))
 		case .failure: break
 		}
 	}
