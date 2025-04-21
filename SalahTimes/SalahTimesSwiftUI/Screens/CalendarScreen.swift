@@ -42,10 +42,14 @@ fileprivate struct SalahTimesOverview: View {
 			Text(viewModel.location)
 				.font(.title)
 				.placeholder(viewModel.showLoading)
-			Grid {
-				GridRow { ForEach(viewModel.salahTimes.prefix(3), id: \.metadata.name) { salahView($0) } }
-				GridRow { ForEach(viewModel.salahTimes.dropFirst(3), id: \.metadata.name) { salahView($0) } }
-			}
+				if dynamicTypeSize.isAccessibilitySize {
+					VStack {
+						HStack { ForEach(viewModel.salahTimes.prefix(3), id: \.metadata.name) { salahView($0) } }
+						HStack { ForEach(viewModel.salahTimes.dropFirst(3), id: \.metadata.name) { salahView($0) } }
+					}
+				} else {
+					HStack { ForEach(viewModel.salahTimes, id: \.metadata.name) { salahView($0) } }
+				}
 		}
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
@@ -53,11 +57,14 @@ fileprivate struct SalahTimesOverview: View {
 	}
 
 	@StateObject private var viewModel = PrayerTimesViewModel()
+	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
 	private func salahView(_ salahTime: SalahTime) -> some View {
 		VStack(spacing: 8) {
 			salahTime.image.foregroundStyle(.orange)
 			Text(salahTime.metadata.name)
+				.lineLimit(1)
+				.truncationMode(.middle)
 			Text(salahTime.time)
 		}
 	}
