@@ -28,6 +28,7 @@ final class PrayerTimesViewModel: ObservableObject {
 		switch result {
 		case .success(let times):
 			self.location = location.location
+			salahTimes = []
 			salahTimes.append(.fajr(time: times.fajr))
 			salahTimes.append(.sunrise(time: times.sunrise))
 			salahTimes.append(.zuhr(time: times.zuhr))
