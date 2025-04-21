@@ -26,10 +26,9 @@ public struct CalendarScreen: View {
 					SalahTimesOverview(location: $0)
 				}
 			}
+			.padding(.bottom)
 		}
-		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.background(BackgroundView())
-		.ignoresSafeArea()
+		.background(BackgroundView().ignoresSafeArea())
 	}
 
 }
@@ -43,6 +42,10 @@ fileprivate struct SalahTimesOverview: View {
 			Text(viewModel.location)
 				.font(.title)
 				.placeholder(viewModel.showLoading)
+			Grid {
+				GridRow { ForEach(viewModel.salahTimes.prefix(3), id: \.metadata.name) { salahView($0) } }
+				GridRow { ForEach(viewModel.salahTimes.dropFirst(3), id: \.metadata.name) { salahView($0) } }
+			}
 		}
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
@@ -50,6 +53,14 @@ fileprivate struct SalahTimesOverview: View {
 	}
 
 	@StateObject private var viewModel = PrayerTimesViewModel()
+
+	private func salahView(_ salahTime: SalahTime) -> some View {
+		VStack(spacing: 8) {
+			salahTime.image.foregroundStyle(.orange)
+			Text(salahTime.metadata.name)
+			Text(salahTime.time)
+		}
+	}
 }
 
 extension View {
