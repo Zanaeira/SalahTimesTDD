@@ -8,7 +8,7 @@
 import SwiftUI
 import SalahTimes
 
-public struct CalendarScreen: View {
+public struct OverviewScreen: View {
 
 	let locations: [Location]
 

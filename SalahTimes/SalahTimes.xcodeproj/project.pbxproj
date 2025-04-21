@@ -13,8 +13,8 @@
 		1B5BA6D82919940000EE6D97 /* TimesLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */; };
 		1B5BA6DA291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */; };
 		1B6845A62D82704700884914 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; platformFilter = ios; };
-		1B6845B12D8270CF00884914 /* PrayerTimesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6845B02D8270CF00884914 /* PrayerTimesScreen.swift */; };
-		1B6845B32D83BB2200884914 /* CalendarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6845B22D83BB2200884914 /* CalendarScreen.swift */; };
+		1B6845B12D8270CF00884914 /* LocationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6845B02D8270CF00884914 /* LocationsScreen.swift */; };
+		1B6845B32D83BB2200884914 /* OverviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6845B22D83BB2200884914 /* OverviewScreen.swift */; };
 		1B6845B52D83BB9400884914 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6845B42D83BB9400884914 /* BackgroundView.swift */; };
 		1B6845B82D83BC3300884914 /* PrayerTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6845B72D83BC3300884914 /* PrayerTimesViewModel.swift */; };
 		1B73A8CF275C248600C1D934 /* SalahTimesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */; };
@@ -103,8 +103,8 @@
 		1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesLoaderError.swift; sourceTree = "<group>"; };
 		1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		1B68459B2D82701C00884914 /* SalahTimesSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SalahTimesSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B6845B02D8270CF00884914 /* PrayerTimesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesScreen.swift; sourceTree = "<group>"; };
-		1B6845B22D83BB2200884914 /* CalendarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarScreen.swift; sourceTree = "<group>"; };
+		1B6845B02D8270CF00884914 /* LocationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsScreen.swift; sourceTree = "<group>"; };
+		1B6845B22D83BB2200884914 /* OverviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewScreen.swift; sourceTree = "<group>"; };
 		1B6845B42D83BB9400884914 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		1B6845B72D83BC3300884914 /* PrayerTimesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesViewModel.swift; sourceTree = "<group>"; };
 		1B73A8CE275C248600C1D934 /* SalahTimesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesViewController.swift; sourceTree = "<group>"; };
@@ -283,8 +283,8 @@
 		1B6845BA2D83BC9C00884914 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				1B6845B22D83BB2200884914 /* CalendarScreen.swift */,
-				1B6845B02D8270CF00884914 /* PrayerTimesScreen.swift */,
+				1B6845B02D8270CF00884914 /* LocationsScreen.swift */,
+				1B6845B22D83BB2200884914 /* OverviewScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -757,10 +757,10 @@
 			files = (
 				1BAD37792DAC60D90002D9B2 /* SalahTime.swift in Sources */,
 				1B6845B52D83BB9400884914 /* BackgroundView.swift in Sources */,
-				1B6845B12D8270CF00884914 /* PrayerTimesScreen.swift in Sources */,
+				1B6845B12D8270CF00884914 /* LocationsScreen.swift in Sources */,
 				1B6845B82D83BC3300884914 /* PrayerTimesViewModel.swift in Sources */,
 				1BAD37772DAC30430002D9B2 /* Location.swift in Sources */,
-				1B6845B32D83BB2200884914 /* CalendarScreen.swift in Sources */,
+				1B6845B32D83BB2200884914 /* OverviewScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

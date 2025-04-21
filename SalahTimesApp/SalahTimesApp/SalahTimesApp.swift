@@ -15,11 +15,11 @@ struct SalahTimesApp: App {
 	var body: some Scene {
 		WindowGroup {
 			TabView {
-				PrayerTimesScreen()
-					.tabItem { Label("Today", systemImage: "clock") }
+				OverviewScreen(locations: locations)
+					.tabItem { Label("Overview", systemImage: "calendar") }
 
-				CalendarScreen(locations: locations)
-					.tabItem { Label("Calendar", systemImage: "calendar") }
+				LocationsScreen()
+					.tabItem { Label("Locations", systemImage: "location") }
 			}
 			.onAppear { registerDefaults() }
 		}
