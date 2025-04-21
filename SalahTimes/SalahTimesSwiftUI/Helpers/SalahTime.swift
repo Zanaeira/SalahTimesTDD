@@ -20,6 +20,13 @@ enum SalahTime {
 		let imageResource: String
 	}
 
+	var time: String {
+		switch self {
+		case .fajr(let time), .sunrise(let time), .zuhr(let time), .asr(let time), .maghrib(let time),.isha(let time):
+			time
+		}
+	}
+
 	var metadata: Metadata {
 		switch self {
 		case .fajr: .init(name: "Fajr", imageResource: "sun.haze")
