@@ -8,7 +8,7 @@
 import SwiftUI
 import SalahTimes
 
-public struct PrayerTimesScreen: View {
+public struct LocationsScreen: View {
 
 	public init() {}
 
