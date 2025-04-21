@@ -39,9 +39,6 @@ fileprivate struct SalahTimesOverview: View {
 
 	var body: some View {
 		GroupBox {
-			Text(viewModel.location)
-				.font(.title)
-				.placeholder(viewModel.showLoading)
 				if dynamicTypeSize.isAccessibilitySize {
 					VStack {
 						HStack { ForEach(viewModel.salahTimes.prefix(3), id: \.metadata.name) { salahView($0) } }
@@ -50,6 +47,10 @@ fileprivate struct SalahTimesOverview: View {
 				} else {
 					HStack { ForEach(viewModel.salahTimes, id: \.metadata.name) { salahView($0) } }
 				}
+		} label: {
+			Text(viewModel.location)
+				.font(.title)
+				.placeholder(viewModel.showLoading)
 		}
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
@@ -60,13 +61,15 @@ fileprivate struct SalahTimesOverview: View {
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
 	private func salahView(_ salahTime: SalahTime) -> some View {
-		VStack(spacing: 8) {
-			salahTime.image.foregroundStyle(.orange)
+		VStack(spacing: 4) {
+			salahTime.image
+				.frame(minWidth: 24, minHeight: 24)
+				.padding(.bottom, 2)
+				.foregroundStyle(.orange)
 			Text(salahTime.metadata.name)
-				.lineLimit(1)
-				.truncationMode(.middle)
 			Text(salahTime.time)
 		}
+		.fixedSize(horizontal: true, vertical: false)
 	}
 }
 
@@ -83,11 +86,11 @@ extension View {
 
 struct SalahOverviewStyle: GroupBoxStyle {
 	func makeBody(configuration: Configuration) -> some View {
-		VStack(spacing: 16) {
+		VStack(spacing: 8) {
 			configuration.label
 			configuration.content
 		}
-		.padding()
+		.padding(16)
 		.frame(maxWidth: .infinity)
 		.background {
 			RoundedRectangle(cornerRadius: 16)
