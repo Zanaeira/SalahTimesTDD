@@ -8,19 +8,19 @@
 import SwiftUI
 
 enum SalahTime {
-	case fajr(time: String)
-	case sunrise(time: String)
-	case zuhr(time: String)
-	case asr(time: String)
-	case maghrib(time: String)
-	case isha(time: String)
+	case fajr(time: Date)
+	case sunrise(time: Date)
+	case zuhr(time: Date)
+	case asr(time: Date)
+	case maghrib(time: Date)
+	case isha(time: Date)
 
 	struct Metadata {
 		let name: String
 		let imageResource: String
 	}
 
-	var time: String {
+	var time: Date {
 		switch self {
 		case .fajr(let time), .sunrise(let time), .zuhr(let time), .asr(let time), .maghrib(let time),.isha(let time):
 			time
