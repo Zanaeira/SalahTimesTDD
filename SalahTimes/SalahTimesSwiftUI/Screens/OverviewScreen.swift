@@ -67,7 +67,7 @@ fileprivate struct SalahTimesOverview: View {
 				.padding(.bottom, 2)
 				.foregroundStyle(.orange)
 			Text(salahTime.metadata.name)
-			Text(salahTime.time)
+			Text(salahTime.time, format: .dateTime.hour().minute())
 		}
 		.fixedSize(horizontal: true, vertical: false)
 	}
