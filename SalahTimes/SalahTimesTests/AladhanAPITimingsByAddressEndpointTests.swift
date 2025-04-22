@@ -17,7 +17,15 @@ class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
         
         XCTAssertEqual(sut.path, expectedPath)
     }
-    
+
+		func test_timingsByAddress_dateFormatIsNotIso8601ByDefault() {
+				let date = tomorrow()
+				let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(anyAddress(), on: date)
+				let expectedQueryItem = URLQueryItem(name: "iso8601", value: "false")
+
+				XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
+		}
+
     func test_timingsByAddress_queryItemsForCityAndCountryIncluded() {
         let date = Date()
         let address = anyAddress()
@@ -61,8 +69,8 @@ class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
         let madhhab = AladhanAPIEndpoint.Madhhab.shafii
         let method = AladhanAPIEndpoint.Method.standard(method: .universityOfIslamicSciencesKarachi)
         
-        let expectedURL = URL(string: "http://api.aladhan.com/v1/timingsByAddress/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))?address=\(address)&school=\(madhhab.rawValue)&method=1")!
-        
+        let expectedURL = URL(string: "http://api.aladhan.com/v1/timingsByAddress/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))?iso8601=false&address=\(address)&school=\(madhhab.rawValue)&method=1")!
+
         let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(address, on: date, madhhabForAsr: madhhab, fajrIshaMethod: method)
         
         XCTAssertEqual(sut.url, expectedURL)

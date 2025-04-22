@@ -29,6 +29,7 @@ public struct AladhanAPIEndpoint: Endpoint {
     
     public static func timingsByAddress(_ address: String, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
         var queryItems = [
+						URLQueryItem(name: "iso8601", value: "false"),
             URLQueryItem(name: "address", value: address),
             URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue))
         ]
