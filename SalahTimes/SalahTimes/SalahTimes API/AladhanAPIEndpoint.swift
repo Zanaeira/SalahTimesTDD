@@ -27,9 +27,9 @@ public struct AladhanAPIEndpoint: Endpoint {
         self.queryItems = queryItems
     }
     
-    public static func timingsByAddress(_ address: String, on date: Date, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
+		public static func timingsByAddress(_ address: String, on date: Date, iso8601DateFormat: Bool = false, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
         var queryItems = [
-						URLQueryItem(name: "iso8601", value: "false"),
+						URLQueryItem(name: "iso8601", value: String(iso8601DateFormat)),
             URLQueryItem(name: "address", value: address),
             URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue))
         ]
