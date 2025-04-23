@@ -81,11 +81,18 @@ fileprivate struct SalahTimesOverview: View {
 	}
 
 	private func errorView(_ errorMessage: String) -> some View {
-		VStack {
+		VStack(spacing: 4) {
 			Text(errorMessage)
+				.font(.callout)
 				.foregroundStyle(.red)
-			Button("Retry") { Task { await viewModel.load(location: location) } }
+			Button {
+				Task { await viewModel.load(location: location) }
+			} label: {
+				Image(systemName: "arrow.clockwise")
+					.frame(minWidth: 36, minHeight: 36)
+			}
 		}
+		.fontWeight(.semibold)
 	}
 
 }
