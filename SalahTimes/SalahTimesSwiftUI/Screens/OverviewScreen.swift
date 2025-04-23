@@ -10,9 +10,11 @@ import SalahTimes
 
 public struct OverviewScreen: View {
 
+	let loader: TimesLoader
 	let locations: [Location]
 
-	public init(locations: [Location]) {
+	public init(loader: TimesLoader, locations: [Location]) {
+		self.loader = loader
 		self.locations = locations
 	}
 
@@ -23,7 +25,7 @@ public struct OverviewScreen: View {
 					.font(.title)
 					.padding(.top, 48)
 				ForEach(locations) {
-					SalahTimesOverview(location: $0)
+					SalahTimesOverview(loader: loader, location: $0)
 				}
 			}
 			.padding(.bottom)
@@ -36,6 +38,11 @@ public struct OverviewScreen: View {
 fileprivate struct SalahTimesOverview: View {
 
 	let location: Location
+
+	init(loader: TimesLoader, location: Location) {
+		self.location = location
+		_viewModel = .init(wrappedValue: PrayerTimesViewModel(loader: loader))
+	}
 
 	var body: some View {
 		GroupBox {
@@ -53,7 +60,7 @@ fileprivate struct SalahTimesOverview: View {
 		.task { await viewModel.load(location: location) }
 	}
 
-	@StateObject private var viewModel = PrayerTimesViewModel()
+	@StateObject private var viewModel: PrayerTimesViewModel
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
 	@ViewBuilder
