@@ -15,11 +15,9 @@ final class PrayerTimesViewModel: ObservableObject {
 		salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: Self.makePrimaryLoader(), fallbackLoader: Self.makeFallbackLoader())
 	}
 
-	@Published var location: String = ""
 	@Published var date = Date()
 	@Published var salahTimes = [SalahTime]()
-
-	var showLoading: Bool { location.isEmpty }
+	@Published var errorMessage: String?
 
 	func load(location: Location) async {
 		let endpoint = AladhanAPIEndpoint.timingsByAddress(location.location, on: date, iso8601DateFormat: true, madhhabForAsr: location.mithl, fajrIshaMethod: location.calculationAngle)
@@ -27,7 +25,6 @@ final class PrayerTimesViewModel: ObservableObject {
 
 		switch result {
 		case .success(let times):
-			self.location = location.location
 			salahTimes = []
 			salahTimes.append(.fajr(time: map(times.fajr)))
 			salahTimes.append(.sunrise(time: map(times.sunrise)))
@@ -35,7 +32,8 @@ final class PrayerTimesViewModel: ObservableObject {
 			salahTimes.append(.asr(time: map(times.asr)))
 			salahTimes.append(.maghrib(time: map(times.maghrib)))
 			salahTimes.append(.isha(time: map(times.isha)))
-		case .failure: break
+		case .failure:
+			errorMessage = "Something went wrong. Please try again."
 		}
 	}
 

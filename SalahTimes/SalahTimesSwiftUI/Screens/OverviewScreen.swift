@@ -39,18 +39,14 @@ fileprivate struct SalahTimesOverview: View {
 
 	var body: some View {
 		GroupBox {
-				if dynamicTypeSize.isAccessibilitySize {
-					VStack {
-						HStack { ForEach(viewModel.salahTimes.prefix(3), id: \.metadata.name) { salahView($0) } }
-						HStack { ForEach(viewModel.salahTimes.dropFirst(3), id: \.metadata.name) { salahView($0) } }
-					}
-				} else {
-					HStack { ForEach(viewModel.salahTimes, id: \.metadata.name) { salahView($0) } }
-				}
+			if let errorMessage = viewModel.errorMessage {
+				errorView(errorMessage)
+			} else {
+				salahTimesView
+			}
 		} label: {
-			Text(viewModel.location)
+			Text(location.location)
 				.font(.title)
-				.placeholder(viewModel.showLoading)
 		}
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
@@ -59,6 +55,18 @@ fileprivate struct SalahTimesOverview: View {
 
 	@StateObject private var viewModel = PrayerTimesViewModel()
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
+	@ViewBuilder
+	private var salahTimesView: some View {
+		if dynamicTypeSize.isAccessibilitySize {
+			VStack {
+				HStack { ForEach(viewModel.salahTimes.prefix(3), id: \.metadata.name) { salahView($0) } }
+				HStack { ForEach(viewModel.salahTimes.dropFirst(3), id: \.metadata.name) { salahView($0) } }
+			}
+		} else {
+			HStack { ForEach(viewModel.salahTimes, id: \.metadata.name) { salahView($0) } }
+		}
+	}
 
 	private func salahView(_ salahTime: SalahTime) -> some View {
 		VStack(spacing: 4) {
@@ -71,6 +79,15 @@ fileprivate struct SalahTimesOverview: View {
 		}
 		.fixedSize(horizontal: true, vertical: false)
 	}
+
+	private func errorView(_ errorMessage: String) -> some View {
+		VStack {
+			Text(errorMessage)
+				.foregroundStyle(.red)
+			Button("Retry") { Task { await viewModel.load(location: location) } }
+		}
+	}
+
 }
 
 extension View {
