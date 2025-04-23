@@ -26,6 +26,7 @@ final class PrayerTimesViewModel: ObservableObject {
 		switch result {
 		case .success(let times):
 			salahTimes = []
+			errorMessage = nil
 			salahTimes.append(.fajr(time: map(times.fajr)))
 			salahTimes.append(.sunrise(time: map(times.sunrise)))
 			salahTimes.append(.zuhr(time: map(times.zuhr)))
