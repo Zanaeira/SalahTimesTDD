@@ -10,7 +10,9 @@ import SalahTimes
 
 public struct LocationsScreen: View {
 
-	public init() {}
+	public init(loader: TimesLoader) {
+		_viewModel = .init(wrappedValue: PrayerTimesViewModel(loader: loader))
+	}
 
 	public var body: some View {
 		VStack {
@@ -28,6 +30,6 @@ public struct LocationsScreen: View {
 		.ignoresSafeArea()
 	}
 
-	@StateObject private var viewModel: PrayerTimesViewModel = .init()
+	@StateObject private var viewModel: PrayerTimesViewModel
 
 }

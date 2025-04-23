@@ -11,8 +11,8 @@ import SalahTimes
 @MainActor
 final class PrayerTimesViewModel: ObservableObject {
 
-	init() {
-		salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: Self.makePrimaryLoader(), fallbackLoader: Self.makeFallbackLoader())
+	init(loader: TimesLoader) {
+		salahTimesLoader = loader
 	}
 
 	@Published var date = Date()
@@ -44,30 +44,4 @@ final class PrayerTimesViewModel: ObservableObject {
 		guard let salahTime = ISO8601DateFormatter().date(from: time) else { assertionFailure(); return .now }
 		return salahTime
 	}
-
-	private static func makePrimaryLoader() -> TimesLoader {
-		return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData))
-	}
-
-	private static func makeFallbackLoader() -> TimesLoader {
-		return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad))
-	}
-
-	private static func makeHTTPClient(withRequestCachePolicy policy: NSURLRequest.CachePolicy) -> HTTPClient {
-		let config = URLSessionConfiguration.default
-		config.urlCache = makeCache()
-		config.requestCachePolicy = policy
-
-		let session = URLSession(configuration: config)
-
-		return URLSessionHTTPClient(session: session)
-	}
-
-	private static func makeCache() -> URLCache {
-		let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-		let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
-
-		return URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: diskCacheURL)
-	}
-
 }
