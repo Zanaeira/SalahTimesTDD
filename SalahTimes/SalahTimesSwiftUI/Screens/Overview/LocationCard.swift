@@ -32,12 +32,18 @@ struct LocationCard: View {
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
 		.onChange(of: location) { Task { await viewModel.load(location: location) } }
+		.onChange(of: scenePhase) {
+			guard scenePhase == .active else { return }
+			animateMenu.toggle()
+		}
 		.task { await viewModel.load(location: location) }
 	}
 
 	@State private var location: Location
 	@StateObject private var viewModel: PrayerTimesViewModel
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
+	@Environment(\.scenePhase) private var scenePhase
+	@State private var animateMenu = false
 
 	@ViewBuilder
 	private var salahTimesView: some View {
@@ -59,6 +65,7 @@ struct LocationCard: View {
 					Button("Second mithl") { location.mithl = .hanafi }
 				} label: {
 					salahView(salah)
+						.symbolEffect(.bounce.byLayer, options: .speed(1).repeat(2), value: animateMenu)
 						.tint(.white)
 				}
 			} else {
@@ -70,6 +77,7 @@ struct LocationCard: View {
 	private func salahView(_ salahTime: SalahTime) -> some View {
 		VStack(spacing: 4) {
 			salahTime.image
+				.font(.title2)
 				.frame(minWidth: 24, minHeight: 24)
 				.padding(.bottom, 2)
 				.foregroundStyle(.orange)
