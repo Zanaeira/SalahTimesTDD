@@ -107,17 +107,6 @@ fileprivate struct SalahTimesOverview: View {
 
 }
 
-extension View {
-	@ViewBuilder
-	func placeholder(_ showPlaceholder: Bool) -> some View {
-		if showPlaceholder {
-			redacted(reason: .placeholder)
-		} else {
-			self
-		}
-	}
-}
-
 struct SalahOverviewStyle: GroupBoxStyle {
 	func makeBody(configuration: Configuration) -> some View {
 		VStack(spacing: 8) {
