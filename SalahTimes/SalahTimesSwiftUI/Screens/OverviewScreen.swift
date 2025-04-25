@@ -37,8 +37,6 @@ public struct OverviewScreen: View {
 
 fileprivate struct SalahTimesOverview: View {
 
-	let location: Location
-
 	init(loader: TimesLoader, location: Location) {
 		self.location = location
 		_viewModel = .init(wrappedValue: PrayerTimesViewModel(loader: loader))
@@ -60,9 +58,11 @@ fileprivate struct SalahTimesOverview: View {
 		}
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
+		.onChange(of: location) { Task { await viewModel.load(location: location) } }
 		.task { await viewModel.load(location: location) }
 	}
 
+	@State private var location: Location
 	@StateObject private var viewModel: PrayerTimesViewModel
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
@@ -70,11 +70,27 @@ fileprivate struct SalahTimesOverview: View {
 	private var salahTimesView: some View {
 		if dynamicTypeSize.isAccessibilitySize {
 			VStack {
-				HStack { ForEach(viewModel.salahTimes.prefix(3), id: \.metadata.name) { salahView($0) } }
-				HStack { ForEach(viewModel.salahTimes.dropFirst(3), id: \.metadata.name) { salahView($0) } }
+				HStack { row(Array(viewModel.salahTimes.prefix(3))) }
+				HStack { row(Array(viewModel.salahTimes.dropFirst(3))) }
 			}
 		} else {
-			HStack { ForEach(viewModel.salahTimes, id: \.metadata.name) { salahView($0) } }
+			HStack { row(viewModel.salahTimes) }
+		}
+	}
+
+	private func row(_ salahTimes: [SalahTime]) -> some View {
+		ForEach(salahTimes, id: \.metadata.name) { salah in
+			if case .asr = salah {
+				Menu {
+					Button("First mithl") { location.mithl = .shafii }
+					Button("Second mithl") { location.mithl = .hanafi }
+				} label: {
+					salahView(salah)
+						.tint(.white)
+				}
+			} else {
+				salahView(salah)
+			}
 		}
 	}
 

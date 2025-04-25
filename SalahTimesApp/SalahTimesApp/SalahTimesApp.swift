@@ -18,7 +18,7 @@ struct SalahTimesApp: App {
 				OverviewScreen(loader: compositeTimesLoader, locations: locations)
 					.tabItem { Label("Overview", systemImage: "calendar") }
 
-				LocationsScreen(loader: compositeTimesLoader)
+				LocationsScreen(loader: compositeTimesLoader, locations: locations)
 					.tabItem { Label("Locations", systemImage: "location") }
 			}
 			.onAppear { registerDefaults() }
@@ -37,10 +37,10 @@ struct SalahTimesApp: App {
 
 			let mithl = AladhanAPIEndpoint.Madhhab(rawValue: defaults.integer(forKey: "Mithl")) ?? .hanafi
 			guard let fajrIshaMethod = defaults.object(forKey: "FajrIsha") as? Data, let angleCalculationMethod: AladhanAPIEndpoint.Method = try? JSONDecoder().decode(AladhanAPIEndpoint.Method.self, from: fajrIshaMethod) else {
-				return .init(location: location, mithl: mithl, calculationAngle: .custom(methodSettings: .init(fajrAngle: 12, maghribAngle: nil, ishaAngle: 12)))
+				return .init(userDefaults: defaults, location: location, mithl: mithl, calculationAngle: .custom(methodSettings: .init(fajrAngle: 12, maghribAngle: nil, ishaAngle: 12)))
 			}
 
-			return .init(location: location, mithl: mithl, calculationAngle: angleCalculationMethod)
+			return .init(userDefaults: defaults, location: location, mithl: mithl, calculationAngle: angleCalculationMethod)
 		}
 	}
 
