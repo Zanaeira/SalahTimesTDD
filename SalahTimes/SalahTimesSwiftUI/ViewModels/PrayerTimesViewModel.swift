@@ -15,26 +15,33 @@ final class PrayerTimesViewModel: ObservableObject {
 		salahTimesLoader = loader
 	}
 
-	@Published var date = Date()
-	@Published var salahTimes = [SalahTime]()
-	@Published var errorMessage: String?
+	enum State {
+		case loading
+		case success
+		case failure(errorMessage: String)
+	}
+
+	@Published private(set) var date = Date()
+	@Published private(set) var salahTimes = [SalahTime]()
+	@Published private(set) var state: State?
 
 	func load(location: Location) async {
 		let endpoint = AladhanAPIEndpoint.timingsByAddress(location.location, on: date, iso8601DateFormat: true, madhhabForAsr: location.mithl, fajrIshaMethod: location.calculationAngle)
+		state = .loading
 		let result = await salahTimesLoader.loadTimes(from: endpoint)
 
 		switch result {
 		case .success(let times):
 			salahTimes = []
-			errorMessage = nil
 			salahTimes.append(.fajr(time: map(times.fajr)))
 			salahTimes.append(.sunrise(time: map(times.sunrise)))
 			salahTimes.append(.zuhr(time: map(times.zuhr)))
 			salahTimes.append(.asr(time: map(times.asr)))
 			salahTimes.append(.maghrib(time: map(times.maghrib)))
 			salahTimes.append(.isha(time: map(times.isha)))
+			state = .success
 		case .failure:
-			errorMessage = "Something went wrong. Please try again."
+			state = .failure(errorMessage: "Something went wrong. Please try again.")
 		}
 	}
 
