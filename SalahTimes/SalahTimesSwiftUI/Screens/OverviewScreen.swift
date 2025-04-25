@@ -46,10 +46,13 @@ fileprivate struct SalahTimesOverview: View {
 
 	var body: some View {
 		GroupBox {
-			if let errorMessage = viewModel.errorMessage {
-				errorView(errorMessage)
-			} else {
+			switch viewModel.state {
+			case nil, .loading:
+				ProgressView()
+			case .success:
 				salahTimesView
+			case .failure(let errorMessage):
+				errorView(errorMessage)
 			}
 		} label: {
 			Text(location.location)
