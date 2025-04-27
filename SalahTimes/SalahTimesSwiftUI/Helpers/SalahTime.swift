@@ -32,11 +32,19 @@ enum SalahTime {
 		case .fajr: .init(name: "Fajr", imageResource: "sun.haze")
 		case .sunrise: .init(name: "Sunrise", imageResource: "sunrise")
 		case .zuhr: .init(name: "Zuhr", imageResource: "sun.max")
-		case .asr: .init(name: "Asr", imageResource: "sun.min")
+		case .asr: .init(name: "Asr", imageResource: "sun.min.fill.badge.gearshape.fill")
 		case .maghrib: .init(name: "Maghrib", imageResource: "sunset")
 		case .isha: .init(name: "Isha", imageResource: "moon.stars")
 		}
 	}
 
-	var image: some View { Image(systemName: metadata.imageResource).symbolVariant(.fill) }
+	@ViewBuilder
+	var image: some View {
+		if case .asr = self {
+			Image(metadata.imageResource)
+				.foregroundStyle(.white.opacity(0.4), .orange)
+		} else {
+			Image(systemName: metadata.imageResource).symbolVariant(.fill)
+		}
+	}
 }

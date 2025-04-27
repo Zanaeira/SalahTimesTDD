@@ -65,7 +65,7 @@ struct LocationCard: View {
 					Button("Second mithl") { location.mithl = .hanafi }
 				} label: {
 					salahView(salah)
-						.symbolEffect(.bounce.byLayer, options: .speed(1).repeat(2), value: animateMenu)
+						.symbolEffect(.bounce.byLayer, value: animateMenu)
 						.tint(.white)
 				}
 			} else {
