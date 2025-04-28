@@ -16,7 +16,7 @@ extension AladhanAPIEndpoint {
     
     public struct MethodSettings: Codable {
         public let fajrAngle: Double?
-        let maghribAngle: Double?
+        public let maghribAngle: Double?
         public let ishaAngle: Double?
         
         public init(fajrAngle: Double?, maghribAngle: Double?, ishaAngle: Double?) {
