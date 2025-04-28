@@ -29,7 +29,7 @@ enum SalahTime {
 
 	var metadata: Metadata {
 		switch self {
-		case .fajr: .init(name: "Fajr", imageResource: "sun.haze")
+		case .fajr: .init(name: "Fajr", imageResource: "sun.haze.fill.badge.gearshape.fill")
 		case .sunrise: .init(name: "Sunrise", imageResource: "sunrise")
 		case .zuhr: .init(name: "Zuhr", imageResource: "sun.max")
 		case .asr: .init(name: "Asr", imageResource: "sun.min.fill.badge.gearshape.fill")
@@ -40,11 +40,18 @@ enum SalahTime {
 
 	@ViewBuilder
 	var image: some View {
-		if case .asr = self {
+		if hasCustomSymbol {
 			Image(metadata.imageResource)
 				.foregroundStyle(.white.opacity(0.4), .orange)
 		} else {
 			Image(systemName: metadata.imageResource).symbolVariant(.fill)
+		}
+	}
+
+	private var hasCustomSymbol: Bool {
+		switch self {
+		case .fajr, .asr: true
+		case .sunrise, .zuhr, .maghrib, .isha: false
 		}
 	}
 }
