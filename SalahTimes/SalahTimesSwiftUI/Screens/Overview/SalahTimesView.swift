@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SalahTimesView: View {
 
-	internal init(locationSettings: LocationSettings, viewModel: PrayerTimesViewModel) {
-		self.locationSettings = locationSettings
+	internal init(locationSettings: Binding<LocationSettings>, viewModel: PrayerTimesViewModel) {
+		self._locationSettings = locationSettings
 		self.viewModel = viewModel
 	}
 
@@ -25,7 +25,6 @@ struct SalahTimesView: View {
 				HStack { row(viewModel.salahTimes) }
 			}
 		}
-		.onChange(of: locationSettings) { Task { await viewModel.load(locationSettings: locationSettings) } }
 		.onChange(of: scenePhase) {
 			guard scenePhase == .active else { return }
 			animateMenu.toggle()
@@ -35,7 +34,7 @@ struct SalahTimesView: View {
 	@Environment(\.scenePhase) private var scenePhase
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-	@State private var locationSettings: LocationSettings
+	@Binding private var locationSettings: LocationSettings
 	@State private var animateMenu = false
 	@ObservedObject private var viewModel: PrayerTimesViewModel
 
