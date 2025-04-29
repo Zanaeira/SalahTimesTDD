@@ -40,20 +40,9 @@ struct SalahTimesView: View {
 
 	private func row(_ salahs: [Salah]) -> some View {
 		ForEach(salahs, id: \.metadata.name) { salah in
-			if case .fajr = salah {
+			if hasMenuItems(salah) {
 				Menu {
-					Button("12º") { locationSettings.fajrAngle = 12 }
-					Button("15º") { locationSettings.fajrAngle = 15 }
-					Button("18º") { locationSettings.fajrAngle = 18 }
-				} label: {
-					salahView(salah)
-						.symbolEffect(.bounce.byLayer, value: animateMenu)
-						.tint(.white)
-				}
-			} else if case .asr = salah {
-				Menu {
-					Button("First mithl") { locationSettings.mithl = .shafii }
-					Button("Second mithl") { locationSettings.mithl = .hanafi }
+					menuButtons(for: salah)
 				} label: {
 					salahView(salah)
 						.symbolEffect(.bounce.byLayer, value: animateMenu)
@@ -76,6 +65,28 @@ struct SalahTimesView: View {
 			Text(viewModel.formatter.string(from: salah.time))
 		}
 		.fixedSize(horizontal: true, vertical: false)
+	}
+
+	private func hasMenuItems(_ salah: Salah) -> Bool {
+		switch salah {
+		case .fajr, .asr: true
+		case .sunrise, .zuhr, .maghrib, .isha: false
+		}
+	}
+
+	@ViewBuilder
+	private func menuButtons(for salah: Salah) -> some View {
+		switch salah {
+		case .fajr:
+			Button("12º") { locationSettings.fajrAngle = 12 }
+			Button("15º") { locationSettings.fajrAngle = 15 }
+			Button("18º") { locationSettings.fajrAngle = 18 }
+		case .asr:
+			Button("First mithl") { locationSettings.mithl = .shafii }
+			Button("Second mithl") { locationSettings.mithl = .hanafi }
+		case .sunrise, .zuhr, .maghrib, .isha:
+			EmptyView()
+		}
 	}
 
 }
