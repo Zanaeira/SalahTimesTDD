@@ -92,7 +92,7 @@ struct LocationCard: View {
 				.padding(.bottom, 2)
 				.foregroundStyle(.orange)
 			Text(salah.metadata.name)
-			Text(salah.time, format: .dateTime.hour().minute())
+			Text(viewModel.formatter.string(from: salah.time))
 		}
 		.fixedSize(horizontal: true, vertical: false)
 	}
