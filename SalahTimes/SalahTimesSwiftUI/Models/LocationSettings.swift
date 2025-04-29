@@ -8,7 +8,7 @@
 import Foundation
 import SalahTimes
 
-public struct Location: Identifiable {
+public struct LocationSettings: Identifiable {
 	public let id = UUID()
 	public let location: String
 	public internal(set) var mithl: AladhanAPIEndpoint.Madhhab {
@@ -41,8 +41,8 @@ public struct Location: Identifiable {
 	}
 }
 
-extension Location: Equatable {
-	public static func == (lhs: Location, rhs: Location) -> Bool {
+extension LocationSettings: Equatable {
+	public static func == (lhs: LocationSettings, rhs: LocationSettings) -> Bool {
 		lhs.id == rhs.id
 		&& lhs.location == rhs.location
 		&& lhs.mithl == rhs.mithl

@@ -15,10 +15,10 @@ struct SalahTimesApp: App {
 	var body: some Scene {
 		WindowGroup {
 			TabView {
-				OverviewScreen(loader: compositeTimesLoader, locations: locations)
+				OverviewScreen(loader: compositeTimesLoader, locationsSettings: locationSettings)
 					.tabItem { Label("Overview", systemImage: "calendar") }
 
-				LocationsScreen(loader: compositeTimesLoader, locations: locations)
+				LocationsScreen(loader: compositeTimesLoader, locationsSettings: locationSettings)
 					.tabItem { Label("Locations", systemImage: "location") }
 			}
 			.onAppear { registerDefaults() }
@@ -29,7 +29,7 @@ struct SalahTimesApp: App {
 	private var compositeTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: Self.makePrimaryLoader(), fallbackLoader: Self.makeFallbackLoader())
 
 	private var suiteNames: [String] { userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"] }
-	private var locations: [Location] {
+	private var locationSettings: [LocationSettings] {
 		suiteNames.compactMap { suiteName in
 			guard let defaults = UserDefaults(suiteName: suiteName), let location = defaults.string(forKey: "Location") else {
 				return nil

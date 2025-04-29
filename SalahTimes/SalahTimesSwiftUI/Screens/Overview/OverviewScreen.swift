@@ -11,11 +11,11 @@ import SalahTimes
 public struct OverviewScreen: View {
 
 	let loader: TimesLoader
-	let locations: [Location]
+	let locationsSettings: [LocationSettings]
 
-	public init(loader: TimesLoader, locations: [Location]) {
+	public init(loader: TimesLoader, locationsSettings: [LocationSettings]) {
 		self.loader = loader
-		self.locations = locations
+		self.locationsSettings = locationsSettings
 	}
 
 	public var body: some View {
@@ -24,8 +24,8 @@ public struct OverviewScreen: View {
 				Text(Date(), format: .dateTime.day().month().year())
 					.font(.title)
 					.padding(.top, 48)
-				ForEach(locations) {
-					LocationCard(loader: loader, location: $0)
+				ForEach(locationsSettings) {
+					LocationCard(loader: loader, locationSettings: $0)
 				}
 			}
 			.padding(.bottom)

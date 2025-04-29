@@ -10,8 +10,8 @@ import SalahTimes
 
 struct LocationCard: View {
 
-	init(loader: TimesLoader, location: Location) {
-		self.location = location
+	init(loader: TimesLoader, locationSettings: LocationSettings) {
+		self.locationSettings = locationSettings
 		_viewModel = .init(wrappedValue: PrayerTimesViewModel(loader: loader))
 	}
 
@@ -26,20 +26,20 @@ struct LocationCard: View {
 				errorView(errorMessage)
 			}
 		} label: {
-			Text(location.location)
+			Text(locationSettings.location)
 				.font(.title)
 		}
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
-		.onChange(of: location) { Task { await viewModel.load(location: location) } }
+		.onChange(of: locationSettings) { Task { await viewModel.load(locationSettings: locationSettings) } }
 		.onChange(of: scenePhase) {
 			guard scenePhase == .active else { return }
 			animateMenu.toggle()
 		}
-		.task { await viewModel.load(location: location) }
+		.task { await viewModel.load(locationSettings: locationSettings) }
 	}
 
-	@State private var location: Location
+	@State private var locationSettings: LocationSettings
 	@StateObject private var viewModel: PrayerTimesViewModel
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 	@Environment(\.scenePhase) private var scenePhase
@@ -61,9 +61,9 @@ struct LocationCard: View {
 		ForEach(salahs, id: \.metadata.name) { salah in
 			if case .fajr = salah {
 				Menu {
-					Button("12º") { location.fajrAngle = 12 }
-					Button("15º") { location.fajrAngle = 15 }
-					Button("18º") { location.fajrAngle = 18 }
+					Button("12º") { locationSettings.fajrAngle = 12 }
+					Button("15º") { locationSettings.fajrAngle = 15 }
+					Button("18º") { locationSettings.fajrAngle = 18 }
 				} label: {
 					salahView(salah)
 						.symbolEffect(.bounce.byLayer, value: animateMenu)
@@ -71,8 +71,8 @@ struct LocationCard: View {
 				}
 			} else if case .asr = salah {
 				Menu {
-					Button("First mithl") { location.mithl = .shafii }
-					Button("Second mithl") { location.mithl = .hanafi }
+					Button("First mithl") { locationSettings.mithl = .shafii }
+					Button("Second mithl") { locationSettings.mithl = .hanafi }
 				} label: {
 					salahView(salah)
 						.symbolEffect(.bounce.byLayer, value: animateMenu)
@@ -103,7 +103,7 @@ struct LocationCard: View {
 				.font(.callout)
 				.foregroundStyle(.red)
 			Button {
-				Task { await viewModel.load(location: location) }
+				Task { await viewModel.load(locationSettings: locationSettings) }
 			} label: {
 				Image(systemName: "arrow.clockwise")
 					.frame(minWidth: 36, minHeight: 36)

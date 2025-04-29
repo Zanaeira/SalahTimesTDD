@@ -25,7 +25,7 @@
 		1B917250277909800009628F /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B91724F277909800009628F /* TitleHeaderView.swift */; };
 		1B9D0AA02767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */; };
 		1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */; };
-		1BAD37772DAC30430002D9B2 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAD37762DAC30430002D9B2 /* Location.swift */; };
+		1BAD37772DAC30430002D9B2 /* LocationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAD37762DAC30430002D9B2 /* LocationSettings.swift */; };
 		1BAD37792DAC60D90002D9B2 /* Salah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAD37782DAC60D90002D9B2 /* Salah.swift */; };
 		1BAEF7BE2773EB720029A02F /* OverviewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7BD2773EB720029A02F /* OverviewCellModel.swift */; };
 		1BAEF7C12773EBB60029A02F /* OverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7C02773EBB60029A02F /* OverviewCell.swift */; };
@@ -117,7 +117,7 @@
 		1B91724F277909800009628F /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
 		1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		1BAD37762DAC30430002D9B2 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		1BAD37762DAC30430002D9B2 /* LocationSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSettings.swift; sourceTree = "<group>"; };
 		1BAD37782DAC60D90002D9B2 /* Salah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Salah.swift; sourceTree = "<group>"; };
 		1BAEF7BD2773EB720029A02F /* OverviewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCellModel.swift; sourceTree = "<group>"; };
 		1BAEF7C02773EBB60029A02F /* OverviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCell.swift; sourceTree = "<group>"; };
@@ -368,7 +368,7 @@
 		1BAD37752DAC30230002D9B2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1BAD37762DAC30430002D9B2 /* Location.swift */,
+				1BAD37762DAC30430002D9B2 /* LocationSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -794,7 +794,7 @@
 				1B6845B52D83BB9400884914 /* BackgroundView.swift in Sources */,
 				1BE68D852DC0323C0045C0E3 /* AladhanAPIEndpoint+Helpers.swift in Sources */,
 				1B6845B82D83BC3300884914 /* PrayerTimesViewModel.swift in Sources */,
-				1BAD37772DAC30430002D9B2 /* Location.swift in Sources */,
+				1BAD37772DAC30430002D9B2 /* LocationSettings.swift in Sources */,
 				1BE68D792DBC4FC30045C0E3 /* LocationCard.swift in Sources */,
 				1B6845B32D83BB2200884914 /* OverviewScreen.swift in Sources */,
 			);

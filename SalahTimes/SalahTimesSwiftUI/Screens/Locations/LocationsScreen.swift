@@ -10,11 +10,11 @@ import SalahTimes
 
 public struct LocationsScreen: View {
 
-	let locations: [Location]
+	let locationsSettings: [LocationSettings]
 
-	public init(loader: TimesLoader, locations: [Location]) {
+	public init(loader: TimesLoader, locationsSettings: [LocationSettings]) {
 		_viewModel = .init(wrappedValue: PrayerTimesViewModel(loader: loader))
-		self.locations = locations
+		self.locationsSettings = locationsSettings
 	}
 
 	public var body: some View {
@@ -22,8 +22,8 @@ public struct LocationsScreen: View {
 			Text(viewModel.date, format: .dateTime.weekday().day().month().year())
 		}
 		.task {
-			for location in locations {
-				await viewModel.load(location: location)
+			for locationSettings in locationsSettings {
+				await viewModel.load(locationSettings: locationSettings)
 			}
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)

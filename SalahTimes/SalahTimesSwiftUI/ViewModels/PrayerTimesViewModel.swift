@@ -25,8 +25,8 @@ final class PrayerTimesViewModel: ObservableObject {
 	@Published private(set) var salahTimes = [Salah]()
 	@Published private(set) var state: State?
 
-	func load(location: Location) async {
-		let endpoint = AladhanAPIEndpoint.timingsByAddress(location.location, on: date, iso8601DateFormat: true, madhhabForAsr: location.mithl, fajrIshaMethod: location.calculationAngle)
+	func load(locationSettings: LocationSettings) async {
+		let endpoint = AladhanAPIEndpoint.timingsByAddress(locationSettings.location, on: date, iso8601DateFormat: true, madhhabForAsr: locationSettings.mithl, fajrIshaMethod: locationSettings.calculationAngle)
 		state = .loading
 		let result = await salahTimesLoader.loadTimes(from: endpoint)
 
