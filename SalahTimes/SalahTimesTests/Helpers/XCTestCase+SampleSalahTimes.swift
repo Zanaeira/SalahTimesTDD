@@ -9,49 +9,52 @@ import XCTest
 @testable import SalahTimes
 
 extension XCTestCase {
-    
-    func salahTimesModelAndDataFor5thAug2021LondonUK() -> (model: SalahTimes, data: Data) {
-        let timestamp = "1628143200"
-        
-        let (salahTimes, salahTimesJSON) = makeSalahTimes(
-            fajr: "03:27", sunrise: "05:31", zuhr: "13:07", asr: "17:13",
-            sunset: "20:42", maghrib: "20:42", isha: "22:44", imsak: "03:17",
-            midnight: "01:06", readableDate: "05 Aug 2021", timestamp: timestamp)
-        
-        let data = makeSalahTimesJSON(salahTimesJSON)
-        
-        return (salahTimes, data)
-    }
-    
-    private func makeSalahTimes(fajr: String, sunrise: String, zuhr: String, asr: String, sunset: String, maghrib: String, isha: String, imsak: String, midnight: String, readableDate: String, timestamp: String) -> (model: SalahTimes, json: [String: [String: String]]) {
-        
-        let salahTimesModel = SalahTimes(timestamp: timestamp, date: readableDate, fajr: fajr, sunrise: sunrise, zuhr: zuhr, asr: asr, maghrib: maghrib, isha: isha)
-        
-        let salahTimesJSON = [
-            "timings": [
-                "Fajr": fajr,
-                "Sunrise": sunrise,
-                "Dhuhr": zuhr,
-                "Asr": asr,
-                "Sunset": sunset,
-                "Maghrib": maghrib,
-                "Isha": isha,
-                "Imsak": imsak,
-                "Midnight": midnight,
-            ],
-            "date": [
-                "readable": readableDate,
-                "timestamp": "\(timestamp)",
-            ]
-        ]
-        
-        return (salahTimesModel, salahTimesJSON)
-    }
-    
-    private func makeSalahTimesJSON(_ timings: [String: [String: String]]) -> Data {
-        let json = ["data": timings]
-        return try! JSONSerialization.data(withJSONObject: json)
-    }
 
-    
+	func salahTimesModelAndDataFor5thAug2021LondonUK() -> (model: SalahTimes, data: Data) {
+		let timestamp = "1628143200"
+
+		let (salahTimes, salahTimesJSON) = makeSalahTimes(
+			fajr: "03:27", sunrise: "05:31", zuhr: "13:06", asr: "17:14",
+			sunset: "20:41", maghrib: "20:41", isha: "22:44", imsak: "03:17",
+			midnight: "01:06", readableDate: "05 Aug 2021", timestamp: timestamp, timezone: "Europe/London")
+
+		let data = makeSalahTimesJSON(salahTimesJSON)
+
+		return (salahTimes, data)
+	}
+
+	private func makeSalahTimes(fajr: String, sunrise: String, zuhr: String, asr: String, sunset: String, maghrib: String, isha: String, imsak: String, midnight: String, readableDate: String, timestamp: String, timezone: String) -> (model: SalahTimes, json: [String: [String: String]]
+	) {
+
+		let salahTimesModel = SalahTimes(timestamp: timestamp, timezone: timezone, date: readableDate, fajr: fajr, sunrise: sunrise, zuhr: zuhr, asr: asr, maghrib: maghrib, isha: isha)
+
+		let salahTimesJSON = [
+			"timings": [
+				"Fajr": fajr,
+				"Sunrise": sunrise,
+				"Dhuhr": zuhr,
+				"Asr": asr,
+				"Sunset": sunset,
+				"Maghrib": maghrib,
+				"Isha": isha,
+				"Imsak": imsak,
+				"Midnight": midnight,
+			],
+			"date": [
+				"readable": readableDate,
+				"timestamp": "\(timestamp)",
+			],
+			"meta": [
+				"timezone": "Europe/London"
+			]
+		]
+
+		return (salahTimesModel, salahTimesJSON)
+	}
+
+	private func makeSalahTimesJSON(_ timings: [String: [String: String]]) -> Data {
+		let json = ["data": timings]
+		return try! JSONSerialization.data(withJSONObject: json)
+	}
+
 }
