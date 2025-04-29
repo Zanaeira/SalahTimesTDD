@@ -22,7 +22,7 @@ final class PrayerTimesViewModel: ObservableObject {
 	}
 
 	@Published private(set) var date = Date()
-	@Published private(set) var salahTimes = [SalahTime]()
+	@Published private(set) var salahTimes = [Salah]()
 	@Published private(set) var state: State?
 
 	func load(location: Location) async {

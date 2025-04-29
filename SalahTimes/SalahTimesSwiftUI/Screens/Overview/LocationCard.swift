@@ -57,8 +57,8 @@ struct LocationCard: View {
 		}
 	}
 
-	private func row(_ salahTimes: [SalahTime]) -> some View {
-		ForEach(salahTimes, id: \.metadata.name) { salah in
+	private func row(_ salahs: [Salah]) -> some View {
+		ForEach(salahs, id: \.metadata.name) { salah in
 			if case .fajr = salah {
 				Menu {
 					Button("12º") { location.fajrAngle = 12 }
@@ -84,15 +84,15 @@ struct LocationCard: View {
 		}
 	}
 
-	private func salahView(_ salahTime: SalahTime) -> some View {
+	private func salahView(_ salah: Salah) -> some View {
 		VStack(spacing: 4) {
-			salahTime.image
+			salah.image
 				.font(.title2)
 				.frame(minWidth: 24, minHeight: 24)
 				.padding(.bottom, 2)
 				.foregroundStyle(.orange)
-			Text(salahTime.metadata.name)
-			Text(salahTime.time, format: .dateTime.hour().minute())
+			Text(salah.metadata.name)
+			Text(salah.time, format: .dateTime.hour().minute())
 		}
 		.fixedSize(horizontal: true, vertical: false)
 	}
