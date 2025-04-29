@@ -24,6 +24,13 @@ final class PrayerTimesViewModel: ObservableObject {
 	@Published private(set) var date = Date()
 	@Published private(set) var salahTimes = [Salah]()
 	@Published private(set) var state: State?
+	private(set) var timeZone: String = "London/Europe"
+
+	var formatter: DateFormatter {
+		let dateFormatter = DateFormatter.salahTimesFormatter
+		dateFormatter.timeZone = .init(identifier: timeZone)
+		return dateFormatter
+	}
 
 	func load(locationSettings: LocationSettings) async {
 		let endpoint = AladhanAPIEndpoint.timingsByAddress(locationSettings.location, on: date, iso8601DateFormat: true, madhhabForAsr: locationSettings.mithl, fajrIshaMethod: locationSettings.calculationAngle)
@@ -32,6 +39,7 @@ final class PrayerTimesViewModel: ObservableObject {
 
 		switch result {
 		case .success(let times):
+			timeZone = times.timezone
 			salahTimes = []
 			salahTimes.append(.fajr(time: map(times.fajr)))
 			salahTimes.append(.sunrise(time: map(times.sunrise)))
@@ -51,4 +59,14 @@ final class PrayerTimesViewModel: ObservableObject {
 		guard let salahTime = ISO8601DateFormatter().date(from: time) else { assertionFailure(); return .now }
 		return salahTime
 	}
+}
+
+fileprivate extension DateFormatter {
+	static let salahTimesFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateStyle = .none
+		formatter.timeStyle = .short
+
+		return formatter
+	}()
 }
