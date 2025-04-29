@@ -14,14 +14,8 @@ struct SalahTimesApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			TabView {
-				OverviewScreen(loader: compositeTimesLoader, locationsSettings: locationSettings)
-					.tabItem { Label("Overview", systemImage: "calendar") }
-
-				LocationsScreen(loader: compositeTimesLoader, locationsSettings: locationSettings)
-					.tabItem { Label("Locations", systemImage: "location") }
-			}
-			.onAppear { registerDefaults() }
+			OverviewScreen(loader: compositeTimesLoader, locationsSettings: locationSettings)
+				.onAppear { registerDefaults() }
 		}
 	}
 
