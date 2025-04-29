@@ -14,10 +14,16 @@ public struct Location: Identifiable {
 	public internal(set) var mithl: AladhanAPIEndpoint.Madhhab {
 		didSet { userDefaults.set(mithl.rawValue, forKey: "Mithl") }
 	}
-	public internal(set) var calculationAngle: AladhanAPIEndpoint.Method {
+	public private(set) var calculationAngle: AladhanAPIEndpoint.Method {
 		didSet {
 			guard let encodedAngles = try? JSONEncoder().encode(calculationAngle) else { return }
 			userDefaults.set(encodedAngles, forKey: "FajrIsha")
+		}
+	}
+	var fajrAngle: Double? {
+		didSet {
+			let angles = calculationAngle.angles
+			calculationAngle = .custom(methodSettings: .init(fajrAngle: fajrAngle, maghribAngle: angles?.maghribAngle, ishaAngle: angles?.ishaAngle))
 		}
 	}
 
@@ -28,6 +34,10 @@ public struct Location: Identifiable {
 		self.location = location
 		self.mithl = mithl
 		self.calculationAngle = calculationAngle
+		fajrAngle = calculationAngle.angles.flatMap {
+			guard let fajrAngle = $0.fajrAngle else { return nil }
+			return fajrAngle
+		}
 	}
 }
 
