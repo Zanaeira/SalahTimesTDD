@@ -21,7 +21,7 @@ struct LocationCard: View {
 			case nil, .loading:
 				ProgressView()
 			case .success:
-				SalahTimesView(locationSettings: locationSettings, viewModel: viewModel)
+				SalahTimesView(locationSettings: $locationSettings, viewModel: viewModel)
 			case .failure(let errorMessage):
 				errorView(errorMessage)
 			}
@@ -31,6 +31,7 @@ struct LocationCard: View {
 		}
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
+		.onChange(of: locationSettings) { Task { await viewModel.load(locationSettings: locationSettings) } }
 		.task { await viewModel.load(locationSettings: locationSettings) }
 	}
 
