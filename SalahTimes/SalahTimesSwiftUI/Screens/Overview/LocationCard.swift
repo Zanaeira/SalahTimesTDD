@@ -88,7 +88,7 @@ struct LocationCard: View {
 		VStack(spacing: 4) {
 			salah.image
 				.font(.title2)
-				.frame(minWidth: 24, minHeight: 24)
+				.frame(minWidth: 32, minHeight: 32)
 				.padding(.bottom, 2)
 				.foregroundStyle(.orange)
 			Text(salah.metadata.name)
