@@ -8,12 +8,13 @@
 import Foundation
 
 public struct SalahTimes: Equatable {
-    public let timestamp: String
-    public let date: String
-    public let fajr: String
-    public let sunrise: String
-    public let zuhr: String
-    public let asr: String
-    public let maghrib: String
-    public let isha: String
+	public let timestamp: String
+	public let timezone: String
+	public let date: String
+	public let fajr: String
+	public let sunrise: String
+	public let zuhr: String
+	public let asr: String
+	public let maghrib: String
+	public let isha: String
 }

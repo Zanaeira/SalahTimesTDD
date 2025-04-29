@@ -30,9 +30,20 @@ private struct Root: Decodable {
 private struct TimingsData: Decodable {
     let timings: Timings
     let date: TimingsDateData
-    
+		let meta: Meta
+
     var salahTimes: SalahTimes {
-        return SalahTimes(timestamp: date.timestamp, date: date.readable, fajr: timings.Fajr, sunrise: timings.Sunrise, zuhr: timings.Dhuhr, asr: timings.Asr, maghrib: timings.Maghrib, isha: timings.Isha)
+			return SalahTimes(
+				timestamp: date.timestamp,
+				timezone: meta.timezone,
+				date: date.readable,
+				fajr: timings.Fajr,
+				sunrise: timings.Sunrise,
+				zuhr: timings.Dhuhr,
+				asr: timings.Asr,
+				maghrib: timings.Maghrib,
+				isha: timings.Isha
+			)
     }
 }
 
@@ -45,4 +56,8 @@ private struct Timings: Decodable {
 private struct TimingsDateData: Decodable {
     let readable: String
     let timestamp: String
+}
+
+private struct Meta: Decodable {
+	let timezone: String
 }
