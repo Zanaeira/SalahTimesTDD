@@ -36,7 +36,6 @@ public struct AladhanAPIEndpoint: Endpoint {
 		fajrIshaMethod.queryItems().forEach({queryItems.append($0)})
 
 		let dateParameter = Calendar.current.isDateInToday(date) ? "" : "/\(dateFormattedForAPIRequest(date))"
-
 		return AladhanAPIEndpoint(path: "/v1/timingsByAddress\(dateParameter)", queryItems: queryItems)
 	}
 
