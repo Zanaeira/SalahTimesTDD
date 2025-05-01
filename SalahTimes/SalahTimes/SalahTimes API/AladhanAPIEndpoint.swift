@@ -40,12 +40,13 @@ public struct AladhanAPIEndpoint: Endpoint {
 		return AladhanAPIEndpoint(path: "/v1/timingsByAddress\(dateParameter)", queryItems: queryItems)
 	}
 
-	public static func nextPrayerByAddress(_ address: String) -> Endpoint {
+	public static func nextPrayerByAddress(_ address: String, on date: Date) -> Endpoint {
 		var queryItems = [
 			URLQueryItem(name: "address", value: address),
 		]
 
-		return AladhanAPIEndpoint(path: "/v1/timingsByAddress", queryItems: queryItems)
+		let dateParameter = Calendar.current.isDateInToday(date) ? "" : "/\(dateFormattedForAPIRequest(date))"
+		return AladhanAPIEndpoint(path: "/v1/nextPrayerByAddress\(dateParameter)", queryItems: queryItems)
 	}
 
 
