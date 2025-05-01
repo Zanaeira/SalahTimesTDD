@@ -29,33 +29,4 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 			XCTAssertEqual(sut.path, expectedPath)
 	}
 
-
-
-	// MARK: - Helpers
-	private func anyAddress() -> String {
-		return "Anywhere in the world"
-	}
-
-	private func anyDate() -> Date {
-			return Date()
-	}
-
-	private func tomorrow() -> Date {
-			let calendar = Calendar.current
-			let today = Date()
-
-			let components = calendar.dateComponents([.hour, .minute, .second, .nanosecond], from: today)
-
-			return calendar.nextDate(after: today, matching: components, matchingPolicy: .nextTime)!
-	}
-
-}
-
-private extension DateFormatter {
-		static let dateFormatterForAladhanAPIRequest: DateFormatter = {
-				let dateFormatter = DateFormatter()
-				dateFormatter.dateFormat = "dd-MM-yyyy"
-
-				return dateFormatter
-		}()
 }
