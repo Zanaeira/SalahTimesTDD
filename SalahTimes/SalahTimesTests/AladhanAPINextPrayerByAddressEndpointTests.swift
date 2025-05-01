@@ -22,34 +22,34 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 	}
 
 	func test_nextPrayerByAddress_pathIsCorrectForDate() {
-			let date = tomorrow()
-			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date)
-			let expectedPath = "/v1/nextPrayerByAddress/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))"
+		let date = tomorrow()
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date)
+		let expectedPath = "/v1/nextPrayerByAddress/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))"
 
-			XCTAssertEqual(sut.path, expectedPath)
+		XCTAssertEqual(sut.path, expectedPath)
 	}
 
 	func test_nextPrayerByAddress_dateFormatIsIso8601ByDefault() {
-			let date = tomorrow()
-			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date)
-			let expectedQueryItem = URLQueryItem(name: "iso8601", value: "true")
+		let date = tomorrow()
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date)
+		let expectedQueryItem = URLQueryItem(name: "iso8601", value: "true")
 
-			XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
+		XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
 	}
 
 	func test_nextPrayerByAddress_dateFormatQueryParameterIsIncluded() {
-			let date = tomorrow()
-			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date, iso8601DateFormat: false)
-			let expectedQueryItem = URLQueryItem(name: "iso8601", value: "false")
+		let date = tomorrow()
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date, iso8601DateFormat: false)
+		let expectedQueryItem = URLQueryItem(name: "iso8601", value: "false")
 
-			XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
+		XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
 	}
 
 	func test_nextPrayerByAddress_queryItemsIncludesSchoolForAsrTimeCalculation() {
-			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate(), madhhab: .shafii)
-			let schoolForAsrTimeQueryItem = URLQueryItem(name: "school", value: "0")
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate(), madhhab: .shafii)
+		let schoolForAsrTimeQueryItem = URLQueryItem(name: "school", value: "0")
 
-			XCTAssertTrue(sut.queryItems.contains(schoolForAsrTimeQueryItem))
+		XCTAssertTrue(sut.queryItems.contains(schoolForAsrTimeQueryItem))
 	}
 
 	func test_nextPrayerByAddress_respectsRequestedMadhabForAsr() {
@@ -60,28 +60,28 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 	}
 
 	func test_nextPrayerByAddress_queryItemsIncludesCalculationMethodForFajrAndIsha() {
-			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate())
-			let calculationMethodQueryItem = URLQueryItem(name: "method", value: "2")
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate())
+		let calculationMethodQueryItem = URLQueryItem(name: "method", value: "2")
 
-			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
+		XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
 	}
 
 	func test_nextPrayerByAddress_calculationMethodForFajrAndIshaCanBeChanged() {
 		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate(), fajrIsha: .standard(method: .muslimWorldLeague))
-			let calculationMethodQueryItem = URLQueryItem(name: "method", value: "3")
+		let calculationMethodQueryItem = URLQueryItem(name: "method", value: "3")
 
-			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
+		XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
 	}
 
 	func test_nextPrayerByAddress_allowsCustomCalculationMethodForFajrAndIsha() {
-			let methodSettings = AladhanAPIEndpoint.MethodSettings(fajrAngle: 18.5, maghribAngle: nil, ishaAngle: 17.5)
-			let method = AladhanAPIEndpoint.Method.custom(methodSettings: methodSettings)
-			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate(), fajrIsha: method)
-			let calculationMethodQueryItems = [URLQueryItem(name: "method", value: "99"),
-																				 URLQueryItem(name: "methodSettings", value: "18.5,null,17.5")]
+		let methodSettings = AladhanAPIEndpoint.MethodSettings(fajrAngle: 18.5, maghribAngle: nil, ishaAngle: 17.5)
+		let method = AladhanAPIEndpoint.Method.custom(methodSettings: methodSettings)
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate(), fajrIsha: method)
+		let calculationMethodQueryItems = [URLQueryItem(name: "method", value: "99"),
+																			 URLQueryItem(name: "methodSettings", value: "18.5,null,17.5")]
 
-			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[0]))
-			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[1]))
+		XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[0]))
+		XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[1]))
 	}
 
 	func test_nextPrayerByAddress_urlContainsHostSchemePathAndAllQueryItemsSpecified() {
