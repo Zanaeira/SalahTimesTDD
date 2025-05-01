@@ -48,6 +48,17 @@ enum Salah {
 		}
 	}
 
+	var imageSystemName: String {
+		switch self {
+		case .fajr: "sun.haze"
+		case .sunrise: "sunrise"
+		case .zuhr: "sun.max"
+		case .asr: "sun.min"
+		case .maghrib: "sunset"
+		case .isha: "moon.stars"
+		}
+	}
+
 	private var hasCustomSymbol: Bool {
 		switch self {
 		case .fajr, .asr: true
