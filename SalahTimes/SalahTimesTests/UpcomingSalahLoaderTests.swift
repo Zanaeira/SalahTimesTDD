@@ -23,7 +23,12 @@ public final class UpcomingSalahLoader {
 
 	public func load(from endpoint: Endpoint, completion: @escaping (Result) -> Void) {
 		client.get(from: endpoint.url) { result in
-			completion(.failure(.connectivity))
+			switch result {
+			case .success(let success):
+				completion(.failure(.invalidData))
+			case .failure(let failure):
+				completion(.failure(.connectivity))
+			}
 		}
 	}
 }
@@ -38,6 +43,25 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 					httpClient.complete(with: httpClientError)
 			}
 	}
+
+	func test_load_deliversInvalidDataErrorOnNon200HTTPResponse() {
+			let (sut, httpClient, endpointSpy) = makeSUT()
+
+			let sampleStatusCodes = [199, 201, 300, 400, 500]
+
+			sampleStatusCodes.enumerated().forEach { index, code in
+					expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
+						let upcomingSalah = ["Fajr": "2025-04-30T03:38:00+01:00"]
+						httpClient.complete(withStatusCode: code, data: makeUpcomingSalahJSON(upcomingSalah), at: index)
+					}
+			}
+	}
+
+	private func makeUpcomingSalahJSON(_ timings: [String: String]) -> Data {
+		let json = ["data": timings]
+		return try! JSONSerialization.data(withJSONObject: json)
+	}
+
 
 	// MARK: - Helpers
 
