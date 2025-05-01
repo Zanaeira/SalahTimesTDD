@@ -94,10 +94,6 @@ class SalahTimesLoaderTests: XCTestCase {
         return "London, UK"
     }
     
-    private func anyDate() -> Date {
-        return Date()
-    }
-    
     private final class HTTPClientSpy: HTTPClient {
         
         typealias Completion = (Result<(Data, HTTPURLResponse), Error>) -> Void
