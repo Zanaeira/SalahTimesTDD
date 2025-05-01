@@ -66,5 +66,12 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
 	}
 
+	func test_nextPrayerByAddress_calculationMethodForFajrAndIshaCanBeChanged() {
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate(), fajrIsha: .standard(method: .muslimWorldLeague))
+			let calculationMethodQueryItem = URLQueryItem(name: "method", value: "3")
+
+			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
+	}
+
 
 }
