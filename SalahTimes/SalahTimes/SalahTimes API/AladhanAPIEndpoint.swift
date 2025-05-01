@@ -39,13 +39,13 @@ public struct AladhanAPIEndpoint: Endpoint {
 		return AladhanAPIEndpoint(path: "/v1/timingsByAddress\(dateParameter)", queryItems: queryItems)
 	}
 
-	public static func nextPrayerByAddress(_ address: String, on date: Date, iso8601DateFormat: Bool = true, madhhab: Madhhab = .hanafi) -> Endpoint {
+	public static func nextPrayerByAddress(_ address: String, on date: Date, iso8601DateFormat: Bool = true, madhhab: Madhhab = .hanafi, fajrIsha: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
 		var queryItems = [
 			URLQueryItem(name: "address", value: address),
 			URLQueryItem(name: "iso8601", value: String(iso8601DateFormat)),
-			URLQueryItem(name: "school", value: String(madhhab.rawValue)),
-			URLQueryItem(name: "method", value: String(2))
+			URLQueryItem(name: "school", value: String(madhhab.rawValue))
 		]
+		fajrIsha.queryItems().forEach { queryItems.append($0) }
 
 		let dateParameter = Calendar.current.isDateInToday(date) ? "" : "/\(dateFormattedForAPIRequest(date))"
 		return AladhanAPIEndpoint(path: "/v1/nextPrayerByAddress\(dateParameter)", queryItems: queryItems)
