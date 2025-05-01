@@ -57,6 +57,15 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		}
 	}
 
+	func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+			let (sut, httpClient, endpointSpy) = makeSUT()
+
+			expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
+					let invalidJSON = Data("invalid json".utf8)
+					httpClient.complete(withStatusCode: 200, data: invalidJSON)
+			}
+	}
+
 	// MARK: - Helpers
 
 	private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (upcomingSalahTimesLoader: UpcomingSalahLoader, httpClient: HTTPClientSpy, endpoint: Endpoint) {
