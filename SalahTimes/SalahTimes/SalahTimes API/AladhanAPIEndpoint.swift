@@ -28,27 +28,36 @@ public struct AladhanAPIEndpoint: Endpoint {
 	}
 
 	public static func timingsByAddress(_ address: String, on date: Date, iso8601DateFormat: Bool = false, madhhabForAsr: Madhhab = .hanafi, fajrIshaMethod: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
-		var queryItems = [
-			URLQueryItem(name: "iso8601", value: String(iso8601DateFormat)),
-			URLQueryItem(name: "address", value: address),
-			URLQueryItem(name: "school", value: String(madhhabForAsr.rawValue))
-		]
-		fajrIshaMethod.queryItems().forEach({queryItems.append($0)})
-
-		let dateParameter = Calendar.current.isDateInToday(date) ? "" : "/\(dateFormattedForAPIRequest(date))"
-		return AladhanAPIEndpoint(path: "/v1/timingsByAddress\(dateParameter)", queryItems: queryItems)
-	}
+		buildEndpoint(
+			"timingsByAddress",
+			address: address,
+			on: date,
+			iso8601DateFormat: iso8601DateFormat,
+			madhhab: madhhabForAsr,
+			fajrIsha: fajrIshaMethod
+		)	}
 
 	public static func nextPrayerByAddress(_ address: String, on date: Date, iso8601DateFormat: Bool = true, madhhab: Madhhab = .hanafi, fajrIsha: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
+		buildEndpoint(
+			"nextPrayerByAddress",
+			address: address,
+			on: date,
+			iso8601DateFormat: iso8601DateFormat,
+			madhhab: madhhab,
+			fajrIsha: fajrIsha
+		)
+	}
+
+	private static func buildEndpoint(_ path: String, address: String, on date: Date, iso8601DateFormat: Bool = true, madhhab: Madhhab = .hanafi, fajrIsha: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
 		var queryItems = [
-			URLQueryItem(name: "address", value: address),
 			URLQueryItem(name: "iso8601", value: String(iso8601DateFormat)),
+			URLQueryItem(name: "address", value: address),
 			URLQueryItem(name: "school", value: String(madhhab.rawValue))
 		]
 		fajrIsha.queryItems().forEach { queryItems.append($0) }
 
 		let dateParameter = Calendar.current.isDateInToday(date) ? "" : "/\(dateFormattedForAPIRequest(date))"
-		return AladhanAPIEndpoint(path: "/v1/nextPrayerByAddress\(dateParameter)", queryItems: queryItems)
+		return AladhanAPIEndpoint(path: "/v1/\(path)\(dateParameter)", queryItems: queryItems)
 	}
 
 
