@@ -84,4 +84,17 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[1]))
 	}
 
+	func test_nextPrayerByAddress_urlContainsHostSchemePathAndAllQueryItemsSpecified() {
+		let address = "London"
+		let date = tomorrow()
+		let madhhab = AladhanAPIEndpoint.Madhhab.hanafi
+		let method = AladhanAPIEndpoint.Method.standard(method: .muslimWorldLeague)
+
+		let expectedURL = URL(string: "http://api.aladhan.com/v1/nextPrayerByAddress/\(DateFormatter.dateFormatterForAladhanAPIRequest.string(from: date))?iso8601=true&address=\(address)&school=1&method=3")!
+
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(address, on: date, madhhab: madhhab, fajrIsha: method)
+
+		XCTAssertEqual(sut.url, expectedURL)
+	}
+
 }
