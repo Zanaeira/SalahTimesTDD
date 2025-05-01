@@ -59,4 +59,12 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 		XCTAssertTrue(sut.queryItems.contains(schoolForAsrTimeQueryItem))
 	}
 
+	func test_nextPrayerByAddress_queryItemsIncludesCalculationMethodForFajrAndIsha() {
+			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate())
+			let calculationMethodQueryItem = URLQueryItem(name: "method", value: "2")
+
+			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
+	}
+
+
 }
