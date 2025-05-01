@@ -73,5 +73,15 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItem))
 	}
 
+	func test_nextPrayerByAddress_allowsCustomCalculationMethodForFajrAndIsha() {
+			let methodSettings = AladhanAPIEndpoint.MethodSettings(fajrAngle: 18.5, maghribAngle: nil, ishaAngle: 17.5)
+			let method = AladhanAPIEndpoint.Method.custom(methodSettings: methodSettings)
+			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate(), fajrIsha: method)
+			let calculationMethodQueryItems = [URLQueryItem(name: "method", value: "99"),
+																				 URLQueryItem(name: "methodSettings", value: "18.5,null,17.5")]
+
+			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[0]))
+			XCTAssertTrue(sut.queryItems.contains(calculationMethodQueryItems[1]))
+	}
 
 }
