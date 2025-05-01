@@ -34,7 +34,7 @@ class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
 				XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
 		}
 
-    func test_timingsByAddress_queryItemsForCityAndCountryIncluded() {
+    func test_timingsByAddress_queryItemsForAddressIncluded() {
         let date = Date()
         let address = anyAddress()
         let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(address, on: date)
