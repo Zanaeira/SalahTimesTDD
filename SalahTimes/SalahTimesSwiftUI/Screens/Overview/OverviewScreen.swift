@@ -25,7 +25,7 @@ public struct OverviewScreen: View {
 					.font(.title)
 					.padding(.top, 48)
 				ForEach(locationsSettings) {
-					LocationCard(loader: loader, locationSettings: $0)
+					LocationSummary(loader: loader, locationSettings: $0)
 				}
 			}
 			.padding(.bottom)

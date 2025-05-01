@@ -17,7 +17,7 @@ struct SalahOverviewStyle: GroupBoxStyle {
 		.frame(maxWidth: .infinity)
 		.background {
 			RoundedRectangle(cornerRadius: 16)
-				.fill(.teal.opacity(0.4))
+				.fill(.teal.opacity(0.4).gradient)
 				.stroke(.white, lineWidth: 1)
 		}
 	}
