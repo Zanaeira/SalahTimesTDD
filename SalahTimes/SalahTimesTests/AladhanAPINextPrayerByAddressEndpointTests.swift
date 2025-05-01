@@ -52,5 +52,11 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 			XCTAssertTrue(sut.queryItems.contains(schoolForAsrTimeQueryItem))
 	}
 
+	func test_nextPrayerByAddress_respectsRequestedMadhabForAsr() {
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: anyDate(), madhhab: .hanafi)
+		let schoolForAsrTimeQueryItem = URLQueryItem(name: "school", value: "1")
+
+		XCTAssertTrue(sut.queryItems.contains(schoolForAsrTimeQueryItem))
+	}
 
 }
