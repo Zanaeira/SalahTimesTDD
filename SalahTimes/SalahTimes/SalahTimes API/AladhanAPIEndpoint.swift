@@ -43,7 +43,8 @@ public struct AladhanAPIEndpoint: Endpoint {
 		var queryItems = [
 			URLQueryItem(name: "address", value: address),
 			URLQueryItem(name: "iso8601", value: String(iso8601DateFormat)),
-			URLQueryItem(name: "school", value: String(madhhab.rawValue))
+			URLQueryItem(name: "school", value: String(madhhab.rawValue)),
+			URLQueryItem(name: "method", value: String(2))
 		]
 
 		let dateParameter = Calendar.current.isDateInToday(date) ? "" : "/\(dateFormattedForAPIRequest(date))"
