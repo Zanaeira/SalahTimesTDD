@@ -57,12 +57,6 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		}
 	}
 
-	private func makeUpcomingSalahJSON(_ timings: [String: String]) -> Data {
-		let json = ["data": timings]
-		return try! JSONSerialization.data(withJSONObject: json)
-	}
-
-
 	// MARK: - Helpers
 
 	private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (upcomingSalahTimesLoader: UpcomingSalahLoader, httpClient: HTTPClientSpy, endpoint: Endpoint) {
@@ -84,6 +78,11 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		action()
 
 		XCTAssertEqual(capturedResults, [result], file: file, line: line)
+	}
+
+	private func makeUpcomingSalahJSON(_ timings: [String: String]) -> Data {
+		let json = ["data": timings]
+		return try! JSONSerialization.data(withJSONObject: json)
 	}
 
 	private final class HTTPClientSpy: HTTPClient {
