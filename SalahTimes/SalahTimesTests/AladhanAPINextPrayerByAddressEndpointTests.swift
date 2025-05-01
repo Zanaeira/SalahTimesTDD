@@ -18,7 +18,7 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 			URLQueryItem(name: "address", value: address)
 		]
 
-		XCTAssertEqual(sut.queryItems, expectedQueryItems)
+		XCTAssertTrue(sut.queryItems.contains(expectedQueryItems[0]))
 	}
 
 	func test_nextPrayerByAddress_pathIsCorrectForDate() {
@@ -28,5 +28,14 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 
 			XCTAssertEqual(sut.path, expectedPath)
 	}
+
+	func test_nextPrayerByAddress_dateFormatIsIso8601ByDefault() {
+			let date = tomorrow()
+			let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date)
+			let expectedQueryItem = URLQueryItem(name: "iso8601", value: "true")
+
+			XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
+	}
+
 
 }
