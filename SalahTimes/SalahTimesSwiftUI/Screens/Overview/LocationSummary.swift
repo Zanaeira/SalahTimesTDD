@@ -56,7 +56,6 @@ struct LocationSummary: View {
 				Text(viewModel.timeFormatter.string(from: salah.time))
 				Text(salah.metadata.name)
 					.font(.callout.smallCaps())
-					.foregroundStyle(.secondary)
 			}
 		}
 	}
