@@ -10,9 +10,11 @@ import Foundation
 public struct UpcomingSalah: Equatable {
 	public let name: String
 	public let time: Date
+	public let timezone: String
 
-	public init(name: String, time: Date) {
+	public init(name: String, time: Date, timezone: String) {
 		self.name = name
 		self.time = time
+		self.timezone = timezone
 	}
 }

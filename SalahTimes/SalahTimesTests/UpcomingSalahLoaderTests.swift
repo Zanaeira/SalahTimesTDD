@@ -26,8 +26,7 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 		sampleStatusCodes.enumerated().forEach { index, code in
 			expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
-				let upcomingSalah = ["timings": ["Fajr": "2025-04-30T03:38:00+01:00"]]
-				httpClient.complete(withStatusCode: code, data: makeUpcomingSalahJSON(upcomingSalah), at: index)
+				httpClient.complete(withStatusCode: code, data: makeUpcomingSalahJSON(), at: index)
 			}
 		}
 	}
@@ -43,8 +42,8 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 	func test_load_deliversUpcomingSalahOn200HTTPResponseWithJSONTimes() {
 		let (sut, httpClient, endpointSpy) = makeSUT()
-		let upcomingSalah = UpcomingSalah(name: "Fajr", time: ISO8601DateFormatter().date(from: "2025-04-30T03:38:00+01:00")!)
-		let data = makeUpcomingSalahJSON(["timings": ["Fajr": "2025-04-30T03:38:00+01:00"]])
+		let upcomingSalah = UpcomingSalah(name: "Fajr", time: ISO8601DateFormatter().date(from: "2025-04-30T03:38:00+01:00")!, timezone: "Europe/London")
+		let data = makeUpcomingSalahJSON()
 
 		expect(sut, toCompleteWith: .success(upcomingSalah), using: endpointSpy) {
 			httpClient.complete(withStatusCode: 200, data: data)
@@ -55,7 +54,7 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		let httpClient = HTTPClientSpy()
 		let endpointSpy = EndpointSpy.make()
 		var sut: UpcomingSalahLoader? = UpcomingSalahLoader(client: httpClient)
-		let data = makeUpcomingSalahJSON(["timings": ["Fajr": "2025-04-30T03:38:00+01:00"]])
+		let data = makeUpcomingSalahJSON()
 
 		var capturedResults = [UpcomingSalahLoader.Result]()
 		sut?.load(from: endpointSpy) {
@@ -92,9 +91,13 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		XCTAssertEqual(capturedResults, [result], file: file, line: line)
 	}
 
-	private func makeUpcomingSalahJSON(_ timings: [String: [String: String]]) -> Data {
-		let json = ["data": timings]
-		print(json)
+	private func makeUpcomingSalahJSON() -> Data {
+		let json = [
+			"data" : [
+				"timings": ["Fajr": "2025-04-30T03:38:00+01:00"],
+				"meta": ["timezone": "Europe/London"]
+			]
+		]
 		return try! JSONSerialization.data(withJSONObject: json)
 	}
 
