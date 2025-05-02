@@ -20,7 +20,13 @@ final class UpcomingSalahViewModel: ObservableObject {
 
 	private(set) var timeZone: String = "London/Europe"
 
-	var formatter: DateFormatter {
+	var dateFormatter: DateFormatter {
+		let dateFormatter = DateFormatter.salahDateFormatter
+		dateFormatter.timeZone = .init(identifier: timeZone)
+		return dateFormatter
+	}
+
+	var timeFormatter: DateFormatter {
 		let dateFormatter = DateFormatter.salahTimesFormatter
 		dateFormatter.timeZone = .init(identifier: timeZone)
 		return dateFormatter
@@ -44,6 +50,13 @@ final class UpcomingSalahViewModel: ObservableObject {
 }
 
 fileprivate extension DateFormatter {
+	static let salahDateFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateStyle = .medium
+		formatter.timeStyle = .none
+
+		return formatter
+	}()
 	static let salahTimesFormatter: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.dateStyle = .none
