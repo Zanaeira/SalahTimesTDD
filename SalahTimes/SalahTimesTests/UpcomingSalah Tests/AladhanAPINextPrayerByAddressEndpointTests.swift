@@ -37,12 +37,14 @@ class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 		XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
 	}
 
-	func test_nextPrayerByAddress_dateFormatQueryParameterIsIncluded() {
+	func test_nextPrayerByAddress_dateFormatCannotBeOtherThanIso8601() {
 		let date = tomorrow()
-		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date, iso8601DateFormat: false)
-		let expectedQueryItem = URLQueryItem(name: "iso8601", value: "false")
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: date)
+		let expectedQueryItem = URLQueryItem(name: "iso8601", value: "true")
+		let unexpectedQueryItem = URLQueryItem(name: "iso8601", value: "false")
 
 		XCTAssertTrue(sut.queryItems.contains(expectedQueryItem))
+		XCTAssertFalse(sut.queryItems.contains(unexpectedQueryItem))
 	}
 
 	func test_nextPrayerByAddress_queryItemsIncludesSchoolForAsrTimeCalculation() {

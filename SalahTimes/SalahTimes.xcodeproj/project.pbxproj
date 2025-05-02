@@ -395,6 +395,32 @@
 			path = "Shared API";
 			sourceTree = "<group>";
 		};
+		1B8F23002DC57540004CC4F1 /* UpcomingSalah Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1BE68D8C2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift */,
+				1BE68D912DC43ACC0045C0E3 /* UpcomingSalahLoaderTests.swift */,
+			);
+			path = "UpcomingSalah Tests";
+			sourceTree = "<group>";
+		};
+		1B8F23012DC57552004CC4F1 /* SalahTimes Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1BE005EA26BCB1BC003F5F54 /* AladhanAPITimingsByAddressEndpointTests.swift */,
+				1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */,
+			);
+			path = "SalahTimes Tests";
+			sourceTree = "<group>";
+		};
+		1B8F23022DC57561004CC4F1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		1B9172512779505F0009628F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,11 +516,9 @@
 			isa = PBXGroup;
 			children = (
 				1BE005B226B8069D003F5F54 /* Info.plist */,
-				1BE68D8C2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift */,
-				1BE005EA26BCB1BC003F5F54 /* AladhanAPITimingsByAddressEndpointTests.swift */,
-				1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */,
-				1BE68D912DC43ACC0045C0E3 /* UpcomingSalahLoaderTests.swift */,
-				1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */,
+				1B8F23002DC57540004CC4F1 /* UpcomingSalah Tests */,
+				1B8F23012DC57552004CC4F1 /* SalahTimes Tests */,
+				1B8F23022DC57561004CC4F1 /* Shared */,
 				1BE005D226BC3368003F5F54 /* Helpers */,
 			);
 			path = SalahTimesTests;
