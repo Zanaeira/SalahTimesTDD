@@ -10,6 +10,51 @@ import SalahTimes
 
 
 public struct UpcomingSalah: Equatable {
+	let name: String
+	let time: Date
+}
+
+final class UpcomingSalahMapper {
+	private static let OK_200: Int = 200
+
+	static func map(_ data: Data, _ response: HTTPURLResponse) throws -> UpcomingSalah {
+			guard response.statusCode == OK_200 else {
+					throw TimesLoaderError.invalidData
+			}
+
+		guard let upcomingSalah = try JSONDecoder().decode(Root.self, from: data).data.upcomingSalah else {
+			throw TimesLoaderError.invalidData
+		}
+
+		return upcomingSalah
+	}
+
+	private struct Root: Decodable {
+		let data: TimingsData
+	}
+
+	private struct TimingsData: Decodable {
+		let timings: Timings
+
+		var upcomingSalah: UpcomingSalah? {
+			let salahs = [timings.Fajr, timings.Dhuhr, timings.Asr, timings.Maghrib, timings.Isha]
+			for (index, salahTime) in salahs.compactMap({ $0 }).enumerated() {
+				guard Self.salahNames.indices.contains(index) else { continue }
+				let name = Self.salahNames[index]
+				guard let time = ISO8601DateFormatter().date(from: salahTime) else { continue }
+				return .init(name: name, time: time)
+			}
+
+			return nil
+		}
+
+		private static let salahNames = ["Fajr", "Zuhr", "Asr", "Maghrib", "Isha"]
+
+	}
+
+	private struct Timings: Decodable {
+		let Fajr, Dhuhr, Asr, Maghrib, Isha: String?
+	}
 }
 
 public final class UpcomingSalahLoader {
@@ -24,8 +69,11 @@ public final class UpcomingSalahLoader {
 	public func load(from endpoint: Endpoint, completion: @escaping (Result) -> Void) {
 		client.get(from: endpoint.url) { result in
 			switch result {
-			case .success(let success):
-				completion(.failure(.invalidData))
+			case .success(let (date, response)):
+				guard let upcomingSalah = try? UpcomingSalahMapper.map(date, response) else {
+					return completion(.failure(.invalidData))
+				}
+				completion(.success(upcomingSalah))
 			case .failure(let failure):
 				completion(.failure(.connectivity))
 			}
@@ -51,19 +99,29 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 		sampleStatusCodes.enumerated().forEach { index, code in
 			expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
-				let upcomingSalah = ["Fajr": "2025-04-30T03:38:00+01:00"]
+				let upcomingSalah = ["timings": ["Fajr": "2025-04-30T03:38:00+01:00"]]
 				httpClient.complete(withStatusCode: code, data: makeUpcomingSalahJSON(upcomingSalah), at: index)
 			}
 		}
 	}
 
 	func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
-			let (sut, httpClient, endpointSpy) = makeSUT()
+		let (sut, httpClient, endpointSpy) = makeSUT()
 
-			expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
-					let invalidJSON = Data("invalid json".utf8)
-					httpClient.complete(withStatusCode: 200, data: invalidJSON)
-			}
+		expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
+			let invalidJSON = Data("invalid json".utf8)
+			httpClient.complete(withStatusCode: 200, data: invalidJSON)
+		}
+	}
+
+	func test_load_deliversUpcomingSalahOn200HTTPResponseWithJSONTimes() {
+		let (sut, httpClient, endpointSpy) = makeSUT()
+		let upcomingSalah = UpcomingSalah(name: "Fajr", time: ISO8601DateFormatter().date(from: "2025-04-30T03:38:00+01:00")!)
+		let data = makeUpcomingSalahJSON(["timings": ["Fajr": "2025-04-30T03:38:00+01:00"]])
+
+		expect(sut, toCompleteWith: .success(upcomingSalah), using: endpointSpy) {
+			httpClient.complete(withStatusCode: 200, data: data)
+		}
 	}
 
 	// MARK: - Helpers
@@ -89,8 +147,9 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		XCTAssertEqual(capturedResults, [result], file: file, line: line)
 	}
 
-	private func makeUpcomingSalahJSON(_ timings: [String: String]) -> Data {
+	private func makeUpcomingSalahJSON(_ timings: [String: [String: String]]) -> Data {
 		let json = ["data": timings]
+		print(json)
 		return try! JSONSerialization.data(withJSONObject: json)
 	}
 
