@@ -68,7 +68,7 @@ public final class UpcomingSalahLoader {
 
 	public func load(from endpoint: Endpoint, completion: @escaping (Result) -> Void) {
 		client.get(from: endpoint.url) { [weak self] result in
-			guard let self else { return }
+			guard self != nil else { return }
 
 			switch result {
 			case .success(let (date, response)):
@@ -76,7 +76,7 @@ public final class UpcomingSalahLoader {
 					return completion(.failure(.invalidData))
 				}
 				completion(.success(upcomingSalah))
-			case .failure(let failure):
+			case .failure:
 				completion(.failure(.connectivity))
 			}
 		}
