@@ -11,9 +11,9 @@ final class UpcomingSalahMapper {
 	private static let OK_200: Int = 200
 
 	static func map(_ data: Data, _ response: HTTPURLResponse) throws -> UpcomingSalah {
-			guard response.statusCode == OK_200 else {
-					throw TimesLoaderError.invalidData
-			}
+		guard response.statusCode == OK_200 else {
+			throw TimesLoaderError.invalidData
+		}
 
 		guard let upcomingSalah = try JSONDecoder().decode(Root.self, from: data).data.upcomingSalah else {
 			throw TimesLoaderError.invalidData
