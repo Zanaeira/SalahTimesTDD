@@ -31,4 +31,12 @@ public final class UpcomingSalahLoader {
 			}
 		}
 	}
+
+	public func load(from endpoint: any Endpoint) async -> Result {
+		await withCheckedContinuation { continuation in
+			load(from: endpoint) { result in
+				continuation.resume(returning: result)
+			}
+		}
+	}
 }
