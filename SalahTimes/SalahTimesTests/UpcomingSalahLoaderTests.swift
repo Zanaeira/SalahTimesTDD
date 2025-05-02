@@ -26,7 +26,7 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 		sampleStatusCodes.enumerated().forEach { index, code in
 			expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
-				httpClient.complete(withStatusCode: code, data: makeUpcomingSalahJSON(), at: index)
+				httpClient.complete(withStatusCode: code, data: makeUpcomingSalahJSON(timings: fajr, timezone: timezone), at: index)
 			}
 		}
 	}
@@ -43,7 +43,7 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 	func test_load_deliversUpcomingSalahOn200HTTPResponseWithJSONTimes() {
 		let (sut, httpClient, endpointSpy) = makeSUT()
 		let upcomingSalah = UpcomingSalah(name: "Fajr", time: ISO8601DateFormatter().date(from: "2025-04-30T03:38:00+01:00")!, timezone: "Europe/London")
-		let data = makeUpcomingSalahJSON()
+		let data = makeUpcomingSalahJSON(timings: fajr, timezone: timezone)
 
 		expect(sut, toCompleteWith: .success(upcomingSalah), using: endpointSpy) {
 			httpClient.complete(withStatusCode: 200, data: data)
@@ -54,7 +54,7 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		let httpClient = HTTPClientSpy()
 		let endpointSpy = EndpointSpy.make()
 		var sut: UpcomingSalahLoader? = UpcomingSalahLoader(client: httpClient)
-		let data = makeUpcomingSalahJSON()
+		let data = makeUpcomingSalahJSON(timings: fajr, timezone: timezone)
 
 		var capturedResults = [UpcomingSalahLoader.Result]()
 		sut?.load(from: endpointSpy) {
@@ -69,6 +69,9 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 
 	// MARK: - Helpers
+
+	private let fajr = ["Fajr": "2025-04-30T03:38:00+01:00"]
+	private let timezone = ["timezone": "Europe/London"]
 
 	private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (upcomingSalahTimesLoader: UpcomingSalahLoader, httpClient: HTTPClientSpy, endpoint: Endpoint) {
 		let httpClient = HTTPClientSpy()
@@ -91,11 +94,11 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		XCTAssertEqual(capturedResults, [result], file: file, line: line)
 	}
 
-	private func makeUpcomingSalahJSON() -> Data {
+	private func makeUpcomingSalahJSON(timings: [String: String], timezone: [String: String]) -> Data {
 		let json = [
 			"data" : [
-				"timings": ["Fajr": "2025-04-30T03:38:00+01:00"],
-				"meta": ["timezone": "Europe/London"]
+				"timings": timings,
+				"meta": timezone
 			]
 		]
 		return try! JSONSerialization.data(withJSONObject: json)
