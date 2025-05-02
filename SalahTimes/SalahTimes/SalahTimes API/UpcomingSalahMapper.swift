@@ -32,13 +32,11 @@ final class UpcomingSalahMapper {
 
 		var upcomingSalah: UpcomingSalah? {
 			let salahs = [timings.Fajr, timings.Dhuhr, timings.Asr, timings.Maghrib, timings.Isha]
-			for (index, salahTime) in salahs.compactMap({ $0 }).enumerated() {
-				guard Self.salahNames.indices.contains(index) else { continue }
-				let name = Self.salahNames[index]
-				guard let time = ISO8601DateFormatter().date(from: salahTime) else { continue }
-				return .init(name: name, time: time, timezone: meta.timezone)
+			for (name, salahTime) in zip(Self.salahNames, salahs) {
+				if let salahTime, let time = ISO8601DateFormatter().date(from: salahTime) {
+					return .init(name: name, time: time, timezone: meta.timezone)
+				}
 			}
-
 			return nil
 		}
 

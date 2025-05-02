@@ -50,6 +50,16 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		}
 	}
 
+	func test_load_deliversCorrectUpcomingSalahOn200HTTPResponseWithJSONTimes() {
+		let (sut, httpClient, endpointSpy) = makeSUT()
+		let upcomingSalah = UpcomingSalah(name: "Zuhr", time: ISO8601DateFormatter().date(from: "2025-04-29T11:56:00+06:00")!, timezone: "Asia/Dhaka")
+		let data = makeUpcomingSalahJSON(timings: ["Dhuhr": "2025-04-29T11:56:00+06:00"], timezone: ["timezone": "Asia/Dhaka"])
+
+		expect(sut, toCompleteWith: .success(upcomingSalah), using: endpointSpy) {
+			httpClient.complete(withStatusCode: 200, data: data)
+		}
+	}
+
 	func test_load_doesNotDeliverResultsAfterSUTInstanceHasBeenDeallocated() {
 		let httpClient = HTTPClientSpy()
 		let endpointSpy = EndpointSpy.make()
