@@ -22,7 +22,7 @@ struct LocationSummary: View {
 					Text(locationSettings.location)
 						.font(.title)
 					Spacer()
-					if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .narrow)) {
+					if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
 						Text("Next Salāh \(timeLeft)")
 							.font(.callout.smallCaps())
 							.foregroundStyle(.secondary)
