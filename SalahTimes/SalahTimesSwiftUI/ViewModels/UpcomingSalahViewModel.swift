@@ -34,8 +34,6 @@ final class UpcomingSalahViewModel: ObservableObject {
 		case .success(let upcomingSalah):
 			timeZone = upcomingSalah.timezone
 			self.upcomingSalah = upcomingSalah
-			print(timeZone)
-			print(upcomingSalah)
 		case .failure:
 			break
 		}
