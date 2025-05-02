@@ -10,9 +10,9 @@ import SalahTimes
 
 struct LocationSummary: View {
 
-	init(loader: TimesLoader, locationSettings: LocationSettings) {
+	init(loader: UpcomingSalahLoader, locationSettings: LocationSettings) {
 		self.locationSettings = locationSettings
-		_viewModel = .init(wrappedValue: PrayerTimesViewModel(loader: loader))
+		_viewModel = .init(wrappedValue: UpcomingSalahViewModel(loader: loader))
 	}
 
 	var body: some View {
@@ -22,10 +22,11 @@ struct LocationSummary: View {
 					Text(locationSettings.location)
 						.font(.title)
 					Spacer()
-					let timeLeft = Date().formatted(.relative(presentation: .numeric, unitsStyle: .narrow))
-					Text("Next Salāh \(timeLeft)")
-						.font(.callout.smallCaps())
-						.foregroundStyle(.secondary)
+					if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .narrow)) {
+						Text("Next Salāh \(timeLeft)")
+							.font(.callout.smallCaps())
+							.foregroundStyle(.secondary)
+					}
 				}
 				Spacer()
 				upcomingSalahView
@@ -37,14 +38,14 @@ struct LocationSummary: View {
 	}
 
 	@State private var locationSettings: LocationSettings
-	@StateObject private var viewModel: PrayerTimesViewModel
+	@StateObject private var viewModel: UpcomingSalahViewModel
 
 	private let secondary = Color.white.opacity(0.8)
 
 	@ViewBuilder
 	private var upcomingSalahView: some View {
 		VStack(spacing: 2) {
-			if let salah = viewModel.salahTimes.first {
+			if let salah = salah(from: viewModel.upcomingSalah) {
 				Image(systemName: salah.imageSystemName)
 					.font(.largeTitle)
 					.symbolVariant(.fill)
@@ -54,6 +55,18 @@ struct LocationSummary: View {
 					.font(.callout.smallCaps())
 					.foregroundStyle(.secondary)
 			}
+		}
+	}
+
+	private func salah(from upcomingSalah: UpcomingSalah?) -> Salah? {
+		guard let upcomingSalah else { return nil }
+		return switch upcomingSalah.name {
+		case "Fajr": .fajr(time: upcomingSalah.time)
+		case "Zuhr": .zuhr(time: upcomingSalah.time)
+		case "Asr": .asr(time: upcomingSalah.time)
+		case "Maghrib": .maghrib(time: upcomingSalah.time)
+		case "Isha": .isha(time: upcomingSalah.time)
+		default: nil
 		}
 	}
 }
