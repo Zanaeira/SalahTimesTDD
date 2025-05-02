@@ -18,9 +18,12 @@ struct LocationSummary: View {
 	var body: some View {
 		GroupBox {
 			HStack(alignment: .lastTextBaseline) {
-				VStack(alignment: .leading, spacing: 16) {
+				VStack(alignment: .leading, spacing: 0) {
 					Text(locationSettings.location)
 						.font(.title)
+					Text(viewModel.dateFormatter.string(from: Date()))
+						.font(.subheadline)
+						.foregroundStyle(.secondary)
 					Spacer()
 					if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
 						Text("Next Salāh \(timeLeft)")
@@ -50,7 +53,7 @@ struct LocationSummary: View {
 					.font(.largeTitle)
 					.symbolVariant(.fill)
 					.foregroundStyle(.orange)
-				Text(viewModel.formatter.string(from: salah.time))
+				Text(viewModel.timeFormatter.string(from: salah.time))
 				Text(salah.metadata.name)
 					.font(.callout.smallCaps())
 					.foregroundStyle(.secondary)
