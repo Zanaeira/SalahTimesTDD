@@ -26,7 +26,7 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 		sampleStatusCodes.enumerated().forEach { index, code in
 			expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
-				httpClient.complete(withStatusCode: code, data: makeUpcomingSalahJSON(timings: fajr, timezone: timezone), at: index)
+				httpClient.complete(withStatusCode: code, data: makeUpcomingSalahJSON(timings: sampleTimings, timezone: sampleTimeZone), at: index)
 			}
 		}
 	}
@@ -42,8 +42,8 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 	func test_load_deliversUpcomingSalahOn200HTTPResponseWithJSONTimes() {
 		let (sut, httpClient, endpointSpy) = makeSUT()
-		let upcomingSalah = UpcomingSalah(name: "Fajr", time: ISO8601DateFormatter().date(from: "2025-04-30T03:38:00+01:00")!, timezone: "Europe/London")
-		let data = makeUpcomingSalahJSON(timings: fajr, timezone: timezone)
+		let upcomingSalah = UpcomingSalah(name: "Isha", time: Date(timeIntervalSince1970: 1746221040), timezone: "Europe/London")
+		let data = makeUpcomingSalahJSON(timings: ["Isha": "2025-05-02T22:24:00+01:00"], timezone: ["timezone": "Europe/London"])
 
 		expect(sut, toCompleteWith: .success(upcomingSalah), using: endpointSpy) {
 			httpClient.complete(withStatusCode: 200, data: data)
@@ -52,7 +52,7 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 	func test_load_deliversCorrectUpcomingSalahOn200HTTPResponseWithJSONTimes() {
 		let (sut, httpClient, endpointSpy) = makeSUT()
-		let upcomingSalah = UpcomingSalah(name: "Zuhr", time: ISO8601DateFormatter().date(from: "2025-04-29T11:56:00+06:00")!, timezone: "Asia/Dhaka")
+		let upcomingSalah = UpcomingSalah(name: "Zuhr", time: Date(timeIntervalSince1970: 1745906160), timezone: "Asia/Dhaka")
 		let data = makeUpcomingSalahJSON(timings: ["Dhuhr": "2025-04-29T11:56:00+06:00"], timezone: ["timezone": "Asia/Dhaka"])
 
 		expect(sut, toCompleteWith: .success(upcomingSalah), using: endpointSpy) {
@@ -64,7 +64,7 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 		let httpClient = HTTPClientSpy()
 		let endpointSpy = EndpointSpy.make()
 		var sut: UpcomingSalahLoader? = UpcomingSalahLoader(client: httpClient)
-		let data = makeUpcomingSalahJSON(timings: fajr, timezone: timezone)
+		let data = makeUpcomingSalahJSON(timings: sampleTimings, timezone: sampleTimeZone)
 
 		var capturedResults = [UpcomingSalahLoader.Result]()
 		sut?.load(from: endpointSpy) {
@@ -80,8 +80,8 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 
 	// MARK: - Helpers
 
-	private let fajr = ["Fajr": "2025-04-30T03:38:00+01:00"]
-	private let timezone = ["timezone": "Europe/London"]
+	private let sampleTimings = ["Fajr": "2025-04-30T03:38:00+01:00"]
+	private let sampleTimeZone = ["timezone": "Europe/London"]
 
 	private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (upcomingSalahTimesLoader: UpcomingSalahLoader, httpClient: HTTPClientSpy, endpoint: Endpoint) {
 		let httpClient = HTTPClientSpy()
