@@ -24,33 +24,33 @@ final class UpcomingSalahMapper {
 
 		return upcomingSalah
 	}
+}
 
-	private struct Root: Decodable {
-		let data: TimingsData
-	}
+private struct Root: Decodable {
+	let data: TimingsData
+}
 
-	private struct TimingsData: Decodable {
-		let timings: Timings
-		let meta: Meta
+private struct TimingsData: Decodable {
+	let timings: Timings
+	let meta: Meta
 
-		var upcomingSalah: UpcomingSalah? {
-			let salahs = [timings.Fajr, timings.Dhuhr, timings.Asr, timings.Maghrib, timings.Isha]
-			for (name, salahTime) in zip(Self.salahNames, salahs) {
-				if let salahTime {
-					return .init(name: name, time: salahTime, timezone: meta.timezone)
-				}
+	var upcomingSalah: UpcomingSalah? {
+		let salahs = [timings.Fajr, timings.Dhuhr, timings.Asr, timings.Maghrib, timings.Isha]
+		for (name, salahTime) in zip(Self.salahNames, salahs) {
+			if let salahTime {
+				return .init(name: name, time: salahTime, timezone: meta.timezone)
 			}
-			return nil
 		}
-
-		private static let salahNames = ["Fajr", "Zuhr", "Asr", "Maghrib", "Isha"]
+		return nil
 	}
 
-	private struct Timings: Decodable {
-		let Fajr, Dhuhr, Asr, Maghrib, Isha: Date?
-	}
+	private static let salahNames = ["Fajr", "Zuhr", "Asr", "Maghrib", "Isha"]
+}
 
-	private struct Meta: Decodable {
-		let timezone: String
-	}
+private struct Timings: Decodable {
+	let Fajr, Dhuhr, Asr, Maghrib, Isha: Date?
+}
+
+private struct Meta: Decodable {
+	let timezone: String
 }
