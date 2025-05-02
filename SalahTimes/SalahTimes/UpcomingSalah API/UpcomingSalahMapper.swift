@@ -15,7 +15,10 @@ final class UpcomingSalahMapper {
 			throw TimesLoaderError.invalidData
 		}
 
-		guard let upcomingSalah = try JSONDecoder().decode(Root.self, from: data).data.upcomingSalah else {
+		let decoder = JSONDecoder()
+		decoder.dateDecodingStrategy = .iso8601
+
+		guard let upcomingSalah = try decoder.decode(Root.self, from: data).data.upcomingSalah else {
 			throw TimesLoaderError.invalidData
 		}
 
@@ -33,8 +36,8 @@ final class UpcomingSalahMapper {
 		var upcomingSalah: UpcomingSalah? {
 			let salahs = [timings.Fajr, timings.Dhuhr, timings.Asr, timings.Maghrib, timings.Isha]
 			for (name, salahTime) in zip(Self.salahNames, salahs) {
-				if let salahTime, let time = ISO8601DateFormatter().date(from: salahTime) {
-					return .init(name: name, time: time, timezone: meta.timezone)
+				if let salahTime {
+					return .init(name: name, time: salahTime, timezone: meta.timezone)
 				}
 			}
 			return nil
@@ -44,7 +47,7 @@ final class UpcomingSalahMapper {
 	}
 
 	private struct Timings: Decodable {
-		let Fajr, Dhuhr, Asr, Maghrib, Isha: String?
+		let Fajr, Dhuhr, Asr, Maghrib, Isha: Date?
 	}
 
 	private struct Meta: Decodable {
