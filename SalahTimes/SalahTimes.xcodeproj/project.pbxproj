@@ -366,6 +366,35 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1B8F22FD2DC562E0004CC4F1 /* UpcomingSalah Feature */ = {
+			isa = PBXGroup;
+			children = (
+				1BE68D932DC44DBB0045C0E3 /* UpcomingSalah.swift */,
+			);
+			path = "UpcomingSalah Feature";
+			sourceTree = "<group>";
+		};
+		1B8F22FE2DC562F8004CC4F1 /* UpcomingSalah API */ = {
+			isa = PBXGroup;
+			children = (
+				1BE68D972DC44DEF0045C0E3 /* UpcomingSalahLoader.swift */,
+				1BE68D952DC44DD60045C0E3 /* UpcomingSalahMapper.swift */,
+			);
+			path = "UpcomingSalah API";
+			sourceTree = "<group>";
+		};
+		1B8F22FF2DC56344004CC4F1 /* Shared API */ = {
+			isa = PBXGroup;
+			children = (
+				1BE005ED26BCC82A003F5F54 /* AladhanAPIEndpoint.swift */,
+				1BE005EF26BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift */,
+				1BE005C626BB5A69003F5F54 /* Endpoint.swift */,
+				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
+				1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */,
+			);
+			path = "Shared API";
+			sourceTree = "<group>";
+		};
 		1B9172512779505F0009628F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,6 +479,9 @@
 				1BE005A626B8069D003F5F54 /* Info.plist */,
 				1BE005CD26BB892D003F5F54 /* SalahTimes Feature */,
 				1BE005CC26BB891E003F5F54 /* SalahTimes API */,
+				1B8F22FF2DC56344004CC4F1 /* Shared API */,
+				1B8F22FD2DC562E0004CC4F1 /* UpcomingSalah Feature */,
+				1B8F22FE2DC562F8004CC4F1 /* UpcomingSalah API */,
 			);
 			path = SalahTimes;
 			sourceTree = "<group>";
@@ -471,18 +503,11 @@
 		1BE005CC26BB891E003F5F54 /* SalahTimes API */ = {
 			isa = PBXGroup;
 			children = (
-				1BE005ED26BCC82A003F5F54 /* AladhanAPIEndpoint.swift */,
-				1BE005EF26BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift */,
-				1BE005C626BB5A69003F5F54 /* Endpoint.swift */,
-				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
 				1BE005C426BB5A49003F5F54 /* SalahTimesLoader.swift */,
 				1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */,
 				1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */,
 				1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */,
 				1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */,
-				1BE68D972DC44DEF0045C0E3 /* UpcomingSalahLoader.swift */,
-				1BE68D952DC44DD60045C0E3 /* UpcomingSalahMapper.swift */,
-				1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */,
 			);
 			path = "SalahTimes API";
 			sourceTree = "<group>";
@@ -491,7 +516,6 @@
 			isa = PBXGroup;
 			children = (
 				1BE005BC26B80701003F5F54 /* SalahTimes.swift */,
-				1BE68D932DC44DBB0045C0E3 /* UpcomingSalah.swift */,
 			);
 			path = "SalahTimes Feature";
 			sourceTree = "<group>";
