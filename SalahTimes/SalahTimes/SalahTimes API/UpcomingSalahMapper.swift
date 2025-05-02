@@ -28,6 +28,7 @@ final class UpcomingSalahMapper {
 
 	private struct TimingsData: Decodable {
 		let timings: Timings
+		let meta: Meta
 
 		var upcomingSalah: UpcomingSalah? {
 			let salahs = [timings.Fajr, timings.Dhuhr, timings.Asr, timings.Maghrib, timings.Isha]
@@ -35,17 +36,20 @@ final class UpcomingSalahMapper {
 				guard Self.salahNames.indices.contains(index) else { continue }
 				let name = Self.salahNames[index]
 				guard let time = ISO8601DateFormatter().date(from: salahTime) else { continue }
-				return .init(name: name, time: time)
+				return .init(name: name, time: time, timezone: meta.timezone)
 			}
 
 			return nil
 		}
 
 		private static let salahNames = ["Fajr", "Zuhr", "Asr", "Maghrib", "Isha"]
-
 	}
 
 	private struct Timings: Decodable {
 		let Fajr, Dhuhr, Asr, Maghrib, Isha: String?
+	}
+
+	private struct Meta: Decodable {
+		let timezone: String
 	}
 }
