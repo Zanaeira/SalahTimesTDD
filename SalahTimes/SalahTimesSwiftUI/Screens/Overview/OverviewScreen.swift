@@ -21,14 +21,11 @@ public struct OverviewScreen: View {
 	public var body: some View {
 		ScrollView {
 			VStack (spacing: 16) {
-				Text(Date(), format: .dateTime.day().month().year())
-					.font(.title)
-					.padding(.top, 48)
 				ForEach(locationsSettings) {
 					LocationSummary(loader: UpcomingSalahLoader(client: URLSessionHTTPClient()), locationSettings: $0)
 				}
 			}
-			.padding(.bottom)
+			.padding(.vertical)
 		}
 		.background(BackgroundView().ignoresSafeArea())
 	}

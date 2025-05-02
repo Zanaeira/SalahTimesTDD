@@ -14,8 +14,11 @@ struct SalahTimesApp: App {
 
 	var body: some Scene {
 		WindowGroup {
-			OverviewScreen(loader: compositeTimesLoader, locationsSettings: locationSettings)
-				.onAppear { registerDefaults() }
+			NavigationStack {
+				OverviewScreen(loader: compositeTimesLoader, locationsSettings: locationSettings)
+					.navigationTitle("My locations")
+					.onAppear { registerDefaults() }
+			}
 		}
 	}
 
