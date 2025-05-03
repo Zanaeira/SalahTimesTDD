@@ -25,6 +25,8 @@
 		1B8F23082DC66B0F004CC4F1 /* RemoteLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23072DC66B0F004CC4F1 /* RemoteLoaderTests.swift */; };
 		1B8F230A2DC66C1D004CC4F1 /* RemoteLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23092DC66C1D004CC4F1 /* RemoteLoader.swift */; };
 		1B8F230C2DC66E41004CC4F1 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F230B2DC66E41004CC4F1 /* TestHelpers.swift */; };
+		1B8F23122DC69537004CC4F1 /* UpcomingSalahLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23112DC69537004CC4F1 /* UpcomingSalahLoaderWithFallbackComposite.swift */; };
+		1B8F23142DC69607004CC4F1 /* UpcomingSalahLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23132DC69607004CC4F1 /* UpcomingSalahLoader.swift */; };
 		1B917250277909800009628F /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B91724F277909800009628F /* TitleHeaderView.swift */; };
 		1B9D0AA02767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */; };
 		1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */; };
@@ -127,6 +129,8 @@
 		1B8F23072DC66B0F004CC4F1 /* RemoteLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLoaderTests.swift; sourceTree = "<group>"; };
 		1B8F23092DC66C1D004CC4F1 /* RemoteLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLoader.swift; sourceTree = "<group>"; };
 		1B8F230B2DC66E41004CC4F1 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
+		1B8F23112DC69537004CC4F1 /* UpcomingSalahLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
+		1B8F23132DC69607004CC4F1 /* UpcomingSalahLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahLoader.swift; sourceTree = "<group>"; };
 		1B91724F277909800009628F /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
 		1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -379,7 +383,9 @@
 		1B8F22FE2DC562F8004CC4F1 /* UpcomingSalah API */ = {
 			isa = PBXGroup;
 			children = (
+				1B8F23112DC69537004CC4F1 /* UpcomingSalahLoaderWithFallbackComposite.swift */,
 				1BE68D952DC44DD60045C0E3 /* UpcomingSalahMapper.swift */,
+				1B8F23132DC69607004CC4F1 /* UpcomingSalahLoader.swift */,
 			);
 			path = "UpcomingSalah API";
 			sourceTree = "<group>";
@@ -531,10 +537,10 @@
 		1BE005CC26BB891E003F5F54 /* SalahTimes API */ = {
 			isa = PBXGroup;
 			children = (
+				1B5BA6D72919940000EE6D97 /* LoaderError.swift */,
 				1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */,
 				1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */,
 				1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */,
-				1B5BA6D72919940000EE6D97 /* LoaderError.swift */,
 			);
 			path = "SalahTimes API";
 			sourceTree = "<group>";
@@ -876,6 +882,8 @@
 			files = (
 				1BE005D626BC6527003F5F54 /* URLSessionHTTPClient.swift in Sources */,
 				1B5BA6DA291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift in Sources */,
+				1B8F23122DC69537004CC4F1 /* UpcomingSalahLoaderWithFallbackComposite.swift in Sources */,
+				1B8F23142DC69607004CC4F1 /* UpcomingSalahLoader.swift in Sources */,
 				1B5BA6D82919940000EE6D97 /* LoaderError.swift in Sources */,
 				1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */,
 				1B8F230A2DC66C1D004CC4F1 /* RemoteLoader.swift in Sources */,
