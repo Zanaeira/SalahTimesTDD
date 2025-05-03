@@ -22,6 +22,8 @@
 		1B73A8D8275C254100C1D934 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73A8D7275C254100C1D934 /* HeaderView.swift */; };
 		1B830F76275C34FF0060186E /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; platformFilter = ios; };
 		1B830F7D275C35650060186E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B830F7C275C35650060186E /* UIView+Extensions.swift */; };
+		1B8F23082DC66B0F004CC4F1 /* RemoteLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23072DC66B0F004CC4F1 /* RemoteLoaderTests.swift */; };
+		1B8F230A2DC66C1D004CC4F1 /* RemoteLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23092DC66C1D004CC4F1 /* RemoteLoader.swift */; };
 		1B917250277909800009628F /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B91724F277909800009628F /* TitleHeaderView.swift */; };
 		1B9D0AA02767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */; };
 		1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */; };
@@ -123,6 +125,8 @@
 		1B73A8D5275C252000C1D934 /* SalahTimesCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesCellModel.swift; sourceTree = "<group>"; };
 		1B73A8D7275C254100C1D934 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		1B830F7C275C35650060186E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		1B8F23072DC66B0F004CC4F1 /* RemoteLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLoaderTests.swift; sourceTree = "<group>"; };
+		1B8F23092DC66C1D004CC4F1 /* RemoteLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLoader.swift; sourceTree = "<group>"; };
 		1B91724F277909800009628F /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
 		1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -390,6 +394,7 @@
 				1BE005EF26BCC978003F5F54 /* AladhanAPIEndpoint+QueryItemTypes.swift */,
 				1BE005C626BB5A69003F5F54 /* Endpoint.swift */,
 				1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */,
+				1B8F23092DC66C1D004CC4F1 /* RemoteLoader.swift */,
 				1BE005D526BC6527003F5F54 /* URLSessionHTTPClient.swift */,
 			);
 			path = "Shared API";
@@ -417,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */,
+				1B8F23072DC66B0F004CC4F1 /* RemoteLoaderTests.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -875,6 +881,7 @@
 				1B5BA6DA291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift in Sources */,
 				1B5BA6D82919940000EE6D97 /* TimesLoaderError.swift in Sources */,
 				1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */,
+				1B8F230A2DC66C1D004CC4F1 /* RemoteLoader.swift in Sources */,
 				1BE68D982DC44DEF0045C0E3 /* UpcomingSalahLoader.swift in Sources */,
 				1BE005CF26BB894D003F5F54 /* SalahTimesMapper.swift in Sources */,
 				1BE68D942DC44DBB0045C0E3 /* UpcomingSalah.swift in Sources */,
@@ -898,6 +905,7 @@
 				1BE68D902DC428000045C0E3 /* XCTestCase+Date+Formatting.swift in Sources */,
 				1BE005EB26BCB1BC003F5F54 /* AladhanAPITimingsByAddressEndpointTests.swift in Sources */,
 				1BE005E726BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */,
+				1B8F23082DC66B0F004CC4F1 /* RemoteLoaderTests.swift in Sources */,
 				1BE68D8D2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift in Sources */,
 				1BE005D126BBF723003F5F54 /* URLSessionHTTPClientTests.swift in Sources */,
 				1BE005D426BC338C003F5F54 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
