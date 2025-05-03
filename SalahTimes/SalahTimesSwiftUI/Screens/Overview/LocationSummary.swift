@@ -38,9 +38,9 @@ struct LocationSummary: View {
 	@ViewBuilder
 	private var upcomingSalahView: some View {
 		VStack(spacing: 2) {
-			if let salah = salah(from: viewModel.upcomingSalah) {
+			if let salah = salah(from: viewModel.upcomingSalah), let time = viewModel.upcomingSalahTime {
 				image(for: salah)
-				Text(viewModel.timeFormatter.string(from: salah.time))
+				Text(time)
 				Text(salah.metadata.name)
 					.font(.callout.smallCaps())
 			}
@@ -66,14 +66,14 @@ struct LocationSummary: View {
 		HStack {
 			VStack(alignment: .leading, spacing: 0) {
 				titleAndSubtitle
-				if let salah = salah(from: viewModel.upcomingSalah) {
+				if let salah = salah(from: viewModel.upcomingSalah), let time = viewModel.upcomingSalahTime {
 					HStack(alignment: .bottom, spacing: 8) {
 						image(for: salah)
 						Text(salah.metadata.name)
 							.font(.callout.smallCaps())
 					}
 					.fixedSize(horizontal: true, vertical: false)
-					Text(viewModel.timeFormatter.string(from: salah.time))
+					Text(time)
 				}
 				timeLeft
 			}
