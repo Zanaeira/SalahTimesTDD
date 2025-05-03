@@ -9,44 +9,44 @@ import UIKit
 import SalahTimes
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
-    var window: UIWindow?
-    
-//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        guard let windowScene = scene as? UIWindowScene else { return }
-//        
-//        let salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: makePrimaryLoader(), fallbackLoader: makeFallbackLoader())
-//        let tabBarController = MainTabBarViewController(salahTimesLoader: salahTimesLoader)
-//        
-//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-//        window?.windowScene = windowScene
-//        window?.rootViewController = tabBarController
-//        window?.makeKeyAndVisible()
-//    }
-    
-    private func makePrimaryLoader() -> TimesLoader {
-        return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData))
-    }
-    
-    private func makeFallbackLoader() -> TimesLoader {
-        return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad))
-    }
-    
-    private func makeHTTPClient(withRequestCachePolicy policy: NSURLRequest.CachePolicy) -> HTTPClient {
-        let config = URLSessionConfiguration.default
-        config.urlCache = makeCache()
-        config.requestCachePolicy = policy
-                
-        let session = URLSession(configuration: config)
-        
-        return URLSessionHTTPClient(session: session)
-    }
-    
-    private func makeCache() -> URLCache {
-        let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-        let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
-        
-        return URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: diskCacheURL)
-    }
-    
+
+	var window: UIWindow?
+
+	//    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+	//        guard let windowScene = scene as? UIWindowScene else { return }
+	//
+	//        let salahTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: makePrimaryLoader(), fallbackLoader: makeFallbackLoader())
+	//        let tabBarController = MainTabBarViewController(salahTimesLoader: salahTimesLoader)
+	//
+	//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+	//        window?.windowScene = windowScene
+	//        window?.rootViewController = tabBarController
+	//        window?.makeKeyAndVisible()
+	//    }
+
+	private func makePrimaryLoader() -> TimesLoader {
+		return RemoteLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData), mapper: SalahTimesMapper.map)
+	}
+
+	private func makeFallbackLoader() -> TimesLoader {
+		return RemoteLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad), mapper: SalahTimesMapper.map)
+	}
+
+	private func makeHTTPClient(withRequestCachePolicy policy: NSURLRequest.CachePolicy) -> HTTPClient {
+		let config = URLSessionConfiguration.default
+		config.urlCache = makeCache()
+		config.requestCachePolicy = policy
+
+		let session = URLSession(configuration: config)
+
+		return URLSessionHTTPClient(session: session)
+	}
+
+	private func makeCache() -> URLCache {
+		let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+		let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
+
+		return URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: diskCacheURL)
+	}
+
 }
