@@ -7,10 +7,10 @@
 
 import Foundation
 
-final class UpcomingSalahMapper {
+public final class UpcomingSalahMapper {
 	private static let OK_200: Int = 200
 
-	static func map(_ data: Data, _ response: HTTPURLResponse) throws -> UpcomingSalah {
+	public static func map(_ data: Data, _ response: HTTPURLResponse) throws -> UpcomingSalah {
 		guard response.statusCode == OK_200 else {
 			throw LoaderError.invalidData
 		}
