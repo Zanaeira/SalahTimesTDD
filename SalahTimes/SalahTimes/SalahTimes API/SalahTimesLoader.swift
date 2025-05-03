@@ -25,7 +25,6 @@ public final class SalahTimesLoader: TimesLoader {
 				guard let salahTimes = try? SalahTimesMapper.map(data, response) else {
 					return completion(.failure(.invalidData))
 				}
-
 				completion(.success(salahTimes))
 			case .failure:
 				completion(.failure(.connectivity))
