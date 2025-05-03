@@ -17,11 +17,11 @@ final class SalahTimesLoaderComposer {
 	}
 
 	private static func primaryLoader() -> TimesLoader {
-		SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData))
+		RemoteLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData), mapper: SalahTimesMapper.map)
 	}
 
 	private static func fallbackLoader() -> TimesLoader {
-		SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad))
+		RemoteLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad), mapper: SalahTimesMapper.map)
 	}
 
 	private static func makeHTTPClient(withRequestCachePolicy policy: NSURLRequest.CachePolicy) -> HTTPClient {
@@ -44,11 +44,3 @@ final class SalahTimesLoaderComposer {
 }
 
 extension RemoteLoader: @retroactive TimesLoader where Resource == SalahTimes {}
-
-typealias SalahTimesLoader = RemoteLoader<SalahTimes>
-
-extension SalahTimesLoader {
-	convenience init(client: HTTPClient) {
-		self.init(client: client, mapper: SalahTimesMapper.map)
-	}
-}
