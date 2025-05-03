@@ -17,28 +17,18 @@ struct LocationSummary: View {
 
 	var body: some View {
 		GroupBox {
-			HStack(alignment: .lastTextBaseline) {
-				VStack(alignment: .leading, spacing: 0) {
-					Text(locationSettings.location)
-						.font(.title)
-					Text(viewModel.dateFormatter.string(from: Date()))
-						.font(.subheadline)
-						.foregroundStyle(.secondary)
-					Spacer()
-					if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
-						Text("Next Salāh \(timeLeft)")
-							.font(.callout.smallCaps())
-							.foregroundStyle(.secondary)
-					}
-				}
-				Spacer()
-				upcomingSalahView
+			if !dynamicTypeSize.isAccessibilitySize {
+				horizontallyStackedOverview
+			} else {
+				verticallyStackedOverview
 			}
 		}
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
 		.task { await viewModel.load(locationSettings: locationSettings) }
 	}
+
+	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
 	@State private var locationSettings: LocationSettings
 	@StateObject private var viewModel: UpcomingSalahViewModel
@@ -60,6 +50,57 @@ struct LocationSummary: View {
 		}
 		.frame(minWidth: 75)
 		.fixedSize(horizontal: true, vertical: false)
+	}
+
+	private var horizontallyStackedOverview: some View {
+		HStack(alignment: .lastTextBaseline) {
+			VStack(alignment: .leading, spacing: 0) {
+				Text(locationSettings.location)
+					.font(.title)
+				Text(viewModel.dateFormatter.string(from: Date()))
+					.font(.subheadline)
+					.foregroundStyle(.secondary)
+				Spacer()
+				if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
+					Text("Next Salāh \(timeLeft)")
+						.font(.callout.smallCaps())
+						.foregroundStyle(.secondary)
+						.fixedSize(horizontal: true, vertical: false)
+				}
+			}
+			Spacer()
+			upcomingSalahView
+		}
+	}
+
+	private var verticallyStackedOverview: some View {
+		HStack {
+			VStack(alignment: .leading, spacing: 0) {
+				Text(locationSettings.location)
+					.font(.title)
+				Text(viewModel.dateFormatter.string(from: Date()))
+					.font(.subheadline)
+					.foregroundStyle(.secondary)
+				if let salah = salah(from: viewModel.upcomingSalah) {
+					HStack(alignment: .bottom, spacing: 8) {
+						Image(systemName: salah.imageSystemName)
+							.font(.largeTitle)
+							.symbolVariant(.fill)
+							.foregroundStyle(.orange)
+						Text(salah.metadata.name)
+							.font(.callout.smallCaps())
+					}
+					.fixedSize(horizontal: true, vertical: false)
+					Text(viewModel.timeFormatter.string(from: salah.time))
+				}
+				if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
+					Text("Next Salāh \(timeLeft)")
+						.font(.callout.smallCaps())
+						.foregroundStyle(.secondary)
+				}
+			}
+			Spacer()
+		}
 	}
 
 	private func salah(from upcomingSalah: UpcomingSalah?) -> Salah? {
