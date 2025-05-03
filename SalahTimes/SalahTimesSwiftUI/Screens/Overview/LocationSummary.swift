@@ -92,7 +92,7 @@ struct LocationSummary: View {
 
 	@ViewBuilder
 	private var timeLeft: some View {
-		if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
+		if let timeLeft = viewModel.timeRemaining {
 			Text("Next Salāh \(timeLeft)")
 				.font(.callout.smallCaps())
 				.foregroundStyle(.secondary)

@@ -18,6 +18,16 @@ final class UpcomingSalahViewModel: ObservableObject {
 	@Published private(set) var upcomingSalah: UpcomingSalah?
 	@Published private(set) var date = Date()
 
+	var timeRemaining: String? {
+		guard let upcomingSalah else { return nil }
+		let formatter = RelativeDateTimeFormatter()
+		if let timeZone = TimeZone(identifier: upcomingSalah.timezone) {
+			formatter.calendar.timeZone = timeZone
+		}
+		formatter.unitsStyle = .full
+		return formatter.localizedString(for: upcomingSalah.time, relativeTo: .now)
+	}
+
 	private(set) var timeZone: String = "London/Europe"
 
 	var dateFormatter: DateFormatter {
