@@ -10,16 +10,18 @@ import Foundation
 public final class UpcomingSalahMapper {
 	private static let OK_200: Int = 200
 
+	public enum Error: Swift.Error { case invalidData }
+
 	public static func map(_ data: Data, _ response: HTTPURLResponse) throws -> UpcomingSalah {
 		guard response.statusCode == OK_200 else {
-			throw LoaderError.invalidData
+			throw Error.invalidData
 		}
 
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
 
 		guard let upcomingSalah = try decoder.decode(Root.self, from: data).data.upcomingSalah else {
-			throw LoaderError.invalidData
+			throw Error.invalidData
 		}
 
 		return upcomingSalah
