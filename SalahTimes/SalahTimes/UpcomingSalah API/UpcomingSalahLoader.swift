@@ -8,7 +8,7 @@
 import Foundation
 
 public final class UpcomingSalahLoader {
-	public typealias Result = Swift.Result<UpcomingSalah, TimesLoaderError>
+	public typealias Result = Swift.Result<UpcomingSalah, LoaderError>
 
 	private let client: HTTPClient
 

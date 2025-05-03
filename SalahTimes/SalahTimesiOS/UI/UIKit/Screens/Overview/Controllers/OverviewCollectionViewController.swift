@@ -142,7 +142,7 @@ final class OverviewCollectionViewController: UIViewController {
         return endpoint
     }
     
-    private func handleError(_ error: TimesLoaderError) {
+    private func handleError(_ error: LoaderError) {
         let errorMessage = error == .invalidData ?
             "Sorry, something went wrong.\n\nIf you think this is a mistake, then please try again later." :
             "Sorry, an error occured when trying to load the Salāh Times. Please check your internet connection and try again."

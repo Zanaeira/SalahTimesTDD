@@ -10,7 +10,7 @@
 		1B053A672773963D0027024C /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B053A662773963D0027024C /* OverviewViewController.swift */; };
 		1B053A7127739EB70027024C /* OverviewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */; };
 		1B5BA6D62919912E00EE6D97 /* TimesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */; };
-		1B5BA6D82919940000EE6D97 /* TimesLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */; };
+		1B5BA6D82919940000EE6D97 /* LoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D72919940000EE6D97 /* LoaderError.swift */; };
 		1B5BA6DA291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */; };
 		1B6845A62D82704700884914 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; platformFilter = ios; };
 		1B6845B32D83BB2200884914 /* OverviewScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6845B22D83BB2200884914 /* OverviewScreen.swift */; };
@@ -24,6 +24,7 @@
 		1B830F7D275C35650060186E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B830F7C275C35650060186E /* UIView+Extensions.swift */; };
 		1B8F23082DC66B0F004CC4F1 /* RemoteLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23072DC66B0F004CC4F1 /* RemoteLoaderTests.swift */; };
 		1B8F230A2DC66C1D004CC4F1 /* RemoteLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23092DC66C1D004CC4F1 /* RemoteLoader.swift */; };
+		1B8F230C2DC66E41004CC4F1 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F230B2DC66E41004CC4F1 /* TestHelpers.swift */; };
 		1B917250277909800009628F /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B91724F277909800009628F /* TitleHeaderView.swift */; };
 		1B9D0AA02767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */; };
 		1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */; };
@@ -114,7 +115,7 @@
 		1B053A662773963D0027024C /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCollectionViewController.swift; sourceTree = "<group>"; };
 		1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesLoader.swift; sourceTree = "<group>"; };
-		1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesLoaderError.swift; sourceTree = "<group>"; };
+		1B5BA6D72919940000EE6D97 /* LoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderError.swift; sourceTree = "<group>"; };
 		1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		1B68459B2D82701C00884914 /* SalahTimesSwiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SalahTimesSwiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B6845B22D83BB2200884914 /* OverviewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewScreen.swift; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		1B830F7C275C35650060186E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		1B8F23072DC66B0F004CC4F1 /* RemoteLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLoaderTests.swift; sourceTree = "<group>"; };
 		1B8F23092DC66C1D004CC4F1 /* RemoteLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLoader.swift; sourceTree = "<group>"; };
+		1B8F230B2DC66E41004CC4F1 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		1B91724F277909800009628F /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
 		1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -421,8 +423,9 @@
 		1B8F23022DC57561004CC4F1 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */,
 				1B8F23072DC66B0F004CC4F1 /* RemoteLoaderTests.swift */,
+				1B8F230B2DC66E41004CC4F1 /* TestHelpers.swift */,
+				1BE005D026BBF723003F5F54 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -537,7 +540,7 @@
 				1B5BA6D9291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift */,
 				1BE005CE26BB894D003F5F54 /* SalahTimesMapper.swift */,
 				1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */,
-				1B5BA6D72919940000EE6D97 /* TimesLoaderError.swift */,
+				1B5BA6D72919940000EE6D97 /* LoaderError.swift */,
 			);
 			path = "SalahTimes API";
 			sourceTree = "<group>";
@@ -879,7 +882,7 @@
 			files = (
 				1BE005D626BC6527003F5F54 /* URLSessionHTTPClient.swift in Sources */,
 				1B5BA6DA291996CB00EE6D97 /* SalahTimesLoaderWithFallbackComposite.swift in Sources */,
-				1B5BA6D82919940000EE6D97 /* TimesLoaderError.swift in Sources */,
+				1B5BA6D82919940000EE6D97 /* LoaderError.swift in Sources */,
 				1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */,
 				1B8F230A2DC66C1D004CC4F1 /* RemoteLoader.swift in Sources */,
 				1BE68D982DC44DEF0045C0E3 /* UpcomingSalahLoader.swift in Sources */,
@@ -905,6 +908,7 @@
 				1BE68D902DC428000045C0E3 /* XCTestCase+Date+Formatting.swift in Sources */,
 				1BE005EB26BCB1BC003F5F54 /* AladhanAPITimingsByAddressEndpointTests.swift in Sources */,
 				1BE005E726BCAA8B003F5F54 /* XCTestCase+SampleSalahTimes.swift in Sources */,
+				1B8F230C2DC66E41004CC4F1 /* TestHelpers.swift in Sources */,
 				1B8F23082DC66B0F004CC4F1 /* RemoteLoaderTests.swift in Sources */,
 				1BE68D8D2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift in Sources */,
 				1BE005D126BBF723003F5F54 /* URLSessionHTTPClientTests.swift in Sources */,
