@@ -39,7 +39,7 @@
 		1BAEF7D32778ED3D0029A02F /* DeleteLocationFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAEF7D22778ED3D0029A02F /* DeleteLocationFooterView.swift */; };
 		1BE005AC26B8069D003F5F54 /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; };
 		1BE005BD26B80701003F5F54 /* SalahTimes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005BC26B80701003F5F54 /* SalahTimes.swift */; };
-		1BE005C126BB5280003F5F54 /* SalahTimesLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */; };
+		1BE005C126BB5280003F5F54 /* SalahTimesMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C026BB5280003F5F54 /* SalahTimesMapperTests.swift */; };
 		1BE005C526BB5A49003F5F54 /* SalahTimesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C426BB5A49003F5F54 /* SalahTimesLoader.swift */; };
 		1BE005C726BB5A69003F5F54 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005C626BB5A69003F5F54 /* Endpoint.swift */; };
 		1BE005CB26BB5AA1003F5F54 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */; };
@@ -146,7 +146,7 @@
 		1BE005AB26B8069D003F5F54 /* SalahTimesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SalahTimesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BE005B226B8069D003F5F54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BE005BC26B80701003F5F54 /* SalahTimes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimes.swift; sourceTree = "<group>"; };
-		1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesLoaderTests.swift; sourceTree = "<group>"; };
+		1BE005C026BB5280003F5F54 /* SalahTimesMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesMapperTests.swift; sourceTree = "<group>"; };
 		1BE005C426BB5A49003F5F54 /* SalahTimesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesLoader.swift; sourceTree = "<group>"; };
 		1BE005C626BB5A69003F5F54 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		1BE005CA26BB5AA1003F5F54 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
@@ -415,7 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE005EA26BCB1BC003F5F54 /* AladhanAPITimingsByAddressEndpointTests.swift */,
-				1BE005C026BB5280003F5F54 /* SalahTimesLoaderTests.swift */,
+				1BE005C026BB5280003F5F54 /* SalahTimesMapperTests.swift */,
 			);
 			path = "SalahTimes Tests";
 			sourceTree = "<group>";
@@ -902,7 +902,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BE005C126BB5280003F5F54 /* SalahTimesLoaderTests.swift in Sources */,
+				1BE005C126BB5280003F5F54 /* SalahTimesMapperTests.swift in Sources */,
 				1BE68D922DC43ACC0045C0E3 /* UpcomingSalahLoaderTests.swift in Sources */,
 				1BE005F226BCD049003F5F54 /* URLProtocolStub.swift in Sources */,
 				1BE68D902DC428000045C0E3 /* XCTestCase+Date+Formatting.swift in Sources */,
