@@ -18,3 +18,9 @@ func anyData() -> Data {
 func anyError() -> Error {
 	return NSError(domain: "any error", code: 0)
 }
+
+extension HTTPURLResponse {
+	convenience init(statusCode: Int) {
+		self.init(url: anyURL(), statusCode: statusCode, httpVersion: nil, headerFields: nil)!
+	}
+}
