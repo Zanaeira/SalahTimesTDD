@@ -10,7 +10,7 @@ import SalahTimes
 
 class SalahTimesLoaderTests: XCTestCase {
     
-    func test_loadTimes_deliversConnectivityErrorOnHTTPClientError() {
+    func test_load_deliversConnectivityErrorOnHTTPClientError() {
         let (sut, httpClient, endpointSpy) = makeSUT()
         
         expect(sut, toCompleteWith: .failure(.connectivity), using: endpointSpy) {
@@ -19,7 +19,7 @@ class SalahTimesLoaderTests: XCTestCase {
         }
     }
     
-    func test_loadTimes_deliversInvalidDataErrorOnNon200HTTPResponse() {
+    func test_load_deliversInvalidDataErrorOnNon200HTTPResponse() {
         let (sut, httpClient, endpointSpy) = makeSUT()
         
         let sampleStatusCodes = [199, 201, 300, 400, 500]
@@ -32,7 +32,7 @@ class SalahTimesLoaderTests: XCTestCase {
         }
     }
     
-    func test_loadTimes_deliversErrorOn200HTTPResponseWithInvalidJSON() {
+    func test_load_deliversErrorOn200HTTPResponseWithInvalidJSON() {
         let (sut, httpClient, endpointSpy) = makeSUT()
         
         expect(sut, toCompleteWith: .failure(.invalidData), using: endpointSpy) {
@@ -41,7 +41,7 @@ class SalahTimesLoaderTests: XCTestCase {
         }
     }
     
-    func test_loadTimes_deliversTimesOn200HTTPResponseWithJSONTimes() {
+    func test_load_deliversTimesOn200HTTPResponseWithJSONTimes() {
         let (sut, httpClient, endpointSpy) = makeSUT()
         let (salahTimes, data) = salahTimesModelAndDataFor5thAug2021LondonUK()
         
@@ -50,14 +50,14 @@ class SalahTimesLoaderTests: XCTestCase {
         }
     }
     
-    func test_loadTimes_doesNotDeliverResultsAfterSUTInstanceHasBeenDeallocated() {
+    func test_load_doesNotDeliverResultsAfterSUTInstanceHasBeenDeallocated() {
         let httpClient = HTTPClientSpy()
         let endpointSpy = EndpointSpy.make()
         var sut: SalahTimesLoader? = SalahTimesLoader(client: httpClient)
         let (_, data) = salahTimesModelAndDataFor5thAug2021LondonUK()
         
         var capturedResults = [TimesLoader.Result]()
-        sut?.loadTimes(from: endpointSpy) {
+        sut?.load(from: endpointSpy) {
             capturedResults.append($0)
         }
         
@@ -81,7 +81,7 @@ class SalahTimesLoaderTests: XCTestCase {
         
     private func expect(_ sut: SalahTimesLoader, toCompleteWith result: TimesLoader.Result, using endpoint: Endpoint, when action: () -> Void, file: StaticString = #file, line: UInt = #line) {
         var capturedResults = [TimesLoader.Result]()
-        sut.loadTimes(from: endpoint) {
+        sut.load(from: endpoint) {
             capturedResults.append($0)
         }
         

@@ -17,19 +17,19 @@ public final class SalahTimesLoaderWithFallbackComposite: TimesLoader {
         self.fallbackLoader = fallbackLoader
     }
     
-    public func loadTimes(from endpoint: Endpoint, completion: @escaping (Result<SalahTimes, TimesLoaderError>) -> Void) {
-        primaryLoader.loadTimes(from: endpoint) { [weak self] result in
+    public func load(from endpoint: Endpoint, completion: @escaping (Result<SalahTimes, TimesLoaderError>) -> Void) {
+        primaryLoader.load(from: endpoint) { [weak self] result in
             switch result {
             case let .success(salahTimes): completion(.success(salahTimes))
             case .failure:
-                self?.fallbackLoader.loadTimes(from: endpoint, completion: completion)
+                self?.fallbackLoader.load(from: endpoint, completion: completion)
             }
         }
     }
 
-		public func loadTimes(from endpoint: any Endpoint) async -> TimesLoader.Result {
+		public func load(from endpoint: any Endpoint) async -> TimesLoader.Result {
 			await withCheckedContinuation { continuation in
-				loadTimes(from: endpoint) { result in
+				load(from: endpoint) { result in
 					continuation.resume(returning: result)
 				}
 			}
