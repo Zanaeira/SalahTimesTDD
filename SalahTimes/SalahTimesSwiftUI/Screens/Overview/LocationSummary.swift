@@ -58,6 +58,8 @@ struct LocationSummary: View {
 					.font(.callout.smallCaps())
 			}
 		}
+		.frame(minWidth: 75)
+		.fixedSize(horizontal: true, vertical: false)
 	}
 
 	private func salah(from upcomingSalah: UpcomingSalah?) -> Salah? {
