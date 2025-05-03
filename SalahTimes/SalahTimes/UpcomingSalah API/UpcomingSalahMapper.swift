@@ -12,14 +12,14 @@ final class UpcomingSalahMapper {
 
 	static func map(_ data: Data, _ response: HTTPURLResponse) throws -> UpcomingSalah {
 		guard response.statusCode == OK_200 else {
-			throw TimesLoaderError.invalidData
+			throw LoaderError.invalidData
 		}
 
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
 
 		guard let upcomingSalah = try decoder.decode(Root.self, from: data).data.upcomingSalah else {
-			throw TimesLoaderError.invalidData
+			throw LoaderError.invalidData
 		}
 
 		return upcomingSalah

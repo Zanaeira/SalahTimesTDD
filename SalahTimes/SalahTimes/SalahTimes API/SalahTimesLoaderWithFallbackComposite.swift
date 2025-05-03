@@ -17,7 +17,7 @@ public final class SalahTimesLoaderWithFallbackComposite: TimesLoader {
         self.fallbackLoader = fallbackLoader
     }
     
-    public func load(from endpoint: Endpoint, completion: @escaping (Result<SalahTimes, TimesLoaderError>) -> Void) {
+    public func load(from endpoint: Endpoint, completion: @escaping (Result<SalahTimes, LoaderError>) -> Void) {
         primaryLoader.load(from: endpoint) { [weak self] result in
             switch result {
             case let .success(salahTimes): completion(.success(salahTimes))
