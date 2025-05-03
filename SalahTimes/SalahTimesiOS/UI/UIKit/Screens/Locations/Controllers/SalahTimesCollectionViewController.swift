@@ -97,7 +97,7 @@ final class SalahTimesCollectionViewController: UIViewController {
             endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date, madhhabForAsr: preferredMithl)
         }
         
-        salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
+        salahTimesLoader.load(from: endpoint) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {

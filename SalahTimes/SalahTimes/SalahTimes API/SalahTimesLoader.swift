@@ -16,7 +16,7 @@ public final class SalahTimesLoader: TimesLoader {
 		self.client = client
 	}
 
-	public func loadTimes(from endpoint: Endpoint, completion: @escaping (Result) -> Void) {
+	public func load(from endpoint: Endpoint, completion: @escaping (Result) -> Void) {
 		client.get(from: endpoint.url) { [weak self] result in
 			guard self != nil else { return }
 
@@ -32,9 +32,9 @@ public final class SalahTimesLoader: TimesLoader {
 		}
 	}
 
-	public func loadTimes(from endpoint: any Endpoint) async -> Result {
+	public func load(from endpoint: any Endpoint) async -> Result {
 		await withCheckedContinuation { continuation in
-			loadTimes(from: endpoint) { result in
+			load(from: endpoint) { result in
 				continuation.resume(returning: result)
 			}
 		}

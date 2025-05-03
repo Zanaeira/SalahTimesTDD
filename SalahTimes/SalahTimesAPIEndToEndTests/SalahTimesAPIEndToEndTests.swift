@@ -44,7 +44,7 @@ class SalahTimesAPIEndToEndTests: XCTestCase {
         let exp = expectation(description: "Wait for load completion")
         
         var receivedResult: TimesLoader.Result?
-        salahTimesLoader.loadTimes(from: endpoint) { result in
+        salahTimesLoader.load(from: endpoint) { result in
             receivedResult = result
             exp.fulfill()
         }

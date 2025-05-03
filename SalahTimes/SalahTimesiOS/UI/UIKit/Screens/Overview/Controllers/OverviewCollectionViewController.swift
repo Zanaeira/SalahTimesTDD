@@ -79,7 +79,7 @@ final class OverviewCollectionViewController: UIViewController {
             dispatchGroup.enter()
             let location = userDefaults.string(forKey: "Location") ?? "London"
             let endpoint = makeEndpoint(usingUserDefaults: userDefaults)
-            salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
+            salahTimesLoader.load(from: endpoint) { [weak self] result in
                 guard let self = self else { return }
                 
                 switch result {
