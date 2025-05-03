@@ -15,7 +15,7 @@ struct SalahTimesApp: App {
 	var body: some Scene {
 		WindowGroup {
 			NavigationStack {
-				OverviewScreen(loader: SalahTimesLoaderComposer().loader, locationsSettings: locationSettings)
+				OverviewScreen(loader: UpcomingSalahLoaderComposer().loader, locationsSettings: locationSettings)
 					.navigationTitle("My locations")
 					.onAppear { registerDefaults() }
 			}

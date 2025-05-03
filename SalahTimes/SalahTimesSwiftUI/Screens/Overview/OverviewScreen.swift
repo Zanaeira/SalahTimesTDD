@@ -10,10 +10,10 @@ import SalahTimes
 
 public struct OverviewScreen: View {
 
-	let loader: TimesLoader
+	let loader: UpcomingSalahLoader
 	let locationsSettings: [LocationSettings]
 
-	public init(loader: TimesLoader, locationsSettings: [LocationSettings]) {
+	public init(loader: UpcomingSalahLoader, locationsSettings: [LocationSettings]) {
 		self.loader = loader
 		self.locationsSettings = locationsSettings
 	}
@@ -22,7 +22,7 @@ public struct OverviewScreen: View {
 		ScrollView {
 			VStack (spacing: 16) {
 				ForEach(locationsSettings) {
-					LocationSummary(loader: UpcomingSalahLoader(client: URLSessionHTTPClient()), locationSettings: $0)
+					LocationSummary(loader: loader, locationSettings: $0)
 				}
 			}
 			.padding(.vertical)
@@ -30,12 +30,4 @@ public struct OverviewScreen: View {
 		.background(BackgroundView().ignoresSafeArea())
 	}
 
-}
-
-typealias UpcomingSalahLoader = RemoteLoader<UpcomingSalah>
-
-extension UpcomingSalahLoader {
-	convenience init(client: HTTPClient) {
-		self.init(client: client, mapper: UpcomingSalahMapper.map)
-	}
 }
