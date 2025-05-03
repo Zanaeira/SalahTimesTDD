@@ -10,6 +10,15 @@ import SalahTimes
 
 class AladhanAPINextPrayerByAddressEndpointTests: XCTestCase {
 
+	func test_nextPrayerByAddress_pathIncludesDateForToday() {
+		let today = Date()
+		let formatted = DateFormatter.dateFormatterForAladhanAPIRequest.string(from: today)
+		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(anyAddress(), on: today)
+		let expectedPath = "/v1/nextPrayerByAddress/\(formatted)"
+
+		XCTAssertEqual(sut.path, expectedPath)
+	}
+
 	func test_nextPrayerByAddress_queryItemsForAddressIncluded() {
 		let address = anyAddress()
 		let sut: Endpoint = AladhanAPIEndpoint.nextPrayerByAddress(address, on: anyDate())

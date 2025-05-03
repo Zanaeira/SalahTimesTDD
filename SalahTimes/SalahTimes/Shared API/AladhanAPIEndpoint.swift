@@ -31,7 +31,7 @@ public struct AladhanAPIEndpoint: Endpoint {
 		buildEndpoint(
 			"timingsByAddress",
 			address: address,
-			on: date,
+			on: Calendar.current.isDateInToday(date) ? "" : "/\(dateFormattedForAPIRequest(date))",
 			iso8601DateFormat: iso8601DateFormat,
 			madhhab: madhhabForAsr,
 			fajrIsha: fajrIshaMethod
@@ -41,14 +41,14 @@ public struct AladhanAPIEndpoint: Endpoint {
 		buildEndpoint(
 			"nextPrayerByAddress",
 			address: address,
-			on: date,
+			on: "/\(dateFormattedForAPIRequest(date))",
 			iso8601DateFormat: true,
 			madhhab: madhhab,
 			fajrIsha: fajrIsha
 		)
 	}
 
-	private static func buildEndpoint(_ path: String, address: String, on date: Date, iso8601DateFormat: Bool = true, madhhab: Madhhab = .hanafi, fajrIsha: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
+	private static func buildEndpoint(_ path: String, address: String, on date: String, iso8601DateFormat: Bool = true, madhhab: Madhhab = .hanafi, fajrIsha: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
 		var queryItems = [
 			URLQueryItem(name: "iso8601", value: String(iso8601DateFormat)),
 			URLQueryItem(name: "address", value: address),
@@ -56,8 +56,7 @@ public struct AladhanAPIEndpoint: Endpoint {
 		]
 		fajrIsha.queryItems().forEach { queryItems.append($0) }
 
-		let dateParameter = Calendar.current.isDateInToday(date) ? "" : "/\(dateFormattedForAPIRequest(date))"
-		return AladhanAPIEndpoint(path: "/v1/\(path)\(dateParameter)", queryItems: queryItems)
+		return AladhanAPIEndpoint(path: "/v1/\(path)\(date)", queryItems: queryItems)
 	}
 
 
