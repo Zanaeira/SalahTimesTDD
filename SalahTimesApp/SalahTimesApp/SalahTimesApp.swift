@@ -96,5 +96,6 @@ struct SalahTimesApp: App {
 		return URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: diskCacheURL)
 	}
 
-
 }
+
+extension RemoteLoader: @retroactive TimesLoader where Resource == SalahTimes {}
