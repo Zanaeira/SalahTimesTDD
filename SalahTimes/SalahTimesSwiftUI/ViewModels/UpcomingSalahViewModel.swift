@@ -18,6 +18,14 @@ final class UpcomingSalahViewModel: ObservableObject {
 	@Published private(set) var upcomingSalah: UpcomingSalah?
 	@Published private(set) var date = Date()
 
+	var upcomingSalahTime: String? {
+		guard let upcomingSalah, let timeZone = TimeZone(identifier: upcomingSalah.timezone) else { return nil }
+		let formatter = DateFormatter.salahFormatter
+		formatter.dateStyle = .none
+		formatter.timeZone = timeZone
+		return formatter.string(from: upcomingSalah.time)
+	}
+
 	var timeRemaining: String? {
 		guard let upcomingSalah else { return nil }
 		let formatter = RelativeDateTimeFormatter()
@@ -32,12 +40,6 @@ final class UpcomingSalahViewModel: ObservableObject {
 
 	var dateFormatter: DateFormatter {
 		let dateFormatter = DateFormatter.salahDateFormatter
-		dateFormatter.timeZone = .init(identifier: timeZone)
-		return dateFormatter
-	}
-
-	var timeFormatter: DateFormatter {
-		let dateFormatter = DateFormatter.salahTimesFormatter
 		dateFormatter.timeZone = .init(identifier: timeZone)
 		return dateFormatter
 	}
@@ -60,17 +62,17 @@ final class UpcomingSalahViewModel: ObservableObject {
 }
 
 fileprivate extension DateFormatter {
+	static let salahFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateStyle = .medium
+		formatter.timeStyle = .short
+
+		return formatter
+	}()
 	static let salahDateFormatter: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.dateStyle = .medium
 		formatter.timeStyle = .none
-
-		return formatter
-	}()
-	static let salahTimesFormatter: DateFormatter = {
-		let formatter = DateFormatter()
-		formatter.dateStyle = .none
-		formatter.timeStyle = .short
 
 		return formatter
 	}()
