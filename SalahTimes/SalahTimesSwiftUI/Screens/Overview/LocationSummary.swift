@@ -85,7 +85,7 @@ struct LocationSummary: View {
 	private var titleAndSubtitle: some View {
 		Text(locationSettings.location)
 			.font(.title)
-		Text(viewModel.dateFormatter.string(from: Date()))
+		viewModel.currentDateAndTime.map(Text.init)
 			.font(.subheadline)
 			.foregroundStyle(.secondary)
 	}

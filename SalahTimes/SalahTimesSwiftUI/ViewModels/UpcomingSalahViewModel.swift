@@ -18,10 +18,16 @@ final class UpcomingSalahViewModel: ObservableObject {
 	@Published private(set) var upcomingSalah: UpcomingSalah?
 	@Published private(set) var date = Date()
 
+	var currentDateAndTime: String? {
+		guard let upcomingSalah, let timeZone = TimeZone(identifier: upcomingSalah.timezone) else { return nil }
+		let formatter = DateFormatter.salahDateAndTimeFormatter
+		formatter.timeZone = timeZone
+		return formatter.string(from: .now)
+	}
+
 	var upcomingSalahTime: String? {
 		guard let upcomingSalah, let timeZone = TimeZone(identifier: upcomingSalah.timezone) else { return nil }
-		let formatter = DateFormatter.salahFormatter
-		formatter.dateStyle = .none
+		let formatter = DateFormatter.salahTimeOnlyFormatter
 		formatter.timeZone = timeZone
 		return formatter.string(from: upcomingSalah.time)
 	}
@@ -36,21 +42,12 @@ final class UpcomingSalahViewModel: ObservableObject {
 		return formatter.localizedString(for: upcomingSalah.time, relativeTo: .now)
 	}
 
-	private(set) var timeZone: String = "London/Europe"
-
-	var dateFormatter: DateFormatter {
-		let dateFormatter = DateFormatter.salahDateFormatter
-		dateFormatter.timeZone = .init(identifier: timeZone)
-		return dateFormatter
-	}
-
 	func load(locationSettings: LocationSettings) async {
 		let endpoint = AladhanAPIEndpoint.nextPrayerByAddress(locationSettings.location, on: date, madhhab: locationSettings.mithl, fajrIsha: locationSettings.calculationAngle)
 		let result = await loader.load(from: endpoint)
 
 		switch result {
 		case .success(let upcomingSalah):
-			timeZone = upcomingSalah.timezone
 			self.upcomingSalah = upcomingSalah
 		case .failure:
 			break
@@ -62,18 +59,19 @@ final class UpcomingSalahViewModel: ObservableObject {
 }
 
 fileprivate extension DateFormatter {
-	static let salahFormatter: DateFormatter = {
+	static let salahDateAndTimeFormatter: DateFormatter = {
 		let formatter = DateFormatter()
 		formatter.dateStyle = .medium
 		formatter.timeStyle = .short
 
 		return formatter
 	}()
-	static let salahDateFormatter: DateFormatter = {
+	static let salahTimeOnlyFormatter: DateFormatter = {
 		let formatter = DateFormatter()
-		formatter.dateStyle = .medium
-		formatter.timeStyle = .none
+		formatter.dateStyle = .none
+		formatter.timeStyle = .short
 
 		return formatter
 	}()
+
 }
