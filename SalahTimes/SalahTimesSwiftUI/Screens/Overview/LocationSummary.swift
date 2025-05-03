@@ -39,10 +39,7 @@ struct LocationSummary: View {
 	private var upcomingSalahView: some View {
 		VStack(spacing: 2) {
 			if let salah = salah(from: viewModel.upcomingSalah) {
-				Image(systemName: salah.imageSystemName)
-					.font(.largeTitle)
-					.symbolVariant(.fill)
-					.foregroundStyle(.orange)
+				image(for: salah)
 				Text(viewModel.timeFormatter.string(from: salah.time))
 				Text(salah.metadata.name)
 					.font(.callout.smallCaps())
@@ -55,18 +52,10 @@ struct LocationSummary: View {
 	private var horizontallyStackedOverview: some View {
 		HStack(alignment: .lastTextBaseline) {
 			VStack(alignment: .leading, spacing: 0) {
-				Text(locationSettings.location)
-					.font(.title)
-				Text(viewModel.dateFormatter.string(from: Date()))
-					.font(.subheadline)
-					.foregroundStyle(.secondary)
+				titleAndSubtitle
 				Spacer()
-				if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
-					Text("Next Salāh \(timeLeft)")
-						.font(.callout.smallCaps())
-						.foregroundStyle(.secondary)
-						.fixedSize(horizontal: true, vertical: false)
-				}
+				timeLeft
+					.fixedSize(horizontal: true, vertical: false)
 			}
 			Spacer()
 			upcomingSalahView
@@ -76,30 +65,37 @@ struct LocationSummary: View {
 	private var verticallyStackedOverview: some View {
 		HStack {
 			VStack(alignment: .leading, spacing: 0) {
-				Text(locationSettings.location)
-					.font(.title)
-				Text(viewModel.dateFormatter.string(from: Date()))
-					.font(.subheadline)
-					.foregroundStyle(.secondary)
+				titleAndSubtitle
 				if let salah = salah(from: viewModel.upcomingSalah) {
 					HStack(alignment: .bottom, spacing: 8) {
-						Image(systemName: salah.imageSystemName)
-							.font(.largeTitle)
-							.symbolVariant(.fill)
-							.foregroundStyle(.orange)
+						image(for: salah)
 						Text(salah.metadata.name)
 							.font(.callout.smallCaps())
 					}
 					.fixedSize(horizontal: true, vertical: false)
 					Text(viewModel.timeFormatter.string(from: salah.time))
 				}
-				if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
-					Text("Next Salāh \(timeLeft)")
-						.font(.callout.smallCaps())
-						.foregroundStyle(.secondary)
-				}
+				timeLeft
 			}
 			Spacer()
+		}
+	}
+
+	@ViewBuilder
+	private var titleAndSubtitle: some View {
+		Text(locationSettings.location)
+			.font(.title)
+		Text(viewModel.dateFormatter.string(from: Date()))
+			.font(.subheadline)
+			.foregroundStyle(.secondary)
+	}
+
+	@ViewBuilder
+	private var timeLeft: some View {
+		if let timeLeft = viewModel.upcomingSalah?.time.formatted(.relative(presentation: .numeric, unitsStyle: .wide)) {
+			Text("Next Salāh \(timeLeft)")
+				.font(.callout.smallCaps())
+				.foregroundStyle(.secondary)
 		}
 	}
 
@@ -113,5 +109,12 @@ struct LocationSummary: View {
 		case "Isha": .isha(time: upcomingSalah.time)
 		default: nil
 		}
+	}
+
+	private func image(for salah: Salah) -> some View {
+		Image(systemName: salah.imageSystemName)
+			.font(.largeTitle)
+			.symbolVariant(.fill)
+			.foregroundStyle(.orange)
 	}
 }
