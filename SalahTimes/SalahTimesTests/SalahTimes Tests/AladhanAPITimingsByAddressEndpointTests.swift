@@ -10,6 +10,13 @@ import SalahTimes
 
 class AladhanAPITimingsByAddressEndpointTests: XCTestCase {
 
+	func test_timingsByAddress_pathExcludesDateForToday() {
+		let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(anyAddress(), on: Date())
+		let expectedPath = "/v1/timingsByAddress"
+
+		XCTAssertEqual(sut.path, expectedPath)
+	}
+
 	func test_timingsByAddress_pathIsCorrectForDate() {
 		let date = tomorrow()
 		let sut: Endpoint = AladhanAPIEndpoint.timingsByAddress(anyAddress(), on: date)
