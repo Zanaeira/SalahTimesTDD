@@ -33,7 +33,7 @@ final class UpcomingSalahViewModel: ObservableObject {
 	}
 
 	func load(locationSettings: LocationSettings) async {
-		let endpoint = AladhanAPIEndpoint.nextPrayerByAddress(locationSettings.location, on: date, iso8601DateFormat: true, madhhab: locationSettings.mithl, fajrIsha: locationSettings.calculationAngle)
+		let endpoint = AladhanAPIEndpoint.nextPrayerByAddress(locationSettings.location, on: date, madhhab: locationSettings.mithl, fajrIsha: locationSettings.calculationAngle)
 		let result = await loader.load(from: endpoint)
 
 		switch result {
