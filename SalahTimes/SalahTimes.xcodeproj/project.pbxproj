@@ -65,7 +65,7 @@
 		1BE68D8D2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D8C2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift */; };
 		1BE68D8F2DC428000045C0E3 /* XCTestCase+Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D8E2DC428000045C0E3 /* XCTestCase+Date+Formatting.swift */; };
 		1BE68D902DC428000045C0E3 /* XCTestCase+Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D8E2DC428000045C0E3 /* XCTestCase+Date+Formatting.swift */; };
-		1BE68D922DC43ACC0045C0E3 /* UpcomingSalahLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D912DC43ACC0045C0E3 /* UpcomingSalahLoaderTests.swift */; };
+		1BE68D922DC43ACC0045C0E3 /* UpcomingSalahMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D912DC43ACC0045C0E3 /* UpcomingSalahMapperTests.swift */; };
 		1BE68D942DC44DBB0045C0E3 /* UpcomingSalah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D932DC44DBB0045C0E3 /* UpcomingSalah.swift */; };
 		1BE68D962DC44DD60045C0E3 /* UpcomingSalahMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D952DC44DD60045C0E3 /* UpcomingSalahMapper.swift */; };
 		1BE68D982DC44DEF0045C0E3 /* UpcomingSalahLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D972DC44DEF0045C0E3 /* UpcomingSalahLoader.swift */; };
@@ -173,7 +173,7 @@
 		1BE68D8A2DC418F20045C0E3 /* LocationSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSummary.swift; sourceTree = "<group>"; };
 		1BE68D8C2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladhanAPINextPrayerByAddressEndpointTests.swift; sourceTree = "<group>"; };
 		1BE68D8E2DC428000045C0E3 /* XCTestCase+Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Date+Formatting.swift"; sourceTree = "<group>"; };
-		1BE68D912DC43ACC0045C0E3 /* UpcomingSalahLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahLoaderTests.swift; sourceTree = "<group>"; };
+		1BE68D912DC43ACC0045C0E3 /* UpcomingSalahMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahMapperTests.swift; sourceTree = "<group>"; };
 		1BE68D932DC44DBB0045C0E3 /* UpcomingSalah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalah.swift; sourceTree = "<group>"; };
 		1BE68D952DC44DD60045C0E3 /* UpcomingSalahMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahMapper.swift; sourceTree = "<group>"; };
 		1BE68D972DC44DEF0045C0E3 /* UpcomingSalahLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahLoader.swift; sourceTree = "<group>"; };
@@ -406,7 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE68D8C2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift */,
-				1BE68D912DC43ACC0045C0E3 /* UpcomingSalahLoaderTests.swift */,
+				1BE68D912DC43ACC0045C0E3 /* UpcomingSalahMapperTests.swift */,
 			);
 			path = "UpcomingSalah Tests";
 			sourceTree = "<group>";
@@ -903,7 +903,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BE005C126BB5280003F5F54 /* SalahTimesMapperTests.swift in Sources */,
-				1BE68D922DC43ACC0045C0E3 /* UpcomingSalahLoaderTests.swift in Sources */,
+				1BE68D922DC43ACC0045C0E3 /* UpcomingSalahMapperTests.swift in Sources */,
 				1BE005F226BCD049003F5F54 /* URLProtocolStub.swift in Sources */,
 				1BE68D902DC428000045C0E3 /* XCTestCase+Date+Formatting.swift in Sources */,
 				1BE005EB26BCB1BC003F5F54 /* AladhanAPITimingsByAddressEndpointTests.swift in Sources */,
