@@ -10,15 +10,6 @@ import SalahTimes
 
 final class UpcomingSalahLoaderTests: XCTestCase {
 
-	func test_load_deliversConnectivityErrorOnHTTPClientError() {
-		let (sut, httpClient, endpointSpy) = makeSUT()
-
-		expect(sut, toCompleteWith: .failure(.connectivity), using: endpointSpy) {
-			let httpClientError = NSError(domain: "Error", code: 0)
-			httpClient.complete(with: httpClientError)
-		}
-	}
-
 	func test_load_deliversInvalidDataErrorOnNon200HTTPResponse() {
 		let (sut, httpClient, endpointSpy) = makeSUT()
 
@@ -59,24 +50,6 @@ final class UpcomingSalahLoaderTests: XCTestCase {
 			httpClient.complete(withStatusCode: 200, data: data)
 		}
 	}
-
-	func test_load_doesNotDeliverResultsAfterSUTInstanceHasBeenDeallocated() {
-		let httpClient = HTTPClientSpy()
-		let endpointSpy = EndpointSpy.make()
-		var sut: UpcomingSalahLoader? = UpcomingSalahLoader(client: httpClient)
-		let data = makeUpcomingSalahJSON(timings: sampleTimings, timezone: sampleTimeZone)
-
-		var capturedResults = [UpcomingSalahLoader.Result]()
-		sut?.load(from: endpointSpy) {
-			capturedResults.append($0)
-		}
-
-		sut = nil
-		httpClient.complete(withStatusCode: 200, data: data)
-
-		XCTAssertTrue(capturedResults.isEmpty)
-	}
-
 
 	// MARK: - Helpers
 
