@@ -15,7 +15,7 @@ struct SalahTimesApp: App {
 	var body: some Scene {
 		WindowGroup {
 			NavigationStack {
-				OverviewScreen(loader: compositeTimesLoader, locationsSettings: locationSettings)
+				OverviewScreen(loader: SalahTimesLoaderComposer().loader, locationsSettings: locationSettings)
 					.navigationTitle("My locations")
 					.onAppear { registerDefaults() }
 			}
@@ -23,7 +23,6 @@ struct SalahTimesApp: App {
 	}
 
 	private let userDefaults = UserDefaults.standard
-	private var compositeTimesLoader = SalahTimesLoaderWithFallbackComposite(primaryLoader: Self.makePrimaryLoader(), fallbackLoader: Self.makeFallbackLoader())
 
 	private var suiteNames: [String] { userDefaults.stringArray(forKey: "suiteNames") ?? ["253FAFE2-96C6-42AF-8908-33DA339BD6C7"] }
 	private var locationSettings: [LocationSettings] {
@@ -71,31 +70,4 @@ struct SalahTimesApp: App {
 		try? JSONEncoder().encode(AladhanAPIEndpoint.Method.custom(methodSettings: .init(fajrAngle: 12.0, maghribAngle: nil, ishaAngle: 12.0)))
 	}
 
-	private static func makePrimaryLoader() -> TimesLoader {
-		return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .reloadRevalidatingCacheData))
-	}
-
-	private static func makeFallbackLoader() -> TimesLoader {
-		return SalahTimesLoader(client: makeHTTPClient(withRequestCachePolicy: .returnCacheDataElseLoad))
-	}
-
-	private static func makeHTTPClient(withRequestCachePolicy policy: NSURLRequest.CachePolicy) -> HTTPClient {
-		let config = URLSessionConfiguration.default
-		config.urlCache = makeCache()
-		config.requestCachePolicy = policy
-
-		let session = URLSession(configuration: config)
-
-		return URLSessionHTTPClient(session: session)
-	}
-
-	private static func makeCache() -> URLCache {
-		let cachesURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
-		let diskCacheURL = cachesURL.appendingPathComponent("DownloadCache")
-
-		return URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, directory: diskCacheURL)
-	}
-
 }
-
-extension RemoteLoader: @retroactive TimesLoader where Resource == SalahTimes {}
