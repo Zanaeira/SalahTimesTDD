@@ -44,3 +44,11 @@ final class SalahTimesLoaderComposer {
 }
 
 extension RemoteLoader: @retroactive TimesLoader where Resource == SalahTimes {}
+
+typealias SalahTimesLoader = RemoteLoader<SalahTimes>
+
+extension SalahTimesLoader {
+	convenience init(client: HTTPClient) {
+		self.init(client: client, mapper: SalahTimesMapper.map)
+	}
+}

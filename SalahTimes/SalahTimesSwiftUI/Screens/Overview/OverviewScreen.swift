@@ -31,3 +31,11 @@ public struct OverviewScreen: View {
 	}
 
 }
+
+typealias UpcomingSalahLoader = RemoteLoader<UpcomingSalah>
+
+extension UpcomingSalahLoader {
+	convenience init(client: HTTPClient) {
+		self.init(client: client, mapper: UpcomingSalahMapper.map)
+	}
+}

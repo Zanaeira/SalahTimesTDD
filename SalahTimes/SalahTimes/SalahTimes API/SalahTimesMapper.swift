@@ -10,9 +10,11 @@ import Foundation
 public final class SalahTimesMapper {
 	private static let OK_200: Int = 200
 
+	public enum Error: Swift.Error { case invalidData }
+
 	public static func map(_ data: Data, _ response: HTTPURLResponse) throws -> SalahTimes {
 		guard response.statusCode == OK_200 else {
-			throw LoaderError.invalidData
+			throw Error.invalidData
 		}
 
 		let root = try JSONDecoder().decode(Root.self, from: data)
