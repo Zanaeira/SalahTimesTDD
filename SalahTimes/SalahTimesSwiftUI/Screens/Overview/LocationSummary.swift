@@ -92,8 +92,8 @@ struct LocationSummary: View {
 
 	@ViewBuilder
 	private var timeLeft: some View {
-		if let timeLeft = viewModel.timeRemaining {
-			Text("Next Salāh \(timeLeft)")
+		if let timeLeft = viewModel.upcomingSalah?.time {
+			(Text("Next Salāh in ") + Text(timeLeft, style: .relative))
 				.font(.callout.smallCaps())
 				.foregroundStyle(.secondary)
 		}

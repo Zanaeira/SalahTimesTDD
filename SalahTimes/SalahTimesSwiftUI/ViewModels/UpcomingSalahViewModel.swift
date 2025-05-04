@@ -32,16 +32,6 @@ final class UpcomingSalahViewModel: ObservableObject {
 		return formatter.string(from: upcomingSalah.time)
 	}
 
-	var timeRemaining: String? {
-		guard let upcomingSalah else { return nil }
-		let formatter = RelativeDateTimeFormatter()
-		if let timeZone = TimeZone(identifier: upcomingSalah.timezone) {
-			formatter.calendar.timeZone = timeZone
-		}
-		formatter.unitsStyle = .full
-		return formatter.localizedString(for: upcomingSalah.time, relativeTo: .now)
-	}
-
 	func load(locationSettings: LocationSettings) async {
 		let endpoint = AladhanAPIEndpoint.nextPrayerByAddress(locationSettings.location, on: date, madhhab: locationSettings.mithl, fajrIsha: locationSettings.calculationAngle)
 		let result = await loader.load(from: endpoint)
