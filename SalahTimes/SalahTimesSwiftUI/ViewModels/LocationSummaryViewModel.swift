@@ -61,7 +61,7 @@ final class LocationSummaryViewModel: ObservableObject {
 	}
 
 	private let salahTimesLoader: TimesLoader
-	private var timeRanges: [Salah: ClosedRange<Date>] = [:]
+	private(set) var timeRanges: [Salah: ClosedRange<Date>] = [:]
 
 	private func mapSalahTimes(from times: SalahTimes) {
 		salahTimes = []
