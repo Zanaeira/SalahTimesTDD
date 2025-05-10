@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Salah {
+enum Salah: Hashable {
 	case fajr(time: Date)
 	case sunrise(time: Date)
 	case zuhr(time: Date)
