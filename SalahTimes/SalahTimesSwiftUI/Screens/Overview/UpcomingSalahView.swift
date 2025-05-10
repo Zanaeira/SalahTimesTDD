@@ -1,5 +1,5 @@
 //
-//  LocationSummary.swift
+//  UpcomingSalahView.swift
 //  SalahTimesSwiftUI
 //
 //  Created by Suhayl Ahmed on 01/05/2025.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SalahTimes
 
-struct LocationSummary: View {
+struct UpcomingSalahView: View {
 
 	init(loader: UpcomingSalahLoader, locationSettings: LocationSettings) {
 		self.locationSettings = locationSettings
