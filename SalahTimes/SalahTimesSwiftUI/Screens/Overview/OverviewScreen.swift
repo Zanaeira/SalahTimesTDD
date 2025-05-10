@@ -10,10 +10,10 @@ import SalahTimes
 
 public struct OverviewScreen: View {
 
-	let loader: UpcomingSalahLoader
+	let loader: TimesLoader
 	let locationsSettings: [LocationSettings]
 
-	public init(loader: UpcomingSalahLoader, locationsSettings: [LocationSettings]) {
+	public init(loader: TimesLoader, locationsSettings: [LocationSettings]) {
 		self.loader = loader
 		self.locationsSettings = locationsSettings
 	}
@@ -22,7 +22,7 @@ public struct OverviewScreen: View {
 		ScrollView {
 			VStack (spacing: 16) {
 				ForEach(locationsSettings) {
-					UpcomingSalahView(loader: loader, locationSettings: $0)
+					LocationSummary(loader: loader, locationSettings: $0)
 				}
 			}
 			.padding(.vertical)

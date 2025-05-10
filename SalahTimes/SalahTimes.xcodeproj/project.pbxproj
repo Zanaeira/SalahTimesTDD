@@ -27,6 +27,8 @@
 		1B8F230C2DC66E41004CC4F1 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F230B2DC66E41004CC4F1 /* TestHelpers.swift */; };
 		1B8F23122DC69537004CC4F1 /* UpcomingSalahLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23112DC69537004CC4F1 /* UpcomingSalahLoaderWithFallbackComposite.swift */; };
 		1B8F23142DC69607004CC4F1 /* UpcomingSalahLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23132DC69607004CC4F1 /* UpcomingSalahLoader.swift */; };
+		1B8F23162DD00659004CC4F1 /* LocationSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23152DD00659004CC4F1 /* LocationSummary.swift */; };
+		1B8F23182DD007D4004CC4F1 /* LocationSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8F23172DD007D4004CC4F1 /* LocationSummaryViewModel.swift */; };
 		1B917250277909800009628F /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B91724F277909800009628F /* TitleHeaderView.swift */; };
 		1B9D0AA02767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */; };
 		1B9D0ACF2768F2D90090CB2A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */; };
@@ -131,6 +133,8 @@
 		1B8F230B2DC66E41004CC4F1 /* TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		1B8F23112DC69537004CC4F1 /* UpcomingSalahLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		1B8F23132DC69607004CC4F1 /* UpcomingSalahLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahLoader.swift; sourceTree = "<group>"; };
+		1B8F23152DD00659004CC4F1 /* LocationSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSummary.swift; sourceTree = "<group>"; };
+		1B8F23172DD007D4004CC4F1 /* LocationSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSummaryViewModel.swift; sourceTree = "<group>"; };
 		1B91724F277909800009628F /* TitleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
 		1B9D0A9F2767FD4E0090CB2A /* SalahTimesBackgroundDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesBackgroundDecorationView.swift; sourceTree = "<group>"; };
 		1B9D0ACE2768F2D90090CB2A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 		1B6845B92D83BC9400884914 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				1B8F23172DD007D4004CC4F1 /* LocationSummaryViewModel.swift */,
 				1B6845B72D83BC3300884914 /* PrayerTimesViewModel.swift */,
 				1BE68D992DC450400045C0E3 /* UpcomingSalahViewModel.swift */,
 			);
@@ -594,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				1BE68D782DBC4FC30045C0E3 /* LocationCard.swift */,
+				1B8F23152DD00659004CC4F1 /* LocationSummary.swift */,
 				1B6845B22D83BB2200884914 /* OverviewScreen.swift */,
 				1BE68D882DC17E210045C0E3 /* SalahTimesView.swift */,
 				1BE68D8A2DC418F20045C0E3 /* UpcomingSalahView.swift */,
@@ -862,6 +868,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B8F23182DD007D4004CC4F1 /* LocationSummaryViewModel.swift in Sources */,
 				1BAD37792DAC60D90002D9B2 /* Salah.swift in Sources */,
 				1BE68D812DBC50780045C0E3 /* Styling.swift in Sources */,
 				1B6845B52D83BB9400884914 /* BackgroundView.swift in Sources */,
@@ -873,6 +880,7 @@
 				1BE68D792DBC4FC30045C0E3 /* LocationCard.swift in Sources */,
 				1B6845B32D83BB2200884914 /* OverviewScreen.swift in Sources */,
 				1BE68D8B2DC418F20045C0E3 /* UpcomingSalahView.swift in Sources */,
+				1B8F23162DD00659004CC4F1 /* LocationSummary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
