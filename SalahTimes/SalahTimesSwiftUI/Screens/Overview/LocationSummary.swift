@@ -50,7 +50,7 @@ struct LocationSummary: View {
 	}
 
 	private var horizontallyStackedOverview: some View {
-		HStack(alignment: .lastTextBaseline) {
+		HStack(alignment: .top) {
 			VStack(alignment: .leading, spacing: 0) {
 				titleAndSubtitle
 				Spacer()
@@ -92,13 +92,12 @@ struct LocationSummary: View {
 
 	@ViewBuilder
 	private var timeLeft: some View {
-		if let salah = viewModel.currentSalah, let endTime = viewModel.timeRemaining(for: salah) {
-			Group {
-				Text("Time remaining for \(salah.metadata.name):")
-				Text(endTime, style: .relative)
+		if let salah = viewModel.currentSalah, let timeRemaining = viewModel.timeRanges[salah] {
+			ProgressView(timerInterval: timeRemaining, countsDown: true) {
+				Text("Time remaining for \(salah.metadata.name)")
+					.font(.callout.smallCaps())
+					.foregroundStyle(.secondary)
 			}
-			.font(.callout.smallCaps())
-			.foregroundStyle(.secondary)
 		}
 	}
 
