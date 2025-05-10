@@ -62,7 +62,7 @@
 		1BE68D812DBC50780045C0E3 /* Styling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D802DBC50780045C0E3 /* Styling.swift */; };
 		1BE68D852DC0323C0045C0E3 /* AladhanAPIEndpoint+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D842DC0323C0045C0E3 /* AladhanAPIEndpoint+Helpers.swift */; };
 		1BE68D892DC17E210045C0E3 /* SalahTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D882DC17E210045C0E3 /* SalahTimesView.swift */; };
-		1BE68D8B2DC418F20045C0E3 /* LocationSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D8A2DC418F20045C0E3 /* LocationSummary.swift */; };
+		1BE68D8B2DC418F20045C0E3 /* UpcomingSalahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D8A2DC418F20045C0E3 /* UpcomingSalahView.swift */; };
 		1BE68D8D2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D8C2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift */; };
 		1BE68D8F2DC428000045C0E3 /* XCTestCase+Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D8E2DC428000045C0E3 /* XCTestCase+Date+Formatting.swift */; };
 		1BE68D902DC428000045C0E3 /* XCTestCase+Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE68D8E2DC428000045C0E3 /* XCTestCase+Date+Formatting.swift */; };
@@ -171,7 +171,7 @@
 		1BE68D802DBC50780045C0E3 /* Styling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Styling.swift; sourceTree = "<group>"; };
 		1BE68D842DC0323C0045C0E3 /* AladhanAPIEndpoint+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AladhanAPIEndpoint+Helpers.swift"; sourceTree = "<group>"; };
 		1BE68D882DC17E210045C0E3 /* SalahTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalahTimesView.swift; sourceTree = "<group>"; };
-		1BE68D8A2DC418F20045C0E3 /* LocationSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSummary.swift; sourceTree = "<group>"; };
+		1BE68D8A2DC418F20045C0E3 /* UpcomingSalahView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahView.swift; sourceTree = "<group>"; };
 		1BE68D8C2DC424670045C0E3 /* AladhanAPINextPrayerByAddressEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladhanAPINextPrayerByAddressEndpointTests.swift; sourceTree = "<group>"; };
 		1BE68D8E2DC428000045C0E3 /* XCTestCase+Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Date+Formatting.swift"; sourceTree = "<group>"; };
 		1BE68D912DC43ACC0045C0E3 /* UpcomingSalahMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingSalahMapperTests.swift; sourceTree = "<group>"; };
@@ -594,9 +594,9 @@
 			isa = PBXGroup;
 			children = (
 				1BE68D782DBC4FC30045C0E3 /* LocationCard.swift */,
-				1BE68D8A2DC418F20045C0E3 /* LocationSummary.swift */,
 				1B6845B22D83BB2200884914 /* OverviewScreen.swift */,
 				1BE68D882DC17E210045C0E3 /* SalahTimesView.swift */,
+				1BE68D8A2DC418F20045C0E3 /* UpcomingSalahView.swift */,
 			);
 			path = Overview;
 			sourceTree = "<group>";
@@ -872,7 +872,7 @@
 				1BE68D892DC17E210045C0E3 /* SalahTimesView.swift in Sources */,
 				1BE68D792DBC4FC30045C0E3 /* LocationCard.swift in Sources */,
 				1B6845B32D83BB2200884914 /* OverviewScreen.swift in Sources */,
-				1BE68D8B2DC418F20045C0E3 /* LocationSummary.swift in Sources */,
+				1BE68D8B2DC418F20045C0E3 /* UpcomingSalahView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
