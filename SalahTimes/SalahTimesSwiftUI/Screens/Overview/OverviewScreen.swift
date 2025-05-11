@@ -22,7 +22,7 @@ public struct OverviewScreen: View {
 		ScrollView {
 			VStack (spacing: 16) {
 				ForEach(locationsSettings) {
-					LocationSummary(loader: UpcomingSalahLoader(client: URLSessionHTTPClient()), locationSettings: $0)
+					LocationSummary(loader: loader, locationSettings: $0)
 				}
 			}
 			.padding(.vertical)

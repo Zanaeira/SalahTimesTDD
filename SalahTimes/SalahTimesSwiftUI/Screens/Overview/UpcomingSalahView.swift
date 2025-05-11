@@ -1,18 +1,18 @@
 //
-//  LocationSummary.swift
+//  UpcomingSalahView.swift
 //  SalahTimesSwiftUI
 //
-//  Created by Suhayl Ahmed on 10/05/2025.
+//  Created by Suhayl Ahmed on 01/05/2025.
 //
 
 import SwiftUI
 import SalahTimes
 
-struct LocationSummary: View {
+struct UpcomingSalahView: View {
 
-	init(loader: TimesLoader, locationSettings: LocationSettings) {
+	init(loader: UpcomingSalahLoader, locationSettings: LocationSettings) {
 		self.locationSettings = locationSettings
-		_viewModel = .init(wrappedValue: LocationSummaryViewModel(loader: loader))
+		_viewModel = .init(wrappedValue: UpcomingSalahViewModel(loader: loader))
 	}
 
 	var body: some View {
@@ -31,16 +31,16 @@ struct LocationSummary: View {
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
 	@State private var locationSettings: LocationSettings
-	@StateObject private var viewModel: LocationSummaryViewModel
+	@StateObject private var viewModel: UpcomingSalahViewModel
 
 	private let secondary = Color.white.opacity(0.8)
 
 	@ViewBuilder
-	private var currentSalahView: some View {
+	private var upcomingSalahView: some View {
 		VStack(spacing: 2) {
-			if let salah = viewModel.currentSalah {
+			if let salah = salah(from: viewModel.upcomingSalah), let time = viewModel.upcomingSalahTime {
 				image(for: salah)
-				Text(viewModel.formatter.string(from: salah.time))
+				Text(time)
 				Text(salah.metadata.name)
 					.font(.callout.smallCaps())
 			}
@@ -50,7 +50,7 @@ struct LocationSummary: View {
 	}
 
 	private var horizontallyStackedOverview: some View {
-		HStack(alignment: .top) {
+		HStack(alignment: .lastTextBaseline) {
 			VStack(alignment: .leading, spacing: 0) {
 				titleAndSubtitle
 				Spacer()
@@ -58,7 +58,7 @@ struct LocationSummary: View {
 					.fixedSize(horizontal: true, vertical: false)
 			}
 			Spacer()
-			currentSalahView
+			upcomingSalahView
 		}
 	}
 
@@ -66,14 +66,14 @@ struct LocationSummary: View {
 		HStack {
 			VStack(alignment: .leading, spacing: 0) {
 				titleAndSubtitle
-				if let salah = viewModel.currentSalah {
+				if let salah = salah(from: viewModel.upcomingSalah), let time = viewModel.upcomingSalahTime {
 					HStack(alignment: .bottom, spacing: 8) {
 						image(for: salah)
 						Text(salah.metadata.name)
 							.font(.callout.smallCaps())
 					}
 					.fixedSize(horizontal: true, vertical: false)
-					Text(viewModel.formatter.string(from: salah.time))
+					Text(time)
 				}
 				timeLeft
 			}
@@ -92,12 +92,22 @@ struct LocationSummary: View {
 
 	@ViewBuilder
 	private var timeLeft: some View {
-		if let salah = viewModel.currentSalah, let timeRemaining = viewModel.timeRanges[salah] {
-			ProgressView(timerInterval: timeRemaining, countsDown: true) {
-				Text("Time remaining for \(salah.metadata.name)")
-					.font(.callout.smallCaps())
-					.foregroundStyle(.secondary)
-			}
+		if let timeLeft = viewModel.upcomingSalah?.time {
+			(Text("Next Salāh in ") + Text(timeLeft, style: .relative))
+				.font(.callout.smallCaps())
+				.foregroundStyle(.secondary)
+		}
+	}
+
+	private func salah(from upcomingSalah: UpcomingSalah?) -> Salah? {
+		guard let upcomingSalah else { return nil }
+		return switch upcomingSalah.name {
+		case "Fajr": .fajr(time: upcomingSalah.time)
+		case "Zuhr": .zuhr(time: upcomingSalah.time)
+		case "Asr": .asr(time: upcomingSalah.time)
+		case "Maghrib": .maghrib(time: upcomingSalah.time)
+		case "Isha": .isha(time: upcomingSalah.time)
+		default: nil
 		}
 	}
 

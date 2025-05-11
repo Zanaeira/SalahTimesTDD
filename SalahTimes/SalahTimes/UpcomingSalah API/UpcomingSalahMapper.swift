@@ -7,19 +7,21 @@
 
 import Foundation
 
-final class UpcomingSalahMapper {
+public final class UpcomingSalahMapper {
 	private static let OK_200: Int = 200
 
-	static func map(_ data: Data, _ response: HTTPURLResponse) throws -> UpcomingSalah {
+	public enum Error: Swift.Error { case invalidData }
+
+	public static func map(_ data: Data, _ response: HTTPURLResponse) throws -> UpcomingSalah {
 		guard response.statusCode == OK_200 else {
-			throw TimesLoaderError.invalidData
+			throw Error.invalidData
 		}
 
 		let decoder = JSONDecoder()
 		decoder.dateDecodingStrategy = .iso8601
 
 		guard let upcomingSalah = try decoder.decode(Root.self, from: data).data.upcomingSalah else {
-			throw TimesLoaderError.invalidData
+			throw Error.invalidData
 		}
 
 		return upcomingSalah

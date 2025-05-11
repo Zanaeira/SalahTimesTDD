@@ -79,7 +79,7 @@ final class OverviewCollectionViewController: UIViewController {
             dispatchGroup.enter()
             let location = userDefaults.string(forKey: "Location") ?? "London"
             let endpoint = makeEndpoint(usingUserDefaults: userDefaults)
-            salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
+            salahTimesLoader.load(from: endpoint) { [weak self] result in
                 guard let self = self else { return }
                 
                 switch result {
@@ -142,7 +142,7 @@ final class OverviewCollectionViewController: UIViewController {
         return endpoint
     }
     
-    private func handleError(_ error: TimesLoaderError) {
+    private func handleError(_ error: LoaderError) {
         let errorMessage = error == .invalidData ?
             "Sorry, something went wrong.\n\nIf you think this is a mistake, then please try again later." :
             "Sorry, an error occured when trying to load the Salāh Times. Please check your internet connection and try again."

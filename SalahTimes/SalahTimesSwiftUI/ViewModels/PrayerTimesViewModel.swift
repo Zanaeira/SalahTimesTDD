@@ -35,7 +35,7 @@ final class PrayerTimesViewModel: ObservableObject {
 	func load(locationSettings: LocationSettings) async {
 		let endpoint = AladhanAPIEndpoint.timingsByAddress(locationSettings.location, on: date, iso8601DateFormat: true, madhhabForAsr: locationSettings.mithl, fajrIshaMethod: locationSettings.calculationAngle)
 		state = .loading
-		let result = await salahTimesLoader.loadTimes(from: endpoint)
+		let result = await salahTimesLoader.load(from: endpoint)
 
 		switch result {
 		case .success(let times):

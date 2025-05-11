@@ -8,8 +8,8 @@
 import Foundation
 
 public protocol TimesLoader {
-    typealias Result = Swift.Result<SalahTimes, TimesLoaderError>
+    typealias Result = Swift.Result<SalahTimes, LoaderError>
     
-    func loadTimes(from endpoint: Endpoint, completion: @escaping (Result) -> Void)
-		func loadTimes(from endpoint: Endpoint) async -> Result
+    func load(from endpoint: Endpoint, completion: @escaping (Result) -> Void)
+		func load(from endpoint: Endpoint) async -> Result
 }

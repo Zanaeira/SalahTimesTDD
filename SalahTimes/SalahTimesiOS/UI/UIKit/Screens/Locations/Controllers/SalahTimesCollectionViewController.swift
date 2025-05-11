@@ -97,7 +97,7 @@ final class SalahTimesCollectionViewController: UIViewController {
             endpoint = AladhanAPIEndpoint.timingsByAddress(location, on: date, madhhabForAsr: preferredMithl)
         }
         
-        salahTimesLoader.loadTimes(from: endpoint) { [weak self] result in
+        salahTimesLoader.load(from: endpoint) { [weak self] result in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -118,7 +118,7 @@ final class SalahTimesCollectionViewController: UIViewController {
         }
     }
     
-    private func handleError(_ error: TimesLoaderError, location: String) {
+    private func handleError(_ error: LoaderError, location: String) {
         let errorMessage = error == .invalidData ?
             "Sorry, we were unable to find any Salāh Times for: \(location).\n\nIf you think this is a mistake, then please try again later." :
             "Sorry, an error occured when trying to load the Salāh Times. Please check your internet connection and try again."
