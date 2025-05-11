@@ -81,10 +81,10 @@ final class LocationSummaryViewModel: ObservableObject {
 	private func setCurrentSalah(using times: SalahTimes) {
 		timeRanges = [
 			Salah.fajr(time: map(times.fajr)): map(times.fajr)...map(times.sunrise),
-			Salah.sunrise(time: map(times.fajr)): map(times.sunrise)...map(times.zuhr),
-			Salah.zuhr(time: map(times.fajr)): map(times.zuhr)...map(times.asr),
-			Salah.asr(time: map(times.fajr)): map(times.asr)...map(times.maghrib),
-			Salah.maghrib(time: map(times.fajr)): map(times.maghrib)...map(times.isha)
+			Salah.sunrise(time: map(times.sunrise)): map(times.sunrise)...map(times.zuhr),
+			Salah.zuhr(time: map(times.zuhr)): map(times.zuhr)...map(times.asr),
+			Salah.asr(time: map(times.asr)): map(times.asr)...map(times.maghrib),
+			Salah.maghrib(time: map(times.maghrib)): map(times.maghrib)...map(times.isha)
 		]
 		currentSalah = timeRanges.first(where: { (_, timeRange) in timeRange.contains(.now) })?.key ?? .isha(time: map(times.isha))
 	}
