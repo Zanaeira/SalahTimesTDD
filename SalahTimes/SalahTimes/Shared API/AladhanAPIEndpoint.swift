@@ -35,7 +35,8 @@ public struct AladhanAPIEndpoint: Endpoint {
 			iso8601DateFormat: iso8601DateFormat,
 			madhhab: madhhabForAsr,
 			fajrIsha: fajrIshaMethod
-		)	}
+		)
+	}
 
 	public static func nextPrayerByAddress(_ address: String, on date: Date, madhhab: Madhhab = .hanafi, fajrIsha: Method = .standard(method: .islamicSocietyOfNorthAmerica)) -> Endpoint {
 		buildEndpoint(
