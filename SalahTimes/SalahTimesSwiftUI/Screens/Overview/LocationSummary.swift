@@ -33,8 +33,6 @@ struct LocationSummary: View {
 	@State private var locationSettings: LocationSettings
 	@StateObject private var viewModel: LocationSummaryViewModel
 
-	private let secondary = Color.white.opacity(0.8)
-
 	@ViewBuilder
 	private var currentSalahView: some View {
 		VStack(spacing: 2) {
