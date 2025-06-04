@@ -13,6 +13,7 @@ final class LocationSummaryViewModel: ObservableObject {
 
 	init(loader: TimesLoader) {
 		salahTimesLoader = loader
+		updateCurrentDateAndTime()
 	}
 
 	enum State {
@@ -22,17 +23,11 @@ final class LocationSummaryViewModel: ObservableObject {
 	}
 
 	@Published private(set) var date = Date()
+	@Published private(set) var currentDateAndTime: String?
 	@Published private(set) var salahTimes = [Salah]()
 	@Published private(set) var currentSalah: Salah?
 	@Published private(set) var state: State?
 	private(set) var timeZone: String = "London/Europe"
-
-	var currentDateAndTime: String? {
-		let timeZone = TimeZone(identifier: timeZone)
-		let formatter = DateFormatter.salahDateAndTimeFormatter
-		formatter.timeZone = timeZone
-		return formatter.string(from: .now)
-	}
 
 	var formatter: DateFormatter {
 		let dateFormatter = DateFormatter.salahTimesFormatter
@@ -54,6 +49,13 @@ final class LocationSummaryViewModel: ObservableObject {
 		case .failure:
 			state = .failure(errorMessage: "Something went wrong. Please try again.")
 		}
+	}
+
+	func updateCurrentDateAndTime() {
+		let timeZone = TimeZone(identifier: timeZone)
+		let formatter = DateFormatter.salahDateAndTimeFormatter
+		formatter.timeZone = timeZone
+		currentDateAndTime = formatter.string(from: .now)
 	}
 
 	func timeRemaining(for salah: Salah) -> Date? {

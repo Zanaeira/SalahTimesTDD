@@ -26,12 +26,15 @@ struct LocationSummary: View {
 		.padding(.horizontal, 16)
 		.groupBoxStyle(.salahOverview)
 		.task { await viewModel.load(locationSettings: locationSettings) }
+		.onReceive(timer) { _ in viewModel.updateCurrentDateAndTime() }
 	}
 
 	@Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
 	@State private var locationSettings: LocationSettings
 	@StateObject private var viewModel: LocationSummaryViewModel
+
+	private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
 	@ViewBuilder
 	private var currentSalahView: some View {
