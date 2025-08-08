@@ -32,11 +32,15 @@ struct SalahTimesApp: App {
 			}
 
 			let mithl = AladhanAPIEndpoint.Madhhab(rawValue: defaults.integer(forKey: "Mithl")) ?? .hanafi
-			guard let fajrIshaMethod = defaults.object(forKey: "FajrIsha") as? Data, let angleCalculationMethod: AladhanAPIEndpoint.Method = try? JSONDecoder().decode(AladhanAPIEndpoint.Method.self, from: fajrIshaMethod) else {
-				return .init(userDefaults: defaults, location: location, mithl: mithl, calculationAngle: .custom(methodSettings: .init(fajrAngle: 12, maghribAngle: nil, ishaAngle: 12)))
+			let calculationMethod: AladhanAPIEndpoint.Method
+			if let methodData = defaults.object(forKey: "FajrIsha") as? Data,
+				 let fajrIshaMethod = try? JSONDecoder().decode(AladhanAPIEndpoint.Method.self, from: methodData) {
+				calculationMethod = fajrIshaMethod
+			} else {
+				calculationMethod = .custom(methodSettings: .init(fajrAngle: 12, maghribAngle: nil, ishaAngle: 12))
 			}
 
-			return .init(userDefaults: defaults, location: location, mithl: mithl, calculationAngle: angleCalculationMethod)
+			return .init(userDefaults: defaults, location: location, mithl: mithl, calculationAngle: calculationMethod)
 		}
 	}
 
