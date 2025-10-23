@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import SalahTimes
 
 public final class LocationManager {
 	public init() {}
 
 	public func add(location: String) throws {
-		throw NSError(domain: "", code: 0)
+		throw LoaderError.invalidData
 	}
 }

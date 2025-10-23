@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import SalahTimes
 import SalahTimesPersistence
 
 final class LocationManagerTests: XCTestCase {
@@ -15,4 +16,12 @@ final class LocationManagerTests: XCTestCase {
 
 		XCTAssertThrowsError(try sut.add(location: "any-invalid-location"))
 	}
+
+	func test_addLocation_throwsInvalidDataErrorOnInvalidLocation() {
+		let sut = LocationManager()
+		var error: Error?
+		XCTAssertThrowsError(try sut.add(location: "any-invalid-location")) { error = $0 }
+		XCTAssertEqual(error as? LoaderError, .invalidData)
+	}
+
 }

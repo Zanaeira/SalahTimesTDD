@@ -76,6 +76,7 @@
 		1BF7BFC22EAAE21D000DFD8E /* SalahTimesPersistence.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BF7BFB92EAAE21C000DFD8E /* SalahTimesPersistence.framework */; };
 		1BF7BFD32EAAE23F000DFD8E /* LocationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF7BFD12EAAE23F000DFD8E /* LocationManagerTests.swift */; };
 		1BF7BFD52EAAE2CE000DFD8E /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BF7BFD42EAAE2CE000DFD8E /* LocationManager.swift */; };
+		1BF7BFD62EAAE742000DFD8E /* SalahTimes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BE005A226B8069D003F5F54 /* SalahTimes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1BF7BFB82EAAE21C000DFD8E;
 			remoteInfo = SalahTimesPersistence;
+		};
+		1BF7BFD82EAAE742000DFD8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BE0059926B8069D003F5F54 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BE005A126B8069D003F5F54;
+			remoteInfo = SalahTimes;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -251,6 +259,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BF7BFD62EAAE742000DFD8E /* SalahTimes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,6 +839,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1BF7BFD92EAAE742000DFD8E /* PBXTargetDependency */,
 			);
 			name = SalahTimesPersistence;
 			packageProductDependencies = (
@@ -1137,6 +1147,11 @@
 			isa = PBXTargetDependency;
 			target = 1BF7BFB82EAAE21C000DFD8E /* SalahTimesPersistence */;
 			targetProxy = 1BF7BFC32EAAE21D000DFD8E /* PBXContainerItemProxy */;
+		};
+		1BF7BFD92EAAE742000DFD8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BE005A126B8069D003F5F54 /* SalahTimes */;
+			targetProxy = 1BF7BFD82EAAE742000DFD8E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1596,7 +1611,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1642,7 +1657,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
-				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
