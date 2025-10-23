@@ -46,7 +46,7 @@ final class LocationManagerTests: XCTestCase {
 		let sut = LocationManager(loader: loader)
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location")
-		XCTAssertEqual(sut.locations, ["any-valid-location"])
+		XCTAssertEqual(sut.locations.map(\.name), ["any-valid-location"])
 	}
 
 	func test_addLocation_addsEachLocationOnSuccess() async throws {
@@ -55,9 +55,16 @@ final class LocationManagerTests: XCTestCase {
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location")
 		try await sut.add(location: "another-valid-location")
-		XCTAssertEqual(sut.locations, ["any-valid-location", "another-valid-location"])
+		XCTAssertEqual(sut.locations.map(\.name), ["any-valid-location", "another-valid-location"])
 	}
 
+	func test_addLocation_addsLocationWithTimesOnSuccess() async throws {
+		let loader = MockSalahTimesLoader()
+		let sut = LocationManager(loader: loader)
+		loader.response = .success(anySalahTimes())
+		try await sut.add(location: "any-valid-location")
+		XCTAssertEqual(sut.locations, [.init(name: "any-valid-location", salahTimes: anySalahTimes())])
+	}
 
 	// MARK: Helpers
 
