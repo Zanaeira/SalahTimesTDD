@@ -8,6 +8,6 @@
 import XCTest
 import SalahTimesPersistence
 
-final class SalahTimesPersistenceTests: XCTestCase {
+final class LocationManagerTests: XCTestCase {
 
 }
