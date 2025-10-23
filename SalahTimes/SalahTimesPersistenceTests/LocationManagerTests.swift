@@ -11,17 +11,23 @@ import SalahTimesPersistence
 
 final class LocationManagerTests: XCTestCase {
 
-	func test_addLocation_throwsErrorOnInvalidLocation() {
-		let sut = LocationManager()
-
-		XCTAssertThrowsError(try sut.add(location: "any-invalid-location"))
-	}
-
-	func test_addLocation_throwsInvalidDataErrorOnInvalidLocation() {
-		let sut = LocationManager()
+	func test_addLocation_throwsInvalidDataErrorOnFailureFromLoader() {
+		let sut = LocationManager(loader: MockSalahTimesLoader())
 		var error: Error?
 		XCTAssertThrowsError(try sut.add(location: "any-invalid-location")) { error = $0 }
 		XCTAssertEqual(error as? LoaderError, .invalidData)
+	}
+
+	// MARK: Helpers
+
+	private final class MockSalahTimesLoader: TimesLoader {
+		typealias Result = Swift.Result<SalahTimes, LoaderError>
+
+		func load(from endpoint: Endpoint, completion: @escaping (Result) -> Void) {}
+
+		func load(from endpoint: Endpoint) async -> Result {
+			.failure(.invalidData)
+		}
 	}
 
 }

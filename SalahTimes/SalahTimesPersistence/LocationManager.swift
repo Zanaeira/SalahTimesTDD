@@ -9,7 +9,7 @@ import Foundation
 import SalahTimes
 
 public final class LocationManager {
-	public init() {}
+	public init(loader: TimesLoader) {}
 
 	public func add(location: String) throws {
 		throw LoaderError.invalidData
