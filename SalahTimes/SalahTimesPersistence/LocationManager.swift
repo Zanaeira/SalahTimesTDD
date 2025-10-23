@@ -21,7 +21,7 @@ public final class LocationManager {
 		let result = await loader.load(from: AladhanAPIEndpoint.timingsByAddress("", on: .now))
 		switch result {
 		case .success:
-			locations.append("any-valid-location")
+			locations.append(location)
 		case .failure(let error):
 			throw error
 		}
