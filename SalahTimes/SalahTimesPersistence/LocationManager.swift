@@ -17,8 +17,8 @@ public final class LocationManager {
 		self.loader = loader
 	}
 
-	public func add(location: String) async throws {
-		let result = await loader.load(from: AladhanAPIEndpoint.timingsByAddress("", on: .now))
+	public func add(location: String, using endpoint: Endpoint) async throws {
+		let result = await loader.load(from: endpoint)
 		switch result {
 		case .success(let salahTimes):
 			locations.append(.init(name: location, salahTimes: salahTimes))

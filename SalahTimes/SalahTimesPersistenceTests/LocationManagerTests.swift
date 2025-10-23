@@ -18,7 +18,7 @@ final class LocationManagerTests: XCTestCase {
 		loader.response = .failure(.invalidData)
 
 		do {
-			try await sut.add(location: "any-invalid-location")
+			try await sut.add(location: "any-invalid-location", using: anyEndpoint())
 		} catch {
 			thrownError = error
 		}
@@ -33,7 +33,7 @@ final class LocationManagerTests: XCTestCase {
 		loader.response = .failure(.connectivity)
 
 		do {
-			try await sut.add(location: "any-valid-location")
+			try await sut.add(location: "any-valid-location", using: anyEndpoint())
 		} catch {
 			thrownError = error
 		}
@@ -45,7 +45,7 @@ final class LocationManagerTests: XCTestCase {
 		let loader = MockSalahTimesLoader()
 		let sut = LocationManager(loader: loader)
 		loader.response = .success(anySalahTimes())
-		try await sut.add(location: "any-valid-location")
+		try await sut.add(location: "any-valid-location", using: anyEndpoint())
 		XCTAssertEqual(sut.locations.map(\.name), ["any-valid-location"])
 	}
 
@@ -53,8 +53,8 @@ final class LocationManagerTests: XCTestCase {
 		let loader = MockSalahTimesLoader()
 		let sut = LocationManager(loader: loader)
 		loader.response = .success(anySalahTimes())
-		try await sut.add(location: "any-valid-location")
-		try await sut.add(location: "another-valid-location")
+		try await sut.add(location: "any-valid-location", using: anyEndpoint())
+		try await sut.add(location: "another-valid-location", using: anyEndpoint())
 		XCTAssertEqual(sut.locations.map(\.name), ["any-valid-location", "another-valid-location"])
 	}
 
@@ -62,7 +62,7 @@ final class LocationManagerTests: XCTestCase {
 		let loader = MockSalahTimesLoader()
 		let sut = LocationManager(loader: loader)
 		loader.response = .success(anySalahTimes())
-		try await sut.add(location: "any-valid-location")
+		try await sut.add(location: "any-valid-location", using: anyEndpoint())
 		XCTAssertEqual(sut.locations, [.init(name: "any-valid-location", salahTimes: anySalahTimes())])
 	}
 
@@ -78,6 +78,10 @@ final class LocationManagerTests: XCTestCase {
 		func load(from endpoint: Endpoint) async -> Result {
 			response!
 		}
+	}
+
+	private func anyEndpoint() -> Endpoint {
+		AladhanAPIEndpoint.timingsByAddress("", on: .now)
 	}
 
 	private func anySalahTimes() -> SalahTimes {
