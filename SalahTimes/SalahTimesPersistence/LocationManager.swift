@@ -9,9 +9,20 @@ import Foundation
 import SalahTimes
 
 public final class LocationManager {
-	public init(loader: TimesLoader) {}
 
-	public func add(location: String) throws {
-		throw LoaderError.invalidData
+	private let loader: TimesLoader
+
+	public init(loader: TimesLoader) {
+		self.loader = loader
+	}
+
+	public func add(location: String) async throws {
+		let result = await loader.load(from: AladhanAPIEndpoint.timingsByAddress("", on: .now))
+		switch result {
+		case .success:
+			break
+		case .failure(let error):
+			throw error
+		}
 	}
 }
