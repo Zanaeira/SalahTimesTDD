@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import SalahTimes
+@testable import SalahTimes
 import SalahTimesPersistence
 
 final class LocationManagerTests: XCTestCase {
@@ -41,6 +41,13 @@ final class LocationManagerTests: XCTestCase {
 		XCTAssertEqual(thrownError as? LoaderError, .connectivity)
 	}
 
+	func test_addLocation_addsLocationOnSuccess() async throws {
+		let loader = MockSalahTimesLoader()
+		let sut = LocationManager(loader: loader)
+		loader.response = .success(anySalahTimes())
+		try await sut.add(location: "any-valid-location")
+		XCTAssertEqual(sut.locations, ["any-valid-location"])
+	}
 
 	// MARK: Helpers
 
@@ -54,6 +61,10 @@ final class LocationManagerTests: XCTestCase {
 		func load(from endpoint: Endpoint) async -> Result {
 			response!
 		}
+	}
+
+	private func anySalahTimes() -> SalahTimes {
+		SalahTimes(timestamp: "", timezone: "", date: "", fajr: "", sunrise: "", zuhr: "", asr: "", maghrib: "", isha: "")
 	}
 
 }
