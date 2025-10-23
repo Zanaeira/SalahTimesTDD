@@ -10,4 +10,9 @@ import SalahTimesPersistence
 
 final class LocationManagerTests: XCTestCase {
 
+	func test_addLocation_throwsErrorOnInvalidLocation() {
+		let sut = LocationManager()
+
+		XCTAssertThrowsError(try sut.add(location: "any-invalid-location"))
+	}
 }
