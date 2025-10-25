@@ -80,9 +80,15 @@ final class LocationManagerTests: XCTestCase {
 	private final class MockLocationStore: LocationStore {
 		enum Message {
 			case add
+			case retrieve
 		}
 
 		private(set) var messages = [Message]()
+
+		func retrieve(_ locationName: String) throws -> Location {
+			messages.append(.retrieve)
+			throw NSError(domain: "", code: 0)
+		}
 
 		func add(_ location: Location) {
 			messages.append(.add)

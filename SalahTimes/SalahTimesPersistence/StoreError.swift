@@ -9,4 +9,5 @@ import Foundation
 
 public enum StoreError: Error {
 	case failedToInsert
+	case failedToRetrieve
 }
