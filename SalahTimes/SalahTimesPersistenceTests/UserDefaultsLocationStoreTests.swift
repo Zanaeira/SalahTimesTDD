@@ -1,5 +1,5 @@
 //
-//  CodableLocationStore.swift
+//  UserDefaultsLocationStoreTests.swift
 //  SalahTimesPersistenceTests
 //
 //  Created by Suhayl Ahmed on 25/10/2025.
@@ -9,16 +9,16 @@ import XCTest
 import SalahTimes
 import SalahTimesPersistence
 
-final class CodableLocationStoreTests: XCTestCase {
+final class UserDefaultsLocationStoreTests: XCTestCase {
 
 	func test_insert_throwsErrorOnInsertionFailure() {
-		let sut = CodableLocationStore()
+		let sut = UserDefaultsLocationStore()
 
 		XCTAssertThrowsError(try sut.add(anyLocation()))
 	}
 
 	func test_insert_throwsInsertionErrorOnInsertionFailure() {
-		let sut = CodableLocationStore()
+		let sut = UserDefaultsLocationStore()
 		var thrownError: Error?
 
 		do {

@@ -1,5 +1,5 @@
 //
-//  CodableLocationStore.swift
+//  UserDefaultsLocationStore.swift
 //  SalahTimesPersistence
 //
 //  Created by Suhayl Ahmed on 25/10/2025.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class CodableLocationStore: LocationStore {
+public final class UserDefaultsLocationStore: LocationStore {
 
 	public init() {}
 
