@@ -31,7 +31,7 @@ final class LocationManagerTests: XCTestCase {
 
 		try? await sut.add(location: "any-invalid-location", using: anyEndpoint())
 
-		XCTAssertEqual(store.messages, [])
+		XCTAssertEqual(store.locations, [])
 	}
 
 
@@ -53,7 +53,7 @@ final class LocationManagerTests: XCTestCase {
 		let (sut, loader, store) = makeSUT()
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location", using: anyEndpoint())
-		XCTAssertEqual(store.messages, [.add])
+		XCTAssertEqual(store.locations.count, 1)
 	}
 
 	func test_addLocation_addsEachLocationOnSuccess() async throws {
@@ -61,7 +61,15 @@ final class LocationManagerTests: XCTestCase {
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location", using: anyEndpoint())
 		try await sut.add(location: "another-valid-location", using: anyEndpoint())
-		XCTAssertEqual(store.messages, [.add, .add])
+		XCTAssertEqual(store.locations.count, 2)
+	}
+
+	func test_addLocation_createsLocationWithSpecifiedName() async throws {
+		let (sut, loader, store) = makeSUT()
+		loader.response = .success(anySalahTimes())
+		try await sut.add(location: "A location", using: anyEndpoint())
+		let location = try store.retrieve("A location")
+		XCTAssertEqual(location.name, "A location")
 	}
 
 	// MARK: Helpers
@@ -78,20 +86,14 @@ final class LocationManagerTests: XCTestCase {
 		}
 	}
 	private final class MockLocationStore: LocationStore {
-		enum Message {
-			case add
-			case retrieve
-		}
-
-		private(set) var messages = [Message]()
+		private(set) var locations = [Location]()
 
 		func retrieve(_ locationName: String) throws -> Location {
-			messages.append(.retrieve)
-			throw NSError(domain: "", code: 0)
+			locations.first { $0.name == locationName }!
 		}
 
 		func add(_ location: Location) {
-			messages.append(.add)
+			locations.append(location)
 		}
 	}
 
