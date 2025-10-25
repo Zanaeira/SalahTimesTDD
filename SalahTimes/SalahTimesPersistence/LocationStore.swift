@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol LocationStore {
-	func add(_ location: Location)
+	func add(_ location: Location) throws
 }

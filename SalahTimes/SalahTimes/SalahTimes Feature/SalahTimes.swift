@@ -17,4 +17,16 @@ public struct SalahTimes: Equatable {
 	public let asr: String
 	public let maghrib: String
 	public let isha: String
+
+	public init(timestamp: String, timezone: String, date: String, fajr: String, sunrise: String, zuhr: String, asr: String, maghrib: String, isha: String) {
+		self.timestamp = timestamp
+		self.timezone = timezone
+		self.date = date
+		self.fajr = fajr
+		self.sunrise = sunrise
+		self.zuhr = zuhr
+		self.asr = asr
+		self.maghrib = maghrib
+		self.isha = isha
+	}
 }

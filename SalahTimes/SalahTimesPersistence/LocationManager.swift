@@ -22,7 +22,7 @@ public final class LocationManager {
 		let result = await loader.load(from: endpoint)
 		switch result {
 		case .success(let salahTimes):
-			store.add(.init(name: location, salahTimes: salahTimes))
+			try store.add(.init(name: location, salahTimes: salahTimes))
 		case .failure(let error):
 			throw error
 		}
