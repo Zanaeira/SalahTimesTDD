@@ -25,7 +25,13 @@ final class UserDefaultsLocationStoreTests: XCTestCase {
 
 	func test_retrieve_throwsErrorOnFailure() {
 		let sut = UserDefaultsLocationStore(suiteName: "test-store")
-		XCTAssertThrowsError(try sut.retrieve("London"))
+		var thrownError: Error?
+		do {
+			let _ = try sut.retrieve("non-existent location")
+		} catch {
+			thrownError = error
+		}
+		XCTAssertEqual(thrownError as? StoreError, .failedToRetrieve)
 	}
 
 	func test_insert_insertsLocationOnSuccess() throws {
