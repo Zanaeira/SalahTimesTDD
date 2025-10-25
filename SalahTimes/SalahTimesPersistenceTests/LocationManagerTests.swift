@@ -12,7 +12,7 @@ import SalahTimesPersistence
 final class LocationManagerTests: XCTestCase {
 
 	func test_addLocation_throwsInvalidDataErrorOnFailureFromLoader() async {
-		let (sut, loader) = makeSUT()
+		let (sut, loader, _) = makeSUT()
 		var thrownError: Error?
 		loader.response = .failure(.invalidData)
 
@@ -26,7 +26,7 @@ final class LocationManagerTests: XCTestCase {
 	}
 
 	func test_addLocation_throwsConnectivityErrorOnFailureFromLoader() async {
-		let (sut, loader) = makeSUT()
+		let (sut, loader, _) = makeSUT()
 		var thrownError: Error?
 		loader.response = .failure(.connectivity)
 
@@ -40,25 +40,18 @@ final class LocationManagerTests: XCTestCase {
 	}
 
 	func test_addLocation_addsLocationOnSuccess() async throws {
-		let (sut, loader) = makeSUT()
+		let (sut, loader, store) = makeSUT()
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location", using: anyEndpoint())
-		XCTAssertEqual(sut.locations.map(\.name), ["any-valid-location"])
+		XCTAssertEqual(store.messages, [.add])
 	}
 
 	func test_addLocation_addsEachLocationOnSuccess() async throws {
-		let (sut, loader) = makeSUT()
+		let (sut, loader, store) = makeSUT()
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location", using: anyEndpoint())
 		try await sut.add(location: "another-valid-location", using: anyEndpoint())
-		XCTAssertEqual(sut.locations.map(\.name), ["any-valid-location", "another-valid-location"])
-	}
-
-	func test_addLocation_addsLocationWithTimesOnSuccess() async throws {
-		let (sut, loader) = makeSUT()
-		loader.response = .success(anySalahTimes())
-		try await sut.add(location: "any-valid-location", using: anyEndpoint())
-		XCTAssertEqual(sut.locations, [.init(name: "any-valid-location", salahTimes: anySalahTimes())])
+		XCTAssertEqual(store.messages, [.add, .add])
 	}
 
 	// MARK: Helpers
@@ -74,10 +67,22 @@ final class LocationManagerTests: XCTestCase {
 			response!
 		}
 	}
+	private final class MockLocationStore: LocationStore {
+		enum Message {
+			case add
+		}
 
-	private func makeSUT() -> (sut: LocationManager, loader: MockSalahTimesLoader) {
+		private(set) var messages = [Message]()
+
+		func add(_ location: Location) {
+			messages.append(.add)
+		}
+	}
+
+	private func makeSUT() -> (sut: LocationManager, loader: MockSalahTimesLoader, store: MockLocationStore) {
 		let loader = MockSalahTimesLoader()
-		return (LocationManager(loader: loader), loader)
+		let store = MockLocationStore()
+		return (LocationManager(loader: loader, store: store), loader, store)
 	}
 
 	private func anyEndpoint() -> Endpoint {

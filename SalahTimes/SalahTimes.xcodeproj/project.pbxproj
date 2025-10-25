@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B01B3342EAD30FC00862BCF /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B01B3332EAD30FC00862BCF /* LocationStore.swift */; };
 		1B053A672773963D0027024C /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B053A662773963D0027024C /* OverviewViewController.swift */; };
 		1B053A7127739EB70027024C /* OverviewCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */; };
 		1B5BA6D62919912E00EE6D97 /* TimesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */; };
@@ -133,6 +134,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B01B3332EAD30FC00862BCF /* LocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
 		1B053A662773963D0027024C /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		1B053A7027739EB70027024C /* OverviewCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCollectionViewController.swift; sourceTree = "<group>"; };
 		1B5BA6D52919912E00EE6D97 /* TimesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimesLoader.swift; sourceTree = "<group>"; };
@@ -670,8 +672,9 @@
 		1BF7BFCF2EAAE23B000DFD8E /* SalahTimesPersistence */ = {
 			isa = PBXGroup;
 			children = (
-				1BF7BFD42EAAE2CE000DFD8E /* LocationManager.swift */,
 				1BF7BFDB2EAAF2B8000DFD8E /* Location.swift */,
+				1BF7BFD42EAAE2CE000DFD8E /* LocationManager.swift */,
+				1B01B3332EAD30FC00862BCF /* LocationStore.swift */,
 			);
 			path = SalahTimesPersistence;
 			sourceTree = "<group>";
@@ -1106,6 +1109,7 @@
 			files = (
 				1BF7BFDC2EAAF2B8000DFD8E /* Location.swift in Sources */,
 				1BF7BFD52EAAE2CE000DFD8E /* LocationManager.swift in Sources */,
+				1B01B3342EAD30FC00862BCF /* LocationStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
