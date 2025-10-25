@@ -12,7 +12,7 @@ public final class CodableLocationStore: LocationStore {
 	public init() {}
 
 	public func add(_ location: Location) throws {
-		throw NSError(domain: "", code: 0)
+		throw StoreError.failedToInsert
 	}
 
 }

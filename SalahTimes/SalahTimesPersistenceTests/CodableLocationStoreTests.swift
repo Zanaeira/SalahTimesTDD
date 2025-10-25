@@ -17,6 +17,19 @@ final class CodableLocationStoreTests: XCTestCase {
 		XCTAssertThrowsError(try sut.add(anyLocation()))
 	}
 
+	func test_insert_throwsInsertionErrorOnInsertionFailure() {
+		let sut = CodableLocationStore()
+		var thrownError: Error?
+
+		do {
+			try sut.add(anyLocation())
+		} catch {
+			thrownError = error
+		}
+
+		XCTAssertEqual(thrownError as? StoreError, .failedToInsert)
+	}
+
 	// MARK: Helper
 
 	private func anyLocation() -> Location {
