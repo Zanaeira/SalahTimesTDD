@@ -11,6 +11,23 @@ import SalahTimesPersistence
 
 final class UserDefaultsLocationStoreTests: XCTestCase {
 
+	override func setUp() {
+		super.setUp()
+		let userDefaults = UserDefaults(suiteName: "test-store")
+		userDefaults?.removeObject(forKey: "London")
+	}
+
+	override func tearDown() {
+		super.tearDown()
+		let userDefaults = UserDefaults(suiteName: "test-store")
+		userDefaults?.removeObject(forKey: "London")
+	}
+
+	func test_retrieve_throwsErrorOnFailure() {
+		let sut = UserDefaultsLocationStore(suiteName: "test-store")
+		XCTAssertThrowsError(try sut.retrieve("London"))
+	}
+
 	func test_insert_insertsLocationOnSuccess() throws {
 		let sut = UserDefaultsLocationStore(suiteName: "test-store")
 		let testLocation = Location(name: "London", salahTimes: .anySalahTimes())
