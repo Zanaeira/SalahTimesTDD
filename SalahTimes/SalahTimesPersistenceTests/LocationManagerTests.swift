@@ -25,6 +25,16 @@ final class LocationManagerTests: XCTestCase {
 		XCTAssertEqual(thrownError as? LoaderError, .invalidData)
 	}
 
+	func test_addLocation_doesNotAddLocationOnError() async {
+		let (sut, loader, store) = makeSUT()
+		loader.response = .failure(.invalidData)
+
+		try? await sut.add(location: "any-invalid-location", using: anyEndpoint())
+
+		XCTAssertEqual(store.messages, [])
+	}
+
+
 	func test_addLocation_throwsConnectivityErrorOnFailureFromLoader() async {
 		let (sut, loader, _) = makeSUT()
 		var thrownError: Error?
