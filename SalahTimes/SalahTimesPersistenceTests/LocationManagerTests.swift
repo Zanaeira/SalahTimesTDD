@@ -12,8 +12,7 @@ import SalahTimesPersistence
 final class LocationManagerTests: XCTestCase {
 
 	func test_addLocation_throwsInvalidDataErrorOnFailureFromLoader() async {
-		let loader = MockSalahTimesLoader()
-		let sut = LocationManager(loader: loader)
+		let (sut, loader) = makeSUT()
 		var thrownError: Error?
 		loader.response = .failure(.invalidData)
 
@@ -27,8 +26,7 @@ final class LocationManagerTests: XCTestCase {
 	}
 
 	func test_addLocation_throwsConnectivityErrorOnFailureFromLoader() async {
-		let loader = MockSalahTimesLoader()
-		let sut = LocationManager(loader: loader)
+		let (sut, loader) = makeSUT()
 		var thrownError: Error?
 		loader.response = .failure(.connectivity)
 
@@ -42,16 +40,14 @@ final class LocationManagerTests: XCTestCase {
 	}
 
 	func test_addLocation_addsLocationOnSuccess() async throws {
-		let loader = MockSalahTimesLoader()
-		let sut = LocationManager(loader: loader)
+		let (sut, loader) = makeSUT()
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location", using: anyEndpoint())
 		XCTAssertEqual(sut.locations.map(\.name), ["any-valid-location"])
 	}
 
 	func test_addLocation_addsEachLocationOnSuccess() async throws {
-		let loader = MockSalahTimesLoader()
-		let sut = LocationManager(loader: loader)
+		let (sut, loader) = makeSUT()
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location", using: anyEndpoint())
 		try await sut.add(location: "another-valid-location", using: anyEndpoint())
@@ -59,8 +55,7 @@ final class LocationManagerTests: XCTestCase {
 	}
 
 	func test_addLocation_addsLocationWithTimesOnSuccess() async throws {
-		let loader = MockSalahTimesLoader()
-		let sut = LocationManager(loader: loader)
+		let (sut, loader) = makeSUT()
 		loader.response = .success(anySalahTimes())
 		try await sut.add(location: "any-valid-location", using: anyEndpoint())
 		XCTAssertEqual(sut.locations, [.init(name: "any-valid-location", salahTimes: anySalahTimes())])
@@ -78,6 +73,11 @@ final class LocationManagerTests: XCTestCase {
 		func load(from endpoint: Endpoint) async -> Result {
 			response!
 		}
+	}
+
+	private func makeSUT() -> (sut: LocationManager, loader: MockSalahTimesLoader) {
+		let loader = MockSalahTimesLoader()
+		return (LocationManager(loader: loader), loader)
 	}
 
 	private func anyEndpoint() -> Endpoint {
