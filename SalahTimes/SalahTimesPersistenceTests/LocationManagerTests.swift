@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import SalahTimes
+import SalahTimes
 import SalahTimesPersistence
 
 final class LocationManagerTests: XCTestCase {
