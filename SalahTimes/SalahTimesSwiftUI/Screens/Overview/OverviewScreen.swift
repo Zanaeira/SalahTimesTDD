@@ -27,6 +27,7 @@ public struct OverviewScreen: View {
 			}
 			.padding(.vertical)
 		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity)
 		.background(BackgroundView().ignoresSafeArea())
 	}
 
